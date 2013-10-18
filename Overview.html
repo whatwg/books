@@ -5,6 +5,18 @@
 <style>
 .head h1 { padding: 1em 0 }
 span.minor { letter-spacing: 0; color: black; font-size: 0.8em; font-weight: normal }
+
+div.example {
+  border-left: thin solid black;
+  margin: 0;
+}
+.code-example {
+  text-align: right;
+  float: left;
+  width: 6em;
+  margin-left: -7em;
+}
+a { text-decoration: none }
 </style>
 <link rel="stylesheet" href="http://www.whatwg.org/style/specification" type="text/css">
 
@@ -14,7 +26,7 @@ span.minor { letter-spacing: 0; color: black; font-size: 0.8em; font-weight: nor
   <p><a href="http://www.whatwg.org/" class="logo"><img width="100" src="http://resources.whatwg.org/logo.svg" alt="WHATWG" height="100"></a></p>
 	<h1>CSS Books</h1>
 	
-	<h2 class="no-num no-toc" id="soon-to-become-a-living-standard-last-updated-14-october-2013"><span class="minor">[soon to become a]</span> Living Standard — Last Updated 14 October 2013</h2>
+	<h2 class="no-num no-toc" id="soon-to-become-a-living-standard-last-updated-18-october-2013"><span class="minor">[soon to become a]</span> Living Standard — Last Updated 18 October 2013</h2>
 	
 	<dl>
 		<dt>This version:
@@ -36,7 +48,7 @@ span.minor { letter-spacing: 0; color: black; font-size: 0.8em; font-weight: nor
 
 	</dl>
 
-<p class="copyright"><a rel="license" href="http://creativecommons.org/publicdomain/zero/1.0/"><img src="http://i.creativecommons.org/p/zero/1.0/80x15.png" alt="CC0"></a>To the extent possible under law, the editor has waived all copyright and related or neighboring rights to this work. In addition, as of 14 October 2013, the editor has made this specification available under the
+<p class="copyright"><a rel="license" href="http://creativecommons.org/publicdomain/zero/1.0/"><img src="http://i.creativecommons.org/p/zero/1.0/80x15.png" alt="CC0"></a>To the extent possible under law, the editor has waived all copyright and related or neighboring rights to this work. In addition, as of 18 October 2013, the editor has made this specification available under the
 <a rel="license" href="http://www.openwebfoundation.org/legal/the-owf-1-0-agreements/owfa-1-0">Open Web Foundation Agreement Version 1.0</a>, which is available at <!--begin-link--><a href="http://www.openwebfoundation.org/legal/the-owf-1-0-agreements/owfa-1-0">http://www.openwebfoundation.org/legal/the-owf-1-0-agreements/owfa-1-0</a><!--end-link-->.
 
 </div>
@@ -137,7 +149,16 @@ content) of an element for later reuse in margin boxes. The second
 mechanism is <dfn id="running-elements-0">running elements</dfn> which <em>moves</em> elements
 (with style, structure, and replaced content) into a margin box.
 
+
+
 <h3 id="named-strings"><span class="secno">2.1 </span>Named strings</h3>
+
+<div class="code-example">
+<a href="http://people.opera.com/howcome/2013/tests/books/named-strings.html">html</a><br>
+<a href="http://people.opera.com/howcome/2013/tests/books/named-strings-ah.pdf" class="pass">AH</a>
+<a href="http://people.opera.com/howcome/2013/tests/books/named-strings-pr.pdf" class="fail">PR</a>
+</div>
+
 
 <!--
 <p>Named strings are discussed both in the CSS3 Generated and Replaced
@@ -151,19 +172,25 @@ strings are created with the 'string-set' property which copies a
 string of text into a named string. Only text is copied; not style,
 structure, or replaced content.
 
+<div class="code-example">
+<a href="http://people.opera.com/howcome/2013/tests/books/e-string-set-motivational.html">html</a><br>
+<a href="http://people.opera.com/howcome/2013/tests/books/e-string-set-motivational-ah.pdf" class="pass">AH</a>
+<a href="http://people.opera.com/howcome/2013/tests/books/string-set-motivational-pr.pdf" class="fail">PR</a>
+</div>
+
 <div class="example">
 
 <p>Consider this code:
 
-<pre class="css">title { string-set: book-title content(text) }
+<pre>h1 { string-set: heading content(text) }
 </pre>
 
-<p>Whenever a <code>title</code> element is encountered,
+<p>Whenever an <code>h1</code> element is encountered,
 its textual content is copied into a named string called
-<em>book-title</em>. The string can later be retrieved in the 'content'
+<em>heading</em>. The string can later be retrieved in the 'content'
 property:
 
-<pre class="css">@page :right { @top-right { content: string(book-title) }}
+<pre>@page { @top-center { content: string(heading) }}
 </pre>
 
 </div>
@@ -248,11 +275,18 @@ several assignments as the ''string()'' functional value
 names in CSS.
 -->
 
-<p>The textual content is processed as if 'white-space: normal' had been set.
+<p>The textual content of the named string is processed as if 'white-space: normal' has been set.
 
+<!--
+<div class=code-example>
+<a href="http://people.opera.com/howcome/2013/tests/books/e-string-set-with-counter.html">html</a><br>
+<a class=pass href="http://people.opera.com/howcome/2013/tests/books/e-string-set-motivational-ah.pdf">AH</a>
+<a class=fail href="http://people.opera.com/howcome/2013/tests/books/string-set-motivational-pr.pdf">PR</a>
+</div>
+-->
 
 <div class="example">
-<pre class="css">h2 {
+<pre>h2 {
   string-set: header "Chapter " counter(header) ": " content();
   counter-increment: header;
 }
@@ -270,7 +304,7 @@ names in CSS.
 <p>This example results in the same value being assigned to
 <em>header</em> as in the previous example. 
 
-<pre class="css">h2:before { content: "Chapter " counter(header) }
+<pre>h2:before { content: "Chapter " counter(header) }
 h2 {
   string-set: header content(before) content(text);
   counter-increment: header }
@@ -279,7 +313,7 @@ h2 {
 
 <div class="example">
 <p>In this example, the named string called <em>index</em> will hold the first letter of <code>dt</code> elements.
-<pre class="css">dt { string-set: index first-letter }
+<pre>dt { string-set: index first-letter }
 </pre>
 <p>One-letter running headers are often used in dictionaries. 
 </div>
@@ -289,7 +323,7 @@ h2 {
 <div class="example">
 <p>In HTML, <code>title</code> elements are normally not displayed, but in this example the content is copied into a named string:
 
-<pre class="css">title {
+<pre>title {
   display: none;
   string-set: tittel content();
 }
@@ -305,7 +339,7 @@ h2 {
 one required argument: the name of the string.
 
 <div class="example">
-<pre class="css">@page { @top-center { content: string(header) }}
+<pre>@page { @top-center { content: string(header) }}
 @page { @right-middle { content: string(index) }}
 @page { @top-left { content: string(entry) }}
 h1 { string-set: header "Chapter " counter(chapter) content() }
@@ -336,7 +370,7 @@ on the ''string()'' value. This argument can have one of four keywords:
 
 <div class="example">
 <p>In this example, the first term on the page will be shown in the top left corner and the last term on the page will be shown in the top right corner. In top center of the page, the first letter of first term will be shown.
-<pre class="css">@page { @top-left { content: string(term, first) }}
+<pre>@page { @top-left { content: string(term, first) }}
 @page { @top-right { content: string(term, last) }}
 @page { @top-center { content: string(index, first) }}
 dt { string-set: index content(first-letter), term content(text) }
@@ -347,7 +381,7 @@ dt { string-set: index content(first-letter), term content(text) }
 
 <p>Given this CSS code:
 
-<pre class="css">h2 { string-set: header content() }
+<pre>h2 { string-set: header content() }
 </pre>
 
 <p>The value of the <em>header</em> string 
@@ -419,13 +453,13 @@ dt { string-set: index content(first-letter), term content(text) }
 
 <div class="example">
 <p>In this example, the term that is being described at the start of the page is shown in the top left header.
-<pre class="css">@page { @top-left { content: string(term, start) }}
+<pre>@page { @top-left { content: string(term, start) }}
 dt { string-set: term content() }
 </pre>
 </div>
 
 <div class="example">
-<pre class="css">@page { @top-left { content: string(term, first) }}
+<pre>@page { @top-left { content: string(term, first) }}
 @page { @top-right { content: string(term, last) }}
 @page { @top-center { content: string(index, first) }}
 dt { string-set: index content(first-letter), term content(text) }
@@ -436,7 +470,7 @@ dt { string-set: index content(first-letter), term content(text) }
 
 <div class="example">
 <p>In this example, the header in the top center will be blank on pages where 'h1' elements appear. On other pages, the string of the previous 'h1' element will be shown.
-<pre class="css">@page { @top-center { content: string(chapter, first-except) }}
+<pre>@page { @top-center { content: string(chapter, first-except) }}
 h1 { string-set: chapter content() }
 </pre>
 </div>
@@ -476,7 +510,7 @@ structure of the document.
 
 
 <div class="example">
-<pre class="css">title { position: running(header) }
+<pre>title { position: running(header) }
 @page { @top-center {
   content: element(header) }
 }
@@ -603,7 +637,7 @@ leader pattern of consecutive lines.
 ''leader()'' value:
 
 <div class="example">
-<pre class="css">heading::after { content: leader(dotted) }
+<pre>heading::after { content: leader(dotted) }
 </pre>
 </div>
 
@@ -627,7 +661,7 @@ background properties, and 'color'.
 <p>In a more complex example, the 'leader' value is combined with other
 values on the 'content' property:
 
-<pre class="css">ul.toc a::after {
+<pre>ul.toc a::after {
   content: leader(". . . ") target-counter(attr(href url), page);
 }
 </pre>
@@ -748,7 +782,7 @@ being the default.
 <p>This style sheet specifies that a string like " (see page 72)"
 is added after a link:
 
-<pre class="css">a::after { content: "(see page " target-counter(attr(href url), page, decimal) ")" }
+<pre>a::after { content: "(see page " target-counter(attr(href url), page, decimal) ")" }
 </pre>
 </div>
 
@@ -757,7 +791,7 @@ is added after a link:
 <p>This style sheet specifies that a string like " (see section 1.3.5)"
 is added after a link:
 
-<pre class="css">a::after { content: "(see section " target-counters(attr(href url), section, ".", decimal) ")" }
+<pre>a::after { content: "(see section " target-counters(attr(href url), section, ".", decimal) ")" }
 </pre>
 </div>
 
@@ -790,7 +824,7 @@ from this markup:
 
 this CSS code can be used:
 
-<pre class="css">h2 { counter-increment: chapter }
+<pre>h2 { counter-increment: chapter }
 a { content: "Chapter " target-counter(attr(href url), chapter)
    ' ("'  target-text(attr(href url), content) '") on page '
    target-counter(attr(href url), page);
@@ -892,7 +926,7 @@ Consider this markup:
 
 <p>The content of the "title" attribute can be turned into a footnote with this code:
 
-<pre class="css">span[title]::after {
+<pre>span[title]::after {
   content: attr(title);
   float: footnote;
 }
@@ -907,7 +941,7 @@ element</em>) is moved to the <em>footnote area</em> and a <em>footnote-call</em
 pseudo-element is put in its original place.
 
 <div class="example">
-<pre class="css">span.footnote {
+<pre>span.footnote {
   float: footnote;
 }
 </pre>
@@ -965,7 +999,7 @@ the page, but it can be positioned in other places.
 
 <p>These rules place the footnote area at the bottom of the page, spanning all columns:
 
-<pre class="css">@page {
+<pre>@page {
   @footnote {
     float: bottom;
     column-span: all;
@@ -980,7 +1014,7 @@ the page, but it can be positioned in other places.
 <div class="example">
 <p>These rules place the footnote area at the bottom of the first column:
 
-<pre class="css">@page {
+<pre>@page {
   @footnote {
     float: bottom;
     width: 100%;
@@ -993,7 +1027,7 @@ the page, but it can be positioned in other places.
 <div class="example XXX">
 <p>This code places the footnote area at the bottom of the right column:
 
-<pre class="css">@page {
+<pre>@page {
   @footnote {
     float: bottom-corner;
     width: 100%;
@@ -1013,7 +1047,7 @@ spanning the full width, but there could be exceptions.
 content which may compete for the same space on the same page.
 
 <div class="example">
-<pre class="css">@page { @footnote { float: bottom page}}
+<pre>@page { @footnote { float: bottom page}}
 div.figure { float: bottom page }
 </pre>
 
@@ -1045,7 +1079,7 @@ specification.
 <div class="example">
 <p>This example uses some of the applicable properties on @footnote:
 
-<pre class="css">@footnote {
+<pre>@footnote {
   margin-top: 0.5em;
   border-top: thin solid black;
   border-clip: 4em;
@@ -1072,7 +1106,7 @@ table or float instead of the bottom of the page.
 a <em>footnote-call</em> is left behind. By default, User Agents must
 behave as if this code is part of the default style sheet:
 
-<pre class="css">::footnote-call {
+<pre>::footnote-call {
   content: counter(footnote, super-decimal);
 }
 </pre>
@@ -1090,7 +1124,7 @@ counter in the footnote-marker.
 <div class="example">
 <p>User Agents may display footnote-calls and footnote-markers this way by default:
 
-<pre class="css">::footnote-call {
+<pre>::footnote-call {
   content: counter(footnote, super-decimal);
 }
 ::footnote-marker {
@@ -1118,7 +1152,7 @@ by one each time an element with ''float: footnote'' appears.
 
 <div class="example">
 This code resets the "footnote" counter on a per-page page basis:
-<pre class="css">@page { counter-reset: footnote }
+<pre>@page { counter-reset: footnote }
 </pre>
 </div>
 
@@ -1132,7 +1166,7 @@ counter is incremented.
 <div class="example">
 <p>This rule is part of the default style sheet:
 
-<pre class=css>
+<pre>
 @page {
   @footnote {
     counter-increment: footnote;
@@ -1198,7 +1232,7 @@ and the settings in the default style sheet differentiates the two.
 <div class="example">
 <p>This example moves images to the outside margin of pages:
 
-<pre class="css">@page :left {
+<pre>@page :left {
   margin-left: 10em;
   @sidenote { position: fixed; left: -8em; width: 6em }
 }
@@ -1317,7 +1351,7 @@ hierarchical bookmark structure. The values are:
 <div class="example">
 <p>This code would generate a simple hierachical outline of a document that uses three heading levels:
 
-<pre class="css">h1 { bookmark-level: 1 }
+<pre>h1 { bookmark-level: 1 }
 h2 { bookmark-level: 2 }
 h3 { bookmark-level: 3 }
 h1, h2, h3 { bookmark-label: content() }
@@ -1327,7 +1361,7 @@ h1, h2, h3 { bookmark-label: content() }
 
 <div class="example">
 <p>This code will make bookmarks from links. 
-<pre class="css">a[href] { bookmark-label: attr(href); bookmark-level: 1 }
+<pre>a[href] { bookmark-label: attr(href); bookmark-level: 1 }
 a[title] { bookmark-label: attr(title); bookmark-level: 1 }
 </pre>
 <p>If a <code>title</code> attribute exisits, its value will be used as the bookmark label. Otherwisee, the URL is used. 
@@ -1335,13 +1369,13 @@ a[title] { bookmark-label: attr(title); bookmark-level: 1 }
 
 <div class="example">
 <p>This code specififies a string to be used as the bookmark label:
-<pre class="css">#frog { bookmark-label: "The green frog"; bookmark-level: 1 }
+<pre>#frog { bookmark-label: "The green frog"; bookmark-level: 1 }
 </pre>
 </div>
 
 <div class="example">
 <p>Consider this code:
-<pre class="css">h1 { bookmark-label: content(before) ": " content(); bookmark-level: 1 }
+<pre>h1 { bookmark-label: content(before) ": " content(); bookmark-level: 1 }
 h1:before { content: "Chapter" }
 
 &lt;h1&gt;Africa&lt;/h1&gt;
@@ -1436,7 +1470,7 @@ bookmarks. This property describes the initial state of a bookmark.
 
 <div>
 <p>In this example, h1 and h2 elements are set to have an open initial bookmark stat, all other elements will be closed initially:
-<pre class="css">* { bookmark-state: closed }
+<pre>* { bookmark-state: closed }
 h1, h2 { bookmark-state: open }
 </pre>
 </div>
@@ -2265,7 +2299,7 @@ they may therefore end up in the same column:
 
 <div class=example>
 
-<pre class=css>
+<pre>
 img { float: top; column-span: 2; float-wrap: wrap; width: 120%;  }
 </pre>
 
@@ -2496,7 +2530,7 @@ article { page: funky }
 
 <div class="example">
 <p>In this example, pages in a document will cycle through pink, lime and white backgrounds:
-<pre class="css">@page :nth(3n) { background: pink }
+<pre>@page :nth(3n) { background: pink }
 @page :nth(3n+1)) { background: lime }
 @page :nth(3n+2)) { background: white }
 </pre>
@@ -2550,7 +2584,7 @@ article { page: funky }
 
 <p>In this example, each article starts a new page group so that the first page of each article has a pink background.
 
-<pre class="css">@page funky:first {
+<pre>@page funky:first {
   background: pink;
 }
 article {
@@ -2573,14 +2607,14 @@ pages, columns, and elements within.
 
 
 <div class="example">
-<pre class="css">article::column(2n) {     /* select every other column of an article */
+<pre>article::column(2n) {     /* select every other column of an article */
   ...
 }
 </pre>
 </div>
 
 <div class="example">
-<pre class="css">div.chapter::column(3)       /* the 3rd column of the element */
+<pre>div.chapter::column(3)       /* the 3rd column of the element */
 div.chapter::column(2n)      /* all even columns of the element */
 div.chapter::column(3+)      /* all columns but the 1st and 2nd */
 div.chapter::column(2,2)     /* second column on second page */
@@ -2591,7 +2625,7 @@ div.chapter::column(1,*)     /* the first column on all pages */
 
 
 <div class="example">
-<pre class="css">article::page(left) {   /* select all left pages in an article */
+<pre>article::page(left) {   /* select all left pages in an article */
   background: pink;
 } 
 </pre>
@@ -2599,7 +2633,7 @@ div.chapter::column(1,*)     /* the first column on all pages */
 
 
 <div class="example">
-<pre class="css">article::page(left) p {   /* select all p elements that appear on left pages in an article */
+<pre>article::page(left) p {   /* select all p elements that appear on left pages in an article */
   text-align: left;
 } 
 </pre>
@@ -2610,7 +2644,7 @@ div.chapter::column(1,*)     /* the first column on all pages */
 <div class="example">
 <p>These are identical:
 
-<pre class="css">@page :left {
+<pre>@page :left {
   {
     p { text-align: left } 
   }
@@ -2630,7 +2664,7 @@ div.chapter::column(1,*)     /* the first column on all pages */
 <div class="example">
 <p>This syntax also allows the selection and styling of elements inside margin boxes:
 
-<pre class="css">@page :left {
+<pre>@page :left {
   background: pink;            /* declaration applies to pages */
   {
     p { text-align: left }     /* declaration applies to elements on page */
@@ -2690,7 +2724,7 @@ http://www.w3.org/Style/Group/css3-src/css3-linebox/Overview.html#LineStacking
 
 <h2 id="appendix-a:-default-style-sheet"><span class="secno">12 </span>Appendix A: Default style sheet</h2>
 
-<pre class="css">@page {
+<pre>@page {
   counter-reset: footnote;
   @footnote {
     counter-increment: footnote;
