@@ -1,9 +1,6 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN"
-	"http://www.w3.org/TR/html4/strict.dtd">
+<!DOCTYPE html>
 <html lang="en">
-
 <head>
-
 <meta http-equiv="content-type" content="text/html; charset=utf-8">
 <title>CSS Books</title>
 <style>
@@ -30,7 +27,7 @@ a { text-decoration: none }
   <p><a class="logo" href="http://www.whatwg.org/"><img alt="WHATWG" height="100" src="http://resources.whatwg.org/logo.svg" width="100"></a></p>
 	<h1>[TITLE]</h1>
 	
-	<h2 class="no-num no-toc"><span class=minor>[soon to become a]</span> Living Standard — Last Updated [DATE]</h2>
+	<h2 class="no-num no-toc"><span class=minor>[soon to become a]</span> Living Standard â Last Updated [DATE]</h2>
 	
 	<dl>
 		<dt>This version:
@@ -239,15 +236,13 @@ several assignments as the ''string()'' functional value
 names in CSS.
 -->
 
-<p>The textual content of the named string is processed as if 'white-space: normal' has been set.
 
-<!--
 <div class=code-example>
-<a href="http://people.opera.com/howcome/2013/tests/books/e-string-set-with-counter.html">html</a><br>
-<a class=pass href="http://people.opera.com/howcome/2013/tests/books/e-string-set-motivational-ah.pdf">AH</a>
-<a class=fail href="http://people.opera.com/howcome/2013/tests/books/string-set-motivational-pr.pdf">PR</a>
+<a href="http://people.opera.com/howcome/2013/tests/books/e-string-set-counter.html">html</a><br>
+<a class=pass href="http://people.opera.com/howcome/2013/tests/books/e-string-counter-ah.pdf">AH</a>
+<a class=fail href="http://people.opera.com/howcome/2013/tests/books/string-set-counter-pr.pdf">PR</a>
 </div>
--->
+
 
 <div class="example">
 <pre>
@@ -258,24 +253,31 @@ h2 {
 
 &lt;h2>Europa&lt;/h2>
 </pre>
-<!--  string-set: header "Chapter " counter(header) ": " contents;-->
 
-<p>Note that the string called "header" is different from the counter with the same name. The above code may result in the string called "header" is set to "Chapter 2: Europa".
+<p>Note that the string called "header" is different from the counter with the same name. The above code may result in the string called "header" is set to "Chapter 1: Europa".
 
 </div>
 
+
+<p>The textual content of the named string is processed as if 'white-space: normal' has been set.
+
+<div class=code-example>
+<a href="http://people.opera.com/howcome/2013/tests/books/e-string-set-white-space.html">html</a><br>
+<a class=pass href="http://people.opera.com/howcome/2013/tests/books/e-string-white-space-ah.pdf">AH</a>
+<a class=fail href="http://people.opera.com/howcome/2013/tests/books/string-set-white-space-pr.pdf">PR</a>
+</div>
 
 <div class="example">
-<p>This example results in the same value being assigned to
-<em>header</em> as in the previous example. 
-
+<p>In this example, the header will consist of three words ("In the begninning") with normal spacing between the words.
 <pre>
-h2:before { content: "Chapter " counter(header) }
 h2 {
-  string-set: header content(before) content(text);
-  counter-increment: header }
+  string-set: header "In " ' ' content();
+}
+
+&lt;h2>   the    beginning&lt;/h2>
 </pre>
 </div>
+
 
 <div class="example">
 <p>In this example, the named string called <em>index</em> will hold the first letter of <code>dt</code> elements.
@@ -2699,7 +2701,7 @@ article::page(left) p {   /* select all p elements that appear on left pages in 
 
 
 
-<h2>Baseline alignement</h2>
+<h2>Baseline alignment</h2>
 
 <p class=XXX>Placeholder</p>
 
@@ -2733,9 +2735,107 @@ http://www.w3.org/Style/Group/css3-src/css3-linebox/Overview.html#LineStacking
 <p class=note>A similar idea &mdash; 'line-stacking-strategy: grid-height' &mdash; was proposed in a <a href="http://www.w3.org/TR/css3-linebox/#line-stacking-strategy">previous version of the CSS3 line module</a>. The 'line-stacking-strategy' property is <a href="http://www.w3.org/TR/xsl/#line-stacking-strategy">used in XSL</a>.
 -->
 
-<h2>Text transformations</h2>
+<h2>Character substitution</h2>
 
-<p class=XXX>Placeholder</p>
+<p>It is sometimes convenient to replace one character with another without changing the source document. For example, the apostrophe character is easily found on keyboards, but in print it is often better to replace it with a quotation character. The ‘text-replace’ property offers a way to perform the replacement in the style sheet.
+
+<table class=propdef>
+<tr>
+  <td><em>Name:</em> 
+  <td><dfn id=text-replace>text-replace</dfn>
+
+<tr>
+  <td><em>Value:</em>
+  <td> [&lt;string> &lt;string>]+ | none
+
+<tr>
+  <td><em>Initial:</em>
+  <td>none
+
+<tr>
+  <td><em>Applies to:</em>
+  <td>all elements
+
+<tr>
+  <td><em>Inherited:</em>
+  <td>yes
+
+<tr>
+  <td><em>Percentages:</em>
+  <td>N/A
+
+<tr>
+  <td><em>Media:</em>
+  <td>visual
+
+<tr>
+  <td><em>Computed&nbsp;value:</em>
+  <td>as specified value
+</table>
+
+
+<p>This property replaces all occurrences of a certain string with another string in the content of the element. The property accepts pairs of strings as value, in addition to the initial &lsquo;<code class=css>none</code>&rsquo; value. For each pair of strings, occurrences of the first string in the content will be replaced with the second string. If &lsquo;<code class=css>none</code>&rsquo; is specified, no replacements will occur.
+
+<div class=code-example>
+<a href="http://people.opera.com/howcome/2013/tests/books/e-character-substitution-motivational.html">html</a><br>
+<a class=pass href="http://people.opera.com/howcome/2013/tests/books/e-character-substitution-motivational-ah.pdf">AH</a>
+<a class=fail href="http://people.opera.com/howcome/2013/tests/books/e-character-substitution-motivational-pr.pdf">PR</a>
+</div>
+
+
+<div class=example>
+<p>In this example, three consecutive period characters are replaced with an ellipsis character and the apostrophe character is replaced with a quotation character:
+
+<pre>
+body { text-replace: "..." "\2026" "'" "\2019" }
+</pre>
+</div>
+
+<div class=example>
+<p>In this example, all references to &rsquo;Soviet Union' are replaced with &lsquo;<span class=property>Russia</span>&rsquo;.
+
+<pre>
+body { text-replace: "Soviet Union" "Russia" }
+</pre>
+</div>
+
+<p>Text replacements are applied sequentially.
+
+<div class=example> 
+
+<p>The two rules below yield the same result. In the first rule all &lsquo;<span class=property>a</span>&rsquo; characters are converted to &lsquo;<span class=property>b</span>&rsquo;. Subsequently, all &lsquo;<span class=property>b</span>&rsquo; characters are converted to &lsquo;<span class=property>c</span>&rsquo;. In the second rule, all &lsquo;<span class=property>a</span>&rsquo; and &lsquo;<span class=property>b</span>&rsquo; characters are converted directly to &lsquo;<span class=property>c</span>&rsquo;.
+
+<pre>
+body { text-replace: "a" "b" "b" "c" }
+body { text-replace: "a" "c" "b" "c" }
+</pre>
+</div>
+
+<p>The first string in a pair must have at least one character, while the second may be empty.
+
+<div class=example>
+<p>In this example, all &lsquo;<span class=property>a</span>&rsquo; characters are removed.
+
+<pre>
+body { text-replace: "a" "" }
+</pre>
+</div>
+
+<p>If the first string of a pair is empty, or if an odd number of strings has been specified, the whole value is ignored and no text replacements are performed. Text replacements do not occur across element boundaries. 
+
+<div class=example>
+<p>No text replacement will occur in this example:
+
+<pre>
+h1 { text-replace: "foo" "bar" "" "foo" }   /* ignore value */
+h2 { text-replace: "foo" "bar" "foobar" }   /* ignore value */
+h3 { text-replace: "foobar" "barfoo" }      /* legal value, but no match du to span element */
+
+&lt;h3>foo&lt;span>bar&lt;/span>&lt;/h3>
+</pre>
+</div>
+
+<p>This property is evaluated after the &lsquo;<span class=property>content</span>&rsquo; property, and before &lsquo;<span class=property>text-transform</span>&rsquo;.
 
 
 <h2>Appendix A: Default style sheet</h2>
