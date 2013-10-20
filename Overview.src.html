@@ -2777,6 +2777,7 @@ http://www.w3.org/Style/Group/css3-src/css3-linebox/Overview.html#LineStacking
 <p>This property replaces all occurrences of a certain string with another string in the content of the element. The property accepts pairs of strings as value, in addition to the initial &lsquo;<code class=css>none</code>&rsquo; value. For each pair of strings, occurrences of the first string in the content will be replaced with the second string. If &lsquo;<code class=css>none</code>&rsquo; is specified, no replacements will occur.
 
 <div class=code-example>
+
 <a href="http://people.opera.com/howcome/2013/tests/books/e-character-substitution-motivational.html">html</a><br>
 <a class=pass href="http://people.opera.com/howcome/2013/tests/books/e-character-substitution-motivational-ah.pdf">AH</a>
 <a class=fail href="http://people.opera.com/howcome/2013/tests/books/e-character-substitution-motivational-pr.pdf">PR</a>
@@ -2829,9 +2830,9 @@ body { text-replace: "a" "" }
 <pre>
 h1 { text-replace: "foo" "bar" "" "foo" }   /* ignore value */
 h2 { text-replace: "foo" "bar" "foobar" }   /* ignore value */
-h3 { text-replace: "foobar" "barfoo" }      /* legal value, but no match du to span element */
+h3 { text-replace: "foobar" "barfoo" }      /* accept value */
 
-&lt;h3>foo&lt;span>bar&lt;/span>&lt;/h3>
+&lt;h3>foo&lt;span>bar&lt;/span>&lt;/h3>    &lt;!-- start tag breaks string which would otherwise match -->
 </pre>
 </div>
 
