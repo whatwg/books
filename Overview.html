@@ -2723,7 +2723,7 @@ http://www.w3.org/Style/Group/css3-src/css3-linebox/Overview.html#LineStacking
 
 <h2 id="character-substitution"><span class="secno">11 </span>Character substitution</h2>
 
-<p>It is sometimes convenient to replace one character with another without changing the source document. For example, the apostrophe character is easily found on keyboards, but in print it is often better to replace it with a quotation character. The ‘text-replace’ property offers a way to perform the replacement in the style sheet.
+<p>It is sometimes convenient to replace one character or string with another without changing the source document. The ‘text-replace’ property offers a way to perform the replacement in the style sheet.
 
 <table class="propdef">
 <tr>
@@ -2775,20 +2775,25 @@ http://www.w3.org/Style/Group/css3-src/css3-linebox/Overview.html#LineStacking
 
 <pre>body { text-replace: "..." "\2026" "'" "\2019" }
 </pre>
+
+<p>As a result, the string "It's the beginning...!" will be changed to "It’s the beginning…!".
 </div>
 
-<div class="example">
-<p>In this example, all references to ’Soviet Union' are replaced with ‘<span class="property">Russia</span>’.
+<!--
+<div class=example>
+<p>In this example, all references to &rsquo;Soviet Union' are replaced with &lsquo;<span class=property>Russia</span>&rsquo;.
 
-<pre>body { text-replace: "Soviet Union" "Russia" }
+<pre>
+body { text-replace: "Soviet Union" "Russia" }
 </pre>
 </div>
+-->
 
-<p>Text replacements are applied sequentially.
+<p>Text replacements are applied sequentially, starting with the first pair of strings. 
 
 <div class="example"> 
 
-<p>The two rules below yield the same result. In the first rule all ‘<span class="property">a</span>’ characters are converted to ‘<span class="property">b</span>’. Subsequently, all ‘<span class="property">b</span>’ characters are converted to ‘<span class="property">c</span>’. In the second rule, all ‘<span class="property">a</span>’ and ‘<span class="property">b</span>’ characters are converted directly to ‘<span class="property">c</span>’.
+<p>The two rules below yield the same result. In the first rule all 'a' characters are converted to 'b'. Subsequently, all 'b' characters are converted to 'c'. In the second rule, all 'a' and 'b' characters are converted directly to 'c'.
 
 <pre>body { text-replace: "a" "b" "b" "c" }
 body { text-replace: "a" "c" "b" "c" }
@@ -2798,7 +2803,7 @@ body { text-replace: "a" "c" "b" "c" }
 <p>The first string in a pair must have at least one character, while the second may be empty.
 
 <div class="example">
-<p>In this example, all ‘<span class="property">a</span>’ characters are removed.
+<p>In this example, all 'a' characters are removed.
 
 <pre>body { text-replace: "a" "" }
 </pre>
@@ -2811,13 +2816,13 @@ body { text-replace: "a" "c" "b" "c" }
 
 <pre>h1 { text-replace: "foo" "bar" "" "foo" }   /* ignore value */
 h2 { text-replace: "foo" "bar" "foobar" }   /* ignore value */
-h3 { text-replace: "foobar" "barfoo" }      /* accept value */
+h3 { text-replace: "foobar" "barfoo" }      /* accept value, but ... */
 
-&lt;h3&gt;foo&lt;span&gt;bar&lt;/span&gt;&lt;/h3&gt;    &lt;!-- start tag breaks string which would otherwise match --&gt;
+&lt;h3&gt;foo&lt;span&gt;bar&lt;/span&gt;&lt;/h3&gt;    &lt;!-- ... start tag breaks string which would otherwise match --&gt;
 </pre>
 </div>
 
-<p>This property is evaluated after the ‘<span class="property">content</span>’ property, and before ‘<span class="property">text-transform</span>’.
+<p>This property is evaluated after the <span class="property">content</span> property, and before <span class="property">text-transform</span>.
 
 
 <h2 id="appendix-a:-default-style-sheet"><span class="secno">12 </span>Appendix A: Default style sheet</h2>
