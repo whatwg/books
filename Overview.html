@@ -96,13 +96,15 @@ a.unclear, a.almost { color: orange }
    <li><a href="#'bookmark-level'"><span class="secno">7.1 </span>'bookmark-level'</a></li>
    <li><a href="#'bookmark-label'"><span class="secno">7.2 </span>'bookmark-label'</a></li>
    <li><a href="#'bookmark-state'"><span class="secno">7.3 </span>'bookmark-state'</a></ol></li>
- <li><a href="#selecting-columns-and-pages"><span class="secno">8 </span>Selecting columns and pages</a>
-  <ol>
-   <li><a href="#selecting-certain-named-pages"><span class="secno">8.1 </span>Selecting certain named pages</a></ol></li>
- <li><a href="#page-groups"><span class="secno">9 </span>Page groups</a>
+ <li><a href="#page-groups"><span class="secno">8 </span>Page groups</a></li>
+ <li><a href="#selecting-pages"><span class="secno">9 </span>Selecting pages</a>
   <ol>
    <li><a href="#selecting-elements-within-pages-and-columns"><span class="secno">9.1 </span>Selecting elements within pages and columns</a></ol></li>
- <li><a href="#baseline-alignment"><span class="secno">10 </span>Baseline alignment</a></li>
+ <li><a href="#baseline-alignment"><span class="secno">10 </span>Baseline alignment</a>
+  <ol>
+   <li><a href="#idea-1"><span class="secno">10.1 </span>Idea 1</a></li>
+   <li><a href="#idea-2"><span class="secno">10.2 </span>Idea 2</a></li>
+   <li><a href="#idea-3"><span class="secno">10.3 </span>Idea 3</a></ol></li>
  <li><a href="#character-substitution"><span class="secno">11 </span>Character substitution</a></li>
  <li><a href="#appendix-a:-default-style-sheet"><span class="secno">12 </span>Appendix A: Default style sheet</a></li>
  <li><a href="#references" class="no-num">References</a></li>
@@ -330,7 +332,7 @@ names in CSS.
 <div class="code-example">
 <a href="http://people.opera.com/howcome/2013/tests/books/e-string-set-other-declarations.html">html</a><br>
 <a href="http://people.opera.com/howcome/2013/tests/books/e-string-set-other-declarations-ah.pdf" class="pass">AH</a>
-<a href="http://people.opera.com/howcome/2013/tests/books/e-string-set-other-declarations-pr.pdf" class="almost">PR</a>
+<a href="http://people.opera.com/howcome/2013/tests/books/e-string-set-other-declarations-pr.pdf" class="pass">PR</a>
 </div>
 
 <div class="example">
@@ -616,7 +618,7 @@ used on subsequent pages.
 <div class="code-example">
 <a href="http://people.opera.com/howcome/2013/tests/books/leaders.html">html</a><br>
 <a href="http://people.opera.com/howcome/2013/tests/books/leaders-ah.pdf" class="pass">AH</a>
-<a href="http://people.opera.com/howcome/2013/tests/books/leaders-pr.pdf" class="fail">PR</a>
+<a href="http://people.opera.com/howcome/2013/tests/books/leaders-pr.pdf" class="almost">PR</a>
 </div>
 
 
@@ -860,7 +862,7 @@ a { content: "Chapter " target-counter(attr(href url), chapter)
 <div class="code-example">
 <a href="http://people.opera.com/howcome/2013/tests/books/footnontes.html">html</a><br>
 <a href="http://people.opera.com/howcome/2013/tests/books/footnotes-ah.pdf" class="pass">AH</a>
-<a href="http://people.opera.com/howcome/2013/tests/books/footnotes-pr.pdf" class="fail">PR</a>
+<a href="http://people.opera.com/howcome/2013/tests/books/footnotes-pr.pdf" class="pass">PR</a>
 </div>
 
 
@@ -1023,22 +1025,21 @@ area</em>. The footnote area is described by an @footnote-rule inside
 the @page-rule. By default, the footnote area appears at the bottom of
 the page, but it can be positioned in other places.
 
-<p class="XXX">Should the footnote are be positioned using page floats or (fixed?) absolute positioning? Or both?
-
 <div class="example">
 
-<p>These rules place the footnote area at the bottom of the page, spanning all columns:
+<p>These rules place the footnote area at the bottom of the page,
+spanning all columns of the outermost multicol element:
 
 <pre>@page {
   @footnote {
     float: bottom;
     column-span: all;
-    width: 100%;
   }
 }
 </pre>
-</div>
 
+<p>The code above is part of the default style sheet.
+</div>
 
 
 <div class="example">
@@ -1047,38 +1048,45 @@ the page, but it can be positioned in other places.
 <pre>@page {
   @footnote {
     float: bottom;
+    column-span: none;
     width: 100%;
   }
 }
 </pre>
 </div>
 
-
-<div class="example XXX">
-<p>This code places the footnote area at the bottom of the right column:
+<div class="example">
+<p>These rules place the footnote area at the bottom of the page, spanning all columns. Also, the footnote area is split into three columns which the footnotes are flowed into:
 
 <pre>@page {
   @footnote {
-    float: bottom-corner;
-    width: 100%;
+    float: bottom;
+    column-span: all;
+    columns: 3; 
+  }
+}
+</pre>
+</div>
+
+<div class="example">
+<p>This code places the footnote area at the bottom of the last column of the outermost multicol element:
+
+<pre>@page {
+  @footnote {
+    float: bottom;
+    float-defer: last;
   }
 }
 </pre>
 
 </div>
-
-<!--
-<p class=issue>How should one indicate that the footnote area should
-span columns? Typically, footnotes are put inside columns rather than
-spanning the full width, but there could be exceptions.
--->
 
 <p>The content of the footnote area is considered to come before other
 content which may compete for the same space on the same page.
 
 <div class="example">
-<pre>@page { @footnote { float: bottom page}}
-div.figure { float: bottom page }
+<pre>@page { @footnote { float: bottom; column-span: all }}
+div.figure { float: bottom }
 </pre>
 
 <p>If figures and footnotes are on the same page, the footnotes will appear below the figures as they are floated to the bottom before the figures.
@@ -1089,7 +1097,7 @@ div.figure { float: bottom page }
 are no footnotes on the page, the footnote area will not take up any
 space. If there are footnotes on a page, the layout of the footnote
 area will be determined by the properties/values set on it, and by the
-footnote elements elements inside it.
+footnote elements inside it.
 
 <p>These properties apply to the footnote area: 'content', 'border',
 'padding', 'margin', 'height', 'width', 'max-height', 'max-width',
@@ -1120,8 +1128,6 @@ specification.
 <p>The result of this code is a footnote area separated from other content above it by margin, border and padding. Only 4em of the border is visible due to the 'border-clip' property, which is defined in <a href="http://dev.w3.org/csswg/css4-background/">CSS Backgrounds and Borders Module Level 4</a>.   <!--[[!CSS4BACKGROUND]]-->.
 
 </div>
-
-
 
 
 <!--
@@ -1186,7 +1192,6 @@ This code resets the "footnote" counter on a per-page page basis:
 </pre>
 </div>
 
-<p class="XXX">Should one also be able to manually increment the "footnote" counter?
 
 <!--
 <p>The 'counter-increment' property can be set in the @footnote rule.
@@ -1238,21 +1243,6 @@ As a result, the "footnote" counter is incremented each time a footnote is gener
 
 </ol>
 
-<!--
-<h3>Footnote magic</h3>
-
-<p>When an element is turned into a footnote, certain magical things
-happen. The element is moved to the footnote area, a footnote call is
-left behind in its place, a footnote marker is displayed before the
-element, and the footnote counter is incremented.
-
-<p>When rendering footnotes, User Agents may apply certain heuristics
-to improve the presentation. For example, the space between a
-footnote-call and surrounding text may be adjusted. Another example is
-the height of the footnote area; it may be heuristically constrained
-to limit the area that is used for footnotes.
--->
-
 
 <h2 id="sidenotes"><span class="secno">6 </span>Sidenotes</h2>
 
@@ -1264,18 +1254,20 @@ and the settings in the default style sheet differentiates the two.
 
 <pre>@page :left {
   margin-left: 10em;
-  @sidenote { position: fixed; left: -8em; width: 6em }
+  @sidenote { position: absolute; left: -8em; top: 0; width: 6em; height: auto }
 }
 @page :right {
   margin-right: 10em;
-  @sidenote { position: fixed; right: -8em; width: 6em }
+  @sidenote { position: fixed; right: -8em; top: 0; width: 6em; height: auto }
 }
+
 img { float: sidenote }
 </pre>
 
 <p>It is important to note that it is the sidenote area that is descibed by @sidenote, and not the elements that are floated into the sidenote area. 
 </div>
 
+<p class="XXX">It should be possible to have all sidenotes go into a sidenote area, like footnotes. It should also be possible to have sidenotes on the side of the text, vertically aligned with the anchoring point. 
 
 <p class="XXX">Should there be a mechanism to create new areas like footnote/sidenote, or are two predefinded areas enough? One could also define sidnotes in a generic way, e.g. "float: to(sidenote)" 
 
@@ -1285,7 +1277,7 @@ img { float: sidenote }
 <div class="code-example">
 <a href="http://people.opera.com/howcome/2013/tests/books/bookmarks.html">html</a><br>
 <a href="http://people.opera.com/howcome/2013/tests/books/bookmarks-ah.pdf" class="pass">AH</a>
-<a href="http://people.opera.com/howcome/2013/tests/books/bookmarks-pr.pdf" class="fail">PR</a>
+<a href="http://people.opera.com/howcome/2013/tests/books/bookmarks-pr.pdf" class="pass">PR</a>
 </div>
 
 <p>Some document formats have the capability to represent bookmarks
@@ -1394,7 +1386,6 @@ h1, h2, h3 { bookmark-label: content() }
 </pre>
 </div>
 
-
 <div class="example">
 <p>This code will make bookmarks from links. 
 <pre>a[href] { bookmark-label: attr(href); bookmark-level: 1 }
@@ -1420,55 +1411,6 @@ h1:before { content: "Chapter" }
 <p>The resulting bookmark would be: "Chapter: Africa".
 </div>
 
-<!--
-<div class=remove>
-
-<table class=propdef>
-    <tr>
-      <td><em>Name:</em>
-      <td><dfn>bookmark-target</dfn>
-    <tr>
-      <td><em>Value:</em>
-      <td>none | &lt;uri>
-    <tr>
-      <td><em>Initial:</em>
-      <td>none
-    <tr>
-      <td><em>Applies to:</em>
-      <td>all elements
-    <tr>
-      <td><em>Inherited:</em>
-      <td>no
-    <tr>
-      <td><em>Percentages:</em>
-      <td>N/A
-    <tr>
-      <td><em>Media:</em>
-      <td>all
-    <tr>
-      <td><em>Computed&nbsp;value:</em>
-      <td>For URI values, the absolute URI; for 'none', as specified.
-</table>
-
-<p>This property specifies the target of the bookmark link.
-
-<div class=example>
-<pre>
-.bookmark {
-   bookmark-label: attr(title);
-   bookmark-target: attr(href url);
-}
-...
-&lt;a class="bookmark" title="The green pear" href="#pears"/>
-</pre>
-</div>
-
-<div class=example>
-.example { bookmark-target: url(http://www.example.com) }
-</div>
-
-</div>
--->
 
 <h3 id="'bookmark-state'"><span class="secno">7.3 </span>'bookmark-state'</h3>
 
@@ -1512,35 +1454,7 @@ h1, h2 { bookmark-state: open }
 </div>
 
 
-<h2 id="selecting-columns-and-pages"><span class="secno">8 </span>Selecting columns and pages</h2>
-
-<p class="XXX">This section is fairly sketchy.
-
-<h3 id="selecting-certain-named-pages"><span class="secno">8.1 </span>Selecting certain named pages</h3>
-
-<p>In CSS2, <a href="http://www.w3.org/TR/CSS2/page.html#page-selectors">first, left and right pages</a> can be selected. This specification extends pages selectors:
-
-
-<div class="example">
-<p>In this example, the first page of an article will have a pink background, and the second will be lime:
-<pre>@page funky:nth(1) { background: pink }
-@page funky:nth(2) { background: lime }
-article { page: funky }
-</pre>
-</div>
-
-<p>The grammar of allowed arguments to nth() is the same as the <a href="http://www.w3.org/TR/css3-selectors/#nth-child-pseudo">nth-child() pseudo-class</a>.
-
-<div class="example">
-<p>In this example, pages in a document will cycle through pink, lime and white backgrounds:
-<pre>@page :nth(3n) { background: pink }
-@page :nth(3n+1)) { background: lime }
-@page :nth(3n+2)) { background: white }
-</pre>
-</div>
-
-
-<h2 id="page-groups"><span class="secno">9 </span>Page groups</h2>
+<h2 id="page-groups"><span class="secno">8 </span>Page groups</h2>
 
 <p>Named pages can appear in sequence, stemming from different elements. A sequnce of named pages with the same name is called a <em>page group</em>. The 'page-group' property expresses whether an element starts a new page group or not. 
 
@@ -1602,8 +1516,41 @@ article {
 
 
 
+<h2 id="selecting-pages"><span class="secno">9 </span>Selecting pages</h2>
+
+<p>In CSS2, <a href="http://www.w3.org/TR/CSS2/page.html#page-selectors">first, left and right pages</a> can be selected. This specification extends pages selectors with the <code>:nth()</code> functional notation. 
+
+
+<div class="example">
+<p>These are equivalent:
+<pre>@page :first { background: lime } 
+@page :nth(1) { background: lime } 
+</pre>
+</div>
+
+<p>The grammar of allowed arguments to <code>nth()</code> is the same as the <a href="http://www.w3.org/TR/css3-selectors/#nth-child-pseudo">nth-child() pseudo-class</a>. 
+
+<div class="example">
+<p>In this example, pages in a document will cycle through pink, lime and white backgrounds:
+<pre>@page :nth(3n) { background: pink }
+@page :nth(3n+1)) { background: lime }
+@page :nth(3n+2)) { background: white }
+</pre>
+</div>
+
+<p><code>nth()</code> can be combined with other page selectors. 
+
+<div class="example">
+<pre>@page funky:nth(1) { background: pink }  /* select first page of every "funky" page group */
+@page :first:nth(2)) { background: lime } /* selects nothing */
+@page :right:nth(3n)) { background: lime } /* selects every third page, which also is a right page */
+</pre>
+</div>
+
+
 <h3 id="selecting-elements-within-pages-and-columns"><span class="secno">9.1 </span>Selecting elements within pages and columns</h3>
 
+<p class="XXX">This section is fairly sketchy.
 
 <p>The 'page()' and 'column()' pseudo-elements allows the selection of
 pages, columns, and elements within.
@@ -1663,7 +1610,6 @@ div.chapter::column(1,*)     /* the first column on all pages */
 
 
 
-
 <div class="example">
 <p>This syntax also allows the selection and styling of elements inside margin boxes:
 
@@ -1684,11 +1630,75 @@ div.chapter::column(1,*)     /* the first column on all pages */
 
 
 
-
-
 <h2 id="baseline-alignment"><span class="secno">10 </span>Baseline alignment</h2>
 
-<p class="XXX">Placeholder</p>
+<p class="XXX">This section is still searching for a solution. 
+
+<p>To avoid <em>show-through</em>, where a printed line shows through to the other side of the sheet, baselines are often aligned. In multi-column layouts, lines in adjacent columns are often aligned. To achive this, a flag of some kind is needed to indicate that lines within an element should be alinged. 
+
+<h3 id="idea-1"><span class="secno">10.1 </span>Idea 1</h3>
+
+<p>One possible solution can be found in <a href="http://www.w3.org/TR/css3-linebox/#line-stacking-strategy">CSS3 module: line</a>.
+
+<div class="example">
+<pre>article { 
+  columns: 3; 
+  line-stacking-strategy: grid-height;
+}
+</pre>
+</div>
+
+<p>When <code>line-stacking-strategy</code> is set to <code>grid-height</code>, the stack height of each line is the smallest multiple of the element's <code>line-height</code> computed value that can contain the block progression of all the inline elements on that line when those elements are properly aligned. The 'line-height' property value is ignored for inline elements. 
+
+<p class="XXX">Where is the extra space placed? Above the line, below the line, or evenly distributed above/below?
+
+<h3 id="idea-2"><span class="secno">10.2 </span>Idea 2</h3>
+
+<p>Another possible solution is to say: 
+
+<ol>
+<li>For each block-level element, find the "natural" set of baselines given by the computed value of 'line-height' and the used font. 
+<li>When baseline alignment in turned on, each line is placed on the closest a "natural" baseline 
+</ol>
+
+<p>This could be achived with:
+
+<div class="example">
+<pre>article { 
+  columns: 3; 
+  line-stacking-strategy: baseline-alignment;
+}
+</pre>
+</div>
+
+
+<h3 id="idea-3"><span class="secno">10.3 </span>Idea 3</h3>
+
+<p>One problem with both Idea 1 and Idea 2 is that all content is
+aligend. This may not be desireable in all cases. For example, a
+headline will typically use a larger font size. If all lines in the
+headlin is aligned with a "natural" baseline (or something similar),
+lots of white space will be generated. Therefore, need a way to turn 
+off baseline alingement for certain elements. For example:
+
+<div class="example">
+
+<p>In this example, the <code>article</code> element defines a set baselines to be used by its own content as well as its child elements. Child elements can opt out of the scheme by setting <code>line-stacking-strategy: normal</code> (or something):
+
+<pre>article { 
+  columns: 3; 
+  line-stacking-strategy: set-baselines;
+}
+article p { line-stacking-strategy: use-baselines }
+article h1 { line-stacking-strategy: normal }
+</pre>
+</div>
+
+
+<!--
+<p class=note>A similar idea &mdash; 'line-stacking-strategy: grid-height' &mdash; was proposed in a <a href="http://www.w3.org/TR/css3-linebox/#line-stacking-strategy">previous version of the CSS3 line module</a>. The 'line-stacking-strategy' property is <a href="http://www.w3.org/TR/xsl/#line-stacking-strategy">used in XSL</a>.
+-->
+
 
 <!--
 <p>In multi-column layouts, baselines are typically aligned between
@@ -1715,9 +1725,6 @@ div.figure { height: 20px; line-box-contain: block inline replaced line-grid }
 -->
 <!--
 http://www.w3.org/Style/Group/css3-src/css3-linebox/Overview.html#LineStacking
--->
-<!--
-<p class=note>A similar idea &mdash; 'line-stacking-strategy: grid-height' &mdash; was proposed in a <a href="http://www.w3.org/TR/css3-linebox/#line-stacking-strategy">previous version of the CSS3 line module</a>. The 'line-stacking-strategy' property is <a href="http://www.w3.org/TR/xsl/#line-stacking-strategy">used in XSL</a>.
 -->
 
 <h2 id="character-substitution"><span class="secno">11 </span>Character substitution</h2>
@@ -1764,8 +1771,8 @@ http://www.w3.org/Style/Group/css3-src/css3-linebox/Overview.html#LineStacking
 <div class="code-example">
 
 <a href="http://people.opera.com/howcome/2013/tests/books/e-character-substitution-motivational.html">html</a><br>
-<a href="http://people.opera.com/howcome/2013/tests/books/e-character-substitution-motivational-ah.pdf" class="pass">AH</a>
-<a href="http://people.opera.com/howcome/2013/tests/books/e-character-substitution-motivational-pr.pdf" class="fail">PR</a>
+<a href="http://people.opera.com/howcome/2013/tests/books/e-character-substitution-motivational-ah.pdf" class="fail">AH</a>
+<a href="http://people.opera.com/howcome/2013/tests/books/e-character-substitution-motivational-pr.pdf" class="pass">PR</a>
 </div>
 
 
@@ -1830,8 +1837,8 @@ h3 { text-replace: "foobar" "barfoo" }      /* accept value, but ... */
   counter-reset: footnote;
   @footnote {
     counter-increment: footnote;
-    float: page bottom;
-    width: 100%;
+    float: bottom;
+    column-span: all;
     height: auto;
   }
 }
