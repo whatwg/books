@@ -1449,8 +1449,9 @@ h1:before { content: "Chapter" }
 The user will typically be able to toggle the state to navigate in the
 bookmarks. This property describes the initial state of a bookmark.
 
-<div>
-<p>In this example, h1 and h2 elements are set to have an open initial bookmark stat, all other elements will be closed initially:
+<div class=example>
+<p>In this example, <code>h1</code> and <code>h2</code> elements are set to have an open initial bookmark stat, all other elements will be closed initially:
+
 <pre>
 * { bookmark-state: closed }
 h1, h2 { bookmark-state: open }
@@ -1460,7 +1461,7 @@ h1, h2 { bookmark-state: open }
 
 <h2>Page groups</h2>
 
-<p>Named pages can appear in sequence, stemming from different elements. A sequnce of named pages with the same name is called a <em>page group</em>. The 'page-group' property expresses whether an element starts a new page group or not. 
+<p>Named pages can appear in sequence, stemming from different elements. It is sometimes necessary to break a sequence of pages with the same name into several <em>page groups</em>. The <code>page-group</code> property expresses whether an element starts a new page group or not. 
 
 <table class=propdef>
     <tr>
@@ -1550,7 +1551,7 @@ article {
 <div class=example>
 <pre>
 @page funky:nth(1) { background: pink }  /* select first page of every "funky" page group */
-@page :first:nth(2)) { background: lime } /* selects nothing */
+@page :first:nth(2)) { background: lime } /* select pages that are both first and second. I.e. none */
 @page :right:nth(3n)) { background: lime } /* selects every third page, which also is a right page */
 </pre>
 </div>
@@ -1616,8 +1617,9 @@ article::page(left) p {   /* select all p elements that appear on left pages in 
 ::page(left) p { text-align: left }
 </pre>
 
+<!--
 <p class=XXX>Is "left" a pseudo-class or pseudo-element? In @page, ":left" is a pseudo-class. However, when we select elements on left pages, it acts like a pseudo-element.</p>
-
+-->
 </div>
 
 
