@@ -1634,7 +1634,7 @@ div.chapter::column(1,*)     /* the first column on all pages */
 
 <p class="XXX">This section is still searching for a solution. 
 
-<p>To avoid <em>show-through</em>, where a printed line shows through to the other side of the sheet, baselines are often aligned. In multi-column layouts, lines in adjacent columns are often aligned. To achive this, a flag of some kind is needed to indicate that lines within an element should be alinged. 
+<p>To avoid <em>show-through</em>, where a printed line shows through to the other side of the sheet, baselines are often aligned. Also, in multi-column layouts, lines in adjacent columns are often aligned. To achive these kinds of aligements, a flag of some kind is needed to indicate that lines within an element should be alinged. This section sketches several ideas.
 
 <h3 id="idea-1"><span class="secno">10.1 </span>Idea 1</h3>
 
@@ -1658,7 +1658,7 @@ div.chapter::column(1,*)     /* the first column on all pages */
 
 <ol>
 <li>For each block-level element, find the "natural" set of baselines given by the computed value of 'line-height' and the used font. 
-<li>When baseline alignment in turned on, each line is placed on the closest a "natural" baseline 
+<li>When baseline alignment in turned on, each line is placed on the closest "natural" baseline.
 </ol>
 
 <p>This could be achived with:
@@ -1676,10 +1676,10 @@ div.chapter::column(1,*)     /* the first column on all pages */
 
 <p>One problem with both Idea 1 and Idea 2 is that all content is
 aligend. This may not be desireable in all cases. For example, a
-headline will typically use a larger font size. If all lines in the
-headlin is aligned with a "natural" baseline (or something similar),
-lots of white space will be generated. Therefore, need a way to turn 
-off baseline alingement for certain elements. For example:
+headline will typically use a larger font size and if all lines in the
+headline are aligned with a "natural" baseline (or something similar),
+lots of white space will be generated. Therefore, we need a way to turn 
+off baseline alingement for certain elements. 
 
 <div class="example">
 
@@ -1687,11 +1687,14 @@ off baseline alingement for certain elements. For example:
 
 <pre>article { 
   columns: 3; 
-  line-stacking-strategy: set-baselines;
+  line-stacking: set-baselines;
 }
-article p { line-stacking-strategy: use-baselines }
-article h1 { line-stacking-strategy: normal }
+article p { line-stacking: use-baselines }
+article h1 { line-stacking: normal }
+article img { display: block; vertical-align: bottom }
 </pre>
+
+<p>(In the code above, the 'vertical-align' property is used to declare where any extra space ends up; in this example it will end up above the image.)
 </div>
 
 
