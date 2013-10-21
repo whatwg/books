@@ -1270,7 +1270,15 @@ img { float: sidenote }
 
 <p class="XXX">It should be possible to have all sidenotes go into a sidenote area, like footnotes. It should also be possible to have sidenotes on the side of the text, vertically aligned with the anchoring point. 
 
-<p class="XXX">Should there be a mechanism to create new areas like footnote/sidenote, or are two predefinded areas enough? One could also define sidnotes in a generic way, e.g. "float: to(sidenote)" 
+<p class="XXX">It may be better to have a generic mechanism for creating notes and other areas:
+
+<pre>@page {
+  @box sidenote {
+    ...
+  }
+}
+div.sidenote { float: to(sidenote) }
+</pre>
 
 
 <h2 id="bookmarks"><span class="secno">7 </span>Bookmarks</h2>
