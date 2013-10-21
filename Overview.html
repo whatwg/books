@@ -1633,11 +1633,11 @@ div.chapter::column(1,*)     /* the first column on all pages */
 
 <h2 id="baseline-alignment"><span class="secno">10 </span>Baseline alignment</h2>
 
-<p class="XXX">This section is still searching for a solution. 
+<p class="note">This issue has also been <a href="http://lists.w3.org/Archives/Public/www-style/2009Jan/0010.html">discussed in the past</a>. We are still searching for a solution.
+
 
 <p>To avoid <em>show-through</em>, where a printed line shows through to the other side of the sheet, baselines are often aligned. Also, in multi-column layouts, lines in adjacent columns are often aligned. To achive these kinds of aligements, a flag of some kind is needed to indicate that lines within an element should be alinged. This section sketches several ideas
 
-<p class="note">This issue has also been <a href="http://lists.w3.org/Archives/Public/www-style/2009Jan/0010.html">discussed in the past</a>.
 
 <h3 id="idea-1"><span class="secno">10.1 </span>Idea 1</h3>
 
@@ -1652,8 +1652,6 @@ div.chapter::column(1,*)     /* the first column on all pages */
 </div>
 
 <p>When <code>line-stacking-strategy</code> is set to <code>grid-height</code>, the stack height of each line is the smallest multiple of the element's <code>line-height</code> computed value that can contain the block progression of all the inline elements on that line when those elements are properly aligned. The 'line-height' property value is ignored for inline elements. 
-
-<p class="XXX">Where is the extra space placed? Above the line, below the line, or evenly distributed above/below?
 
 <h3 id="idea-2"><span class="secno">10.2 </span>Idea 2</h3>
 
@@ -1677,12 +1675,7 @@ div.chapter::column(1,*)     /* the first column on all pages */
 
 <h3 id="idea-3"><span class="secno">10.3 </span>Idea 3</h3>
 
-<p>One problem with both Idea 1 and Idea 2 is that all content is
-aligend. This may not be desireable in all cases. For example, a
-headline will typically use a larger font size and if all lines in the
-headline are aligned with a "natural" baseline (or something similar),
-lots of white space will be generated. Therefore, we need a way to turn 
-off baseline alingement for certain elements. 
+<p>One problem with both Idea 1 and Idea 2 is that all content aligend. This may not be desireable in all cases. For example, a headline will typically use a larger font size and if all lines in the headline are aligned with a "natural" baseline (or something similar), lots of white space will be generated. Therefore, we need a way to turn off baseline alignment for certain elements. 
 
 <div class="example">
 
