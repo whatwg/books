@@ -1650,6 +1650,8 @@ article::page(left) p {   /* select all p elements that appear on left pages in 
 
 <p>To avoid <em>show-through</em>, where a printed line shows through to the other side of the sheet, baselines are often aligned. Also, in multi-column layouts, lines in adjacent columns are often aligned. To achive these kinds of aligements, a flag of some kind is needed to indicate that lines within an element should be alinged. This section sketches several ideas.
 
+<!-- this has been dicussed before:  http://lists.w3.org/Archives/Public/www-style/2009Jan/0010.html -->
+
 <h3>Idea 1</h3>
 
 <p>One possible solution can be found in <a href="http://www.w3.org/TR/css3-linebox/#line-stacking-strategy">CSS3 module: line</a>.
@@ -1713,6 +1715,11 @@ article img { display: block; vertical-align: bottom }
 
 <p>(In the code above, the 'vertical-align' property is used to declare where any extra space ends up; in this example it will end up above the image.)
 </div>
+
+<h3>Idea 3</h3>
+
+<p><a href="http://dev.w3.org/csswg/css-line-grid">CSS Line Grid Module</a>
+
 
 
 <!--
