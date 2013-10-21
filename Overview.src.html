@@ -18,6 +18,9 @@ div.example {
   margin-left: -7em;
 }
 a { text-decoration: none }
+a.pass { background: green }
+a.fail { background: red }
+a.unclear, a.almost { background: orange }
 </style>
 <link rel="stylesheet" type="text/css" href="http://www.whatwg.org/style/specification">
 
@@ -287,20 +290,28 @@ dt { string-set: index first-letter }
 <p>One-letter running headers are often used in dictionaries. 
 </div>
 
-<p>The textual content is copied regardless of other settings on the element. 
+<p>The textual content is copied regardless of values on other CSS properties. 
+
+<div class=code-example>
+<a href="http://people.opera.com/howcome/2013/tests/books/e-string-set-other-declarations.html">html</a><br>
+<a class=pass href="http://people.opera.com/howcome/2013/tests/books/e-string-set-other-declarations.pdf">AH</a>
+<a class=fail href="http://people.opera.com/howcome/2013/tests/books/string-set-other-declarations.pdf">PR</a>
+</div>
 
 <div class="example">
-<p>In HTML, <code>title</code> elements are normally not displayed, but in this example the content is copied into a named string:
+<p>In this example, only the last declaration has an effect on the named string:
 
 <pre>
 title {
   display: none;
+  content: "foo"; 
+  text-transform: uppercase;
+  text-replace: "foo" "bar";
   string-set: tittel content();
 }
 </pre>
 </div>
 
-<p class=XXX>Should 'text-transform' be applied before copying the content?
 
 <h4>Using named strings</h4>
 
