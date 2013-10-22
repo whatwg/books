@@ -1680,14 +1680,6 @@ article::page(left) {   /* select parts of article shown on left pages */
 </pre>
 </div>
 
-<div class=example>
-<pre>
-::page(left) p {   /* select articles that are fully within a page */
-  background: pink;
-} 
-</pre>
-</div>
-
 
 <div class=example>
 <pre>
@@ -1700,8 +1692,15 @@ article::page(left) {   /* select parts of article shown on left pages */
 </pre>
 </div>
 
+<!-- must be able to select named pages, too -- and named areas? -->
+<!-- how to select elements that appear in a named area
 
+  p:col(2n)
+  p:area(sidenote)
+  p:page(:left)
+  p:page(funky)
 
+-->
 
 <p>It is also possible to construct complex selectors:
 
