@@ -1673,19 +1673,30 @@ div.chapter::column(1,*)     /* the first column on all pages */
 </pre>
 </div>
 
-<p>It is also possible to place the code inside @page:
+
+<div class="example">
+<pre>::page(left) .sidenote {   /* select sidenotes that appear on left pages */
+  text-align: left;
+} 
+::page(right) .sidenote {   /* select sidenotes that appear on right pages */
+  text-align: left;
+} 
+</pre>
+</div>
+
+<p>In an alterntive syntax, the code is placed inside @page:
 
 <div class="example">
 <p>These are identical:
 
 <pre>@page :left {
-  {
+  @inside {
     p { text-align: left } 
   }
 }
-
 ::page(left) p { text-align: left }
 </pre>
+
 
 <!--
 <p class=XXX>Is "left" a pseudo-class or pseudo-element? In @page, ":left" is a pseudo-class. However, when we select elements on left pages, it acts like a pseudo-element.</p>
