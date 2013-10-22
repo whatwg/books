@@ -1646,21 +1646,17 @@ article {
 </div>
 
 
-<p>In an alterntive longhand syntax, selectors are placed inside an @inside-block:
+<p>In an alternative longhand syntax, selectors are placed inside an @inside-block:
 
 <div class="example">
 <p>These are identical:
 
-<pre>@page :left {
-  @inside {
-    p { text-align: left } 
-  }
-}
+<pre>@page :left { @inside { p { text-align: left }}}
 @page :left p { text-align: left }
 </pre>
 </div>
 
-<p>The longhand syntax also allows the styling of elemens that appear inside page areas and margin boxes.
+<p>The longhand syntax also allows the styling of elements that appear inside page areas and margin boxes.
 
 <div class="example">
 <p>In this example, two sidenote areas are declared. Paragraphs inside those areas are given a differnet styling based on which side they are in.
@@ -1668,15 +1664,15 @@ article {
   margin-left: 1cm 5cm;  /* wide side margins */
   @area sidenote { 
     @area { 
-      position: absolute; left: -4cm; top: 0; bottom: 0; width: 3.5cm; /* left */
+      position: absolute; left: -4cm; top: 0; bottom: 0; width: 3.5cm; /* left sidenote */
       @inside p {
-        text-align: right;
+        text-align: right;   /* paragraphs in left sidenotes are aligned right */
       }
     }
     @area { 
-      position: absolute; right: -4cm; top: 0; bottom: 0; width: 3.5cm; /* right */
+      position: absolute; right: -4cm; top: 0; bottom: 0; width: 3.5cm; /* right sidenote */
       @inside p {
-        text-align: left;
+        text-align: left;   /* paragraphs in right sidenotes are aligned left */
       }
     }
   }
