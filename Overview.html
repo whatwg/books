@@ -98,17 +98,17 @@ a.unclear, a.almost { color: orange }
    <li><a href="#'bookmark-label'"><span class="secno">8.2 </span>'bookmark-label'</a></li>
    <li><a href="#'bookmark-state'"><span class="secno">8.3 </span>'bookmark-state'</a></ol></li>
  <li><a href="#page-groups"><span class="secno">9 </span>Page groups</a></li>
- <li><a href="#selecting-pages"><span class="secno">10 </span>Selecting pages</a>
+ <li><a href="#selecting-pages"><span class="secno">10 </span>Selecting pages</a></li>
+ <li><a href="#selecting-elements-within-pages"><span class="secno">11 </span>Selecting elements within pages</a></li>
+ <li><a href="#selecting-columns"><span class="secno">12 </span>Selecting columns</a></li>
+ <li><a href="#baseline-alignment"><span class="secno">13 </span>Baseline alignment</a>
   <ol>
-   <li><a href="#selecting-elements-within-pages-and-columns"><span class="secno">10.1 </span>Selecting elements within pages and columns</a></ol></li>
- <li><a href="#baseline-alignment"><span class="secno">11 </span>Baseline alignment</a>
-  <ol>
-   <li><a href="#idea-1"><span class="secno">11.1 </span>Idea 1</a></li>
-   <li><a href="#idea-2"><span class="secno">11.2 </span>Idea 2</a></li>
-   <li><a href="#idea-3"><span class="secno">11.3 </span>Idea 3</a></li>
-   <li><a href="#idea-3-0"><span class="secno">11.4 </span>Idea 3</a></ol></li>
- <li><a href="#character-substitution"><span class="secno">12 </span>Character substitution</a></li>
- <li><a href="#appendix-a:-default-style-sheet"><span class="secno">13 </span>Appendix A: Default style sheet</a></li>
+   <li><a href="#idea-1"><span class="secno">13.1 </span>Idea 1</a></li>
+   <li><a href="#idea-2"><span class="secno">13.2 </span>Idea 2</a></li>
+   <li><a href="#idea-3"><span class="secno">13.3 </span>Idea 3</a></li>
+   <li><a href="#idea-3-0"><span class="secno">13.4 </span>Idea 3</a></ol></li>
+ <li><a href="#character-substitution"><span class="secno">14 </span>Character substitution</a></li>
+ <li><a href="#appendix-a:-default-style-sheet"><span class="secno">15 </span>Appendix A: Default style sheet</a></li>
  <li><a href="#references" class="no-num">References</a></li>
  <li><a href="#acknowledgments" class="no-num">Acknowledgments</a></ol>
 <!--end-toc-->
@@ -1333,16 +1333,16 @@ optional <code>align</code> keyword may be used.
 </pre>
 </div>
 
-<p>To support having serveral named areas with the same name on the
-same page, multiple sets of declarations can be wrapped in curly
+<p>To support having several identically named areas on the
+same page, a second level of @area blocks are used:
 braces.
 
 <div class="example">
 <pre>@page {
   margin-left: 1cm 5cm;  /* wide side margins */
   @area sidenote { 
-    { position: absolute; left: -4cm; top: 0; bottom: 0; width: 3.5cm; } /* left */
-    { position: absolute; right: -4cm; top: 0; bottom: 0; width: 3.5cm; } /* right */
+    @area { position: absolute; left: -4cm; top: 0; bottom: 0; width: 3.5cm; } /* left */
+    @area { position: absolute; right: -4cm; top: 0; bottom: 0; width: 3.5cm; } /* right */
   }
 }
 .sidenote { float: to(sidenote) }
@@ -1350,6 +1350,7 @@ braces.
 
 </div>
 
+<p>Only two levels of @area are allowed. The outer @area must always have a name, and the inner @area must never have a name. 
 
 
 
@@ -1630,22 +1631,77 @@ article {
 </div>
 
 
-<h3 id="selecting-elements-within-pages-and-columns"><span class="secno">10.1 </span>Selecting elements within pages and columns</h3>
+<h2 id="selecting-elements-within-pages"><span class="secno">11 </span>Selecting elements within pages</h2>
 
 <p class="XXX">This section is fairly sketchy.
 
-<p>Requirement: to select an element, or part of an element, that ends up on a certain page or in a certain column
-
-<p>The 'page()' and 'column()' pseudo-elements allows the selection of
-pages, columns, and elements within.
-
+<p>To select elements within a page, normal selectors can be combined with a page selector:
 
 <div class="example">
-<pre>article::column(2n) {     /* select every other column of an article */
-  ...
+<pre>@page :first p { background: lime } 
+@page :nth(1) .sidenote { background: lime } 
+@page :nth(3n+1)) p:first-line { background: lime }
+@page funky:nth(1) p { background: pink } 
+</pre>
+</div>
+
+
+<p>In an alterntive longhand syntax, selectors are placed inside an @inside-block:
+
+<div class="example">
+<p>These are identical:
+
+<pre>@page :left {
+  @inside {
+    p { text-align: left } 
+  }
+}
+@page :left p { text-align: left }
+</pre>
+</div>
+
+<p>The longhand syntax also allows the styling of elemens that appear inside page areas and margin boxes.
+
+<div class="example">
+<p>In this example, two sidenote areas are declared. Paragraphs inside those areas are given a differnet styling based on which side they are in.
+<pre>@page {
+  margin-left: 1cm 5cm;  /* wide side margins */
+  @area sidenote { 
+    @area { 
+      position: absolute; left: -4cm; top: 0; bottom: 0; width: 3.5cm; /* left */
+      @inside p {
+        text-align: right;
+      }
+    }
+    @area { 
+      position: absolute; right: -4cm; top: 0; bottom: 0; width: 3.5cm; /* right */
+      @inside p {
+        text-align: left;
+      }
+    }
+  }
 }
 </pre>
 </div>
+
+<div class="example">
+<pre>@page :left {
+  background: pink;            /* declaration applies to pages */
+  @inside {
+    p { text-align: left }     /* declaration applies to elements on page */
+  }
+  @top-center {
+    background: orange;        /* declaration applies to margin box */
+    @inside {
+      p { text-align: left }   /* declaration applies to elements in top-center margin boxes */
+    }
+  }
+}
+</pre>
+</div>
+
+<h2 id="selecting-columns"><span class="secno">12 </span>Selecting columns</h2>
+
 
 <div class="example">
 <pre>div.chapter::column(3)       /* the 3rd column of the element */
@@ -1658,87 +1714,7 @@ div.chapter::column(1,*)     /* the first column on all pages */
 </div>
 
 
-<div class="example">
-<pre>article::page(left) {   /* select parts of article shown on left pages */
-  background: pink;
-} 
-</pre>
-</div>
-
-
-<div class="example">
-<pre>.sidenote::page(left)  {   /* select sidenotes that appear on left pages */
-  text-align: left;
-} 
-.sidenote::page(right)  {   /* select sidenotes that appear on right pages */
-  text-align: left;
-} 
-</pre>
-</div>
-
-<!-- must be able to select named pages, too -- and named areas? -->
-<!-- how to select elements that appear in a named area
-
-  p:col(2n)
-  p:area(sidenote)
-  p:page(:left)
-  p:page(funky)
-
--->
-
-<p>It is also possible to construct complex selectors:
-
-<div class="example">
-<pre>article::page(left) p {   /* select all p elements that appear on left pages in an article */
-  text-align: left;
-} 
-</pre>
-</div>
-
-
-<p>In an alterntive syntax, the code is placed inside @page:
-
-<div class="example">
-<p>These are identical:
-
-<pre>@page :left {
-  @inside {
-    p { text-align: left } 
-  }
-}
-::page(left) p { text-align: left }
-</pre>
-
-
-<!--
-<p class=XXX>Is "left" a pseudo-class or pseudo-element? In @page, ":left" is a pseudo-class. However, when we select elements on left pages, it acts like a pseudo-element.</p>
--->
-</div>
-
-
-
-
-<div class="example">
-<p>This syntax also allows the selection and styling of elements inside margin boxes:
-
-<pre>@page :left {
-  background: pink;            /* declaration applies to pages */
-  {
-    p { text-align: left }     /* declaration applies to elements on page */
-  }
-  @top-center {
-    background: orange;        /* declaration applies to margin box */
-    {
-      p { text-align: left }   /* declaration applies to elements in margin box */
-    }
-  }
-}
-</pre>
-</div>
-
-
-
-<h2 id="baseline-alignment"><span class="secno">11 </span>Baseline alignment</h2>
+<h2 id="baseline-alignment"><span class="secno">13 </span>Baseline alignment</h2>
 
 <p class="note">This issue has also been <a href="http://lists.w3.org/Archives/Public/www-style/2009Jan/0010.html">discussed in the past</a>. We are still searching for a solution.
 
@@ -1746,7 +1722,7 @@ div.chapter::column(1,*)     /* the first column on all pages */
 <p>To avoid <em>show-through</em>, where a printed line shows through to the other side of the sheet, baselines are often aligned. Also, in multi-column layouts, lines in adjacent columns are often aligned. To achive these kinds of aligements, a flag of some kind is needed to indicate that lines within an element should be alinged. This section sketches several ideas
 
 
-<h3 id="idea-1"><span class="secno">11.1 </span>Idea 1</h3>
+<h3 id="idea-1"><span class="secno">13.1 </span>Idea 1</h3>
 
 <p>One possible solution can be found in <a href="http://www.w3.org/TR/css3-linebox/#line-stacking-strategy">CSS3 module: line</a>.
 
@@ -1760,7 +1736,7 @@ div.chapter::column(1,*)     /* the first column on all pages */
 
 <p>When <code>line-stacking-strategy</code> is set to <code>grid-height</code>, the stack height of each line is the smallest multiple of the element's <code>line-height</code> computed value that can contain the block progression of all the inline elements on that line when those elements are properly aligned. The 'line-height' property value is ignored for inline elements. 
 
-<h3 id="idea-2"><span class="secno">11.2 </span>Idea 2</h3>
+<h3 id="idea-2"><span class="secno">13.2 </span>Idea 2</h3>
 
 <p>Another possible solution is to say: 
 
@@ -1780,7 +1756,7 @@ div.chapter::column(1,*)     /* the first column on all pages */
 </div>
 
 
-<h3 id="idea-3"><span class="secno">11.3 </span>Idea 3</h3>
+<h3 id="idea-3"><span class="secno">13.3 </span>Idea 3</h3>
 
 <p>One problem with both Idea 1 and Idea 2 is that all content aligend. This may not be desireable in all cases. For example, a headline will typically use a larger font size and if all lines in the headline are aligned with a "natural" baseline (or something similar), lots of white space will be generated. Therefore, we need a way to turn off baseline alignment for certain elements. 
 
@@ -1800,7 +1776,7 @@ article img { display: block; vertical-align: bottom }
 <p>(In the code above, the 'vertical-align' property is used to declare where any extra space ends up; in this example it will end up above the image.)
 </div>
 
-<h3 id="idea-3-0"><span class="secno">11.4 </span>Idea 3</h3>
+<h3 id="idea-3-0"><span class="secno">13.4 </span>Idea 3</h3>
 
 <p><a href="http://dev.w3.org/csswg/css-line-grid">CSS Line Grid Module</a>
 
@@ -1838,7 +1814,7 @@ div.figure { height: 20px; line-box-contain: block inline replaced line-grid }
 http://www.w3.org/Style/Group/css3-src/css3-linebox/Overview.html#LineStacking
 -->
 
-<h2 id="character-substitution"><span class="secno">12 </span>Character substitution</h2>
+<h2 id="character-substitution"><span class="secno">14 </span>Character substitution</h2>
 
 <p>It is sometimes convenient to replace one character or string with another without changing the source document. The ‘text-replace’ property offers a way to perform the replacement in the style sheet.
 
@@ -1942,7 +1918,7 @@ h3 { text-replace: "foobar" "barfoo" }      /* accept value, but ... */
 <p>This property is evaluated after the <span class="property">content</span> property, and before <span class="property">text-transform</span>.
 
 
-<h2 id="appendix-a:-default-style-sheet"><span class="secno">13 </span>Appendix A: Default style sheet</h2>
+<h2 id="appendix-a:-default-style-sheet"><span class="secno">15 </span>Appendix A: Default style sheet</h2>
 
 <pre>@page {
   counter-reset: footnote;
