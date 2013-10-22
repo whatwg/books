@@ -116,7 +116,7 @@ a.unclear, a.almost { color: orange }
 
 <h2 class="no-num" id="goals">Goals</h2>
 
-<p>The main goal of this specification is to enable authors to write books in HTML or other markup languages. Book publishing is a craft with long traditions and certain formatting conventions have developed over time. This specification adds functionality to CSS so that style sheets can express commonly used features in printed books, on-screen books, and page description languages.
+<p>The main goal of this specification is to enable authors to write books in HTML or other markup languages. Book publishing is a craft with long traditions and certain formatting conventions have developed over time. This specification adds functionality to CSS so that style sheets can express commonly used features in printed books, on-screen books, and page description languages. These features are also often used by magazines, in brochures, and in other publications.
 
 
 <h2 id="conformance"><span class="secno">1 </span>Conformance</h2>
@@ -1636,6 +1636,8 @@ article {
 
 <p class="XXX">This section is fairly sketchy.
 
+<p>Requirement: to select an element, or part of an element, that ends up on a certain page or in a certain column
+
 <p>The 'page()' and 'column()' pseudo-elements allows the selection of
 pages, columns, and elements within.
 
@@ -1659,12 +1661,34 @@ div.chapter::column(1,*)     /* the first column on all pages */
 
 
 <div class="example">
-<pre>article::page(left) {   /* select all left pages in an article */
+<pre>article::page(left) {   /* select parts of article shown on left pages */
   background: pink;
 } 
 </pre>
 </div>
 
+<div class="example">
+<pre>::page(left) p {   /* select articles that are fully within a page */
+  background: pink;
+} 
+</pre>
+</div>
+
+
+<div class="example">
+<pre>.sidenote::page(left)  {   /* select sidenotes that appear on left pages */
+  text-align: left;
+} 
+.sidenote::page(right)  {   /* select sidenotes that appear on right pages */
+  text-align: left;
+} 
+</pre>
+</div>
+
+
+
+
+<p>It is also possible to construct complex selectors:
 
 <div class="example">
 <pre>article::page(left) p {   /* select all p elements that appear on left pages in an article */
@@ -1673,16 +1697,6 @@ div.chapter::column(1,*)     /* the first column on all pages */
 </pre>
 </div>
 
-
-<div class="example">
-<pre>::page(left) .sidenote {   /* select sidenotes that appear on left pages */
-  text-align: left;
-} 
-::page(right) .sidenote {   /* select sidenotes that appear on right pages */
-  text-align: left;
-} 
-</pre>
-</div>
 
 <p>In an alterntive syntax, the code is placed inside @page:
 
