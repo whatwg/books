@@ -28,7 +28,7 @@ a.unclear, a.almost { color: orange }
   <p><a href="http://www.whatwg.org/" class="logo"><img width="100" src="http://resources.whatwg.org/logo.svg" alt="WHATWG" height="100"></a></p>
 	<h1>CSS Books</h1>
 	
-	<h2 class="no-num no-toc" id="soon-to-become-a-living-standard-—-last-updated-21-october-2013"><span class="minor">[soon to become a]</span> Living Standard — Last Updated 21 October 2013</h2>
+	<h2 class="no-num no-toc" id="soon-to-become-a-living-standard-—-last-updated-22-october-2013"><span class="minor">[soon to become a]</span> Living Standard — Last Updated 22 October 2013</h2>
 	
 	<dl>
 		<dt>This version:
@@ -50,7 +50,7 @@ a.unclear, a.almost { color: orange }
 
 	</dl>
 
-<p class="copyright"><a rel="license" href="http://creativecommons.org/publicdomain/zero/1.0/"><img src="http://i.creativecommons.org/p/zero/1.0/80x15.png" alt="CC0"></a>To the extent possible under law, the editor has waived all copyright and related or neighboring rights to this work. In addition, as of 21 October 2013, the editor has made this specification available under the
+<p class="copyright"><a rel="license" href="http://creativecommons.org/publicdomain/zero/1.0/"><img src="http://i.creativecommons.org/p/zero/1.0/80x15.png" alt="CC0"></a>To the extent possible under law, the editor has waived all copyright and related or neighboring rights to this work. In addition, as of 22 October 2013, the editor has made this specification available under the
 <a rel="license" href="http://www.openwebfoundation.org/legal/the-owf-1-0-agreements/owfa-1-0">Open Web Foundation Agreement Version 1.0</a>, which is available at <!--begin-link--><a href="http://www.openwebfoundation.org/legal/the-owf-1-0-agreements/owfa-1-0">http://www.openwebfoundation.org/legal/the-owf-1-0-agreements/owfa-1-0</a><!--end-link-->.
 
 </div>
@@ -91,23 +91,24 @@ a.unclear, a.almost { color: orange }
    <li><a href="#counting-footnotes"><span class="secno">5.5 </span>Counting footnotes</a></li>
    <li><a href="#laying-out-footnotes"><span class="secno">5.6 </span>Laying out footnotes</a></ol></li>
  <li><a href="#sidenotes"><span class="secno">6 </span>Sidenotes</a></li>
- <li><a href="#bookmarks"><span class="secno">7 </span>Bookmarks</a>
+ <li><a href="#named-areas"><span class="secno">7 </span>Named Areas</a></li>
+ <li><a href="#bookmarks"><span class="secno">8 </span>Bookmarks</a>
   <ol>
-   <li><a href="#'bookmark-level'"><span class="secno">7.1 </span>'bookmark-level'</a></li>
-   <li><a href="#'bookmark-label'"><span class="secno">7.2 </span>'bookmark-label'</a></li>
-   <li><a href="#'bookmark-state'"><span class="secno">7.3 </span>'bookmark-state'</a></ol></li>
- <li><a href="#page-groups"><span class="secno">8 </span>Page groups</a></li>
- <li><a href="#selecting-pages"><span class="secno">9 </span>Selecting pages</a>
+   <li><a href="#'bookmark-level'"><span class="secno">8.1 </span>'bookmark-level'</a></li>
+   <li><a href="#'bookmark-label'"><span class="secno">8.2 </span>'bookmark-label'</a></li>
+   <li><a href="#'bookmark-state'"><span class="secno">8.3 </span>'bookmark-state'</a></ol></li>
+ <li><a href="#page-groups"><span class="secno">9 </span>Page groups</a></li>
+ <li><a href="#selecting-pages"><span class="secno">10 </span>Selecting pages</a>
   <ol>
-   <li><a href="#selecting-elements-within-pages-and-columns"><span class="secno">9.1 </span>Selecting elements within pages and columns</a></ol></li>
- <li><a href="#baseline-alignment"><span class="secno">10 </span>Baseline alignment</a>
+   <li><a href="#selecting-elements-within-pages-and-columns"><span class="secno">10.1 </span>Selecting elements within pages and columns</a></ol></li>
+ <li><a href="#baseline-alignment"><span class="secno">11 </span>Baseline alignment</a>
   <ol>
-   <li><a href="#idea-1"><span class="secno">10.1 </span>Idea 1</a></li>
-   <li><a href="#idea-2"><span class="secno">10.2 </span>Idea 2</a></li>
-   <li><a href="#idea-3"><span class="secno">10.3 </span>Idea 3</a></li>
-   <li><a href="#idea-3-0"><span class="secno">10.4 </span>Idea 3</a></ol></li>
- <li><a href="#character-substitution"><span class="secno">11 </span>Character substitution</a></li>
- <li><a href="#appendix-a:-default-style-sheet"><span class="secno">12 </span>Appendix A: Default style sheet</a></li>
+   <li><a href="#idea-1"><span class="secno">11.1 </span>Idea 1</a></li>
+   <li><a href="#idea-2"><span class="secno">11.2 </span>Idea 2</a></li>
+   <li><a href="#idea-3"><span class="secno">11.3 </span>Idea 3</a></li>
+   <li><a href="#idea-3-0"><span class="secno">11.4 </span>Idea 3</a></ol></li>
+ <li><a href="#character-substitution"><span class="secno">12 </span>Character substitution</a></li>
+ <li><a href="#appendix-a:-default-style-sheet"><span class="secno">13 </span>Appendix A: Default style sheet</a></li>
  <li><a href="#references" class="no-num">References</a></li>
  <li><a href="#acknowledgments" class="no-num">Acknowledgments</a></ol>
 <!--end-toc-->
@@ -1259,29 +1260,102 @@ and the settings in the default style sheet differentiates the two.
 }
 @page :right {
   margin-right: 10em;
-  @sidenote { position: fixed; right: -8em; top: 0; width: 6em; height: auto }
+  @sidenote { position: absolute; right: -8em; top: 0; width: 6em; height: auto }
 }
 
-img { float: sidenote }
+.sidenote { float: sidenote }
 </pre>
 
 <p>It is important to note that it is the sidenote area that is descibed by @sidenote, and not the elements that are floated into the sidenote area. 
 </div>
 
-<p class="XXX">It should be possible to have all sidenotes go into a sidenote area, like footnotes. It should also be possible to have sidenotes on the side of the text, vertically aligned with the anchoring point. 
+<h2 id="named-areas"><span class="secno">7 </span>Named Areas</h2>
 
-<p class="XXX">It may be better to have a generic mechanism for creating notes and other areas:
+<p class="XXX">This section is sketchy
 
-<pre>@page {
-  @box sidenote {
-    ...
+<p>The page area and footnote area are predefined areas in CSS; all content is shown in the page area by default, and footnotes can be floated to the page area. Other page areas can be generated by the style sheet to provide space for sidenotes, figures and other content which is presented apart. Such areas are called <dfn id="named-areas-0">named areas</dfn>. The <code>@area</code> construct is used to create named areas.
+
+<div class="example">
+
+<p>In this example, images are floated to the right page, where the "photos" area take up all available space:
+
+<pre>@page :right {
+  @area photos {
+    width: 1vw;
+    height: 1vh;
   }
 }
-div.sidenote { float: to(sidenote) }
+img { float: to(photos) }
 </pre>
 
+<p>The result is a document where all content ends up on left pages, and where right pages hold only <code>img</code> elements.
+</div>
 
-<h2 id="bookmarks"><span class="secno">7 </span>Bookmarks</h2>
+<div class="example">
+<p>In this example, sidenotes are floated to the outside margin of pages:
+
+<pre>@page :left {
+  margin-left: 10em;
+  @area sidenote { position: absolute; left: -8em; top: 0; width: 6em; height: auto }
+}
+@page :right {
+  margin-right: 10em;
+  @area sidenote { position: absolute; right: -8em; top: 0; width: 6em; height: auto }
+}
+.sidenote { float: to(sidenote) }
+</pre>
+
+</div>
+
+<p>Areas with the same name are connected and content can flow from
+one area to the next, when necessary.
+
+<p>Elements floated to a named area are, by default, positioned at the
+first available space in the named area on its natural page. If there
+is no such named area on that page, or if the named area does not have
+sufficient room, the element is floated to the first opportunity in
+subsequent named areas with the same name. If there are no such areas,
+the element is shown at the end of the document.
+
+<p>To align elements with its anchoring point in the block direction, the
+optional <code>align</code> keyword may be used.
+
+<div class="example">
+<p>In this example, the sidenotes are placed next to their anchoring point:
+
+<pre>@page {
+  margin: 2cm 2cm 2cm 6cm;  /* set a wide left margin */
+  @area sidenote { 
+    position: absolute;
+    width: 3.5cm
+    margin-left: -4cm;     /* place sidenote area in left margin */
+  }
+}
+.sidenote { float: to(sidenote align) }
+</pre>
+</div>
+
+<p>To support having serveral named areas with the same name on the
+same page, multiple sets of declarations can be wrapped in curly
+braces.
+
+<div class="example">
+<pre>@page {
+  margin-left: 1cm 5cm;  /* wide side margins */
+  @area sidenote { 
+    { position: absolute; left: -4cm; top: 0; bottom: 0; width: 3.5cm; } /* left */
+    { position: absolute; right: -4cm; top: 0; bottom: 0; width: 3.5cm; } /* right */
+  }
+}
+.sidenote { float: to(sidenote) }
+</pre>
+
+</div>
+
+
+
+
+<h2 id="bookmarks"><span class="secno">8 </span>Bookmarks</h2>
 
 <div class="code-example">
 <a href="http://people.opera.com/howcome/2013/tests/books/bookmarks.html">html</a><br>
@@ -1296,7 +1370,7 @@ document itself, often in a tree-structured and clickable table of
 contents. To generate bookmarks, these properties are defined:
 'bookmark-level', 'bookmark-label', and 'bookmark-state'. 
 
-<h3 id="'bookmark-level'"><span class="secno">7.1 </span>'bookmark-level'</h3>
+<h3 id="'bookmark-level'"><span class="secno">8.1 </span>'bookmark-level'</h3>
 
 <table class="propdef">
     <tr>
@@ -1341,7 +1415,7 @@ hierarchical bookmark structure. The values are:
 </dl>
 
 
-<h3 id="'bookmark-label'"><span class="secno">7.2 </span>'bookmark-label'</h3>
+<h3 id="'bookmark-label'"><span class="secno">8.2 </span>'bookmark-label'</h3>
 
 <table class="propdef">
     <tr>
@@ -1421,7 +1495,7 @@ h1:before { content: "Chapter" }
 </div>
 
 
-<h3 id="'bookmark-state'"><span class="secno">7.3 </span>'bookmark-state'</h3>
+<h3 id="'bookmark-state'"><span class="secno">8.3 </span>'bookmark-state'</h3>
 
 
 <table class="propdef">
@@ -1464,7 +1538,7 @@ h1, h2 { bookmark-state: open }
 </div>
 
 
-<h2 id="page-groups"><span class="secno">8 </span>Page groups</h2>
+<h2 id="page-groups"><span class="secno">9 </span>Page groups</h2>
 
 <p>Named pages can appear in sequence, stemming from different elements. It is sometimes necessary to break a sequence of pages with the same name into several <em>page groups</em>. The <a href="#page-group"><code>page-group</code></a> property expresses whether an element starts a new page group or not. 
 
@@ -1526,7 +1600,7 @@ article {
 
 
 
-<h2 id="selecting-pages"><span class="secno">9 </span>Selecting pages</h2>
+<h2 id="selecting-pages"><span class="secno">10 </span>Selecting pages</h2>
 
 <p>In CSS2, <a href="http://www.w3.org/TR/CSS2/page.html#page-selectors">first, left and right pages</a> can be selected. This specification extends pages selectors with the <code>:nth()</code> functional notation. 
 
@@ -1558,7 +1632,7 @@ article {
 </div>
 
 
-<h3 id="selecting-elements-within-pages-and-columns"><span class="secno">9.1 </span>Selecting elements within pages and columns</h3>
+<h3 id="selecting-elements-within-pages-and-columns"><span class="secno">10.1 </span>Selecting elements within pages and columns</h3>
 
 <p class="XXX">This section is fairly sketchy.
 
@@ -1641,7 +1715,7 @@ div.chapter::column(1,*)     /* the first column on all pages */
 
 
 
-<h2 id="baseline-alignment"><span class="secno">10 </span>Baseline alignment</h2>
+<h2 id="baseline-alignment"><span class="secno">11 </span>Baseline alignment</h2>
 
 <p class="note">This issue has also been <a href="http://lists.w3.org/Archives/Public/www-style/2009Jan/0010.html">discussed in the past</a>. We are still searching for a solution.
 
@@ -1649,7 +1723,7 @@ div.chapter::column(1,*)     /* the first column on all pages */
 <p>To avoid <em>show-through</em>, where a printed line shows through to the other side of the sheet, baselines are often aligned. Also, in multi-column layouts, lines in adjacent columns are often aligned. To achive these kinds of aligements, a flag of some kind is needed to indicate that lines within an element should be alinged. This section sketches several ideas
 
 
-<h3 id="idea-1"><span class="secno">10.1 </span>Idea 1</h3>
+<h3 id="idea-1"><span class="secno">11.1 </span>Idea 1</h3>
 
 <p>One possible solution can be found in <a href="http://www.w3.org/TR/css3-linebox/#line-stacking-strategy">CSS3 module: line</a>.
 
@@ -1663,7 +1737,7 @@ div.chapter::column(1,*)     /* the first column on all pages */
 
 <p>When <code>line-stacking-strategy</code> is set to <code>grid-height</code>, the stack height of each line is the smallest multiple of the element's <code>line-height</code> computed value that can contain the block progression of all the inline elements on that line when those elements are properly aligned. The 'line-height' property value is ignored for inline elements. 
 
-<h3 id="idea-2"><span class="secno">10.2 </span>Idea 2</h3>
+<h3 id="idea-2"><span class="secno">11.2 </span>Idea 2</h3>
 
 <p>Another possible solution is to say: 
 
@@ -1683,7 +1757,7 @@ div.chapter::column(1,*)     /* the first column on all pages */
 </div>
 
 
-<h3 id="idea-3"><span class="secno">10.3 </span>Idea 3</h3>
+<h3 id="idea-3"><span class="secno">11.3 </span>Idea 3</h3>
 
 <p>One problem with both Idea 1 and Idea 2 is that all content aligend. This may not be desireable in all cases. For example, a headline will typically use a larger font size and if all lines in the headline are aligned with a "natural" baseline (or something similar), lots of white space will be generated. Therefore, we need a way to turn off baseline alignment for certain elements. 
 
@@ -1703,7 +1777,7 @@ article img { display: block; vertical-align: bottom }
 <p>(In the code above, the 'vertical-align' property is used to declare where any extra space ends up; in this example it will end up above the image.)
 </div>
 
-<h3 id="idea-3-0"><span class="secno">10.4 </span>Idea 3</h3>
+<h3 id="idea-3-0"><span class="secno">11.4 </span>Idea 3</h3>
 
 <p><a href="http://dev.w3.org/csswg/css-line-grid">CSS Line Grid Module</a>
 
@@ -1741,7 +1815,7 @@ div.figure { height: 20px; line-box-contain: block inline replaced line-grid }
 http://www.w3.org/Style/Group/css3-src/css3-linebox/Overview.html#LineStacking
 -->
 
-<h2 id="character-substitution"><span class="secno">11 </span>Character substitution</h2>
+<h2 id="character-substitution"><span class="secno">12 </span>Character substitution</h2>
 
 <p>It is sometimes convenient to replace one character or string with another without changing the source document. The ‘text-replace’ property offers a way to perform the replacement in the style sheet.
 
@@ -1845,7 +1919,7 @@ h3 { text-replace: "foobar" "barfoo" }      /* accept value, but ... */
 <p>This property is evaluated after the <span class="property">content</span> property, and before <span class="property">text-transform</span>.
 
 
-<h2 id="appendix-a:-default-style-sheet"><span class="secno">12 </span>Appendix A: Default style sheet</h2>
+<h2 id="appendix-a:-default-style-sheet"><span class="secno">13 </span>Appendix A: Default style sheet</h2>
 
 <pre>@page {
   counter-reset: footnote;
