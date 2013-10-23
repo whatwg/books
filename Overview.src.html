@@ -1351,6 +1351,20 @@ braces.
 
 <p>Only two levels of @area are allowed. The outer @area must always have a name, and the inner @area must never have a name. 
 
+<p>By floating elements into a statically positioned named area, the content remains for as long as the named area is visible.
+
+<div class=example>
+<pre>
+@page {
+  @area sidenote { 
+    position: fixed; left: -4cm; top: 0; bottom: 0; width: 3.5cm; 
+  }
+}
+.sidenote { float: to(sidenote) }
+</pre>
+</div>
+
+<p class=issue>How is the element named area emptied?
 
 
 <h2>Bookmarks</h2>
