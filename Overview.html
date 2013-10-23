@@ -28,7 +28,7 @@ a.unclear, a.almost { color: orange }
   <p><a href="http://www.whatwg.org/" class="logo"><img width="100" src="http://resources.whatwg.org/logo.svg" alt="WHATWG" height="100"></a></p>
 	<h1>CSS Books</h1>
 	
-	<h2 class="no-num no-toc" id="soon-to-become-a-living-standard-—-last-updated-22-october-2013"><span class="minor">[soon to become a]</span> Living Standard — Last Updated 22 October 2013</h2>
+	<h2 class="no-num no-toc" id="soon-to-become-a-living-standard-—-last-updated-23-october-2013"><span class="minor">[soon to become a]</span> Living Standard — Last Updated 23 October 2013</h2>
 	
 	<dl>
 		<dt>This version:
@@ -50,7 +50,7 @@ a.unclear, a.almost { color: orange }
 
 	</dl>
 
-<p class="copyright"><a rel="license" href="http://creativecommons.org/publicdomain/zero/1.0/"><img src="http://i.creativecommons.org/p/zero/1.0/80x15.png" alt="CC0"></a>To the extent possible under law, the editor has waived all copyright and related or neighboring rights to this work. In addition, as of 22 October 2013, the editor has made this specification available under the
+<p class="copyright"><a rel="license" href="http://creativecommons.org/publicdomain/zero/1.0/"><img src="http://i.creativecommons.org/p/zero/1.0/80x15.png" alt="CC0"></a>To the extent possible under law, the editor has waived all copyright and related or neighboring rights to this work. In addition, as of 23 October 2013, the editor has made this specification available under the
 <a rel="license" href="http://www.openwebfoundation.org/legal/the-owf-1-0-agreements/owfa-1-0">Open Web Foundation Agreement Version 1.0</a>, which is available at <!--begin-link--><a href="http://www.openwebfoundation.org/legal/the-owf-1-0-agreements/owfa-1-0">http://www.openwebfoundation.org/legal/the-owf-1-0-agreements/owfa-1-0</a><!--end-link-->.
 
 </div>
@@ -1350,6 +1350,19 @@ braces.
 
 <p>Only two levels of @area are allowed. The outer @area must always have a name, and the inner @area must never have a name. 
 
+<p>By floating elements into a statically positioned named area, the content remains for as long as the named area is visible.
+
+<div class="example">
+<pre>@page {
+  @area sidenote { 
+    position: fixed; left: -4cm; top: 0; bottom: 0; width: 3.5cm; 
+  }
+}
+.sidenote { float: to(sidenote) }
+</pre>
+</div>
+
+<p class="issue">How is the element named area emptied?
 
 
 <h2 id="bookmarks"><span class="secno">8 </span>Bookmarks</h2>
