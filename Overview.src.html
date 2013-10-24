@@ -1416,7 +1416,7 @@ braces.
 
 <div class=example>
 
-<p>In this example, there are two streams of footnotes. The first stream is floated to the "footnote" area, and the second is floated to a name area called "fn2". The first stream is referenced by line numbers, and the second by lower-alpha. 
+<p>In this example, there are two streams of footnotes. The first stream is floated to the predefined "footnote" area, and the second is floated to a name area called "fn2". The first stream is referenced by line numbers, and the second by lower-alpha. 
 
 <pre>
 @page { 
@@ -1424,6 +1424,7 @@ braces.
   @area fn2 {
     float: bottom; 
     column-span: all;
+    columns: 2;
   }
 }
 div.line { counter-increment: line }
@@ -1438,7 +1439,7 @@ div.line:nth-of-type(2n+1)::after { content: leader(space) counter(line) }
 .fn2::marker { content: "[" counter(line) "]" }
 </pre>
 
-<p>In the formatted result, the footnote area appears below the named area:
+<p>In the formatted result, the footnote area appears below the named area.
 
 <pre>
 Come, blue-eyed maid of heaven! - but thou, alas,[a]       1
