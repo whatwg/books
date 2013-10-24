@@ -667,9 +667,15 @@ ul.toc a::after {
 </div>
 
 
+<div class=code-example>
+<a href="http://people.opera.com/howcome/2013/tests/books/e-leaders-line-numbers.html">html</a><br>
+<a class=pass href="http://people.opera.com/howcome/2013/tests/books/e-leaders-line-numbers-ah.pdf">AH</a>
+<a class=pass href="http://people.opera.com/howcome/2013/tests/books/e-leaders-line-numbers-pr.pdf">PR</a>
+</div>
+
 
 <div class="example">
-<p>Leaders can be used to add line numbers to text. This is commonly used when publishing famous poems. In this example, every other line gets a line number on the right. 
+<p>Leaders can be used to add line numbers to text. This is sometimes used when publishing poems or writs. In this example, every other line gets a line number on the right. 
 
 <pre>
 @page { counter-reset: line }
@@ -677,7 +683,16 @@ ul.toc a::after {
 .line:nth-of-type(2n+1)::after { content: leader(space) counter(line) }
 </pre>
 
-<p>Note that the formatter doesn't really count lines, but elements marked up as lines. 
+<p>The formatted result could be:
+
+<pre>
+Oh! let that eye, which, wild as the gazelle's,    1
+Now brightly bold or beautifully shy,
+Wins as it wanders, dazzles where it dwells,       3
+Glance o'er this page, nor to my verse deny
+</pre>
+
+<p>Note that the formatter doesn't really count lines, but rather elements marked up as lines. 
 </div>
 
 <p>If the content connected by a leader end up on different lines, the
@@ -1232,9 +1247,9 @@ As a result, the "footnote" counter is incremented each time a footnote is gener
 -->
 
 <div class=code-example>
-<a href="http://people.opera.com/howcome/2013/tests/books/e-leaders-line-numbers.html">html</a><br>
-<a class=pass href="http://people.opera.com/howcome/2013/tests/books/e-leaders-line-numbers-ah.pdf">AH</a>
-<a class=pass href="http://people.opera.com/howcome/2013/tests/books/e-leaders-line-numbers-pr.pdf">PR</a>
+<a href="http://people.opera.com/howcome/2013/tests/books/e-footnotes-leaders-line-numbers.html">html</a><br>
+<a class=pass href="http://people.opera.com/howcome/2013/tests/books/e-footnotes-leaders-line-numbers-ah.pdf">AH</a>
+<a class=pass href="http://people.opera.com/howcome/2013/tests/books/e-footnotes-leaders-line-numbers-pr.pdf">PR</a>
 </div>
 
 <div class=example>
