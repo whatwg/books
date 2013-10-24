@@ -1216,6 +1216,17 @@ horizontally aligned with the start of the line box.
 footnote is generated. That is, the "footnote" counter is incremented
 by one each time an element with ''float: footnote'' appears.
 
+<div class="example">
+<p>This code adds square brackets around footnote calls and 
+
+<pre>
+::footnote-call { 
+  content: " [" counter(footnote) "]";
+}
+</pre>
+</div>
+
+
 <p>The footnote counter can be reset with the 'counter-reset' property.
 
 <div class="example">
