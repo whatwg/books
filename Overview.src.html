@@ -639,6 +639,23 @@ of the leader, a partial leader string may be shown. White space in
 the leader string is collapsed according to the values of white-space
 properties.
 
+<p>To determine the length of the leaders, user agents must do the
+following for each line where a leader appears:
+
+<ol>
+<li>Lay out the content with leaders of minimum lengths
+
+<li>Determine the empty space left on the line. Informally: for block-level elements, the empty space is the difference between the element's width and the content on the line. For inline-level elements and for shrink-wrapped elements, the empty space is zero. For table cells, the empty space is the difference between the "minimum content width" and the "maximum content width".
+
+<li>Distribute the empty space between all leaders on the line and
+fill the empty space with the specified leader patterns. Glyphs must
+not be shown partially. All leaders on the line should, to the extent
+possible, have the same length. This may not always be possible as the
+minimum leader length must be honored.
+
+</ol>
+
+
 <div class="example">
 <p>By adding a leader to the ::after pseudo-element, a leader is added after the content of an element:
 <pre>
@@ -677,7 +694,7 @@ span::after {
 &lt;p>A paragraph with a &ltspan>span&lt;/span> inside.
 </pre>
 
-would beformatted as:
+would be formatted as:
 
 <pre>
 A paragraph with a span... inside.
@@ -764,22 +781,6 @@ Douglas Adams...
 </div>
 
 
-
-<p>To determine the length of the leaders, user agents must do the
-following for each line where a leader appears:
-
-<ol>
-<li>Lay out the content with leaders of minimum lengths
-
-<li>Determine the empty space left on the line. Informally: for block-level elements, the empty space is the difference between the element's width and the content on the line. For inline-level elements and for shrink-wrapped elements, the empty space is zero. For table cells, the empty space is the difference between the "minimum content width" and the "maximum content width".
-
-<li>Distribute the empty space between all leaders on the line and
-fill the empty space with the specified leader patterns. Glyphs must
-not be shown partially. All leaders on the line should, to the extent
-possible, have the same length. This may not always be possible as the
-minimum leader length must be honored.
-
-</ol>
 
 <div class="example">
 <p>Consider this code:
