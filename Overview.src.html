@@ -629,15 +629,15 @@ The table below shows the equivalents:
 leader pattern of consecutive lines.
 
 <p>The string inside the parenthesis is called the <em>leader
-string</em>. The leader string must be shown in full at least once and
+string</em>. The leader string must be shown in full at least once,
+thereby pushing other content to the side (in the writing direction of
+the element to which the leader is attached). The leader string
 establishes the minimum length of the leader. If there is empty space
-on the line, the leader is repeated as many times as possible thereby
-pushing other content to the side in the writing direction of the
-element to which the leader is attached. The expansion of a leader
-from its minimum length never causes line breaks to change. At the end
-of the leader, a partial leader string may be shown. White space in
-the leader string is collapsed according to the values of white-space
-properties.
+on the line, the leader is repeated as many times as possible. The
+expansion of a leader from its minimum length never causes line breaks
+to change. At the end of the leader, a partial leader string may be
+shown. White space in the leader string is collapsed according to the
+values of white-space properties.
 
 <p>To determine the length of the leaders, user agents must do the
 following for each line where a leader appears:
