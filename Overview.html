@@ -2068,6 +2068,13 @@ http://www.w3.org/Style/Group/css3-src/css3-linebox/Overview.html#LineStacking
 <p>As a result, the string "It's the beginning...!" will be changed to "It’s the beginning…!".
 </div>
 
+<div class="example">
+<p>In this example, a narrow no-break space is added before exclamation marks in French texts. This is known as "quart de cadratin" in French. 
+
+<pre>html:lang(fr) { text-replace "!" "\202F!" }
+</pre>
+</div>
+
 <!--
 <div class=example>
 <p>In this example, all references to &rsquo;Soviet Union' are replaced with &lsquo;<span class=property>Russia</span>&rsquo;.
@@ -2078,7 +2085,7 @@ body { text-replace: "Soviet Union" "Russia" }
 </div>
 -->
 
-<p>Text replacements are applied sequentially, starting with the first pair of strings. 
+<p>Text replacements are applied serially; the first pair of strings is applied to the textual content of the element, then the second pair of strings is applied to the outcome etc.
 
 <div class="example"> 
 
