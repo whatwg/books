@@ -28,7 +28,7 @@ a.unclear, a.almost { color: orange }
   <p><a href="http://www.whatwg.org/" class="logo"><img width="100" src="http://resources.whatwg.org/logo.svg" alt="WHATWG" height="100"></a></p>
 	<h1>CSS Books</h1>
 	
-	<h2 class="no-num no-toc" id="soon-to-become-a-living-standard-—-last-updated-24-october-2013"><span class="minor">[soon to become a]</span> Living Standard — Last Updated 24 October 2013</h2>
+	<h2 class="no-num no-toc" id="soon-to-become-a-living-standard-—-last-updated-26-october-2013"><span class="minor">[soon to become a]</span> Living Standard — Last Updated 26 October 2013</h2>
 	
 	<dl>
 		<dt>This version:
@@ -50,7 +50,7 @@ a.unclear, a.almost { color: orange }
 
 	</dl>
 
-<p class="copyright"><a rel="license" href="http://creativecommons.org/publicdomain/zero/1.0/"><img src="http://i.creativecommons.org/p/zero/1.0/80x15.png" alt="CC0"></a>To the extent possible under law, the editor has waived all copyright and related or neighboring rights to this work. In addition, as of 24 October 2013, the editor has made this specification available under the
+<p class="copyright"><a rel="license" href="http://creativecommons.org/publicdomain/zero/1.0/"><img src="http://i.creativecommons.org/p/zero/1.0/80x15.png" alt="CC0"></a>To the extent possible under law, the editor has waived all copyright and related or neighboring rights to this work. In addition, as of 26 October 2013, the editor has made this specification available under the
 <a rel="license" href="http://www.openwebfoundation.org/legal/the-owf-1-0-agreements/owfa-1-0">Open Web Foundation Agreement Version 1.0</a>, which is available at <!--begin-link--><a href="http://www.openwebfoundation.org/legal/the-owf-1-0-agreements/owfa-1-0">http://www.openwebfoundation.org/legal/the-owf-1-0-agreements/owfa-1-0</a><!--end-link-->.
 
 </div>
@@ -657,22 +657,54 @@ The table below shows the equivalents:
 <p>When possible, User Agents should align corresponding glyphs from the
 leader pattern of consecutive lines.
 
-<p>The string inside the parenthesis is called the <em>leader string</em>.
-
-<p>In its simplest form, the 'content' property only takes one
-''leader()'' value:
+<p>The string inside the parenthesis is called the <em>leader
+string</em>. The leader string must be shown in full at least once and
+establishes the minimum length of the leader. If there is empty space
+on the line, the leader is repeated as many times as possible thereby
+pushing other content to the side in the writing direction of the
+element to which the leader is attached. The expansion of a leader
+from its minimum length never causes line breaks to change. At the end
+of the leader, a partial leader string may be shown. White space in
+the leader string is collapsed according to the values of white-space
+properties.
 
 <div class="example">
-<pre>heading::after { content: leader(dotted) }
+<p>By adding a leader to the ::after pseudo-element, a leader is added after the content of an element:
+<pre>h1::after { content: leader(dotted) }
+
+&lt;h1&gt;Dotted news&lt;/h1&gt;
+</pre>
+<p>The formatted result may be:
+<pre>Dotted news...................
 </pre>
 </div>
 
-<p>The leader string must be shown in full at least once and this
-establishes the minimum length of the leader. To fill the available
-space, the leader string is repeated as many times as possible in the
-writing direction. At the end of the leader, a partial string pattern
-may be shown. White space in the leader string is collapsed according
-to the values on white-space properties.
+<div class="example">
+<p>By setting 'white-space: pre', the white space in the leader string is preserved:
+<pre>h1::after { 
+  content: leader('  -  ');
+  white-space: pre; 
+}
+&lt;h1&gt;Dashing news&lt;/h1&gt;
+</pre>
+<p>The formatted result may be:
+<pre>Dotted news  -    -    -    -
+</pre>
+</div>
+
+<div class="example">
+<p>By setting 'white-space: pre', the white space in the leader string is preserved:
+<pre>span::after { 
+  content: leader('...');
+}
+</pre>
+
+</div>
+
+
+
+
+
 
 <!-- <span class="issue">Or, partial strings be avoided?</span> -->
 <!--<p class="issue">Should other properties influence the appearance of leaders?-->
@@ -684,8 +716,8 @@ background properties, and 'color'.
 
 <div class="example">
 
-<p>In a more complex example, the 'leader' value is combined with other
-values on the 'content' property:
+<p>In a more complex example, the 'leader' value is combined with
+other values on the 'content' property:
 
 <pre>ul.toc a::after {
   content: leader(". . . ") target-counter(attr(href url), page);
@@ -720,45 +752,51 @@ Glance o'er this page, nor to my verse deny
 <p>Note that the formatter doesn't really count lines, but rather elements marked up as lines. 
 </div>
 
-<p>If the content connected by a leader end up on different lines, the
+<!--<p>If the content connected by a leader end up on different lines, the
 leader will be present on all lines. Each leader fragment honors the
-minimum length of the leader.
+minimum length of the leader.-->
+
+<p>If the presence of a minimum length leader at the end of a line results in subsequent content being moved to the next line, the leader will also appear at the beginning of the next line. 
 
 <div class="example">
 <p>Consider this code:
 
 <pre>&lt;style&gt;
-.name::after { content: leader(dotted) }
+.name::after { content: leader("...") }
 &lt;/style&gt;
 &lt;div class="entry"&gt;
-&lt;span class="name"&gt;John Doe&lt;/span&gt;
-&lt;span class="number"&gt;123456789&lt;/span&gt;
+&lt;span class="name"&gt;Douglas Adams&lt;/span&gt;
+&lt;span class="number"&gt;43&lt;/span&gt;
 &lt;/div&gt;
 </pre>
 
-<p>If the name and number end up on different lines (e.g., in a narrow column), it may be formatted like this:
+<p>In this example, the number is pushed to the next line by the leader, which then appears on both lines:
 
-<pre>John Doe....
-...123456789
+<pre>Douglas Adams...
+..............42
 </pre>
+
+<p class="XXX">Or, should the leader in this case only be shown on the last line?
+
 </div>
 
+
+
 <p>To determine the length of the leaders, user agents must do the
-following for each line:
+following for each line where a leader appears:
 
 <ol>
 <li>Lay out the content with leaders of minimum lengths
 
-<li>Determine the empty space left on the line.
+<li>Determine the empty space left on the line. Informally: for block-level elements, the empty space is the difference between the element's width and the content on the line. For inline-level elements and for shrink-wrapped elements, the empty space is zero. For table cells, the empty space is the difference between the "minimum content width" and the "maximum content width".
 
-<li>Distribute the empty space between the leaders on the line. Glyphs
-must not be shown partially. All leaders on the line should, to the
-extent possible, have the same length. This may not always be possible
-as the minimum leader length must be honored.
+<li>Distribute the empty space between all leaders on the line and
+fill the empty space with the specified leader patterns. Glyphs must
+not be shown partially. All leaders on the line should, to the extent
+possible, have the same length. This may not always be possible as the
+minimum leader length must be honored.
 
-<li>Fill the empty space with the specified leader pattern.
 </ol>
-
 
 <div class="example">
 <p>Consider this code:
@@ -1288,7 +1326,6 @@ And is, despite of war and wasting fire,
 </pre>
 
 </div>
-
 
 
 <h3 id="laying-out-footnotes"><span class="secno">5.6 </span>Laying out footnotes</h3>
