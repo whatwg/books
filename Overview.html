@@ -672,9 +672,9 @@ values of white-space properties.
 following for each line where a leader appears:
 
 <ol>
-<li>Lay out the content with leaders of minimum lengths
+<li>Lay out the content with leaders of minimum lengths.
 
-<li>Determine the empty space left on the line. Informally: for block-level elements, the empty space is the difference between the element's width and the content on the line. For inline-level elements and for shrink-wrapped elements, the empty space is zero. For table cells, the empty space is the difference between the "minimum content width" and the "maximum content width".
+<li>Determine the empty space on the line. The empty space is the difference between the width of the line box (as per <a href="http://www.w3.org/TR/CSS2/visuren.html#line-box">CSS 2.1, section 9.4.2</a>) and the formatted content in the line box. For table cells in automatic table layout, the empty space is the difference between the "minimum content width" and the "maximum content width" (as per <a href="http://www.w3.org/TR/CSS2/tables.html#auto-table-layout">CSS 2.1 17.5.2.2</a>).
 
 <li>Distribute the empty space between all leaders on the line and
 fill the empty space with the specified leader patterns. Glyphs must
