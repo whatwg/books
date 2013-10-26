@@ -675,7 +675,7 @@ properties.
 &lt;h1&gt;Dotted news&lt;/h1&gt;
 </pre>
 <p>The formatted result may be:
-<pre>Dotted news...................
+<pre>|Dotted news...................|
 </pre>
 </div>
 
@@ -688,23 +688,24 @@ properties.
 &lt;h1&gt;Dashing news&lt;/h1&gt;
 </pre>
 <p>The formatted result may be:
-<pre>Dotted news  -    -    -    -
+<pre>|Dashing news  -    -    -    -|
 </pre>
 </div>
 
 <div class="example">
-<p>By setting 'white-space: pre', the white space in the leader string is preserved:
+<p>
 <pre>span::after { 
   content: leader('...');
 }
+
+&lt;p&gt;A paragraph with a &lt;span&gt;span&lt;/span&gt; inside.
 </pre>
 
+would beformatted as:
+
+<pre>A paragraph with a span... inside.
+</pre>
 </div>
-
-
-
-
-
 
 <!-- <span class="issue">Or, partial strings be avoided?</span> -->
 <!--<p class="issue">Should other properties influence the appearance of leaders?-->
