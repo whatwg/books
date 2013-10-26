@@ -648,7 +648,7 @@ h1::after { content: leader(dotted) }
 </pre>
 <p>The formatted result may be:
 <pre>
-Dotted news...................
+|Dotted news...................|
 </pre>
 </div>
 
@@ -663,24 +663,26 @@ h1::after {
 </pre>
 <p>The formatted result may be:
 <pre>
-Dotted news  -    -    -    -
+|Dashing news  -    -    -    -|
 </pre>
 </div>
 
 <div class="example">
-<p>By setting 'white-space: pre', the white space in the leader string is preserved:
+<p>
 <pre>
 span::after { 
   content: leader('...');
 }
+
+&lt;p>A paragraph with a &ltspan>span&lt;/span> inside.
 </pre>
+
+would beformatted as:
+
+<pre>
+A paragraph with a span... inside.
 </pre>
 </div>
-
-
-
-
-
 
 <!-- <span class="issue">Or, partial strings be avoided?</span> -->
 <!--<p class="issue">Should other properties influence the appearance of leaders?-->
