@@ -628,23 +628,59 @@ The table below shows the equivalents:
 <p>When possible, User Agents should align corresponding glyphs from the
 leader pattern of consecutive lines.
 
-<p>The string inside the parenthesis is called the <em>leader string</em>.
-
-<p>In its simplest form, the 'content' property only takes one
-''leader()'' value:
+<p>The string inside the parenthesis is called the <em>leader
+string</em>. The leader string must be shown in full at least once and
+establishes the minimum length of the leader. If there is empty space
+on the line, the leader is repeated as many times as possible thereby
+pushing other content to the side in the writing direction of the
+element to which the leader is attached. The expansion of a leader
+from its minimum length never causes line breaks to change. At the end
+of the leader, a partial leader string may be shown. White space in
+the leader string is collapsed according to the values of white-space
+properties.
 
 <div class="example">
+<p>By adding a leader to the ::after pseudo-element, a leader is added after the content of an element:
 <pre>
-heading::after { content: leader(dotted) }
+h1::after { content: leader(dotted) }
+
+&lt;h1>Dotted news&lt;/h1>
+</pre>
+<p>The formatted result may be:
+<pre>
+Dotted news...................
 </pre>
 </div>
 
-<P>The leader string must be shown in full at least once and this
-establishes the minimum length of the leader. To fill the available
-space, the leader string is repeated as many times as possible in the
-writing direction. At the end of the leader, a partial string pattern
-may be shown. White space in the leader string is collapsed according
-to the values on white-space properties.
+<div class="example">
+<p>By setting 'white-space: pre', the white space in the leader string is preserved:
+<pre>
+h1::after { 
+  content: leader('  -  ');
+  white-space: pre; 
+}
+&lt;h1>Dashing news&lt;/h1>
+</pre>
+<p>The formatted result may be:
+<pre>
+Dotted news  -    -    -    -
+</pre>
+</div>
+
+<div class="example">
+<p>By setting 'white-space: pre', the white space in the leader string is preserved:
+<pre>
+span::after { 
+  content: leader('...');
+}
+</pre>
+</pre>
+</div>
+
+
+
+
+
 
 <!-- <span class="issue">Or, partial strings be avoided?</span> -->
 <!--<p class="issue">Should other properties influence the appearance of leaders?-->
@@ -656,8 +692,8 @@ background properties, and 'color'.
 
 <div class="example">
 
-<p>In a more complex example, the 'leader' value is combined with other
-values on the 'content' property:
+<p>In a more complex example, the 'leader' value is combined with
+other values on the 'content' property:
 
 <pre>
 ul.toc a::after {
@@ -695,47 +731,53 @@ Glance o'er this page, nor to my verse deny
 <p>Note that the formatter doesn't really count lines, but rather elements marked up as lines. 
 </div>
 
-<p>If the content connected by a leader end up on different lines, the
+<!--<p>If the content connected by a leader end up on different lines, the
 leader will be present on all lines. Each leader fragment honors the
-minimum length of the leader.
+minimum length of the leader.-->
+
+<p>If the presence of a minimum length leader at the end of a line results in subsequent content being moved to the next line, the leader will also appear at the beginning of the next line. 
 
 <div class="example">
 <p>Consider this code:
 
 <pre>
 &lt;style>
-.name::after { content: leader(dotted) }
+.name::after { content: leader("...") }
 &lt;/style>
 &lt;div class="entry">
-&lt;span class="name">John Doe&lt;/span>
-&lt;span class="number">123456789&lt;/span>
+&lt;span class="name">Douglas Adams&lt;/span>
+&lt;span class="number">43&lt;/span>
 &lt;/div>
 </pre>
 
-<p>If the name and number end up on different lines (e.g., in a narrow column), it may be formatted like this:
+<p>In this example, the number is pushed to the next line by the leader, which then appears on both lines:
 
 <pre>
-John Doe....
-...123456789
+Douglas Adams...
+..............42
 </pre>
+
+<p class="XXX">Or, should the leader in this case only be shown on the last line?
+
 </div>
 
+
+
 <p>To determine the length of the leaders, user agents must do the
-following for each line:
+following for each line where a leader appears:
 
 <ol>
 <li>Lay out the content with leaders of minimum lengths
 
-<li>Determine the empty space left on the line.
+<li>Determine the empty space left on the line. Informally: for block-level elements, the empty space is the difference between the element's width and the content on the line. For inline-level elements and for shrink-wrapped elements, the empty space is zero. For table cells, the empty space is the difference between the "minimum content width" and the "maximum content width".
 
-<li>Distribute the empty space between the leaders on the line. Glyphs
-must not be shown partially. All leaders on the line should, to the
-extent possible, have the same length. This may not always be possible
-as the minimum leader length must be honored.
+<li>Distribute the empty space between all leaders on the line and
+fill the empty space with the specified leader patterns. Glyphs must
+not be shown partially. All leaders on the line should, to the extent
+possible, have the same length. This may not always be possible as the
+minimum leader length must be honored.
 
-<li>Fill the empty space with the specified leader pattern.
 </ol>
-
 
 <div class="example">
 <p>Consider this code:
@@ -1289,7 +1331,6 @@ And is, despite of war and wasting fire,
 </pre>
 
 </div>
-
 
 
 <h3>Laying out footnotes</h3>
