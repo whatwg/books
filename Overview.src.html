@@ -1588,7 +1588,7 @@ optional <code>align</code> keyword may be used.
 </div>
 
 
-<h3>Note calls: <code>::call</code></h3>
+<h3>Note calls: <code>::call<foo/code></h3>
 
 
 <p>Elements that are floated to named areas can add a "call", similar to a footnote-call, at the place where they were floated from. 
@@ -1631,8 +1631,6 @@ to fetch the content of a note and place it in a footnote.
 &lt;p id=words>&lt;span class="call">[3]&lt;/span> Most often.
 </pre>
 
-<p class=issue>define ''target-pull''
-
 <p>When shown in a legacy browser, the content of the element will be
 shown as a clickable link to an endnote. When printed according to
 this specification, there will be a footnote:
@@ -1644,13 +1642,7 @@ A sentence consists of words&#xB9;.
 </pre>
 </div>
 
-<div class=example>
-Consider this markup:
-<pre>
-&lt;p>Sorry, &lt;span title="This is, of course, a lie.">we're closing for lunch&lt;/span>.
-</pre>
 
-<p>The content of the "title" attribute can be turned into a footnote with this code:
 
 <div class=example>
 
