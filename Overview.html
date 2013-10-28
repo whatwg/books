@@ -28,7 +28,7 @@ a.unclear, a.almost { color: orange }
   <p><a href="http://www.whatwg.org/" class="logo"><img width="100" src="http://resources.whatwg.org/logo.svg" alt="WHATWG" height="100"></a></p>
 	<h1>CSS Books</h1>
 	
-	<h2 class="no-num no-toc" id="soon-to-become-a-living-standard-—-last-updated-26-october-2013"><span class="minor">[soon to become a]</span> Living Standard — Last Updated 26 October 2013</h2>
+	<h2 class="no-num no-toc" id="soon-to-become-a-living-standard-—-last-updated-28-october-2013"><span class="minor">[soon to become a]</span> Living Standard — Last Updated 28 October 2013</h2>
 	
 	<dl>
 		<dt>This version:
@@ -50,7 +50,7 @@ a.unclear, a.almost { color: orange }
 
 	</dl>
 
-<p class="copyright"><a rel="license" href="http://creativecommons.org/publicdomain/zero/1.0/"><img src="http://i.creativecommons.org/p/zero/1.0/80x15.png" alt="CC0"></a>To the extent possible under law, the editor has waived all copyright and related or neighboring rights to this work. In addition, as of 26 October 2013, the editor has made this specification available under the
+<p class="copyright"><a rel="license" href="http://creativecommons.org/publicdomain/zero/1.0/"><img src="http://i.creativecommons.org/p/zero/1.0/80x15.png" alt="CC0"></a>To the extent possible under law, the editor has waived all copyright and related or neighboring rights to this work. In addition, as of 28 October 2013, the editor has made this specification available under the
 <a rel="license" href="http://www.openwebfoundation.org/legal/the-owf-1-0-agreements/owfa-1-0">Open Web Foundation Agreement Version 1.0</a>, which is available at <!--begin-link--><a href="http://www.openwebfoundation.org/legal/the-owf-1-0-agreements/owfa-1-0">http://www.openwebfoundation.org/legal/the-owf-1-0-agreements/owfa-1-0</a><!--end-link-->.
 
 </div>
@@ -91,7 +91,10 @@ a.unclear, a.almost { color: orange }
    <li><a href="#counting-footnotes"><span class="secno">5.5 </span>Counting footnotes</a></li>
    <li><a href="#laying-out-footnotes"><span class="secno">5.6 </span>Laying out footnotes</a></ol></li>
  <li><a href="#sidenotes"><span class="secno">6 </span>Sidenotes</a></li>
- <li><a href="#named-areas"><span class="secno">7 </span>Named Areas</a></li>
+ <li><a href="#named-areas"><span class="secno">7 </span>Named Areas</a>
+  <ol>
+   <li><a href="#floating-content-into-named-areas:-to()"><span class="secno">7.1 </span>Floating content into named areas: <code>to()</code></a></li>
+   <li><a href="#pulling-content:-target-pull()"><span class="secno">7.2 </span>Pulling content: <code>target-pull()</code></a></ol></li>
  <li><a href="#bookmarks"><span class="secno">8 </span>Bookmarks</a>
   <ol>
    <li><a href="#'bookmark-level'"><span class="secno">8.1 </span>'bookmark-level'</a></li>
@@ -674,7 +677,7 @@ following for each line where a leader appears:
 <ol>
 <li>Lay out the content with leaders of minimum lengths.
 
-<li>Determine the empty space on the line. The empty space is the difference between the width of the line box (as per <a href="http://www.w3.org/TR/CSS2/visuren.html#line-box">CSS 2.1, section 9.4.2</a>) and the formatted content in the line box. For table cells in automatic table layout, the empty space is the difference between the "minimum content width" and the "maximum content width" (as per <a href="http://www.w3.org/TR/CSS2/tables.html#auto-table-layout">CSS 2.1 17.5.2.2</a>).
+<li>Determine the empty space on the line. The empty space is the difference between the width of the line box (as per <a href="http://www.w3.org/TR/CSS2/visuren.html#line-box">CSS 2.1, section 9.4.2</a>) and the formatted content in the line box. For table cells in automatic table layout, leaders may influence the layout by enlarging the "maximum cell width" (as per <a href="http://www.w3.org/TR/CSS2/tables.html#auto-table-layout">CSS 2.1 17.5.2.2</a>).
 
 <li>Distribute the empty space between all leaders on the line and
 fill the empty space with the specified leader patterns. Glyphs must
@@ -724,13 +727,36 @@ would be formatted as:
 </pre>
 </div>
 
-<!-- <span class="issue">Or, partial strings be avoided?</span> -->
-<!--<p class="issue">Should other properties influence the appearance of leaders?-->
 
-<p>These properties influence the appearance of leaders: all font
-properties, text properties, 'letter-spacing', white-space properties,
-background properties, and 'color'.
+<div class="example">
+<pre>
+</pre>
+</div>
 
+<div class="example">
+<p>Consider this example:
+
+<pre>td.leader::after { content: leader('..') }
+
+&lt;table style="width: 30em"&gt;
+&lt;tr&gt;&lt;td class=leader&gt;foo&lt;/td&gt; &lt;td&gt;bar&lt;/td&gt;&lt;/tr&gt;
+&lt;/table&gt;
+</pre>
+
+<p>In UAs that don't do leaders, the two cells will have the same width
+and the table cells could be rendered like this:
+
+<pre>|foo                             |bar                           |
+</pre>
+
+<p>When leaders are supported, the <em>maximum cell width</em> of the
+first cell grows, and the table cell could be rendered like this:
+
+<pre>|foo........................................................|bar|
+</pre>
+
+<p>(The '|' charaters mark vertical cell edges in the figures above.)
+</div>
 
 <div class="example">
 
@@ -742,6 +768,10 @@ other values on the 'content' property:
 }
 </pre>
 </div>
+
+<p>The appearance of leaders is influenced by the same set of properties that influence the appearance of fixed strings. 
+
+
 
 
 <div class="code-example">
@@ -1384,7 +1414,7 @@ and the settings in the default style sheet differentiates the two.
 
 <p class="XXX">This section is sketchy
 
-<p>The page area and footnote area are predefined areas in CSS; all content is shown in the page area by default, and footnotes can be floated to the page area. Other page areas can be generated by the style sheet to provide space for sidenotes, figures and other content which is presented apart. Such areas are called <dfn id="named-areas-0">named areas</dfn>. The <code>@area</code> construct is used to create named areas.
+<p>The page area and footnote area are predefined areas in CSS; all content is shown in the page area by default, and footnotes can be floated to the page area. Other page areas can be generated by the style sheet to provide space for sidenotes, figures and other content which is presented apart. Such areas are called <dfn id="named-areas-0">named areas</dfn>. The <code>@area</code> construct is used to create named areas, into which content can be floated with the <code>to()</code>.
 
 <div class="example">
 <p>In this example, the sidenote area is not predefinde (as in the previous section), but defined using @area:
@@ -1539,7 +1569,72 @@ And is, despite of war and wasting fire,
 </pre>
 </div>
 
+<h3 id="floating-content-into-named-areas:-to()"><span class="secno">7.1 </span>Floating content into named areas: <code>to()</code></h3>
 
+<div class="example">
+<pre>span.note { float: to(sidenote,block); }
+</pre>
+</div>
+
+<h3 id="pulling-content:-target-pull()"><span class="secno">7.2 </span>Pulling content: <code>target-pull()</code></h3>
+
+<div class="example">
+
+<p>To support legacy browsers, it is often better to make a link to
+the note rather than including the text inline. This example shows how
+to fetch the content of a note and place it in a footnote.
+
+<pre>&lt;style&gt;
+@media print {
+  .footnote {
+    float: footnote;
+    content: target-pull(attr(href url)) }
+  .call { display: none }
+}
+&lt;/style&gt;
+...
+&lt;p&gt;A sentence consists of words&lt;a class="footnote" href="#words"&gt; [3]&lt;/a&gt;.
+...
+&lt;p id=words&gt;&lt;span class="call"&gt;[3]&lt;/span&gt; Most often.
+</pre>
+
+<p class="issue">define ''target-pull''
+
+<p>When shown in a legacy browser, the content of the element will be
+shown as a clickable link to an endnote. When printed according to
+this specification, there will be a footnote:
+
+<pre>A sentence consists of words¹.
+
+¹ Most often.
+</pre>
+</div>
+
+<div class="example">
+Consider this markup:
+<pre>&lt;p&gt;Sorry, &lt;span title="This is, of course, a lie."&gt;we're closing for lunch&lt;/span&gt;.
+</pre>
+
+<p>The content of the "title" attribute can be turned into a footnote with this code:
+
+<div class="example">
+
+<p>When footnotes are long or complex, it may be impractical to keep their content at the point of reference. Instead, the content of the footnote may be stored at some other point in the source file.  This example shows how to fetch the content of a note and place it in a footnote.
+
+<pre>&lt;style&gt;
+@media print {
+  .footnote {
+    float: footnote;
+    content: target-pull(attr(href url)) }
+}
+&lt;/style&gt;
+...
+&lt;p&gt;A sentence consists of words&lt;a class="footnote" href="#words"&gt;&lt;/a&gt;.
+...
+&lt;div id=words&gt;Most often, a sentence consists of words. However, some sentences also 
+  have &amp;em&gt;numbers&lt;/em&gt;. And punctuation, don't forget punctuation.&lt;/div&gt;
+</pre>
+</div>
 
 
 
@@ -2171,6 +2266,7 @@ Etemad, Laurens Holst, Mike Bremford, Allan Sandfeld Jensen, Kelly
 Miller, Werner Donné, Tarquin (Mark) Wilton-Jones, Michel Fortin,
 Christian Roth, Brady Duga, Del Merritt, Ladd Van Tol, Tab Atkins Jr.,
 Jacob Grundtvig Refstrup,  James Elmore, Ian Tindale, Murakami Shinyu, Paul E.
-Merrell, Philip Taylor, Brad Kemper, Peter Linss, Daniel Glazman, Tantek Çelik, Florian Rivoal, Alex Mogilevsky, Simon Sapin, Cameron McCormack, Liam R E Quin, Peter Moulder, Morten Stenshorne, Rune Lillesveen, Lars Erik Bolstad, Anton Prowse, Michel Onoff</p>
+Merrell, Philip Taylor, Brad Kemper, Peter Linss, Daniel Glazman, Tantek Çelik, Florian Rivoal, Alex Mogilevsky, Simon Sapin, Cameron McCormack, Liam R E Quin, Peter Moulder, Morten Stenshorne, Rune Lillesveen, Lars Erik Bolstad, Anton Prowse, Michel Onoff, Dave Cramer.</p>
 
 
+</div>
