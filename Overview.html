@@ -96,7 +96,7 @@ p.issue::before { content: "Issue: " }
   <ol>
    <li><a href="#creating-names-areas:-@area"><span class="secno">6.1 </span>Creating names areas: <code>@area</code></a></li>
    <li><a href="#floating-content-into-named-areas:-to()"><span class="secno">6.2 </span>Floating content into named areas: <code>to()</code></a></li>
-   <li><a href="#note-calls:-::call"><span class="secno">6.3 </span>Note calls: <code>::call</code></a></li>
+   <li><a href="#note-calls:-::call"><span class="secno">6.3 </span>Note calls: <code>::call<foo code=""></foo></code></a></li>
    <li><a href="#pulling-content:-target-pull()"><span class="secno">6.4 </span>Pulling content: <code>target-pull()</code></a></ol></li>
  <li><a href="#bookmarks"><span class="secno">7 </span>Bookmarks</a>
   <ol>
@@ -1574,7 +1574,7 @@ optional <code>align</code> keyword may be used.
 </div>
 
 
-<h3 id="note-calls:-::call"><span class="secno">6.3 </span>Note calls: <code>::call</code></h3>
+<h3 id="note-calls:-::call"><span class="secno">6.3 </span>Note calls: <code>::call<foo code=""></foo></code></h3><code>
 
 
 <p>Elements that are floated to named areas can add a "call", similar to a footnote-call, at the place where they were floated from. 
@@ -1615,8 +1615,6 @@ to fetch the content of a note and place it in a footnote.
 &lt;p id=words&gt;&lt;span class="call"&gt;[3]&lt;/span&gt; Most often.
 </pre>
 
-<p class="issue">define ''target-pull''
-
 <p>When shown in a legacy browser, the content of the element will be
 shown as a clickable link to an endnote. When printed according to
 this specification, there will be a footnote:
@@ -1627,12 +1625,7 @@ this specification, there will be a footnote:
 </pre>
 </div>
 
-<div class="example">
-Consider this markup:
-<pre>&lt;p&gt;Sorry, &lt;span title="This is, of course, a lie."&gt;we're closing for lunch&lt;/span&gt;.
-</pre>
 
-<p>The content of the "title" attribute can be turned into a footnote with this code:
 
 <div class="example">
 
@@ -2286,4 +2279,4 @@ Jacob Grundtvig Refstrup,  James Elmore, Ian Tindale, Murakami Shinyu, Paul E.
 Merrell, Philip Taylor, Brad Kemper, Peter Linss, Daniel Glazman, Tantek Çelik, Florian Rivoal, Alex Mogilevsky, Simon Sapin, Cameron McCormack, Liam R E Quin, Peter Moulder, Morten Stenshorne, Rune Lillesveen, Lars Erik Bolstad, Anton Prowse, Michel Onoff, Dave Cramer.</p>
 
 
-</div>
+</code>
