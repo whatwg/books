@@ -104,7 +104,9 @@ p.issue::before { content: "Issue: " }
    <li><a href="#'bookmark-label'"><span class="secno">7.2 </span>'bookmark-label'</a></li>
    <li><a href="#'bookmark-state'"><span class="secno">7.3 </span>'bookmark-state'</a></ol></li>
  <li><a href="#page-groups"><span class="secno">8 </span>Page groups</a></li>
- <li><a href="#page-queries"><span class="secno">9 </span>Page queries</a></li>
+ <li><a href="#page-selectors"><span class="secno">9 </span>Page selectors</a>
+  <ol>
+   <li><a href="#nth()"><span class="secno">9.1 </span><code>nth()</code></a></ol></li>
  <li><a href="#selecting-elements-within-pages"><span class="secno">10 </span>Selecting elements within pages</a></li>
  <li><a href="#selecting-columns"><span class="secno">11 </span>Selecting columns</a></li>
  <li><a href="#baseline-alignment"><span class="secno">12 </span>Baseline alignment</a>
@@ -1892,10 +1894,13 @@ article {
 
 
 
-<h2 id="page-queries"><span class="secno">9 </span>Page queries</h2>
+<h2 id="page-selectors"><span class="secno">9 </span>Page selectors</h2>
 
-<p>In CSS2, <a href="http://www.w3.org/TR/CSS2/page.html#page-selectors">first, left and right pages</a> can be selected. This specification adds more advanced page queries. 
+<p>In CSS2, <a href="http://www.w3.org/TR/CSS2/page.html#page-selectors">first, left and right pages</a>, as well as named pages, can be selected. This specification adds more advanced page selectors. Page selectors are similar to normal selectors in the sense that they query a data set and select parts of it. However, page selectors and normal selector are different in what they query (normal selectors query a document tree, page selectors query a sequence of pages) and what they select (normal selectors return structural elements, page selectors return pages). Page selectors borrow from the syntax of normal selectors, but extends it somewhat (with ranges).
 
+<h3 id="nth()"><span class="secno">9.1 </span><code>nth()</code></h3>
+
+<p>The <code>nth()</code> construct is added to select a numbered page.
 
 <div class="example">
 <p>These are equivalent:
@@ -1904,7 +1909,7 @@ article {
 </pre>
 </div>
 
-<p>The grammar of allowed arguments to <code>nth()</code> is the same as the <a href="http://www.w3.org/TR/css3-selectors/#nth-child-pseudo">nth-child() pseudo-class</a>. 
+<p>The grammar of <a href="http://www.w3.org/TR/css3-selectors/#nth-child-pseudo">nth-child() pseudo-class</a> can be used with <code>nth()</code>:
 
 <div class="example">
 <p>In this example, pages in a document will cycle through pink, lime and white backgrounds:
@@ -1914,19 +1919,23 @@ article {
 </pre>
 </div>
 
-<p><code>nth()</code> can be combined with other page queries. 
+<p>Also, <code>nth()</code> can be used to select page ranges:
+
+<div class="example">
+<p>In this example, pages in a document will cycle through pink, lime and white backgrounds:
+<pre>@page :nth(3-5) { ... } /* page 3, 4 and 5 */
+</pre>
+</div>
+
+<p class="issue">Or, we could introduce a new :range selector</p>
+
+<p><code>nth()</code> can be combined with other page selectors. 
 
 <div class="example">
 <pre>@page funky:nth(1) { background: pink }  /* select first page of every "funky" page group */
 @page :first:nth(2) { background: lime } /* select pages that are both first and second. I.e. none */
 @page :right:nth(3n) { background: lime } /* selects every third page, which also is a right page */
-</pre>
-</div>
-
-<div class="example">
-<p>In this example, ranges of pages are selected:
-<pre>@page :range(3-8) { background: pink }
-@page :range(3-8), :range(14-18) { background: pink }
+@page :nth(20-40):odd { ... } /* all odd pages between 20 and 40 */
 </pre>
 </div>
 
@@ -1946,6 +1955,7 @@ article {
 </pre>
 </div>
 
+<p>The grammar is, informally: If something follows @page (with or without a space in between), it is a page selector. Between the page selector and the left curly brace comes a normal, possibly complex, selector. Elements that are (partially) shown on the selected page AND are selected by the normal selector, are selected. 
 
 <p>In an alternative longhand syntax, selectors are placed inside an @inside-block:
 
