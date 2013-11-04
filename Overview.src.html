@@ -1487,8 +1487,26 @@ braces.
     @area { position: absolute; right: -4cm; top: 0; bottom: 0; width: 3.5cm; } /* right */
   }
 }
-.sidenote { float: to(sidenote) }
+.sidenote { float: to(sidenote align) }
 </pre>
+
+<p>One possible rendering is:
+<pre>
+            ........ .........
+            ........ .........
+            ........ ...x..... second
+            ........ ......... sidnote
+            ........ .........
+      first ....x... .........
+   sidenote ........ .........
+            ........ ....x.... third
+            ........ ......... sidenote
+            ........ .........
+</pre>
+<p>(The 'x' marks the call point.)
+</div>
+
+
 
 </div>
 
@@ -1561,11 +1579,22 @@ And is, despite of war and wasting fire,
 
 <h3>Floating content into named areas: <code>to()</code></h3>
 
+<p>Content is added to named area with the <code>to()</code> functional notation.
+
 <div class=example>
+<p>This code adds an element to the named area called "sidenote":
+
 <pre>
-span.note { float: to(sidenote, block); }
+span.note { float: to(sidenote); }
 </pre>
 </div>
+
+<div class=issue>Is 'float' the best property to use? Could it be aligned with regions? Prince uses the 'flow' property: 
+<pre>
+span.note { flow: static(sidename) }
+</pre>
+</div>
+
 
 <p>To align elements with its anchoring point in the block direction, the
 optional <code>align</code> keyword may be used.
