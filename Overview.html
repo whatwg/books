@@ -30,7 +30,7 @@ p.issue::before { content: "Issue: " }
   <p><a href="http://www.whatwg.org/" class="logo"><img width="100" src="http://resources.whatwg.org/logo.svg" alt="WHATWG" height="100"></a></p>
 	<h1>CSS Books</h1>
 	
-	<h2 class="no-num no-toc" id="soon-to-become-a-living-standard-—-last-updated-28-october-2013"><span class="minor">[soon to become a]</span> Living Standard — Last Updated 28 October 2013</h2>
+	<h2 class="no-num no-toc" id="soon-to-become-a-living-standard-—-last-updated-4-november-2013"><span class="minor">[soon to become a]</span> Living Standard — Last Updated 4 November 2013</h2>
 	
 	<dl>
 		<dt>This version:
@@ -52,7 +52,7 @@ p.issue::before { content: "Issue: " }
 
 	</dl>
 
-<p class="copyright"><a rel="license" href="http://creativecommons.org/publicdomain/zero/1.0/"><img src="http://i.creativecommons.org/p/zero/1.0/80x15.png" alt="CC0"></a>To the extent possible under law, the editor has waived all copyright and related or neighboring rights to this work. In addition, as of 28 October 2013, the editor has made this specification available under the
+<p class="copyright"><a rel="license" href="http://creativecommons.org/publicdomain/zero/1.0/"><img src="http://i.creativecommons.org/p/zero/1.0/80x15.png" alt="CC0"></a>To the extent possible under law, the editor has waived all copyright and related or neighboring rights to this work. In addition, as of 4 November 2013, the editor has made this specification available under the
 <a rel="license" href="http://www.openwebfoundation.org/legal/the-owf-1-0-agreements/owfa-1-0">Open Web Foundation Agreement Version 1.0</a>, which is available at <!--begin-link--><a href="http://www.openwebfoundation.org/legal/the-owf-1-0-agreements/owfa-1-0">http://www.openwebfoundation.org/legal/the-owf-1-0-agreements/owfa-1-0</a><!--end-link-->.
 
 </div>
@@ -1480,10 +1480,27 @@ braces.
     @area { position: absolute; right: -4cm; top: 0; bottom: 0; width: 3.5cm; } /* right */
   }
 }
-.sidenote { float: to(sidenote) }
+.sidenote { float: to(sidenote align) }
 </pre>
 
+<p>One possible rendering is:
+<pre>            ........ .........
+            ........ .........
+            ........ ...x..... second
+            ........ ......... sidnote
+            ........ .........
+      first ....x... .........
+   sidenote ........ .........
+            ........ ....x.... third
+            ........ ......... sidenote
+            ........ .........
+</pre>
+<p>(The 'x' marks the call point.)
 </div>
+
+
+
+
 
 <p>Only two levels of @area are allowed. The outer @area must always have a name, and the inner @area must never have a name. 
 
@@ -1551,10 +1568,20 @@ And is, despite of war and wasting fire,
 
 <h3 id="floating-content-into-named-areas:-to()"><span class="secno">6.2 </span>Floating content into named areas: <code>to()</code></h3>
 
+<p>Content is added to named area with the <code>to()</code> functional notation.
+
 <div class="example">
-<pre>span.note { float: to(sidenote, block); }
+<p>This code adds an element to the named area called "sidenote":
+
+<pre>span.note { float: to(sidenote); }
 </pre>
 </div>
+
+<div class="issue">Is 'float' the best property to use? Could it be aligned with regions? Prince uses the 'flow' property: 
+<pre>span.note { flow: static(sidename) }
+</pre>
+</div>
+
 
 <p>To align elements with its anchoring point in the block direction, the
 optional <code>align</code> keyword may be used.
