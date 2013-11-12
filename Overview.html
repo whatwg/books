@@ -30,7 +30,7 @@ a.unclear, a.almost { color: orange }
   <p><a href="http://www.whatwg.org/" class="logo"><img width="100" src="http://resources.whatwg.org/logo.svg" alt="WHATWG" height="100"></a></p>
 	<h1>CSS Books</h1>
 	
-	<h2 class="no-num no-toc" id="soon-to-become-a-living-standard-—-last-updated-4-november-2013"><span class="minor">[soon to become a]</span> Living Standard — Last Updated 4 November 2013</h2>
+	<h2 class="no-num no-toc" id="soon-to-become-a-living-standard-—-last-updated-12-november-2013"><span class="minor">[soon to become a]</span> Living Standard — Last Updated 12 November 2013</h2>
 	
 	<dl>
 		<dt>This version:
@@ -52,7 +52,7 @@ a.unclear, a.almost { color: orange }
 
 	</dl>
 
-<p class="copyright"><a rel="license" href="http://creativecommons.org/publicdomain/zero/1.0/"><img src="http://i.creativecommons.org/p/zero/1.0/80x15.png" alt="CC0"></a>To the extent possible under law, the editor has waived all copyright and related or neighboring rights to this work. In addition, as of 4 November 2013, the editor has made this specification available under the
+<p class="copyright"><a rel="license" href="http://creativecommons.org/publicdomain/zero/1.0/"><img src="http://i.creativecommons.org/p/zero/1.0/80x15.png" alt="CC0"></a>To the extent possible under law, the editor has waived all copyright and related or neighboring rights to this work. In addition, as of 12 November 2013, the editor has made this specification available under the
 <a rel="license" href="http://www.openwebfoundation.org/legal/the-owf-1-0-agreements/owfa-1-0">Open Web Foundation Agreement Version 1.0</a>, which is available at <!--begin-link--><a href="http://www.openwebfoundation.org/legal/the-owf-1-0-agreements/owfa-1-0">http://www.openwebfoundation.org/legal/the-owf-1-0-agreements/owfa-1-0</a><!--end-link-->.
 
 </div>
@@ -114,7 +114,8 @@ a.unclear, a.almost { color: orange }
    <li><a href="#idea-1"><span class="secno">12.1 </span>Idea 1</a></li>
    <li><a href="#idea-2"><span class="secno">12.2 </span>Idea 2</a></li>
    <li><a href="#idea-3"><span class="secno">12.3 </span>Idea 3</a></li>
-   <li><a href="#idea-3-0"><span class="secno">12.4 </span>Idea 3</a></ol></li>
+   <li><a href="#idea-4"><span class="secno">12.4 </span>Idea 4</a></li>
+   <li><a href="#idea-5"><span class="secno">12.5 </span>Idea 5</a></ol></li>
  <li><a href="#character-substitution"><span class="secno">13 </span>Character substitution</a></li>
  <li><a href="#appendix-a:-default-style-sheet"><span class="secno">14 </span>Appendix A: Default style sheet</a></li>
  <li><a href="#references" class="no-num">References</a></li>
@@ -670,7 +671,7 @@ string</em>. The leader string must be shown in full at least once,
 thereby pushing other content to the side (in the writing direction of
 the element to which the leader is attached). The leader string
 establishes the minimum length of the leader. If there is empty space
-on the line, the leader is repeated as many times as possible. The
+on the line, the leader is expanded by repeating it as many times as possible. The
 expansion of a leader from its minimum length never causes line breaks
 to change. At the end of the leader, a partial leader string may be
 shown. White space in the leader string is collapsed according to the
@@ -1487,7 +1488,7 @@ braces.
 <pre>            ........ .........
             ........ .........
             ........ ...x..... second
-            ........ ......... sidnote
+            ........ ......... sidenote
             ........ .........
       first ....x... .........
    sidenote ........ .........
@@ -1501,6 +1502,64 @@ braces.
 
 
 
+
+
+<!--
+
+.sidenote { float: to(sidenote, align, closest, inline) }
+
+three parameters: 
+
+  - which named area (closest or orderly)
+  - where in named area (closest or orderly)
+  - display type (inline/block)
+
+<pre>
+            ........ .........
+            ........ .........
+            ........ ...x..... second
+            ........ ......... sidenote
+            ........ .........
+      first ....x... .........
+   sidenote ........ .........
+            ........ ....x.... third
+            ........ ......... sidenote
+            ........ .........
+</pre>
+
+
+
+.sidenote { float: to(sidenote, top, closest) }
+
+<pre>
+      first ........ ......... second
+   sidenote ........ ......... sidenote
+            ........ ...x..... third
+            ........ ......... sidenote
+            ........ .........
+            ....x... .........
+            ........ .........
+            ........ ....x.... 
+            ........ ......... 
+            ........ .........
+</pre>
+
+.sidenote { float: to(sidenote, top, first) }
+
+<pre>
+      first ........ ......... 
+   sidenote ........ ......... 
+     second ........ ...x..... 
+   sidenote ........ ......... 
+      third ........ .........
+   sidenote ....x... .........
+            ........ .........
+            ........ ....x.... 
+            ........ ......... 
+            ........ .........
+</pre>
+
+-->
 
 <p>Only two levels of @area are allowed. The outer @area must always have a name, and the inner @area must never have a name. 
 
@@ -1609,12 +1668,10 @@ optional <code>align</code> keyword may be used.
   counter-increment: sn;
 }
 .sidenote::call { 
-  content: counter(sn, lower-alpha); font-size: 0.6em; vertical-align: top 
+  content: counter(sn, lower-alpha); font-size: 0.6em; vertical-align: top;
 }
 </pre>
 </div>
-
-
 
 
 <h3 id="pulling-content:-target-pull()"><span class="secno">6.4 </span>Pulling content: <code>target-pull()</code></h3>
@@ -1648,8 +1705,6 @@ this specification, there will be a footnote:
 ¹ Most often.
 </pre>
 </div>
-
-
 
 <div class="example">
 
@@ -2091,7 +2146,7 @@ div.chapter::column(1,*)     /* the first column on all pages */
 
 <h3 id="idea-3"><span class="secno">12.3 </span>Idea 3</h3>
 
-<p>One problem with both Idea 1 and Idea 2 is that all content aligend. This may not be desireable in all cases. For example, a headline will typically use a larger font size and if all lines in the headline are aligned with a "natural" baseline (or something similar), lots of white space will be generated. Therefore, we need a way to turn off baseline alignment for certain elements. 
+<p>One problem with both Idea 1 and Idea 2 is that all content is aligned. This may not be desireable in all cases. For example, a headline will typically use a larger font size and if all lines in the headline are aligned with a "natural" baseline (or something similar), lots of white space will be generated. Therefore, we need a way to turn off baseline alignment for certain elements. 
 
 <div class="example">
 
@@ -2107,9 +2162,14 @@ article img { display: block; vertical-align: bottom }
 </pre>
 
 <p>(In the code above, the 'vertical-align' property is used to declare where any extra space ends up; in this example it will end up above the image.)
+
+<h3 id="idea-4"><span class="secno">12.4 </span>Idea 4</h3>
+
+<p>It may be possible to automatically determine which content should be excemted from baseline alignment by looking at the computed value of 'line-height'; if it matches that of the containing block, baseline alignment is turned on, otherwise it's off.
+
 </div>
 
-<h3 id="idea-3-0"><span class="secno">12.4 </span>Idea 3</h3>
+<h3 id="idea-5"><span class="secno">12.5 </span>Idea 5</h3>
 
 <p><a href="http://dev.w3.org/csswg/css-line-grid">CSS Line Grid Module</a>
 
