@@ -1472,16 +1472,17 @@ img { float: to(photos) }
 <p>The result is a document where all content ends up on left pages, and where right pages hold only <code>img</code> elements.
 </div>
 
-
 <p>Areas with the same name are connected and content can flow from
 one area to the next, when necessary.
 
+<!--
 <p>Elements floated to a named area are, by default, positioned at the
 first available space in the named area on its natural page. If there
 is no such named area on that page, or if the named area does not have
 sufficient room, the element is floated to the first opportunity in
 subsequent named areas with the same name. If there are no such areas,
 the element is shown at the end of the document.
+-->
 
 <p>To support having several identically named areas on the
 same page, a second level of @area blocks are used:
@@ -1496,7 +1497,7 @@ braces.
     @area { position: absolute; right: -4cm; top: 0; bottom: 0; width: 3.5cm; } /* right */
   }
 }
-.sidenote { float: to(sidenote align) }
+.sidenote { float: to(sidenote) }
 </pre>
 
 <p>One possible rendering is:
@@ -1516,66 +1517,20 @@ braces.
 </div>
 
 
+<h3>Floating content into named areas: <code>to()</code></h3>
 
+<p>Content is added to named area with the <code>to()</code> functional notation.
 
-
-
-<!--
-
-.sidenote { float: to(sidenote, align, closest, inline) }
-
-three parameters: 
-
-  - which named area (closest or orderly)
-  - where in named area (closest or orderly)
-  - display type (inline/block)
+<div class=example>
+<p>This code adds an element to the named area called "sidenote":
 
 <pre>
-            ........ .........
-            ........ .........
-            ........ ...x..... second
-            ........ ......... sidenote
-            ........ .........
-      first ....x... .........
-   sidenote ........ .........
-            ........ ....x.... third
-            ........ ......... sidenote
-            ........ .........
+span.note { float: to(sidenote); }
 </pre>
+</div>
 
+<p class=issue>Is 'float' the best property to use? Could the syntax be aligned with regions? Prince uses the 'flow' property. 
 
-
-.sidenote { float: to(sidenote, top, closest) }
-
-<pre>
-      first ........ ......... second
-   sidenote ........ ......... sidenote
-            ........ ...x..... third
-            ........ ......... sidenote
-            ........ .........
-            ....x... .........
-            ........ .........
-            ........ ....x.... 
-            ........ ......... 
-            ........ .........
-</pre>
-
-.sidenote { float: to(sidenote, top, first) }
-
-<pre>
-      first ........ ......... 
-   sidenote ........ ......... 
-     second ........ ...x..... 
-   sidenote ........ ......... 
-      third ........ .........
-   sidenote ....x... .........
-            ........ .........
-            ........ ....x.... 
-            ........ ......... 
-            ........ .........
-</pre>
-
--->
 
 <p>Only two levels of @area are allowed. The outer @area must always have a name, and the inner @area must never have a name. 
 
@@ -1644,36 +1599,142 @@ And is, despite of war and wasting fire,
 
 <p class=issue>How is the element named area emptied? What is the scope?</p>
 
-<h3>Floating content into named areas: <code>to()</code></h3>
 
-<p>Content is added to named area with the <code>to()</code> functional notation.
+<h3>Alignment in Named Areas</h3>
+
+<p>Content floated to a named area is, by default, aligned with its
+reference point. That is, the content will be placed as close to the
+reference point as possible, both along the x axis and the y axis. The
+effect of alingning a float to its reference point is limited to (a)
+choosing the closest matching named area to the reference point, and
+(b) starting the float on the same baseline as the reference point.
 
 <div class=example>
-<p>This code adds an element to the named area called "sidenote":
+
+<p>In this example, the "sidenote" named area has two fragments, one
+on the left side of the first column, and the other on the right side
+of the second column. The respective reference points are numbered 1,
+2, and 3. All three sidenotes are aligned along the x axis so that
+they appear in the closest matching named area. Also, they are aligned
+along the y axis so that the floats start on the same baseline as
+their respective reference points.
 
 <pre>
-span.note { float: to(sidenote); }
+            ........ .........
+            ........ .........
+            ........ ...2..... second
+            ........ ......... sidenote
+            ........ .........
+      first ....1... .........
+   sidenote ........ .........
+            ........ ....3.... third
+            ........ ......... sidenote
+            ........ .........
+</pre>
+
+</div>
+
+<p>Elements may request alignements through an optional argument in <code>to()</code>. Values are:
+
+<dl>
+<dt>align
+<dd>align float along both x and y axis
+
+<dt>align-x
+<dd>align float only along x axis
+
+<dt>align-y
+<dd>align float only along y axis
+
+<dd>
+<dt>fill
+<dd>do float neither along x nor y axis
+</dl>
+
+
+<div class=example>
+
+<p>In this example, floats are only aligned along the x axis:
+
+<pre>
+.sidenote { float: to(sidenote, align-x) }
+</pre>
+
+<p>As a result, floats are placed in the closest matching named
+area. Inside that area, the floats are shown in the order they appear.
+
+<pre>
+      first ........ ......... second
+   sidenote ........ ......... sidenote
+            ........ ...2..... third
+            ........ ......... sidenote
+            ........ .........
+            ....1... .........
+            ........ .........
+            ........ ....3.... 
+            ........ ......... 
+            ........ .........
 </pre>
 </div>
 
-<p class=issue>Is 'float' the best property to use? Could the syntax be aligned with regions? Prince uses the 'flow' property. 
-
-<p>To align elements with its anchoring point in the block direction, the
-optional <code>align</code> keyword may be used.
 
 <div class=example>
-<p>In this example, the sidenotes are placed next to their anchoring point:
+
+<p>In this example, floats are not aligned with the reference point. 
 
 <pre>
-@page {
-  margin: 2cm 2cm 2cm 6cm;  /* set a wide left margin */
-  @area sidenote { 
-    position: absolute;
-    width: 3.5cm
-    margin-left: -4cm;     /* place sidenote area in left margin */
-  }
-}
-.sidenote { float: to(sidenote align) }
+.sidenote { float: to(sidenote fill) }
+</pre>
+
+<p>As a result, floats are placed in the first matching named area on the page of the reference point. 
+
+<pre>
+      first ........ ......... 
+   sidenote ........ ......... 
+     second ........ ...2..... 
+   sidenote ........ ......... 
+      third ........ .........
+   sidenote ....1... .........
+            ........ .........
+            ........ ....3.... 
+            ........ ......... 
+            ........ .........
+</pre>
+</div>
+
+
+
+<h3>Requesting a page or spread</h3>
+
+<p>Further arguments for <code>to()</code> allows the float to indicate preferences for which page the float should end up on.
+
+<div class=example>
+<pre>
+.sidenote { float: to(sidenote, same-spread) }
+</pre>
+</div>
+
+<p>These keywords are supported:
+
+<dl>
+
+<dt>same-page
+<dd>element requests placement on the same page as its reference point. This is the default.
+
+<dt>same-spread
+<dd>element requests placement on the same spread as its reference point
+
+<dd>any-page
+<dd>element does not request any particular placement
+</dl>
+
+<h3>Conditional floats</h3>
+
+<p>A float can indicate that its placement is so important that if it cannot be honored, the float will rather be deleted:
+
+<div class=example>
+<pre>
+.sidenote { float: to(sidenote, same-page transient) }
 </pre>
 </div>
 
