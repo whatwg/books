@@ -1662,12 +1662,19 @@ their respective reference points.
             ........ .........
 </pre>
 
+<p>The code used to achieve this is:
+
+<pre>
+.sidenote { float: to(sidenote, align) }
+</pre>
+
 </div>
 
 
 <div class=example>
 
 <p>This example is similar to the previous one, except for the placement of the third reference point: it appears much closer to the second reference point. As a result, the second sidenote pushes down the third sidenote, which is no longer alinged along the y axis.
+
 
 <pre>
             ........ .........
