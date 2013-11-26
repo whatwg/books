@@ -627,8 +627,6 @@ The table below shows the equivalents:
 </table>
 
 
-<p>When possible, User Agents should align corresponding glyphs from the
-leader pattern of consecutive lines.
 
 <p>The string inside the parenthesis is called the <em>leader
 string</em>. The leader string must be shown in full at least once,
@@ -638,10 +636,14 @@ establishes the minimum length of the leader. If there is empty space
 on the line, the leader is expanded by repeating it as many times as possible. The
 expansion of a leader from its minimum length never causes line breaks
 to change. At the end of the leader, a partial leader string may be
-shown. White space in the leader string is collapsed according to the
-values of white-space properties.
+shown. 
 
-<p>Line-breaking characters inside leader strings must be ignored.
+<!--
+<p>Leaders that trail other content
+-->
+
+<p>Line-breaking characters inside leader strings must be ignored. Other white space characters are collapsed according to the
+values of white-space properties.
 
 [Unicode Technical Report #13 http://www.unicode.org/standard/reports/tr13/tr13-5.html]
 
@@ -758,6 +760,7 @@ ul.toc a::after {
 
 <div class="example">
 <p>The same properties can affect the presentation of the fixed string and the leader.
+
 <pre> 
 content: "...";
 content: leader("...");
@@ -872,6 +875,19 @@ cite { white-space: nowrap }
 </pre>
 
 </div>
+
+<p>When possible, User Agents should align corresponding glyphs from the
+leaders of consecutive lines.
+
+<div class=example>
+In this example, the dotted lines are aligned horizontally.
+<pre>
+  Alfa ........ 5
+  Bravo ...... 41
+  Charlie ... 125
+<pre>
+</div>
+
 
 
 <h2>Cross-references</h2>
@@ -2468,6 +2484,11 @@ h3 { text-replace: "foobar" "barfoo" }      /* accept value, but ... */
 </div>
 
 <p>This property is evaluated after the <span class=property>content</span> property, and before <span class=property>text-transform</span>.
+
+<h2>Spacing linits</h2>
+
+<p>Add <a href="http://www.w3.org/TR/2012/WD-css3-text-20121113/#spacing-limits">spacing limits</a> on 'word-spacing' and 'letter-spacing'.
+
 
 <h2>Conditional text</h2>
 
