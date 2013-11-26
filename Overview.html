@@ -30,7 +30,7 @@ a.unclear, a.almost { color: orange }
   <p><a href="http://www.whatwg.org/" class="logo"><img width="100" src="http://resources.whatwg.org/logo.svg" alt="WHATWG" height="100"></a></p>
 	<h1>CSS Books</h1>
 	
-	<h2 class="no-num no-toc" id="soon-to-become-a-living-standard-—-last-updated-19-november-2013"><span class="minor">[soon to become a]</span> Living Standard — Last Updated 19 November 2013</h2>
+	<h2 class="no-num no-toc" id="soon-to-become-a-living-standard-—-last-updated-26-november-2013"><span class="minor">[soon to become a]</span> Living Standard — Last Updated 26 November 2013</h2>
 	
 	<dl>
 		<dt>This version:
@@ -52,7 +52,7 @@ a.unclear, a.almost { color: orange }
 
 	</dl>
 
-<p class="copyright"><a rel="license" href="http://creativecommons.org/publicdomain/zero/1.0/"><img src="http://i.creativecommons.org/p/zero/1.0/80x15.png" alt="CC0"></a>To the extent possible under law, the editor has waived all copyright and related or neighboring rights to this work. In addition, as of 19 November 2013, the editor has made this specification available under the
+<p class="copyright"><a rel="license" href="http://creativecommons.org/publicdomain/zero/1.0/"><img src="http://i.creativecommons.org/p/zero/1.0/80x15.png" alt="CC0"></a>To the extent possible under law, the editor has waived all copyright and related or neighboring rights to this work. In addition, as of 26 November 2013, the editor has made this specification available under the
 <a rel="license" href="http://www.openwebfoundation.org/legal/the-owf-1-0-agreements/owfa-1-0">Open Web Foundation Agreement Version 1.0</a>, which is available at <!--begin-link--><a href="http://www.openwebfoundation.org/legal/the-owf-1-0-agreements/owfa-1-0">http://www.openwebfoundation.org/legal/the-owf-1-0-agreements/owfa-1-0</a><!--end-link-->.
 
 </div>
@@ -119,8 +119,9 @@ a.unclear, a.almost { color: orange }
    <li><a href="#idea-4"><span class="secno">12.4 </span>Idea 4</a></li>
    <li><a href="#idea-5"><span class="secno">12.5 </span>Idea 5</a></ol></li>
  <li><a href="#character-substitution"><span class="secno">13 </span>Character substitution</a></li>
- <li><a href="#conditional-text"><span class="secno">14 </span>Conditional text</a></li>
- <li><a href="#appendix-a:-default-style-sheet"><span class="secno">15 </span>Appendix A: Default style sheet</a></li>
+ <li><a href="#spacing-linits"><span class="secno">14 </span>Spacing linits</a></li>
+ <li><a href="#conditional-text"><span class="secno">15 </span>Conditional text</a></li>
+ <li><a href="#appendix-a:-default-style-sheet"><span class="secno">16 </span>Appendix A: Default style sheet</a></li>
  <li><a href="#references" class="no-num">References</a></li>
  <li><a href="#acknowledgments" class="no-num">Acknowledgments</a></ol>
 <!--end-toc-->
@@ -666,8 +667,6 @@ The table below shows the equivalents:
 </table>
 
 
-<p>When possible, User Agents should align corresponding glyphs from the
-leader pattern of consecutive lines.
 
 <p>The string inside the parenthesis is called the <em>leader
 string</em>. The leader string must be shown in full at least once,
@@ -677,10 +676,14 @@ establishes the minimum length of the leader. If there is empty space
 on the line, the leader is expanded by repeating it as many times as possible. The
 expansion of a leader from its minimum length never causes line breaks
 to change. At the end of the leader, a partial leader string may be
-shown. White space in the leader string is collapsed according to the
-values of white-space properties.
+shown. 
 
-<p>Line-breaking characters inside leader strings must be ignored.
+<!--
+<p>Leaders that trail other content
+-->
+
+<p>Line-breaking characters inside leader strings must be ignored. Other white space characters are collapsed according to the
+values of white-space properties.
 
 [Unicode Technical Report #13 http://www.unicode.org/standard/reports/tr13/tr13-5.html]
 
@@ -786,6 +789,7 @@ other values on the 'content' property:
 
 <div class="example">
 <p>The same properties can affect the presentation of the fixed string and the leader.
+
 <pre> 
 content: "...";
 content: leader("...");
@@ -893,6 +897,17 @@ cite { white-space: nowrap }
 </pre>
 
 </div>
+
+<p>When possible, User Agents should align corresponding glyphs from the
+leaders of consecutive lines.
+
+<div class="example">
+In this example, the dotted lines are aligned horizontally.
+<pre>  Alfa ........ 5
+  Bravo ...... 41
+  Charlie ... 125
+<pre></pre></pre></div>
+
 
 
 <h2 id="cross-references"><span class="secno">4 </span>Cross-references</h2>
@@ -2424,7 +2439,12 @@ h3 { text-replace: "foobar" "barfoo" }      /* accept value, but ... */
 
 <p>This property is evaluated after the <span class="property">content</span> property, and before <span class="property">text-transform</span>.
 
-<h2 id="conditional-text"><span class="secno">14 </span>Conditional text</h2>
+<h2 id="spacing-linits"><span class="secno">14 </span>Spacing linits</h2>
+
+<p>Add <a href="http://www.w3.org/TR/2012/WD-css3-text-20121113/#spacing-limits">spacing limits</a> on 'word-spacing' and 'letter-spacing'.
+
+
+<h2 id="conditional-text"><span class="secno">15 </span>Conditional text</h2>
 
 <div class="example">
 <pre>a:target-layout(attr(href url), same-page) { content: " on this page" }
@@ -2433,7 +2453,7 @@ a:target-layout(attr(href url), previous-page) { content: " on the previous page
 </pre>
 </div>
 
-<h2 id="appendix-a:-default-style-sheet"><span class="secno">15 </span>Appendix A: Default style sheet</h2>
+<h2 id="appendix-a:-default-style-sheet"><span class="secno">16 </span>Appendix A: Default style sheet</h2>
 
 <pre>@page {
   counter-reset: footnote;
