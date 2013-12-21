@@ -207,24 +207,29 @@ encountered, the named strings are assigned their respective value.
 <dt>&lt;counter&gt;
 <dd>the counter() or counters() function, as per <a href="http://www.w3.org/TR/CSS21/syndata.html#counter">CSS 2.1 section 4.3.5</a> <span data-anolis-ref>CSS</span>
 
-<dt><!--content-element-->content(text)
+<dt>content(text)
 
 <dd>The textual content of the element, not including the content of its ::before and ::after pseudo-element. The content of the element's descendants, including their respective ::before and ::after pseudo-elements, are included in the returned content. This is the default value, so ''content()'' is equivalent to ''content(text)''.
 
-<dt><!--content-before-->content(before)
+<dt>content(before)
 
 <dd>The textual content of the ::before pseudo-element of the element.
 
-<dt><!--content-after-->content(after)
+<dt>content(after)
 
 <dd>The textual content of the ::after pseudo-element of the element.
 
-<dt><!--content-first-letter-->content(first-letter)
+<dt>content(first-letter)
 
 <dd>The first letter of the textual content of the element. The definition of a letter is the same as for the :first-letter pseudo-element, as per <a href="http://www.w3.org/TR/CSS2/selector.html#first-letter">CSS 2.1 section 5.12.2</a>.
 
 </dl>
 
+<p>The syntax is formally described as:
+
+<pre>
+  &lt;content-list&gt; = [ &lt;string&gt; | &lt;counter&gt; | [ content( [ before | after | first-letter ] ) ] ]+
+</pre>
 
 <p>Named strings can only hold the result of one assignment; whenever
 a new assignment is made to a named string, its old value is replaced.
@@ -273,7 +278,7 @@ h2 {
 </div>
 
 <div class="example">
-<p>In this example, the header will consist of three words ("In the begninning") with normal spacing between the words.
+<p>In this example, the header will consist of three words ("In the beginning") with normal spacing between the words.
 <pre>
 h2 {
   string-set: header "In " ' ' content();
@@ -287,7 +292,7 @@ h2 {
 <div class="example">
 <p>In this example, the named string called <em>index</em> will hold the first letter of &lt;dt&gt; elements.
 <pre>
-dt { string-set: index first-letter }
+dt { string-set: index content(first-letter) }
 </pre>
 <p>One-letter running headers are often used in dictionaries. 
 </div>
@@ -301,7 +306,7 @@ dt { string-set: index first-letter }
 </div>
 
 <div class="example">
-<p>In this example, only the last declaration has an effect on the named string:
+<p>In this example, the first four declarations have no effect on the on the named string copied in the last declaration:
 
 <pre>
 title {
@@ -349,6 +354,12 @@ on the ''string()'' value. This argument can have one of four keywords:
 <li>''first-except'': similar to ''first'', except on the page where the value was assigned. On that page, the empty string is used.
 
 </ul>
+
+<p>The syntax of the ''string()'' value is defined as:
+
+<pre>
+  string( <a href="http://www.w3.org/TR/css3-values/#custom-idents">&lt;custom-ident&gt;</a> [ , [ first | start | last | first-except ]]? )
+</pre>
 
 <p>The assignment is considered to take place on the first page where a content box representing the element occurs. If the element does not have any content boxes (e.g., if 'display: none' is set), the assignment is considered to take place on the page where the first content box would have occured if the element had been in the normal flow.
 
@@ -522,18 +533,15 @@ title { position: running(header), normal }
 
 
 <p>Like the ''string()'' value, the ''element()'' value accepts an
-optional second argument:
+optional second argument. The syntax is defined as:
 
-<dl>
-<dt>''start''
-<dt>''first''
-<dt>''last''
-<dt>''first-except''
-</dl>
+<pre>
+  element( <a href="http://www.w3.org/TR/css3-values/#custom-idents">&lt;custom-ident&gt;</a> [ , [ first | start | last | first-except ]]? )
+</pre>
 
 <p>The keywords have the same meaning as for the ''string()'' value. 
 
-<p>The ''element()'' value cannot be combined with any other values.
+<p>The ''element()'' value is only allowed on the 'content' property within a margin box. The ''element()'' value cannot be combined with any other values.
 
 <div class="example">
 <p>In this example, the header is hidden from view in all media types
@@ -607,14 +615,11 @@ telephone number.
 <p>In CSS3, a leader is composed of series of glyphs through the
 ''leader()'' value on the 'content' property. The functional notation
 accepts two values. The first describes the glyph pattern that makes up the
-leader. These values are allowed:
+leader. These syntax is:
 
-<ul>
-<li>leader(dotted)
-<li>leader(solid)
-<li>leader(space)
-<li>leader(&lt;string&gt;)
-</ul>
+<pre>
+  leader( [ dotted | solid | space |  <a href="http://www.w3.org/TR/css3-values/#strings">*&lt;string&gt;</a> ] )
+</pre>
 
 <p>Using the keyword values is equivalent to setting a string value.
 The table below shows the equivalents:
@@ -625,7 +630,6 @@ The table below shows the equivalents:
 <tr><td>leader(solid)<td>leader('_')<td>\005F
 <tr><td>leader(space)<td>leader(' ')<td>\0020
 </table>
-
 
 
 <p>The string inside the parenthesis is called the <em>leader
@@ -707,14 +711,12 @@ would be formatted as:
 <pre>
 A paragraph with a span... inside.
 </pre>
+
+<p class=issue>describe why
 </div>
 
 
-<div class="example">
-<pre>
 
-</pre>
-</div>
 
 <div class="example">
 <p>Consider this example:
@@ -821,9 +823,14 @@ Douglas Adams...
 ..............42
 </pre>
 
-<p class="issue">Or, should the leader in this case only be shown on the last line?
-
 </div>
+
+<p class="issue">It seems that traditional leaders only appear on one line. If so, the example above should be rendered:
+
+<pre>
+Douglas Adams
+..............42
+</pre>
 
 
 
@@ -880,7 +887,7 @@ cite { white-space: nowrap }
 leaders of consecutive lines.
 
 <div class=example>
-In this example, the dotted lines are aligned horizontally.
+In this example, the dotted lines are aligned horizontally:
 <pre>
   Alfa ........ 5
   Bravo ...... 41
@@ -892,16 +899,16 @@ In this example, the dotted lines are aligned horizontally.
 
 <h2>Cross-references</h2>
 
-<p>It is common to refer to other parts of a document by
-way of a section number (e.g., "See section 3.4.1"), a page number
-(e.g., "See discussion on page 72"), or a string (e.g., "See the
-chapter on Europe"). Being able to resolve these cross-references
-automatically saves time and reduces the number of errors.
+<p>It is common to refer to other parts of a document by way of a
+section number (e.g., "See section 3.4.1"), a page number (e.g., "See
+discussion on page 72"), or a string (e.g., "See the chapter on
+Europe"). This specification describes how to resolve cross-references
+automatically by introducing two new values on the 'content' property.
 
 <h3>The ''target-counter'' and ''target-counters'' values</h3>
 
 <p>Numerical cross-references are generated by ''target-counter()''
-and ''target-counters()'' values that fetch the value of a counter at
+and ''target-counters()'' values on the 'content' property that fetch the value of a counter at
 the target end of the link. These functions are similar to the
 ''counter()'' and ''counters()'' functions, except that they fetch
 counter values from remote elements. ''target-counter()'' has two
@@ -910,7 +917,13 @@ required arguments: the url of the link, and the name of a counter.
 link, the name of a counter, and a separator string. Both functions
 accepts an optional argument at the end that describes which list
 style type to use when presenting the resulting number; ''decimal''
-being the default.
+being the default. The syntax is defined as:
+
+<pre>
+  target-counter( <a href="http://www.w3.org/TR/css3-values/#url-value">&lturl&gt;</a> , <a href="http://www.w3.org/TR/css3-values/#custom-idents">&lt;custom-ident&gt;</a> [ , <a href=http://www.w3.org/TR/CSS21/generate.html#propdef-list-style-type>&lt;counter-style&gt; ]? )
+  target-counters( <a href="http://www.w3.org/TR/css3-values/#url-value">&lturl&gt;</a> , <a href="http://www.w3.org/TR/css3-values/#custom-idents">&lt;custom-ident&gt;</a> , <a href="http://www.w3.org/TR/css3-values/#strings">*&lt;string&gt;</a> [ , <a href=http://www.w3.org/TR/CSS21/generate.html#propdef-list-style-type>&lt;counter-style&gt; ]? )
+</pre>
+
 
 <div class="example">
 <p>This style sheet specifies that a string like " (see page 72)"
@@ -939,9 +952,12 @@ fetches the textual content from the target end of the link. Only text
 is copied; not style, structure, or replaced content.
 ''target-text()'' has one required argument: the url of the link. An
 optional second argument specifies exactly which content is fetched.
-There are four possible values: <!--''contents'',--> ''content'',
-''before'', ''after'', ''first-letter''; these
-keywords are defined above.
+There are four possible values: ''content'', ''before'', ''after'',
+''first-letter''; these keywords are defined on 'string-set' above. The syntax is:
+
+<pre>
+  target-text( <a href="http://www.w3.org/TR/css3-values/#url-value">&lturl&gt;</a> [, [ content | before | after | first-letter ]]? )
+</pre>
 
 
 <div class="example">
@@ -1225,7 +1241,7 @@ footnote elements inside it.
 
 <p>These properties apply to the footnote area: 'content', 'border',
 'padding', 'margin', 'height', 'width', 'max-height', 'max-width',
-'min-height', 'min-width', the background properties.
+'min-height', 'min-width', and the background properties.
 
 <!--
 <p class="note">In published books, it is customary for the footnote
@@ -1388,7 +1404,7 @@ Goddess of Wisdom! here thy temple was,                 3
 And is, despite of war and wasting fire,
 
 1 From "Childe Harold's Pilgrimage" by Lord Byron
-3 She must have been very wise, demanding an uppercase W
+3 The use of uppercase "W" indicates great wisdom
 </pre>
 
 </div>
@@ -1550,8 +1566,14 @@ span.note { float: to(sidenote); }
 </pre>
 </div>
 
-<p class=issue>Is 'float' the best property to use? Could the syntax be aligned with regions? Prince uses the 'flow' property. 
+<p>The syntax is:
 
+<pre>
+  to( <a href="http://www.w3.org/TR/css3-values/#custom-idents">&lt;custom-ident&gt;</a> )
+</pre>
+
+
+<p class=issue>Is 'float' the best property to use? Could the syntax be aligned with regions? Prince uses the 'flow' property. 
 
 
 <div class=code-example>
@@ -1594,7 +1616,7 @@ Didst never yet one mortal song inspire -
 Goddess of Wisdom! here thy temple was,                    3
 And is, despite of war and wasting fire,
 
-[3] She must have been very wise, demanding an uppercase "W"
+[3] The use of uppercase "W" indicates great wisdom
 [a] From "Childe Harold's Pilgrimage" by Lord Byron
 </pre>
 
