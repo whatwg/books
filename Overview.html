@@ -108,7 +108,9 @@ a.unclear, a.almost { color: orange }
  <li><a href="#page-groups"><span class="secno">8 </span>Page groups</a></li>
  <li><a href="#page-selectors"><span class="secno">9 </span>Page selectors</a>
   <ol>
-   <li><a href="#nth()"><span class="secno">9.1 </span><code>nth()</code></a></ol></li>
+   <li><a href="#the-nth()-page-pseudo-class"><span class="secno">9.1 </span>The <code>nth()</code> page pseudo-class</a></li>
+   <li><a href="#the-range()-page-pseudo-class"><span class="secno">9.2 </span>The <code>range()</code> page pseudo-class</a></li>
+   <li><a href="#complex-page-selectors"><span class="secno">9.3 </span>Complex page selectors</a></ol></li>
  <li><a href="#selecting-elements-within-pages"><span class="secno">10 </span>Selecting elements within pages</a></li>
  <li><a href="#selecting-columns"><span class="secno">11 </span>Selecting columns</a></li>
  <li><a href="#baseline-alignment"><span class="secno">12 </span>Baseline alignment</a>
@@ -250,7 +252,7 @@ specifies which text to copy into the named string. Whenever an
 element with value of 'string-set' different from ''none'' is
 encountered, the named strings are assigned their respective value.
 
-<p>&lt;content-list&gt; expands to one or more of these values, in any order:
+<p name="content-list">&lt;content-list&gt; expands to one or more of these values, in any order:
 
 <dl>
 
@@ -402,7 +404,7 @@ on the ''string()'' value. This argument can have one of four keywords:
 
 </ul>
 
-<p>The syntax of the ''string()'' value is defined as:
+<p>The syntax of the ''string()'' value is:
 
 <pre>  string( <a href="http://www.w3.org/TR/css3-values/#custom-idents">&lt;custom-ident&gt;</a> [ , [ first | start | last | first-except ]]? )
 </pre>
@@ -847,12 +849,24 @@ minimum length of the leader.-->
 
 </div>
 
-<p class="issue">It seems that traditional leaders only appear on one line. If so, the example above should be rendered:
+<div class="issue">It seems that traditional leaders only appear on one line. If so, the example above should be rendered:
 
 <pre>Douglas Adams
 ..............42
 </pre>
 
+<!--
+ We could make an exception for white-space-only leaders. That would
+ probabbly be what most authors would want. Hmm.
+
+Answering myself, there is probably a better switch to use: In the
+example above, the leader is placed before the <cite>Douglas
+Adams</cite> element (as opposed to after the quote itself). So, we
+could probably find a way to say that post-leaders can cause line
+breaks, while pre-leaders can't.
+-->
+
+</div>
 
 
 <div class="example">
@@ -936,7 +950,7 @@ style type to use when presenting the resulting number; ''decimal''
 being the default. The syntax is defined as:
 
 <pre>  target-counter( <a href="http://www.w3.org/TR/css3-values/#url-value">&lt;url&gt;</a> , <a href="http://www.w3.org/TR/css3-values/#custom-idents">&lt;custom-ident&gt;</a> [ , <a href="http://www.w3.org/TR/CSS21/generate.html#propdef-list-style-type">&lt;counter-style&gt;</a> ]? )
-  target-counters( <a href="http://www.w3.org/TR/css3-values/#url-value">&lt;url&gt;</a> , <a href="http://www.w3.org/TR/css3-values/#custom-idents">&lt;custom-ident&gt;</a> , <a href="http://www.w3.org/TR/css3-values/#strings">*&lt;string&gt;</a> [ , <a href="http://www.w3.org/TR/CSS21/generate.html#propdef-list-style-type">&lt;counter-style&gt;</a> ]? )
+  target-counters( <a href="http://www.w3.org/TR/css3-values/#url-value">&lt;url&gt;</a> , <a href="http://www.w3.org/TR/css3-values/#custom-idents">&lt;custom-ident&gt;</a> , <a href="http://www.w3.org/TR/css3-values/#strings">&lt;string&gt;</a> [ , <a href="http://www.w3.org/TR/CSS21/generate.html#propdef-list-style-type">&lt;counter-style&gt;</a> ]? )
 </pre>
 
 
@@ -1642,9 +1656,9 @@ the same baseline as the reference point.
 
 </dl>
 
-<p>A trailing "!" can be adde to these keywords: align, align-x,
+<p>A trailing "!" can be added to these keywords: align, align-x,
 align-y, same-page, same-sprea. This indicates that the float should
-be deleted if the exact alignment cannot be achived.
+be deleted if the exact alignment cannot be achieved.
 
 <div class="example">
 
@@ -1932,7 +1946,7 @@ hierarchical bookmark structure. The values are:
       <td><dfn id="bookmark-label">bookmark-label</dfn>
     <tr>
       <td><em>Value:</em>
-      <td>&lt;content-list&gt; | none
+      <td><a href="#content-list">&lt;content-list&gt;</a> | none
     <tr>
       <td><em>Initial:</em>
       <td>none
@@ -1957,7 +1971,7 @@ hierarchical bookmark structure. The values are:
 
 <dl>
 
-<dt>&lt;content-list&gt;
+<dt><a href="#content-list">&lt;content-list&gt;</a>
 
 <dd>as defined on the 'string-set' property
 
@@ -2049,7 +2063,7 @@ h1, h2 { bookmark-state: open }
 
 <h2 id="page-groups"><span class="secno">8 </span>Page groups</h2>
 
-<p>Named pages can appear in sequence, stemming from different elements. A sequence of pages with the same name is called a <em>page group</em>. It is sometimes necessary to split one page group into several page groups in order to, e.g., address the first page in the group. The <a href="#page-group"><code>page-group</code></a> property expresses whether an element starts a new page group or not. 
+<p>Named pages can appear in sequence, stemming from different elements. A sequence of pages with the same name is called a <em>page group</em>. It is sometimes necessary to split one page group into several page groups in order to, e.g., address the first page in the group. The 'page-group' property expresses whether an element starts a new page group or not. 
 
 <table class="propdef">
     <tr>
@@ -2111,14 +2125,14 @@ article {
 
 <h2 id="page-selectors"><span class="secno">9 </span>Page selectors</h2>
 
-<p>In CSS2, <a href="http://www.w3.org/TR/CSS2/page.html#page-selectors">first, left and right pages</a>, as well as named pages, can be selected. This specification adds more advanced page selectors. Page selectors are similar to normal selectors in the sense that they query a data set and select parts of it. However, page selectors and normal selector are different in what they query (normal selectors query a document tree, page selectors query a sequence of pages) and what they select (normal selectors return structural elements, page selectors return pages). Page selectors borrow from the syntax of normal selectors, but extends it somewhat (with ranges).
+<p>In CSS2, <a href="http://www.w3.org/TR/CSS2/page.html#page-selectors">first, left and right pages</a>, as well as named pages, can be selected. This specification adds more advanced page selectors. Page selectors are similar to normal selectors in the sense that they query a data set and select parts of it. However, page selectors and normal selector are different in what they query (normal selectors query a document tree, page selectors query a sequence of pages) and what they select (normal selectors find structural elements, page selectors find pages). This specification adds two page pseudo-classes: nth() and range(). Also, it describes how page groups are used in page selectors.
 
-<h3 id="nth()"><span class="secno">9.1 </span><code>nth()</code></h3>
+<h3 id="the-nth()-page-pseudo-class"><span class="secno">9.1 </span>The <code>nth()</code> page pseudo-class</h3>
 
 <p>The <code>nth()</code> construct is added to select a numbered page.
 
 <div class="example">
-<p>These are equivalent:
+<p>These are equivalent, they both select the first page of a document:
 <pre>@page :first { background: lime } 
 @page :nth(1) { background: lime } 
 </pre>
@@ -2134,26 +2148,49 @@ article {
 </pre>
 </div>
 
-<p>Also, <code>nth()</code> can be used to select page ranges:
+<h3 id="the-range()-page-pseudo-class"><span class="secno">9.2 </span>The <code>range()</code> page pseudo-class</h3>
+
+<p>The :range() page pseue
 
 <div class="example">
 <p>In this example, pages in a document will cycle through pink, lime and white backgrounds:
-<pre>@page :nth(3-5) { ... } /* page 3, 4 and 5 */
+<pre>@page :range(3-5) { ... } /* page 3, 4 and 5 */
 </pre>
 </div>
 
-<p class="issue">Or, we could introduce a new :range selector</p>
+<!--
+pseudo_page :
+     ':' [ "left" | "right" | "first" | "blank" | &lt;nth> | ]
+-->
 
-<p><code>nth()</code> can be combined with other page selectors. 
+<h3 id="complex-page-selectors"><span class="secno">9.3 </span>Complex page selectors</h3>
+
+<p>Complex page selectors are formed by combining several <a href="http://www.w3.org/TR/css3-page/#page-pseudo-class">page pseudo-classes</a>, or by combining one <a href="http://www.w3.org/TR/css3-page/#page-type-selector">page type selector</a> with one or more page pseudo-classes. 
+
+<p>When two or more page pseudo-classes are combined into a complex page selector, it selects all pages that match all pseudo-classes. 
 
 <div class="example">
-<pre>@page funky:nth(1) { background: pink }  /* select first page of every "funky" page group */
-@page :first:nth(2) { background: lime } /* select pages that are both first and second. I.e. none */
-@page :right:nth(3n) { background: lime } /* selects every third page, which also is a right page */
-@page :nth(20-40):odd { ... } /* all odd pages between 20 and 40 */
+<pre>@page :first:nth(2) { background: lime } /* select pages that are both first and second. I.e. none */
+@page :right:nth(3n) { background: lime } /* selects every third page, but only those on the right */
+@page :nth(20-40):odd { ... } /* all odd pages between 20 and 40 (inclusive) */
 </pre>
 </div>
 
+<p>When a page type selector is combined with one or more page pseudo-classes, the page pseudo-classes query the page group named by the page type selector. 
+
+<div class="example">
+<pre>@page chapter:first { ...     }   /* selects the first page of every "chapter" page group */
+@page section:range(2-4) { ... }  /* selects page 2, 3, and 4 of every "range" page group */
+</pre>
+</div>
+
+<!--
+<p class=note>Complex page selectors
+this is like
+ :nth-of-type()
+or like pseudo-elements
+</p>
+-->
 
 
 <h2 id="selecting-elements-within-pages"><span class="secno">10 </span>Selecting elements within pages</h2>
