@@ -30,7 +30,7 @@ a.unclear, a.almost { color: orange }
   <p><a href="http://www.whatwg.org/" class="logo"><img width="100" alt="WHATWG" height="100" src="http://resources.whatwg.org/logo.svg"></a></p>
 	<h1>CSS Books</h1>
 	
-	<h2 class="no-num no-toc" id="soon-to-become-a-living-standard-—-last-updated-21-december-2013"><span class="minor">[soon to become a]</span> Living Standard — Last Updated 21 December 2013</h2>
+	<h2 class="no-num no-toc" id="soon-to-become-a-living-standard-—-last-updated-22-december-2013"><span class="minor">[soon to become a]</span> Living Standard — Last Updated 22 December 2013</h2>
 	
 	<dl>
 		<dt>This version:
@@ -52,7 +52,7 @@ a.unclear, a.almost { color: orange }
 
 	</dl>
 
-<p class="copyright"><a href="http://creativecommons.org/publicdomain/zero/1.0/" rel="license"><img src="http://i.creativecommons.org/p/zero/1.0/80x15.png" alt="CC0"></a>To the extent possible under law, the editor has waived all copyright and related or neighboring rights to this work. In addition, as of 21 December 2013, the editor has made this specification available under the
+<p class="copyright"><a href="http://creativecommons.org/publicdomain/zero/1.0/" rel="license"><img src="http://i.creativecommons.org/p/zero/1.0/80x15.png" alt="CC0"></a>To the extent possible under law, the editor has waived all copyright and related or neighboring rights to this work. In addition, as of 22 December 2013, the editor has made this specification available under the
 <a href="http://www.openwebfoundation.org/legal/the-owf-1-0-agreements/owfa-1-0" rel="license">Open Web Foundation Agreement Version 1.0</a>, which is available at <!--begin-link--><a href="http://www.openwebfoundation.org/legal/the-owf-1-0-agreements/owfa-1-0">http://www.openwebfoundation.org/legal/the-owf-1-0-agreements/owfa-1-0</a><!--end-link-->.
 
 </div>
@@ -652,9 +652,9 @@ telephone number.
 <p>In CSS3, a leader is composed of series of glyphs through the
 ''leader()'' value on the 'content' property. The functional notation
 accepts two values. The first describes the glyph pattern that makes up the
-leader. These syntax is:
+leader. The syntax is:
 
-<pre>  leader( [ dotted | solid | space |  <a href="http://www.w3.org/TR/css3-values/#strings">*&lt;string&gt;</a> ] )
+<pre>  leader( [ dotted | solid | space |  <a href="http://www.w3.org/TR/css3-values/#strings">&lt;string&gt;</a> ] )
 </pre>
 
 <p>Using the keyword values is equivalent to setting a string value.
@@ -729,7 +729,8 @@ minimum leader length must be honored.
 </div>
 
 <div class="example">
-<p>
+<p>If a leader is set on an inline element inide a justified paragraph, there will not be any empty space on the line. Therefore, the leader is shown only once. 
+
 <pre>span::after { 
   content: leader('...');
 }
@@ -742,7 +743,6 @@ would be formatted as:
 <pre>A paragraph with a span... inside.
 </pre>
 
-<p class="issue">describe why
 </div>
 
 
@@ -935,9 +935,9 @@ accepts an optional argument at the end that describes which list
 style type to use when presenting the resulting number; ''decimal''
 being the default. The syntax is defined as:
 
-<pre>  target-counter( <a href="http://www.w3.org/TR/css3-values/#url-value">&lt;url&gt;</a> , <a href="http://www.w3.org/TR/css3-values/#custom-idents">&lt;custom-ident&gt;</a> [ , <a href="http://www.w3.org/TR/CSS21/generate.html#propdef-list-style-type">&lt;counter-style&gt; ]? )
-  target-counters( </a><a href="http://www.w3.org/TR/css3-values/#url-value">&lt;url&gt;</a> , <a href="http://www.w3.org/TR/css3-values/#custom-idents">&lt;custom-ident&gt;</a> , <a href="http://www.w3.org/TR/css3-values/#strings">*&lt;string&gt;</a> [ , <a href="http://www.w3.org/TR/CSS21/generate.html#propdef-list-style-type">&lt;counter-style&gt; ]? )
-</a></pre><a href="http://www.w3.org/TR/CSS21/generate.html#propdef-list-style-type">
+<pre>  target-counter( <a href="http://www.w3.org/TR/css3-values/#url-value">&lt;url&gt;</a> , <a href="http://www.w3.org/TR/css3-values/#custom-idents">&lt;custom-ident&gt;</a> [ , <a href="http://www.w3.org/TR/CSS21/generate.html#propdef-list-style-type">&lt;counter-style&gt;</a> ]? )
+  target-counters( <a href="http://www.w3.org/TR/css3-values/#url-value">&lt;url&gt;</a> , <a href="http://www.w3.org/TR/css3-values/#custom-idents">&lt;custom-ident&gt;</a> , <a href="http://www.w3.org/TR/css3-values/#strings">*&lt;string&gt;</a> [ , <a href="http://www.w3.org/TR/CSS21/generate.html#propdef-list-style-type">&lt;counter-style&gt;</a> ]? )
+</pre>
 
 
 <div class="example">
@@ -968,7 +968,7 @@ optional second argument specifies exactly which content is fetched.
 There are four possible values: ''content'', ''before'', ''after'',
 ''first-letter''; these keywords are defined on 'string-set' above. The syntax is:
 
-</a><pre><a href="http://www.w3.org/TR/CSS21/generate.html#propdef-list-style-type">  target-text( </a><a href="http://www.w3.org/TR/css3-values/#url-value">&lt;url&gt;</a> [, [ content | before | after | first-letter ]]? )
+<pre>  target-text( <a href="http://www.w3.org/TR/css3-values/#url-value">&lt;url&gt;</a> [, [ content | before | after | first-letter ]]? )
 </pre>
 
 
