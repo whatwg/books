@@ -2096,7 +2096,22 @@ h1, h2 { bookmark-state: open }
 
 <h2>Page groups</h2>
 
-<p>Named pages can appear in sequence, stemming from different elements. A sequence of pages with the same name is called a <em>page group</em>. It is sometimes necessary to split one page group into several page groups in order to, e.g., address the first page in the group. The 'page-group' property expresses whether an element starts a new page group or not. 
+<p>A document consists of a linear sequence of pages. In simple
+documents, all pages have the same page area and marginalia. In more
+complex documents, it makes sense to style pages differently. Styling
+can be based on automatic classification (using page pseudo-classes),
+or explicit page groups. Page groups are named with the 'page' property
+
+
+
+
+
+
+
+Pages can be named with the 'page' property. Named pages can appear in sequence, stemming from different elements. A sequence of pages with the same name is called a <em>page group</em>. 
+
+
+<p>It is sometimes necessary to split one page group into several page groups in order to, e.g., address the first page in the group. The 'page-group' property expresses whether an element starts a new page group or not. 
 
 <table class=propdef>
     <tr>
@@ -2159,7 +2174,7 @@ article {
 
 <h2>Page selectors</h2>
 
-<p>In CSS2, <a href="http://www.w3.org/TR/CSS2/page.html#page-selectors">first, left and right pages</a>, as well as named pages, can be selected. This specification adds more advanced page selectors. Page selectors are similar to normal selectors in the sense that they query a data set and select parts of it. However, page selectors and normal selector are different in what they query (normal selectors query a document tree, page selectors query a sequence of pages) and what they select (normal selectors find structural elements, page selectors find pages). This specification adds two page pseudo-classes: nth() and range(). Also, it describes how page groups are used in page selectors.
+<p>In CSS2, <a href="http://www.w3.org/TR/CSS2/page.html#page-selectors">first, left and right pages</a>, as well as named pages, can be selected. This specification adds more advanced page selectors. Page selectors are similar to normal selectors in the sense that they query a data set and select parts of it. However, page selectors and normal selector are different in what they query (normal selectors query a document tree; page selectors query a sequence of pages) and what they select (normal selectors find structured elements, page selectors find formatted pages). This specification adds two page pseudo-classes: nth() and range(). Also, it describes how page groups are used in page selectors.
 
 <h3>The <code>nth()</code> page pseudo-class</h3>
 
@@ -2202,7 +2217,7 @@ pseudo_page :
 
 <h3>Complex page selectors</h3>
 
-<p>Complex page selectors are formed by combining several <a href="http://www.w3.org/TR/css3-page/#page-pseudo-class">page pseudo-classes</a>, or by combining one <a href="http://www.w3.org/TR/css3-page/#page-type-selector">page type selector</a> with one or more page pseudo-classes. 
+<p>Complex page selectors are formed by combining several <a href="http://www.w3.org/TR/css3-page/#page-pseudo-class">page pseudo-classes</a>, or by combining one <a href="http://www.w3.org/TR/css3-page/#page-type-selector">page type selector</a>, called "page group selector" in this document, with one or more page pseudo-classes. 
 
 <p>When two or more page pseudo-classes are combined into a complex page selector, it selects all pages that match all pseudo-classes. 
 
@@ -2214,7 +2229,7 @@ pseudo_page :
 </pre>
 </div>
 
-<p>When a page type selector is combined with one or more page pseudo-classes, the page pseudo-classes query the page group named by the page type selector. 
+<p>When a page group selector is combined with one or more page pseudo-classes, the page pseudo-classes query pages within that page group. 
 
 <div class=example>
 <pre>
