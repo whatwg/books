@@ -120,9 +120,10 @@ a.unclear, a.almost { color: orange }
    <li><a href="#idea-4"><span class="secno">12.4 </span>Idea 4</a></li>
    <li><a href="#idea-5"><span class="secno">12.5 </span>Idea 5</a></ol></li>
  <li><a href="#character-substitution"><span class="secno">13 </span>Character substitution</a></li>
- <li><a href="#spacing-linits"><span class="secno">14 </span>Spacing linits</a></li>
- <li><a href="#conditional-text"><span class="secno">15 </span>Conditional text</a></li>
- <li><a href="#appendix-a:-default-style-sheet"><span class="secno">16 </span>Appendix A: Default style sheet</a></li>
+ <li><a href="#microtypography"><span class="secno">14 </span>Microtypography</a>
+  <ol>
+   <li><a href="#minimum,-maximum-and-optimal-spacing"><span class="secno">14.1 </span>Minimum, maximum and optimal spacing</a></ol></li>
+ <li><a href="#appendix-a:-default-style-sheet"><span class="secno">15 </span>Appendix A: Default style sheet</a></li>
  <li><a href="#references" class="no-num">References</a></li>
  <li><a href="#acknowledgments" class="no-num">Acknowledgments</a></ol>
 <!--end-toc-->
@@ -2403,12 +2404,13 @@ article img { display: block; vertical-align: bottom }
 </pre>
 
 <p>(In the code above, the 'vertical-align' property is used to declare where any extra space ends up; in this example it will end up above the image.)
+</div>
 
 <h3 id="idea-4"><span class="secno">12.4 </span>Idea 4</h3>
 
 <p>It may be possible to automatically determine which content should be excemted from baseline alignment by looking at the computed value of 'line-height'; if it matches that of the containing block, baseline alignment is turned on, otherwise it's off.
 
-</div>
+
 
 <h3 id="idea-5"><span class="secno">12.5 </span>Idea 5</h3>
 
@@ -2558,21 +2560,41 @@ h3 { text-replace: "foobar" "barfoo" }      /* accept value, but ... */
 
 <p>This property is evaluated after the <span class="property">content</span> property, and before <span class="property">text-transform</span>.
 
-<h2 id="spacing-linits"><span class="secno">14 </span>Spacing linits</h2>
+<h2 id="microtypography"><span class="secno">14 </span>Microtypography</h2>
 
-<p>Add <a href="http://www.w3.org/TR/2012/WD-css3-text-20121113/#spacing-limits">spacing limits</a> on 'word-spacing' and 'letter-spacing'.
+<p>Microtypography is a range of methods for improving the appearance of text. Often, small adjustments in the space between letters and words can achieve a more even presentation with less need for hyphenation and fewer widows and orphans. This specification extends two existing CSS properties — 'letter-spacing' and 'word-spacing' — with minimum and maximum values to guide User Agents when laying out text. 
 
+<h3 id="minimum,-maximum-and-optimal-spacing"><span class="secno">14.1 </span>Minimum, maximum and optimal spacing</h3>
 
-<h2 id="conditional-text"><span class="secno">15 </span>Conditional text</h2>
+<p>The 'letter-spacing' and 'word-spacing' properties are extended to accept up to three values:
+
+<pre> [ normal | &lt;length&gt; | &lt;percentage&gt;]{1,3}
+</pre>
+
+<p>If one value is specified, it describes the optimum value, as well as the minimum and maximum values. If two values are specified, the first denotes the optimum and the minimum, and the second denotes the maximum. If three values are specified, they describe the optimum, minimum and maximum values. 
+
+<p>The values themselves are described in <a href="http://www.w3.org/TR/css-text-3/#spacing">CSS Text</a>.
+
 
 <div class="example">
-<pre>a:target-layout(attr(href url), same-page) { content: " on this page" }
+
+<pre>p { letter-spacing: -0.1em normal 0.1em }
+</pre>
+</div>
+
+<!--
+<h2>Conditional text</h2>
+
+<div class=example>
+<pre>
+a:target-layout(attr(href url), same-page) { content: " on this page" }
 a:target-layout(attr(href url), next-page) { content: " on the next page" }
 a:target-layout(attr(href url), previous-page) { content: " on the previous page" }
 </pre>
 </div>
+-->
 
-<h2 id="appendix-a:-default-style-sheet"><span class="secno">16 </span>Appendix A: Default style sheet</h2>
+<h2 id="appendix-a:-default-style-sheet"><span class="secno">15 </span>Appendix A: Default style sheet</h2>
 
 <pre>@page {
   counter-reset: footnote;
