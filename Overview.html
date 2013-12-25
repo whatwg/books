@@ -2234,7 +2234,12 @@ article {
 </pre>
 
 <p>This is similar to how the ":nth-of-type()" selector works. 
+
+<!--<p>Another way to think of it is that a page selector without any explicit page group has a default, invisible page group. If it had been named "document", the selector for the first page in the document would have been "document:first".-->
+
 </div>
+
+
 
 <!--
 <p class=note>Another wayComplex page selectors
@@ -2282,7 +2287,12 @@ or like pseudo-elements
 <div class="example">
 <p>These are identical:
 
-<pre>@page :left { @inside { p { text-align: left }}}
+<pre>@page :left { 
+  @inside { 
+    p { text-align: left }
+  }
+}
+
 @page :left p { text-align: left }
 </pre>
 </div>
