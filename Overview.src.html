@@ -632,24 +632,22 @@ The table below shows the equivalents:
 </table>
 
 
-<p>The string inside the parenthesis is called the <em>leader
-string</em>. The leader string must be shown in full at least once,
+<p>The string inside the parenthesis is called the <dfn>leader
+string</dfn>. The leader string must be shown in full at least once,
 thereby pushing other content to the side (in the writing direction of
 the element to which the leader is attached). The leader string
 establishes the minimum length of the leader. If there is empty space
-on the line, the leader is expanded by repeating it as many times as possible. The
-expansion of a leader from its minimum length never causes line breaks
-to change. At the end of the leader, a partial leader string may be
-shown. 
+on the line, the leader is expanded by repeating it as many times as
+possible. The expansion of a leader from its minimum length never
+causes line breaks to change. At the end of the leader, a partial
+leader string may be shown.
 
-<!--
-<p>Leaders that trail other content
--->
+<p>Line-breaking characters inside leader strings must be ignored. A list of line-breaking characters are found in 
+<a href="http://www.unicode.org/standard/reports/tr13/tr13-5.html">[Unicode
+Technical Report #13]</a>. Other white space characters are collapsed according to the values of
+white-space properties. A leader consisting only of whitespace
+characters is called a <dfn>whitespace leader</dfn>.
 
-<p>Line-breaking characters inside leader strings must be ignored. Other white space characters are collapsed according to the
-values of white-space properties.
-
-[Unicode Technical Report #13 http://www.unicode.org/standard/reports/tr13/tr13-5.html]
 
 <p>To determine the length of the leaders, user agents must do the
 following for each line where a leader appears:
@@ -844,7 +842,7 @@ Glance o'er this page, nor to my verse deny
 
 </div>
 
-<p>The purpose of a visible leader is most often to connect two
+<p>The purpose of a leader is most often to connect two
 strings visually. To achieve this, User Agents may chose to move
 content appearing before the leader onto the same line as the leader. 
 
@@ -856,6 +854,7 @@ content appearing before the leader onto the same line as the leader.
 |Adams.........42|
 </pre>
 </div>
+
 
 <div class="example">
 <p>In cases where there is not enough space for content on both sides of the leader, the leader will remain on the same line as the sollowing content.
@@ -874,18 +873,41 @@ content appearing before the leader onto the same line as the leader.
 </div>
 
 <div class=example>
-<p>Leaders that only have whitespace characters do not connect two strings in the same way that visible leaders do. User Agents may therefore chose to not move content appearing before the leader onto the same line as the leader. This will result in a rendition like:
+<p>In this example, a whitespace leader is placed before a &lt;cite> element:
 
 <pre>
- |For a moment, nothing happend.  |
- |Then, after a second or so,     |
- |nothing continued to happen.    |
- |                   Douglas Adams|
+&lt;style>
+cite::before { content: leader('  ') }
+&lt;/style>
+&lt;blockquote>
+  For a moment, nothing happend. 
+  Then, after a second or so, 
+  nothing continued to happen.
+    &lt;cite>Douglas&nbsp;Adams&lt;/cite>
+&lt;/blockquote>
+</pre>
+
+<p>Whitespace leaders do not connect two strings in the same way that visible leaders do. User Agents may therefore chose to not move content appearing before the leader onto the same line as the leader. This will result in a rendition like:
+
+<pre>
+|For a moment, nothing happend.  |
+|Then, after a second or so,     |
+|nothing continued to happen.    |
+|                   Douglas Adams|
+</pre>
+
+<p>Rather than:
+
+<pre>
+|For a moment, nothing happend.  |
+|Then, after a second or so,     |
+|nothing continued to            |
+|happen.            Douglas Adams|
 </pre>
 
 </div>
 
-
+<!--
 <div class="example">
 <p>Consider this code:
 
@@ -910,20 +932,6 @@ cite::before { content: leader('  ') }
  |                   Douglas Adams|
 </pre>
 
-<!--
-<p>To indicate that <q>John Johnson</q> should be kept on one line,
-this rule can be added to the style sheet:
-
-<pre>
-cite { text-wrap: suppress }
-</pre>
-
-<p>Until 'text-wrap' is widely supported, this rule can also be used:
-
-<pre>
-cite { white-space: nowrap }
-</pre>
--->
 
 <p>If the containing block is wider, this may be the resultant presentation:
 
@@ -934,12 +942,13 @@ cite { white-space: nowrap }
 </pre>
 
 </div>
+-->
 
 <p>When possible, User Agents should align corresponding glyphs from the
 leaders of consecutive lines.
 
 <div class=example>
-In this example, the dotted lines are aligned horizontally:
+In this example, the dotted lines are aligned horizontally so that the dots appear directly above and below each other:
 <pre>
   Alfa ........ 5
   Bravo ...... 41
