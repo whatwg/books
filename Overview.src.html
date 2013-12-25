@@ -697,7 +697,8 @@ h1::after {
 </div>
 
 <div class="example">
-<p>If a leader is set on an inline element inide a justified paragraph, there will not be any empty space on the line. Therefore, the leader is shown only once. 
+
+<p>If a leader is set on an inline element inside a justified paragraph, there will not be any empty space on the line. Therefore, the leader is shown only once. 
 
 <pre>
 span::after { 
@@ -719,7 +720,7 @@ A paragraph with a span... inside.
 
 
 <div class="example">
-<p>Consider this example:
+<p>The presence of a leader may influence tables. Consider this example with two table cells in one row:
 
 <pre>
 td.leader::after { content: leader('..') }
@@ -743,19 +744,29 @@ first cell grows, and the table cell could be rendered like this:
 |foo........................................................|bar|
 </pre>
 
-<p>(The '|' charaters mark vertical cell edges in the figures above.)
+<!--<p>(The '|' charaters mark vertical cell edges in the figures above.)-->
 </div>
 
 <div class="example">
 
-<p>In a more complex example, the 'leader' value is combined with
-other values on the 'content' property:
+<p>A table of contents often use leaders to visually connect a chapter
+title with the corresponding page number. This can be achieved with code like:
 
 <pre>
 ul.toc a::after {
   content: leader(". . . ") target-counter(attr(href url), page);
 }
 </pre>
+
+<p>The formatted result could be:
+
+<pre>
+Africa ...........1
+America...........9
+Antarctica.......56
+Asia............134
+</pre>
+
 </div>
 
 <p>The appearance of leaders is influenced by the same set of properties that influence the appearance of fixed strings. 
@@ -777,7 +788,7 @@ content: leader("...");
 
 
 <div class="example">
-<p>Leaders can be used to add line numbers to text. This is sometimes used when publishing poems or writs. In this example, every other line gets a line number on the right. 
+<p>Line numbers sometimes displayed on the side of poetry, for reference purposes. In this example, a counter is dsplayed on every other line and pushed to the right by an invisible leader. 
 
 <pre>
 @page { counter-reset: line }
@@ -797,12 +808,12 @@ Glance o'er this page, nor to my verse deny
 <p>Note that the formatter doesn't really count lines, but rather elements marked up as lines. 
 </div>
 
-<!--<p>If the content connected by a leader end up on different lines, the
-leader will be present on all lines. Each leader fragment honors the
-minimum length of the leader.-->
-
+<!--
 <p>If the presence of a minimum length leader at the end of a line results in subsequent content being moved to the next line, the leader will also appear at the beginning of the next line. 
+-->
 
+<p>A leader is only present on one line. If the presence of a minimum length leader at the end of a line results in subsequent content being moved to the next line, the leader will also be moved to the next line. 
+  
 <div class="example">
 <p>Consider this code:
 
@@ -833,6 +844,50 @@ Douglas Adams
 </pre>
 
 <!--
+
+ - leaders can only appear on one line
+
+Must be able to do
+
+
+
+Douglas Adams...
+..............42
+
+
+
+Douglas Adams
+...........42
+
+
+
+Douglas Adams
+..............42
+
+- If a leader forms part of a pseudo-element, the whole
+  pseudo-element, along with the last thing before the pseudo element,
+  must come on one line.
+
+ - visible leaders connect two items; it should try to show both of them at the same line
+
+Leaders that only contain white-space characters are called "whitepace leaders". A whitepace leader does not connect two visible parts
+
+"Leaders set on on a "before" elements isn't able to influen"
+
+
+
+ |For a moment, nothing happend.  |
+ |Then, after a second or so,     |
+ |nothing continued to happen.    |
+ |                   Douglas Adams|
+
+
+Douglas 
+Adams.........42
+
+
+
+
  We could make an exception for white-space-only leaders. That would
  probabbly be what most authors would want. Hmm.
 
@@ -2094,24 +2149,69 @@ h1, h2 { bookmark-state: open }
 </div>
 
 
+<h2>Page selectors</h2>
+
+<p>In CSS2, <a href="http://www.w3.org/TR/CSS2/page.html#page-selectors">first, left and right pages</a>, as well as named pages, can be selected. This specification adds more advanced page selectors. Page selectors are similar to normal selectors in the sense that they query a data set and select parts of it. However, page selectors and normal selector are different in what they query (normal selectors query a document tree; page selectors query a sequence of pages) and what they select (normal selectors find structured elements, page selectors find formatted pages). This specification adds two page pseudo-classes: nth() and range(). 
+
+<h3>The <code>nth()</code> page pseudo-class</h3>
+
+<p>The <code>nth()</code> construct is added to select a numbered page.
+
+<div class=example>
+<p>These are equivalent, they both select the first page of a document:
+<pre>
+@page :first { background: lime } 
+@page :nth(1) { background: lime } 
+</pre>
+</div>
+
+<p>The grammar of <a href="http://www.w3.org/TR/css3-selectors/#nth-child-pseudo">nth-child() pseudo-class</a> can be used with <code>nth()</code>:
+
+<div class=example>
+<p>In this example, pages in a document will cycle through pink, lime and white backgrounds:
+<pre>
+@page :nth(3n) { background: pink }
+@page :nth(3n+1)) { background: lime }
+@page :nth(3n+2)) { background: white }
+</pre>
+</div>
+
+<h3>The <code>range()</code> page pseudo-class</h3>
+
+<p>The :range() page pseue
+
+<div class=example>
+<p>In this example, pages in a document will cycle through pink, lime and white backgrounds:
+<pre>
+@page :range(3-5) { ... } /* page 3, 4 and 5 */
+</pre>
+</div>
+
+
 <h2>Page groups</h2>
 
 <p>A document consists of a linear sequence of pages. In simple
 documents, all pages have the same page area and marginalia. In more
 complex documents, it makes sense to style pages differently. Styling
-can be based on automatic classification (using page pseudo-classes),
-or explicit page groups. Page groups are named with the 'page' property
+can be based on automatic classification (like the pseudo-classes
+described in the previous section), or explicitly named page groups.
+Page groups are named with the 'page' property, and selected with
+a <a href="http://www.w3.org/TR/css3-page/#page-type-selector">page
+type selector</a>.
 
 
+<div class=example>
+<pre>
+@page chapter { @bottom-center { content: counter(page) }
+div.introduction { page: chapter }
+</pre>
+</div>
 
-
-
-
-
-Pages can be named with the 'page' property. Named pages can appear in sequence, stemming from different elements. A sequence of pages with the same name is called a <em>page group</em>. 
-
-
-<p>It is sometimes necessary to split one page group into several page groups in order to, e.g., address the first page in the group. The 'page-group' property expresses whether an element starts a new page group or not. 
+<p>A sequence of pages with the same name are is automatically combined
+into a page group. It is sometimes necessary to split one page group
+into several page groups in order to, e.g., address the first page in
+the group. The 'page-group' property expresses whether an element
+starts a new page group or not.
 
 <table class=propdef>
     <tr>
@@ -2170,51 +2270,28 @@ article {
 
 </div>
 
-
-
-<h2>Page selectors</h2>
-
-<p>In CSS2, <a href="http://www.w3.org/TR/CSS2/page.html#page-selectors">first, left and right pages</a>, as well as named pages, can be selected. This specification adds more advanced page selectors. Page selectors are similar to normal selectors in the sense that they query a data set and select parts of it. However, page selectors and normal selector are different in what they query (normal selectors query a document tree; page selectors query a sequence of pages) and what they select (normal selectors find structured elements, page selectors find formatted pages). This specification adds two page pseudo-classes: nth() and range(). Also, it describes how page groups are used in page selectors.
-
-<h3>The <code>nth()</code> page pseudo-class</h3>
-
-<p>The <code>nth()</code> construct is added to select a numbered page.
+<p>When a <a href="http://www.w3.org/TR/css3-page/#page-pseudo-class">page pseudo-class</a> is combined with a <a href="http://www.w3.org/TR/css3-page/#page-type-selector">page type selector</a> (also called a "page group selector"), the page pseudo-classes query pages within that page group.
 
 <div class=example>
-<p>These are equivalent, they both select the first page of a document:
+<p>When used alone, ":first" selects the first page of the document. When combined with a page group selector, ":first" selects the first page in a page group
+
 <pre>
-@page :first { background: lime } 
-@page :nth(1) { background: lime } 
+@page :first { ...  }         /* selects the first page of the document */
+@page chapter:first { ... }   /* selects the first page of every "chapter" page group */
 </pre>
-</div>
 
-<p>The grammar of <a href="http://www.w3.org/TR/css3-selectors/#nth-child-pseudo">nth-child() pseudo-class</a> can be used with <code>nth()</code>:
-
-<div class=example>
-<p>In this example, pages in a document will cycle through pink, lime and white backgrounds:
-<pre>
-@page :nth(3n) { background: pink }
-@page :nth(3n+1)) { background: lime }
-@page :nth(3n+2)) { background: white }
-</pre>
-</div>
-
-<h3>The <code>range()</code> page pseudo-class</h3>
-
-<p>The :range() page pseue
-
-<div class=example>
-<p>In this example, pages in a document will cycle through pink, lime and white backgrounds:
-<pre>
-@page :range(3-5) { ... } /* page 3, 4 and 5 */
-</pre>
+<p>This is similar to how the ":nth-of-type()" selector works. 
 </div>
 
 <!--
-pseudo_page :
-     ':' [ "left" | "right" | "first" | "blank" | &lt;nth> | ]
+<p class=note>Another wayComplex page selectors
+this is like
+ :nth-of-type()
+or like pseudo-elements
+</p>
 -->
 
+<!--
 <h3>Complex page selectors</h3>
 
 <p>Complex page selectors are formed by combining several <a href="http://www.w3.org/TR/css3-page/#page-pseudo-class">page pseudo-classes</a>, or by combining one <a href="http://www.w3.org/TR/css3-page/#page-type-selector">page type selector</a>, called "page group selector" in this document, with one or more page pseudo-classes. 
@@ -2228,22 +2305,6 @@ pseudo_page :
 @page :nth(20-40):odd { ... } /* all odd pages between 20 and 40 (inclusive) */
 </pre>
 </div>
-
-<p>When a page group selector is combined with one or more page pseudo-classes, the page pseudo-classes query pages within that page group. 
-
-<div class=example>
-<pre>
-@page chapter:first { ...     }   /* selects the first page of every "chapter" page group */
-@page section:range(2-4) { ... }  /* selects page 2, 3, and 4 of every "range" page group */
-</pre>
-</div>
-
-<!--
-<p class=note>Complex page selectors
-this is like
- :nth-of-type()
-or like pseudo-elements
-</p>
 -->
 
 
