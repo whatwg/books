@@ -867,7 +867,7 @@ strings visually. To achieve this, User Agents may chose to move
 content appearing before the leader onto the same line as the leader. 
 
 <div class="example">
-<p>In this renditon, "Adams" has been moved to the next line:
+<p>In this renditon, the User Agen has chosen to move "Adams" to the next line to preserve a visual connection:
 
 <pre>|Douglas         |
 |Adams.........42|
@@ -876,7 +876,7 @@ content appearing before the leader onto the same line as the leader.
 
 
 <div class="example">
-<p>In cases where there is not enough space for content on both sides of the leader, the leader will remain on the same line as the sollowing content.
+<p>In cases where there is not enough space for content on both sides of the leader, the leader will remain on the same line as the following content.
 
 <pre>|Douglas  |
 |Adams    |
@@ -903,7 +903,7 @@ cite::before { content: leader('  ') }
 &lt;/blockquote&gt;
 </pre>
 
-<p>Whitespace leaders do not connect two strings in the same way that visible leaders do. User Agents may therefore chose to not move content appearing before the leader onto the same line as the leader. This will result in a rendition like:
+<p>Whitespace leaders do not connect two strings in the same way that visible leaders do. User Agents may therefore chose to not move content appearing before the leader onto the same line as the leader. This may result in a rendition like:
 
 <pre>|For a moment, nothing happend.  |
 |Then, after a second or so,     |
@@ -1916,7 +1916,7 @@ this specification, there will be a footnote:
 </pre>
 </div>
 
-<p class="issue">How is the element named area emptied? What is the scope?</p>
+<p class="issue">How is the named area emptied? What is the scope?</p>
 
 
 
@@ -2131,11 +2131,14 @@ h1, h2 { bookmark-state: open }
 
 <h3 id="the-range()-page-pseudo-class"><span class="secno">8.2 </span>The <code>range()</code> page pseudo-class</h3>
 
-<p>The :range() page pseue
+<p>The :range() page pseudo-class is added to select a range of pages. The syntax is:
+
+<pre>  :range( S* [0-9]+ S* - S* [0-9]+ S* )
+</pre>
 
 <div class="example">
-<p>In this example, pages in a document will cycle through pink, lime and white backgrounds:
-<pre>@page :range(3-5) { ... } /* page 3, 4 and 5 */
+<p>In this example, page 3, 4, and 5 of the document will have a pink background. 
+<pre>@page :range(3-5) { background: pink }
 </pre>
 </div>
 
