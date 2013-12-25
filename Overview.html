@@ -850,74 +850,54 @@ Glance o'er this page, nor to my verse deny
 &lt;/div&gt;
 </pre>
 
-<p>In this example, the number is pushed to the next line by the minimum length leader. Therefore, the leader will appear on both lines:
+<p>Depending on the width of the containing block, the content may or may not fit on one line. In the rendered examples below, the thrird rendition the leader and its subsequent content is moved to the second line.
 
-<pre>Douglas Adams...
-..............42
+<pre>|Douglas Adams......42|
+</pre>
+
+<pre>|Douglas Adams...42|
+</pre>
+
+<pre>|Douglas Adams   |
+|..............42|
 </pre>
 
 </div>
 
-<div class="issue">It seems that traditional leaders only appear on one line. If so, the example above should be rendered:
+<p>The purpose of a visible leader is most often to connect two
+strings visually. To achieve this, User Agents may chose to move
+content appearing before the leader onto the same line as the leader. 
 
-<pre>Douglas Adams
-..............42
+<div class="example">
+<p>In this renditon, "Adams" has been moved to the next line:
+
+<pre>|Douglas         |
+|Adams.........42|
+</pre>
+</div>
+
+<div class="example">
+<p>In cases where there is not enough space for content on both sides of the leader, the leader will remain on the same line as the sollowing content.
+
+<pre>|Douglas  |
+|Adams    |
+|.......42|
 </pre>
 
-<!--
+<pre>|Dou|glas
+|Ada|ms  
+|...|42
+</pre>
+</div>
 
- - leaders can only appear on one line
+<div class="example">
+<p>Leaders that only have whitespace characters do not connect two strings in the same way that visible leaders do. User Agents may therefore chose to not move content appearing before the leader onto the same line as the leader. This will result in a rendition like:
 
-Must be able to do
-
-
-
-Douglas Adams...
-..............42
-
-
-
-Douglas Adams
-...........42
-
-
-
-Douglas Adams
-..............42
-
-- If a leader forms part of a pseudo-element, the whole
-  pseudo-element, along with the last thing before the pseudo element,
-  must come on one line.
-
- - visible leaders connect two items; it should try to show both of them at the same line
-
-Leaders that only contain white-space characters are called "whitepace leaders". A whitepace leader does not connect two visible parts
-
-"Leaders set on on a "before" elements isn't able to influen"
-
-
-
- |For a moment, nothing happend.  |
+<pre> |For a moment, nothing happend.  |
  |Then, after a second or so,     |
  |nothing continued to happen.    |
  |                   Douglas Adams|
-
-
-Douglas 
-Adams.........42
-
-
-
-
- We could make an exception for white-space-only leaders. That would
- probabbly be what most authors would want. Hmm.
-
-Answering myself, there is probably a better switch to use: In the
-example above, the leader is placed before the <cite>Douglas
-Adams</cite> element (as opposed to after the quote itself). So, we
-could probably find a way to say that post-leaders can cause line
-breaks, while pre-leaders can't.
--->
+</pre>
 
 </div>
 
@@ -1828,7 +1808,7 @@ area. Inside that area, the floats are shown in the order they appear.
 <pre>.sidenote { float: to(sidenote, align!) }
 </pre>
 
-<p>However, there isn't room for the third sidenote in its preferred position. As a result, the third sidenote is deleted.
+<p>However, there isn't space for the third sidenote in its preferred position. As a result, the third sidenote is deleted.
 
 <pre>      first ........ .........
    sidenote ........ ..2...... second
