@@ -2147,13 +2147,13 @@ h1, h2 { bookmark-state: open }
 
 <p>A document consists of a linear sequence of pages. In simple
 documents, all pages have the same page area and marginalia. In more
-complex documents, it makes sense to style pages differently. Styling
-can be based on automatic classification (like the pseudo-classes
-described in the previous section), or explicitly named page groups.
-Page groups are named with the 'page' property, and selected with
-a <a href="http://www.w3.org/TR/css3-page/#page-type-selector">page
+complex documents, pages may have different sizes, marginalia and
+orientation. Being able to style pages differently is therefore
+important. Styling can be based on automatic classification (like the
+pseudo-classes described in the previous section), or explicitly named
+page groups. Page groups are named with the 'page' property, and
+selected with a <a href="http://www.w3.org/TR/css3-page/#page-type-selector">page
 type selector</a>.
-
 
 <div class="example">
 <pre>@page chapter { @bottom-center { content: counter(page) }
@@ -2161,7 +2161,7 @@ div.introduction { page: chapter }
 </pre>
 </div>
 
-<p>A sequence of pages with the same name are is automatically combined
+<p>A sequence of pages with the same name is automatically combined
 into a page group. It is sometimes necessary to split one page group
 into several page groups in order to, e.g., address the first page in
 the group. The 'page-group' property expresses whether an element
