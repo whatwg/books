@@ -2357,7 +2357,7 @@ div.chapter:column(1,*)     /* the first column on all pages */
 
 <h2 id="baseline-rhythms"><span class="secno">12 </span>Baseline rhythms</h2>
 
-<p>Baselines of text are often adjusted so that text in adjacent columns use the same baselines. This also reduces <em>show-through</em>, where a printed line shows through to the other side of the sheet. A headline or an image may upset the <em>rhythm</em> of the baselines, but subsequent text should find it again. To support baseline alignment, the 'line-rhythm' property is introduced.
+<p>Text in adjacent columns often use the same baselines. This appears more pleasant to typographers, and reduces <em>show-through</em>, where a printed line shows through to the other side of the sheet. A headline or an image may disturb the <em>rhythm</em> of the baselines, but subsequent text should find it again. To support baseline alignment, the 'line-rhythm' property is introduced and 'vertical-align' is used to position elements within the space left open by aligning baselines.
 
 <h3 id="'line-rhythm'"><span class="secno">12.1 </span>'line-rhythm'</h3>
 
@@ -2467,7 +2467,7 @@ klm nop.
 <p>Notice how the body text aligns with the baseline rhythm (illustrated in orange), while the heading, figure and figure caption do not. After the heading and figure, the main text starts again on the next available baseline.
 </div>
 
-<p>The 'vertical-align' property is used to determine how the white space is distributed.
+<p>The 'vertical-align' property is used to position elements within the space left open by aligning baselines. These values are supported on block containers: 'top', 'middle', 'bottom'. 
 
 <div class="example">
 
