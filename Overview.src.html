@@ -32,7 +32,7 @@ a.unclear, a.almost { color: orange }
   <p><a class="logo" href="http://www.whatwg.org/"><img alt="WHATWG" height="100" src="http://resources.whatwg.org/logo.svg" width="100"></a></p>
 	<h1>[TITLE]</h1>
 	
-	<h2 class="no-num no-toc"><span class=minor>[soon to become a]</span> Living Standard &mdash; Last Updated [DATE]</h2>
+	<h2 class="no-num no-toc">Living Standard &mdash; Last Updated [DATE]</h2>
 	
 	<dl>
 		<dt>This version:
@@ -2386,6 +2386,7 @@ or like pseudo-elements
 </pre>
 </div>
 
+<!--
 <h2>Selecting columns</h2>
 
 
@@ -2399,17 +2400,242 @@ div.chapter::column(*,2)     /* all columns on the second page */
 div.chapter::column(1,*)     /* the first column on all pages */
 </pre>
 </div>
+-->
 
 
 
 
+<h2>Baseline rhythms</h2>
 
-<h2>Baseline alignment</h2>
+<p>Baselines of text are often adjusted so that text in adjacent columns use the same baselines. This also reduces <em>show-through</em>, where a printed line shows through to the other side of the sheet. A headline or an image may upset the <em>rhythm</em> of the baselines, but subsequent text should find it again. To support baseline alignment, the 'line-rhythm' property is introduced.
 
-<p class="note">This issue has also been <a href="http://lists.w3.org/Archives/Public/www-style/2009Jan/0010.html">discussed in the past</a>. We are still searching for a solution.
+<h3>'line-rhythm'</h3>
+
+<table class=propdef>
+    <tr>
+      <td><em>Name:</em>
+      <td><dfn>line-rhythm</dfn>
+    <tr>
+      <td><em>Value:</em>
+    <td>none | root | &lt;ident>
+    <tr>
+      <td><em>Initial:</em>
+      <td>none
+    <tr>
+      <td><em>Applies to:</em>
+      <td>block containers
+    <tr>
+      <td><em>Inherited:</em>
+      <td>yes
+    <tr>
+      <td><em>Percentages:</em>
+      <td>N/A
+    <tr>
+      <td><em>Media:</em>
+      <td>visual
+    <tr>
+      <td><em>Computed&nbsp;value:</em>
+      <td>as specified
+</table>
+
+<p>Values are:
+
+<dl>
+<dt>none
+
+<dd>the element does not establish a new baseline rhythm, nor does its content align with a baseline rhythm.
+
+<dt>root
+
+<dd>the content of the element aligns with the root baseline rhythm. The root baseline rhythm is establised by the computed value of line-height and the dominant font of the root element.
+
+<dt>&lt;ident>
+
+<dd>If the specified baseline rhythm has not been established by an ancestor element, the element establishes a new baseline rhythm based on the computed line-height of the dominant font of the element. The new baseline rythm is given the specified name. These values are illegal rhythm names: 'none', 'inherit', 'root', 'auto' and 'initial'. 
+
+</dl>
 
 
-<p>To avoid <em>show-through</em>, where a printed line shows through to the other side of the sheet, baselines are often aligned. Also, in multi-column layouts, lines in adjacent columns are often aligned. To achive these kinds of aligements, a flag of some kind is needed to indicate that lines within an element should be alinged. This section sketches several ideas
+<div class=example>
+<p>In this example, the rhythm will be defined by the line-height of the root element. Headlines and figures are excempted.
+
+<pre>
+body { line-rhythm: root }
+h1, h2, figure { line-rhythm: none }
+</pre>
+
+<p>One possible rendition is:
+
+<div style="position: relative; height: 240px; ">
+<div style="white-space: pre; color: orange; position: absolute; background: #eee; width: 280px">
+     ____________________________
+     ____________________________
+     ____________________________
+     ____________________________
+     ____________________________
+     ____________________________
+     ____________________________
+     ____________________________
+     ____________________________
+
+</div>
+<div style="white-space: pre; position: absolute; top: 3px; left: 23px">
+Abc def ghi j
+klmn o pqrst 
+uvw xyz.
+</div>
+
+<div style="white-space: pre; position: absolute; top: 64px; left: 23px; font-size: 1.4em; font-weight: bold">
+Heading
+</div>
+
+<div style="white-space: pre; position: absolute; top: 113px; left: 23px">
+Abc def ghi j
+klmn o pqrst 
+uvw xyz. Abc
+de fghij klm
+</div>
+
+<div style="white-space: pre; position: absolute; top: 3px; left: 153px">
+nop q rstuw
+xyz.
+</div>
+
+<div style="position: absolute; top: 72px; left: 153px; width: 95px; height: 88px; background: black; opacity: 0.5">
+</div>
+<div style="position: absolute; top: 77px; left: 158px; width: 85px; height: 40px; background: red; opacity: 0.5"></div>
+
+<div style="position: absolute; top: 120px; left: 158px; width: 95px; font-size: 0.9em; font-style: italic; color: white">figure<br>caption
+</div>
+
+<div style="white-space: pre; position: absolute; top: 157px; left: 153px">
+Abc def ghij
+klm nop.
+</div>
+
+</div>
+
+<p>Notice how the body text aligns with the baseline rhythm (illustrated in orange), while the heading, figure and figure caption do not. After the heading and figure, the main text starts again on the next available baseline.
+</div>
+
+<p>The 'vertical-align' property is used to determine how the white space is distributed.
+
+<div class=example>
+
+<pre>
+h2, h2, figure {              h2, h2, figure { 
+  vertical-align: top            vertical-align: bottom 
+}                             }
+</pre>
+
+<div style="height: 240px;">
+<div style="position: relative; height: 240px; width: 300px; float: left;">
+<div style="white-space: pre; color: orange; position: absolute; background: #eee; width: 280px">
+     ____________________________
+     ____________________________
+     ____________________________
+     ____________________________
+     ____________________________
+     ____________________________
+     ____________________________
+     ____________________________
+     ____________________________
+
+</div>
+<div style="white-space: pre; position: absolute; top: 3px; left: 23px">
+Abc def ghi j
+klmn o pqrst 
+uvw xyz.
+</div>
+
+<div style="white-space: pre; position: absolute; top: 60px; left: 23px; font-size: 1.4em; font-weight: bold">
+Heading
+</div>
+
+<div style="white-space: pre; position: absolute; top: 113px; left: 23px">
+Abc def ghi j
+klmn o pqrst 
+uvw xyz. Abc
+de fghij klm
+</div>
+
+<div style="white-space: pre; position: absolute; top: 3px; left: 153px">
+nop q rstuw
+xyz.
+</div>
+
+<div style="position: absolute; top: 72px; left: 153px; width: 95px; height: 88px; background: black; opacity: 0.5">
+</div>
+<div style="position: absolute; top: 77px; left: 158px; width: 85px; height: 40px; background: red; opacity: 0.5"></div>
+
+<div style="position: absolute; top: 120px; left: 158px; width: 95px; font-size: 0.9em; font-style: italic; color: white">figure<br>caption
+</div>
+
+<div style="white-space: pre; position: absolute; top: 157px; left: 153px">
+Abc def ghij
+klm nop.
+</div>
+
+</div>
+
+
+
+<div style="position: relative; height: 240px; width: 300px; float: left; ">
+<div style="white-space: pre; color: orange; position: absolute; background: #eee; width: 280px">
+     ____________________________
+     ____________________________
+     ____________________________
+     ____________________________
+     ____________________________
+     ____________________________
+     ____________________________
+     ____________________________
+     ____________________________
+
+</div>
+<div style="white-space: pre; position: absolute; top: 3px; left: 23px">
+Abc def ghi j
+klmn o pqrst 
+uvw xyz.
+</div>
+
+<div style="white-space: pre; position: absolute; top: 74px; left: 23px; font-size: 1.4em; font-weight: bold">
+Heading
+</div>
+
+<div style="white-space: pre; position: absolute; top: 113px; left: 23px">
+Abc def ghi j
+klmn o pqrst 
+uvw xyz. Abc
+de fghij klm
+</div>
+
+<div style="white-space: pre; position: absolute; top: 3px; left: 153px">
+nop q rstuw
+xyz.
+</div>
+
+<div style="position: absolute; top: 84px; left: 153px; width: 95px; height: 88px; background: black; opacity: 0.5">
+</div>
+<div style="position: absolute; top: 89px; left: 158px; width: 85px; height: 40px; background: red; opacity: 0.5"></div>
+
+<div style="position: absolute; top: 132px; left: 158px; width: 95px; font-size: 0.9em; font-style: italic; color: white">figure<br>caption
+</div>
+
+<div style="white-space: pre; position: absolute; top: 157px; left: 153px">
+Abc def ghij
+klm nop.
+</div>
+
+</div>
+</div>
+</div>
+
+
+
+<!--
+
+<p class="note">This issue has also been <a href="http://lists.w3.org/Archives/Public/www-style/2009Jan/0010.html">discussed in the past</a>.
 
 
 <h3>Idea 1</h3>
@@ -2471,7 +2697,7 @@ article img { display: block; vertical-align: bottom }
 
 <h3>Idea 4</h3>
 
-<p>It may be possible to automatically determine which content should be excemted from baseline alignment by looking at the computed value of 'line-height'; if it matches that of the containing block, baseline alignment is turned on, otherwise it's off.
+<p>It may be possible to automatically determine which content should be excempted from baseline alignment by looking at the computed value of 'line-height'; if it matches that of the containing block, baseline alignment is turned on, otherwise it's off.
 
 </div>
 
@@ -2479,7 +2705,26 @@ article img { display: block; vertical-align: bottom }
 
 <p><a href="http://dev.w3.org/csswg/css-line-grid">CSS Line Grid Module</a>
 
+<pre>
+html { baseline-grid: root }
+article { baseline-grid: 
+p { baseline-grid: root }
+img { baseline-grid: none }
 
+
+article {
+  line-grid: root;
+
+}
+p {
+  line-snap: baseline
+}
+h1 {
+  line-grid: 
+
+</pre>
+
+-->
 
 <!--
 <p class=note>A similar idea &mdash; 'line-stacking-strategy: grid-height' &mdash; was proposed in a <a href="http://www.w3.org/TR/css3-linebox/#line-stacking-strategy">previous version of the CSS3 line module</a>. The 'line-stacking-strategy' property is <a href="http://www.w3.org/TR/xsl/#line-stacking-strategy">used in XSL</a>.
