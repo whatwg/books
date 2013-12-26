@@ -2175,13 +2175,20 @@ h1, h2 { bookmark-state: open }
 <p>The :range() page pseudo-class is added to select a range of pages. The syntax is:
 
 <pre>
-  :range( S* [0-9]+ S* - S* [0-9]+ S* )
+  :range( S* [ [0-9]+ S* - S* [0-9] ] | [0-9]+\+ ] S* )
 </pre>
 
 <div class=example>
 <p>In this example, page 3, 4, and 5 of the document will have a pink background. 
 <pre>
 @page :range(3-5) { background: pink }
+</pre>
+</div>
+
+<div class=example>
+<p>In this example, all but page 1 and 2 will have a pink background. 
+<pre>
+@page :range(3+) { background: pink }
 </pre>
 </div>
 
@@ -2313,7 +2320,6 @@ or like pseudo-elements
 
 <h2>Selecting elements within pages</h2>
 
-<p class="XXX">This section is fairly sketchy.
 
 <p>To select elements within a page, normal selectors can be combined with a page selector:
 
@@ -2386,22 +2392,21 @@ or like pseudo-elements
 </pre>
 </div>
 
-<!--
+
 <h2>Selecting columns</h2>
 
+<p class="issue">This section is not fully developed. 
 
 <div class=example>
 <pre>
-div.chapter::column(3)       /* the 3rd column of the element */
-div.chapter::column(2n)      /* all even columns of the element */
-div.chapter::column(3+)      /* all columns but the 1st and 2nd */
-div.chapter::column(2,2)     /* second column on second page */
-div.chapter::column(*,2)     /* all columns on the second page */
-div.chapter::column(1,*)     /* the first column on all pages */
+div.chapter:column(3)       /* the 3rd column of the element */
+div.chapter:column(2n)      /* all even columns of the element */
+div.chapter:column(3+)      /* all columns but the 1st and 2nd */
+div.chapter:column(2,2)     /* second column on second page */
+div.chapter:column(*,2)     /* all columns on the second page */
+div.chapter:column(1,*)     /* the first column on all pages */
 </pre>
 </div>
--->
-
 
 
 
