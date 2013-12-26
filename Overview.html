@@ -111,14 +111,15 @@ a.unclear, a.almost { color: orange }
    <li><a href="#the-range()-page-pseudo-class"><span class="secno">8.2 </span>The <code>range()</code> page pseudo-class</a></ol></li>
  <li><a href="#page-groups"><span class="secno">9 </span>Page groups</a></li>
  <li><a href="#selecting-elements-within-pages"><span class="secno">10 </span>Selecting elements within pages</a></li>
- <li><a href="#baseline-rhythms"><span class="secno">11 </span>Baseline rhythms</a>
+ <li><a href="#selecting-columns"><span class="secno">11 </span>Selecting columns</a></li>
+ <li><a href="#baseline-rhythms"><span class="secno">12 </span>Baseline rhythms</a>
   <ol>
-   <li><a href="#'line-rhythm'"><span class="secno">11.1 </span>'line-rhythm'</a></ol></li>
- <li><a href="#character-substitution"><span class="secno">12 </span>Character substitution</a></li>
- <li><a href="#microtypography"><span class="secno">13 </span>Microtypography</a>
+   <li><a href="#'line-rhythm'"><span class="secno">12.1 </span>'line-rhythm'</a></ol></li>
+ <li><a href="#character-substitution"><span class="secno">13 </span>Character substitution</a></li>
+ <li><a href="#microtypography"><span class="secno">14 </span>Microtypography</a>
   <ol>
-   <li><a href="#minimum,-maximum-and-optimal-spacing"><span class="secno">13.1 </span>Minimum, maximum and optimal spacing</a></ol></li>
- <li><a href="#appendix-a:-default-style-sheet"><span class="secno">14 </span>Appendix A: Default style sheet</a></li>
+   <li><a href="#minimum,-maximum-and-optimal-spacing"><span class="secno">14.1 </span>Minimum, maximum and optimal spacing</a></ol></li>
+ <li><a href="#appendix-a:-default-style-sheet"><span class="secno">15 </span>Appendix A: Default style sheet</a></li>
  <li><a href="#references" class="no-num">References</a></li>
  <li><a href="#acknowledgments" class="no-num">Acknowledgments</a></ol>
 <!--end-toc-->
@@ -2129,12 +2130,18 @@ h1, h2 { bookmark-state: open }
 
 <p>The :range() page pseudo-class is added to select a range of pages. The syntax is:
 
-<pre>  :range( S* [0-9]+ S* - S* [0-9]+ S* )
+<pre>  :range( S* [ [0-9]+ S* - S* [0-9] ] | [0-9]+\+ ] S* )
 </pre>
 
 <div class="example">
 <p>In this example, page 3, 4, and 5 of the document will have a pink background. 
 <pre>@page :range(3-5) { background: pink }
+</pre>
+</div>
+
+<div class="example">
+<p>In this example, all but page 1 and 2 will have a pink background. 
+<pre>@page :range(3+) { background: pink }
 </pre>
 </div>
 
@@ -2263,7 +2270,6 @@ or like pseudo-elements
 
 <h2 id="selecting-elements-within-pages"><span class="secno">10 </span>Selecting elements within pages</h2>
 
-<p class="XXX">This section is fairly sketchy.
 
 <p>To select elements within a page, normal selectors can be combined with a page selector:
 
@@ -2332,30 +2338,28 @@ or like pseudo-elements
 </pre>
 </div>
 
-<!--
-<h2>Selecting columns</h2>
 
+<h2 id="selecting-columns"><span class="secno">11 </span>Selecting columns</h2>
 
-<div class=example>
-<pre>
-div.chapter::column(3)       /* the 3rd column of the element */
-div.chapter::column(2n)      /* all even columns of the element */
-div.chapter::column(3+)      /* all columns but the 1st and 2nd */
-div.chapter::column(2,2)     /* second column on second page */
-div.chapter::column(*,2)     /* all columns on the second page */
-div.chapter::column(1,*)     /* the first column on all pages */
+<p class="issue">This section is not fully developed. 
+
+<div class="example">
+<pre>div.chapter:column(3)       /* the 3rd column of the element */
+div.chapter:column(2n)      /* all even columns of the element */
+div.chapter:column(3+)      /* all columns but the 1st and 2nd */
+div.chapter:column(2,2)     /* second column on second page */
+div.chapter:column(*,2)     /* all columns on the second page */
+div.chapter:column(1,*)     /* the first column on all pages */
 </pre>
 </div>
--->
 
 
 
-
-<h2 id="baseline-rhythms"><span class="secno">11 </span>Baseline rhythms</h2>
+<h2 id="baseline-rhythms"><span class="secno">12 </span>Baseline rhythms</h2>
 
 <p>Baselines of text are often adjusted so that text in adjacent columns use the same baselines. This also reduces <em>show-through</em>, where a printed line shows through to the other side of the sheet. A headline or an image may upset the <em>rhythm</em> of the baselines, but subsequent text should find it again. To support baseline alignment, the 'line-rhythm' property is introduced.
 
-<h3 id="'line-rhythm'"><span class="secno">11.1 </span>'line-rhythm'</h3>
+<h3 id="'line-rhythm'"><span class="secno">12.1 </span>'line-rhythm'</h3>
 
 <table class="propdef">
     <tr>
@@ -2702,7 +2706,7 @@ div.figure { height: 20px; line-box-contain: block inline replaced line-grid }
 http://www.w3.org/Style/Group/css3-src/css3-linebox/Overview.html#LineStacking
 -->
 
-<h2 id="character-substitution"><span class="secno">12 </span>Character substitution</h2>
+<h2 id="character-substitution"><span class="secno">13 </span>Character substitution</h2>
 
 <p>It is sometimes convenient to replace one character or string with another without changing the source document. The ‘text-replace’ property offers a way to perform the replacement in the style sheet.
 
@@ -2812,11 +2816,11 @@ h3 { text-replace: "foobar" "barfoo" }      /* accept value, but ... */
 
 <p>This property is evaluated after the <span class="property">content</span> property, and before <span class="property">text-transform</span>.
 
-<h2 id="microtypography"><span class="secno">13 </span>Microtypography</h2>
+<h2 id="microtypography"><span class="secno">14 </span>Microtypography</h2>
 
 <p>Microtypography is a range of methods for improving the appearance of text. Often, small adjustments in the space between letters and words can achieve a more even presentation with less need for hyphenation and fewer widows and orphans. This specification extends two existing CSS properties — 'letter-spacing' and 'word-spacing' — with minimum and maximum values to guide User Agents when laying out text. 
 
-<h3 id="minimum,-maximum-and-optimal-spacing"><span class="secno">13.1 </span>Minimum, maximum and optimal spacing</h3>
+<h3 id="minimum,-maximum-and-optimal-spacing"><span class="secno">14.1 </span>Minimum, maximum and optimal spacing</h3>
 
 
 <p>The 'letter-spacing' and 'word-spacing' properties are extended to accept up to three values:
@@ -2901,7 +2905,7 @@ a:target-layout(attr(href url), previous-page) { content: " on the previous page
 </div>
 -->
 
-<h2 id="appendix-a:-default-style-sheet"><span class="secno">14 </span>Appendix A: Default style sheet</h2>
+<h2 id="appendix-a:-default-style-sheet"><span class="secno">15 </span>Appendix A: Default style sheet</h2>
 
 <pre>@page {
   counter-reset: footnote;
