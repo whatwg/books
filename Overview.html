@@ -30,7 +30,7 @@ a.unclear, a.almost { color: orange }
   <p><a href="http://www.whatwg.org/" class="logo"><img width="100" alt="WHATWG" height="100" src="http://resources.whatwg.org/logo.svg"></a></p>
 	<h1>CSS Books</h1>
 	
-	<h2 class="no-num no-toc" id="soon-to-become-a-living-standard-—-last-updated-25-december-2013"><span class="minor">[soon to become a]</span> Living Standard — Last Updated 25 December 2013</h2>
+	<h2 class="no-num no-toc" id="living-standard-—-last-updated-26-december-2013">Living Standard — Last Updated 26 December 2013</h2>
 	
 	<dl>
 		<dt>This version:
@@ -52,7 +52,7 @@ a.unclear, a.almost { color: orange }
 
 	</dl>
 
-<p class="copyright"><a href="http://creativecommons.org/publicdomain/zero/1.0/" rel="license"><img src="http://i.creativecommons.org/p/zero/1.0/80x15.png" alt="CC0"></a>To the extent possible under law, the editor has waived all copyright and related or neighboring rights to this work. In addition, as of 25 December 2013, the editor has made this specification available under the
+<p class="copyright"><a href="http://creativecommons.org/publicdomain/zero/1.0/" rel="license"><img src="http://i.creativecommons.org/p/zero/1.0/80x15.png" alt="CC0"></a>To the extent possible under law, the editor has waived all copyright and related or neighboring rights to this work. In addition, as of 26 December 2013, the editor has made this specification available under the
 <a href="http://www.openwebfoundation.org/legal/the-owf-1-0-agreements/owfa-1-0" rel="license">Open Web Foundation Agreement Version 1.0</a>, which is available at <!--begin-link--><a href="http://www.openwebfoundation.org/legal/the-owf-1-0-agreements/owfa-1-0">http://www.openwebfoundation.org/legal/the-owf-1-0-agreements/owfa-1-0</a><!--end-link-->.
 
 </div>
@@ -111,19 +111,14 @@ a.unclear, a.almost { color: orange }
    <li><a href="#the-range()-page-pseudo-class"><span class="secno">8.2 </span>The <code>range()</code> page pseudo-class</a></ol></li>
  <li><a href="#page-groups"><span class="secno">9 </span>Page groups</a></li>
  <li><a href="#selecting-elements-within-pages"><span class="secno">10 </span>Selecting elements within pages</a></li>
- <li><a href="#selecting-columns"><span class="secno">11 </span>Selecting columns</a></li>
- <li><a href="#baseline-alignment"><span class="secno">12 </span>Baseline alignment</a>
+ <li><a href="#baseline-rhythms"><span class="secno">11 </span>Baseline rhythms</a>
   <ol>
-   <li><a href="#idea-1"><span class="secno">12.1 </span>Idea 1</a></li>
-   <li><a href="#idea-2"><span class="secno">12.2 </span>Idea 2</a></li>
-   <li><a href="#idea-3"><span class="secno">12.3 </span>Idea 3</a></li>
-   <li><a href="#idea-4"><span class="secno">12.4 </span>Idea 4</a></li>
-   <li><a href="#idea-5"><span class="secno">12.5 </span>Idea 5</a></ol></li>
- <li><a href="#character-substitution"><span class="secno">13 </span>Character substitution</a></li>
- <li><a href="#microtypography"><span class="secno">14 </span>Microtypography</a>
+   <li><a href="#'line-rhythm'"><span class="secno">11.1 </span>'line-rhythm'</a></ol></li>
+ <li><a href="#character-substitution"><span class="secno">12 </span>Character substitution</a></li>
+ <li><a href="#microtypography"><span class="secno">13 </span>Microtypography</a>
   <ol>
-   <li><a href="#minimum,-maximum-and-optimal-spacing"><span class="secno">14.1 </span>Minimum, maximum and optimal spacing</a></ol></li>
- <li><a href="#appendix-a:-default-style-sheet"><span class="secno">15 </span>Appendix A: Default style sheet</a></li>
+   <li><a href="#minimum,-maximum-and-optimal-spacing"><span class="secno">13.1 </span>Minimum, maximum and optimal spacing</a></ol></li>
+ <li><a href="#appendix-a:-default-style-sheet"><span class="secno">14 </span>Appendix A: Default style sheet</a></li>
  <li><a href="#references" class="no-num">References</a></li>
  <li><a href="#acknowledgments" class="no-num">Acknowledgments</a></ol>
 <!--end-toc-->
@@ -2337,11 +2332,13 @@ or like pseudo-elements
 </pre>
 </div>
 
-<h2 id="selecting-columns"><span class="secno">11 </span>Selecting columns</h2>
+<!--
+<h2>Selecting columns</h2>
 
 
-<div class="example">
-<pre>div.chapter::column(3)       /* the 3rd column of the element */
+<div class=example>
+<pre>
+div.chapter::column(3)       /* the 3rd column of the element */
 div.chapter::column(2n)      /* all even columns of the element */
 div.chapter::column(3+)      /* all columns but the 1st and 2nd */
 div.chapter::column(2,2)     /* second column on second page */
@@ -2349,25 +2346,249 @@ div.chapter::column(*,2)     /* all columns on the second page */
 div.chapter::column(1,*)     /* the first column on all pages */
 </pre>
 </div>
+-->
 
 
 
 
+<h2 id="baseline-rhythms"><span class="secno">11 </span>Baseline rhythms</h2>
 
-<h2 id="baseline-alignment"><span class="secno">12 </span>Baseline alignment</h2>
+<p>Baselines of text are often adjusted so that text in adjacent columns use the same baselines. This also reduces <em>show-through</em>, where a printed line shows through to the other side of the sheet. A headline or an image may upset the <em>rhythm</em> of the baselines, but subsequent text should find it again. To support baseline alignment, the 'line-rhythm' property is introduced.
 
-<p class="note">This issue has also been <a href="http://lists.w3.org/Archives/Public/www-style/2009Jan/0010.html">discussed in the past</a>. We are still searching for a solution.
+<h3 id="'line-rhythm'"><span class="secno">11.1 </span>'line-rhythm'</h3>
+
+<table class="propdef">
+    <tr>
+      <td><em>Name:</em>
+      <td><dfn id="line-rhythm">line-rhythm</dfn>
+    <tr>
+      <td><em>Value:</em>
+    <td>none | root | &lt;ident&gt;
+    <tr>
+      <td><em>Initial:</em>
+      <td>none
+    <tr>
+      <td><em>Applies to:</em>
+      <td>block containers
+    <tr>
+      <td><em>Inherited:</em>
+      <td>yes
+    <tr>
+      <td><em>Percentages:</em>
+      <td>N/A
+    <tr>
+      <td><em>Media:</em>
+      <td>visual
+    <tr>
+      <td><em>Computed value:</em>
+      <td>as specified
+</table>
+
+<p>Values are:
+
+<dl>
+<dt>none
+
+<dd>the element does not establish a new baseline rhythm, nor does its content align with a baseline rhythm.
+
+<dt>root
+
+<dd>the content of the element aligns with the root baseline rhythm. The root baseline rhythm is establised by the computed value of line-height and the dominant font of the root element.
+
+<dt>&lt;ident&gt;
+
+<dd>If the specified baseline rhythm has not been established by an ancestor element, the element establishes a new baseline rhythm based on the computed line-height of the dominant font of the element. The new baseline rythm is given the specified name. These values are illegal rhythm names: 'none', 'inherit', 'root', 'auto' and 'initial'. 
+
+</dl>
 
 
-<p>To avoid <em>show-through</em>, where a printed line shows through to the other side of the sheet, baselines are often aligned. Also, in multi-column layouts, lines in adjacent columns are often aligned. To achive these kinds of aligements, a flag of some kind is needed to indicate that lines within an element should be alinged. This section sketches several ideas
+<div class="example">
+<p>In this example, the rhythm will be defined by the line-height of the root element. Headlines and figures are excempted.
+
+<pre>body { line-rhythm: root }
+h1, h2, figure { line-rhythm: none }
+</pre>
+
+<p>One possible rendition is:
+
+<div style="position: relative; height: 240px; ">
+<div style="white-space: pre; color: orange; position: absolute; background: #eee; width: 280px">
+     ____________________________
+     ____________________________
+     ____________________________
+     ____________________________
+     ____________________________
+     ____________________________
+     ____________________________
+     ____________________________
+     ____________________________
+
+</div>
+<div style="white-space: pre; position: absolute; top: 3px; left: 23px">
+Abc def ghi j
+klmn o pqrst 
+uvw xyz.
+</div>
+
+<div style="white-space: pre; position: absolute; top: 64px; left: 23px; font-size: 1.4em; font-weight: bold">
+Heading
+</div>
+
+<div style="white-space: pre; position: absolute; top: 113px; left: 23px">
+Abc def ghi j
+klmn o pqrst 
+uvw xyz. Abc
+de fghij klm
+</div>
+
+<div style="white-space: pre; position: absolute; top: 3px; left: 153px">
+nop q rstuw
+xyz.
+</div>
+
+<div style="position: absolute; top: 72px; left: 153px; width: 95px; height: 88px; background: black; opacity: 0.5">
+</div>
+<div style="position: absolute; top: 77px; left: 158px; width: 85px; height: 40px; background: red; opacity: 0.5"></div>
+
+<div style="position: absolute; top: 120px; left: 158px; width: 95px; font-size: 0.9em; font-style: italic; color: white">figure<br>caption
+</div>
+
+<div style="white-space: pre; position: absolute; top: 157px; left: 153px">
+Abc def ghij
+klm nop.
+</div>
+
+</div>
+
+<p>Notice how the body text aligns with the baseline rhythm (illustrated in orange), while the heading, figure and figure caption do not. After the heading and figure, the main text starts again on the next available baseline.
+</div>
+
+<p>The 'vertical-align' property is used to determine how the white space is distributed.
+
+<div class="example">
+
+<pre>h2, h2, figure {              h2, h2, figure { 
+  vertical-align: top            vertical-align: bottom 
+}                             }
+</pre>
+
+<div style="height: 240px;">
+<div style="position: relative; height: 240px; width: 300px; float: left;">
+<div style="white-space: pre; color: orange; position: absolute; background: #eee; width: 280px">
+     ____________________________
+     ____________________________
+     ____________________________
+     ____________________________
+     ____________________________
+     ____________________________
+     ____________________________
+     ____________________________
+     ____________________________
+
+</div>
+<div style="white-space: pre; position: absolute; top: 3px; left: 23px">
+Abc def ghi j
+klmn o pqrst 
+uvw xyz.
+</div>
+
+<div style="white-space: pre; position: absolute; top: 60px; left: 23px; font-size: 1.4em; font-weight: bold">
+Heading
+</div>
+
+<div style="white-space: pre; position: absolute; top: 113px; left: 23px">
+Abc def ghi j
+klmn o pqrst 
+uvw xyz. Abc
+de fghij klm
+</div>
+
+<div style="white-space: pre; position: absolute; top: 3px; left: 153px">
+nop q rstuw
+xyz.
+</div>
+
+<div style="position: absolute; top: 72px; left: 153px; width: 95px; height: 88px; background: black; opacity: 0.5">
+</div>
+<div style="position: absolute; top: 77px; left: 158px; width: 85px; height: 40px; background: red; opacity: 0.5"></div>
+
+<div style="position: absolute; top: 120px; left: 158px; width: 95px; font-size: 0.9em; font-style: italic; color: white">figure<br>caption
+</div>
+
+<div style="white-space: pre; position: absolute; top: 157px; left: 153px">
+Abc def ghij
+klm nop.
+</div>
+
+</div>
 
 
-<h3 id="idea-1"><span class="secno">12.1 </span>Idea 1</h3>
+
+<div style="position: relative; height: 240px; width: 300px; float: left; ">
+<div style="white-space: pre; color: orange; position: absolute; background: #eee; width: 280px">
+     ____________________________
+     ____________________________
+     ____________________________
+     ____________________________
+     ____________________________
+     ____________________________
+     ____________________________
+     ____________________________
+     ____________________________
+
+</div>
+<div style="white-space: pre; position: absolute; top: 3px; left: 23px">
+Abc def ghi j
+klmn o pqrst 
+uvw xyz.
+</div>
+
+<div style="white-space: pre; position: absolute; top: 74px; left: 23px; font-size: 1.4em; font-weight: bold">
+Heading
+</div>
+
+<div style="white-space: pre; position: absolute; top: 113px; left: 23px">
+Abc def ghi j
+klmn o pqrst 
+uvw xyz. Abc
+de fghij klm
+</div>
+
+<div style="white-space: pre; position: absolute; top: 3px; left: 153px">
+nop q rstuw
+xyz.
+</div>
+
+<div style="position: absolute; top: 84px; left: 153px; width: 95px; height: 88px; background: black; opacity: 0.5">
+</div>
+<div style="position: absolute; top: 89px; left: 158px; width: 85px; height: 40px; background: red; opacity: 0.5"></div>
+
+<div style="position: absolute; top: 132px; left: 158px; width: 95px; font-size: 0.9em; font-style: italic; color: white">figure<br>caption
+</div>
+
+<div style="white-space: pre; position: absolute; top: 157px; left: 153px">
+Abc def ghij
+klm nop.
+</div>
+
+</div>
+</div>
+</div>
+
+
+
+<!--
+
+<p class="note">This issue has also been <a href="http://lists.w3.org/Archives/Public/www-style/2009Jan/0010.html">discussed in the past</a>.
+
+
+<h3>Idea 1</h3>
 
 <p>One possible solution can be found in <a href="http://www.w3.org/TR/css3-linebox/#line-stacking-strategy">CSS3 module: line</a>.
 
-<div class="example">
-<pre>article { 
+<div class=example>
+<pre>
+article { 
   columns: 3; 
   line-stacking-strategy: grid-height;
 }
@@ -2376,7 +2597,7 @@ div.chapter::column(1,*)     /* the first column on all pages */
 
 <p>When <code>line-stacking-strategy</code> is set to <code>grid-height</code>, the stack height of each line is the smallest multiple of the element's <code>line-height</code> computed value that can contain the block progression of all the inline elements on that line when those elements are properly aligned. The 'line-height' property value is ignored for inline elements. 
 
-<h3 id="idea-2"><span class="secno">12.2 </span>Idea 2</h3>
+<h3>Idea 2</h3>
 
 <p>Another possible solution is to say: 
 
@@ -2387,8 +2608,9 @@ div.chapter::column(1,*)     /* the first column on all pages */
 
 <p>This could be achived with:
 
-<div class="example">
-<pre>article { 
+<div class=example>
+<pre>
+article { 
   columns: 3; 
   line-stacking-strategy: baseline-alignment;
 }
@@ -2396,15 +2618,16 @@ div.chapter::column(1,*)     /* the first column on all pages */
 </div>
 
 
-<h3 id="idea-3"><span class="secno">12.3 </span>Idea 3</h3>
+<h3>Idea 3</h3>
 
 <p>One problem with both Idea 1 and Idea 2 is that all content is aligned. This may not be desireable in all cases. For example, a headline will typically use a larger font size and if all lines in the headline are aligned with a "natural" baseline (or something similar), lots of white space will be generated. Therefore, we need a way to turn off baseline alignment for certain elements. 
 
-<div class="example">
+<div class=example>
 
 <p>In this example, the <code>article</code> element defines a set baselines to be used by its own content as well as its child elements. Child elements can opt out of the scheme by setting <code>line-stacking: normal</code> (or something):
 
-<pre>article { 
+<pre>
+article { 
   columns: 3; 
   line-stacking: set-baselines;
 }
@@ -2416,17 +2639,36 @@ article img { display: block; vertical-align: bottom }
 <p>(In the code above, the 'vertical-align' property is used to declare where any extra space ends up; in this example it will end up above the image.)
 </div>
 
-<h3 id="idea-4"><span class="secno">12.4 </span>Idea 4</h3>
+<h3>Idea 4</h3>
 
-<p>It may be possible to automatically determine which content should be excemted from baseline alignment by looking at the computed value of 'line-height'; if it matches that of the containing block, baseline alignment is turned on, otherwise it's off.
+<p>It may be possible to automatically determine which content should be excempted from baseline alignment by looking at the computed value of 'line-height'; if it matches that of the containing block, baseline alignment is turned on, otherwise it's off.
 
+</div>
 
-
-<h3 id="idea-5"><span class="secno">12.5 </span>Idea 5</h3>
+<h3>Idea 5</h3>
 
 <p><a href="http://dev.w3.org/csswg/css-line-grid">CSS Line Grid Module</a>
 
+<pre>
+html { baseline-grid: root }
+article { baseline-grid: 
+p { baseline-grid: root }
+img { baseline-grid: none }
 
+
+article {
+  line-grid: root;
+
+}
+p {
+  line-snap: baseline
+}
+h1 {
+  line-grid: 
+
+</pre>
+
+-->
 
 <!--
 <p class=note>A similar idea &mdash; 'line-stacking-strategy: grid-height' &mdash; was proposed in a <a href="http://www.w3.org/TR/css3-linebox/#line-stacking-strategy">previous version of the CSS3 line module</a>. The 'line-stacking-strategy' property is <a href="http://www.w3.org/TR/xsl/#line-stacking-strategy">used in XSL</a>.
@@ -2460,7 +2702,7 @@ div.figure { height: 20px; line-box-contain: block inline replaced line-grid }
 http://www.w3.org/Style/Group/css3-src/css3-linebox/Overview.html#LineStacking
 -->
 
-<h2 id="character-substitution"><span class="secno">13 </span>Character substitution</h2>
+<h2 id="character-substitution"><span class="secno">12 </span>Character substitution</h2>
 
 <p>It is sometimes convenient to replace one character or string with another without changing the source document. The ‘text-replace’ property offers a way to perform the replacement in the style sheet.
 
@@ -2570,11 +2812,11 @@ h3 { text-replace: "foobar" "barfoo" }      /* accept value, but ... */
 
 <p>This property is evaluated after the <span class="property">content</span> property, and before <span class="property">text-transform</span>.
 
-<h2 id="microtypography"><span class="secno">14 </span>Microtypography</h2>
+<h2 id="microtypography"><span class="secno">13 </span>Microtypography</h2>
 
 <p>Microtypography is a range of methods for improving the appearance of text. Often, small adjustments in the space between letters and words can achieve a more even presentation with less need for hyphenation and fewer widows and orphans. This specification extends two existing CSS properties — 'letter-spacing' and 'word-spacing' — with minimum and maximum values to guide User Agents when laying out text. 
 
-<h3 id="minimum,-maximum-and-optimal-spacing"><span class="secno">14.1 </span>Minimum, maximum and optimal spacing</h3>
+<h3 id="minimum,-maximum-and-optimal-spacing"><span class="secno">13.1 </span>Minimum, maximum and optimal spacing</h3>
 
 
 <p>The 'letter-spacing' and 'word-spacing' properties are extended to accept up to three values:
@@ -2659,7 +2901,7 @@ a:target-layout(attr(href url), previous-page) { content: " on the previous page
 </div>
 -->
 
-<h2 id="appendix-a:-default-style-sheet"><span class="secno">15 </span>Appendix A: Default style sheet</h2>
+<h2 id="appendix-a:-default-style-sheet"><span class="secno">14 </span>Appendix A: Default style sheet</h2>
 
 <pre>@page {
   counter-reset: footnote;
