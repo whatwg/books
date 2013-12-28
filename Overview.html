@@ -30,7 +30,7 @@ a.unclear, a.almost { color: orange }
   <p><a href="http://www.whatwg.org/" class="logo"><img width="100" alt="WHATWG" height="100" src="http://resources.whatwg.org/logo.svg"></a></p>
 	<h1>CSS Books</h1>
 	
-	<h2 class="no-num no-toc" id="living-standard-—-last-updated-26-december-2013">Living Standard — Last Updated 26 December 2013</h2>
+	<h2 class="no-num no-toc" id="living-standard-—-last-updated-28-december-2013">Living Standard — Last Updated 28 December 2013</h2>
 	
 	<dl>
 		<dt>This version:
@@ -52,7 +52,7 @@ a.unclear, a.almost { color: orange }
 
 	</dl>
 
-<p class="copyright"><a href="http://creativecommons.org/publicdomain/zero/1.0/" rel="license"><img src="http://i.creativecommons.org/p/zero/1.0/80x15.png" alt="CC0"></a>To the extent possible under law, the editor has waived all copyright and related or neighboring rights to this work. In addition, as of 26 December 2013, the editor has made this specification available under the
+<p class="copyright"><a href="http://creativecommons.org/publicdomain/zero/1.0/" rel="license"><img src="http://i.creativecommons.org/p/zero/1.0/80x15.png" alt="CC0"></a>To the extent possible under law, the editor has waived all copyright and related or neighboring rights to this work. In addition, as of 28 December 2013, the editor has made this specification available under the
 <a href="http://www.openwebfoundation.org/legal/the-owf-1-0-agreements/owfa-1-0" rel="license">Open Web Foundation Agreement Version 1.0</a>, which is available at <!--begin-link--><a href="http://www.openwebfoundation.org/legal/the-owf-1-0-agreements/owfa-1-0">http://www.openwebfoundation.org/legal/the-owf-1-0-agreements/owfa-1-0</a><!--end-link-->.
 
 </div>
@@ -1511,6 +1511,11 @@ and the settings in the default style sheet differentiates the two.
 -->
 
 <h2 id="named-areas"><span class="secno">6 </span>Named Areas</h2>
+<!--
+<p class=issue>add example with aside
+<p class=issue>describe content model, how to empty/reset named areas
+<p class=issue>what role should fixed areas have
+-->
 
 <p>The page area and footnote area are predefined areas in CSS; all content is shown in the page area by default, and footnotes can be floated to the page area. This section describes how to create other areas, how to posistion those areas, and how to fill them with content. 
 
@@ -2156,7 +2161,12 @@ important. Styling can be based on automatic classification (like the
 pseudo-classes described in the previous section), or explicitly named
 page groups. Page groups are named with the 'page' property, and
 selected with a <a href="http://www.w3.org/TR/css3-page/#page-type-selector">page
-type selector</a>.
+type selector</a>. 
+
+<p>The syntax of page selectors are:
+
+<pre>@page [ \S+ &lt;page-group&gt;? [ : page-pseudo-class ]* ] | [ \S* [ : *page-pseudo-class ]+
+</pre>
 
 <div class="example">
 <pre>@page chapter { @bottom-center { content: counter(page) }
@@ -2271,7 +2281,7 @@ or like pseudo-elements
 <h2 id="selecting-elements-within-pages"><span class="secno">10 </span>Selecting elements within pages</h2>
 
 
-<p>To select elements within a page, normal selectors can be combined with a page selector:
+<p>To select elements within a page, normal selectors can be combined with a page selector. 
 
 <div class="example">
 <pre>@page :first p { background: lime } 
@@ -2281,7 +2291,17 @@ or like pseudo-elements
 </pre>
 </div>
 
-<p>The grammar is, informally: If something follows @page (with or without a space in between), it is a page selector. Between the page selector and the left curly brace comes a normal, possibly complex, selector. Elements that are (partially) shown on the selected page AND are selected by the normal selector, are selected. 
+<p>The syntax is:
+
+<pre>  @page \S+ &lt;page-selector&gt; \S+ &lt;selector&gt; 
+</pre>
+
+<p>The selector 
+
+
+
+
+
 
 <p>In an alternative longhand syntax, selectors are placed inside an @inside-block:
 
@@ -2397,17 +2417,17 @@ div.chapter:column(1,*)     /* the first column on all pages */
 
 <dt>root
 
-<dd>the content of the element aligns with the root baseline rhythm. The root baseline rhythm is establised by the computed value of line-height and the dominant font of the root element.
+<dd>the content of the element aligns with the root baseline rhythm. The root baseline rhythm is established by the computed value of line-height and the dominant font of the root element.
 
 <dt>&lt;ident&gt;
 
-<dd>If the specified baseline rhythm has not been established by an ancestor element, the element establishes a new baseline rhythm based on the computed line-height of the dominant font of the element. The new baseline rythm is given the specified name. These values are illegal rhythm names: 'none', 'inherit', 'root', 'auto' and 'initial'. 
+<dd>If the specified baseline rhythm has not been established by an earlier element, the element establishes a new baseline rhythm based on the computed line-height of the dominant font of the element. The new baseline rhythm is given the specified name. These values are illegal rhythm names: 'none', 'inherit', 'root', 'auto' and 'initial'. 
 
 </dl>
 
 
 <div class="example">
-<p>In this example, the rhythm will be defined by the line-height of the root element. Headlines and figures are excempted.
+<p>In this example, the rhythm of the document is established by the line-height of the root element. Headlines and figures are excempted.
 
 <pre>body { line-rhythm: root }
 h1, h2, figure { line-rhythm: none }
@@ -2580,6 +2600,24 @@ klm nop.
 </div>
 
 
+
+<div class="example">
+<p>In this example there are sidenotes in different languages:
+
+<pre>aside { line-rhythm: note }
+
+&lt;div class=introduction&gt;
+  &lt;aside lang=en&gt; &lt;/aside&gt;
+&lt;/div&gt;
+
+&lt;div class=chapter&gt;
+  &lt;aside lang=ar&gt; &lt;/aside&gt;
+&lt;/div&gt;
+</pre>
+
+<p>The "note" rhythm is established by the first &lt;aside&gt; element, and later used by other &lt;aside&gt; elements. The result is that all &lt;aside&gt; elements use the same rhythm based on the line-height and dominant font of the first &lt;aside&gt; element. 
+
+</div>
 
 <!--
 
