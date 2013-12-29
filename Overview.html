@@ -1906,7 +1906,7 @@ this specification, there will be a footnote:
 
 <h3 id="sticky()-and-reset()"><span class="secno">6.6 </span>sticky() and reset()</h3>
 
-<p class="issue">Must be spelled out. But it should work.
+<p class="issue">This section needs some work. 
 
 <p>Like 'to()', 'fix()' moves elements to a named area. Also, 'fix()', makes the element sticky -- it's shown on every page where the named area appears. 
 
@@ -1919,6 +1919,27 @@ this specification, there will be a footnote:
 
 <div class="example">
 <pre>.sidenote { float: clear(sidenote) }
+</pre>
+</div>
+
+
+<p>The 'clear()' notation clears the named area of its content before moving content into it.
+
+<div class="example">
+<pre>.sidenote { float: copy(sidenote) }
+</pre>
+</div>
+
+<div class="example">
+<pre>.sidenote { float: clone(sidenote) }  /* copy &amp; sticky */
+</pre>
+</div>
+
+
+<p>The 'clear()' notation clears the named area of its content before moving content into it.
+
+<div class="example">
+<pre>.sidenote { float: to-margin(top-center) }
 </pre>
 </div>
 
