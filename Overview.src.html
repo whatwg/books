@@ -1961,7 +1961,7 @@ A sentence consists of words&#xB9;.
 </div>
 
 
-<p>The 'clear()' notation clears the named area of its content before moving content into it.
+<p>'copy()' copies the element to the named area
 
 <div class=example>
 <pre>
@@ -1976,7 +1976,7 @@ A sentence consists of words&#xB9;.
 </div>
 
 
-<p>The 'clear()' notation clears the named area of its content before moving content into it.
+<p>to-margin() copies to 
 
 <div class=example>
 <pre>
@@ -1984,8 +1984,14 @@ A sentence consists of words&#xB9;.
 </pre>
 </div>
 
+<p>Prince supports:
 
-
+<pre>
+@page { 
+    @top { content: flow(header) }
+}
+h1 { flow: static(header) }
+</pre>
 
 <h2>Bookmarks</h2>
 
