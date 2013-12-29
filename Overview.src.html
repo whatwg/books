@@ -1551,7 +1551,7 @@ and the settings in the default style sheet differentiates the two.
   margin-right: 10em;
   @area sidenote { position: absolute; right: -8em; top: 0; width: 6em; height: auto }
 }
-.sidenote { float: to(sidenote) }
+aside { float: to(sidenote) }
 </pre>
 
 </div>
@@ -1625,10 +1625,10 @@ content.
 <p>Content is added to named areas with the <code>to()</code> functional notation.
 
 <div class=example>
-<p>This code adds an element to the named area called "sidenote":
+<p>This code moves &lt;aside> elements to the named area called "sidenote":
 
 <pre>
-span.note { float: to(sidenote); }
+aside { float: to(sidenote); }
 </pre>
 </div>
 
@@ -1733,7 +1733,7 @@ be deleted if the exact alignment cannot be achieved.
 img { float: to(sidenote) }                   /* this is the default */
 img { float: to(sidenote, align same-page) }  /* this is also default */
 
-img { float: to(sidenote, align-y }           /* float is only aligned along the y axis */
+img { float: to(sidenote, align-y) }          /* float is only aligned along the y axis */
 img { float: to(sidenote, fill) }             /* show float in the order they appear */
 img { float: to(sidenote, fill same-spread) } /* show float in the order they appear, use any matching named flow on the spread of the reference point */
 img { float: to(sidenote, same-page!) }       /* delete float if it doesn't end up on the same page */
@@ -1940,22 +1940,25 @@ A sentence consists of words&#xB9;.
 </pre>
 </div>
 
-<h3>Fixed named areas</h3>
+<h3>sticky() and reset()</h3>
 
-<p>By floating elements into a statically positioned named area, the content remains for as long as the named area is visible.
+<p class=issue>Must be spelled out. But it should work.
+
+<p>Like 'to()', 'fix()' moves elements to a named area. Also, 'fix()', makes the element sticky -- it's shown on every page where the named area appears. 
 
 <div class=example>
 <pre>
-@page {
-  @area sidenote { 
-    position: fixed; left: -4cm; top: 0; bottom: 0; width: 3.5cm; 
-  }
-}
-.sidenote { float: to(sidenote) }
+.sidenote { float: fix(sidenote) }
 </pre>
 </div>
 
-<p class=issue>How is the named area emptied? What is the scope?</p>
+<p>The 'clear()' notation clears the named area of its content before moving content into it.
+
+<div class=example>
+<pre>
+.sidenote { float: clear(sidenote) }
+</pre>
+</div>
 
 
 
