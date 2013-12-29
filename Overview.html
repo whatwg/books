@@ -1923,7 +1923,7 @@ this specification, there will be a footnote:
 </div>
 
 
-<p>The 'clear()' notation clears the named area of its content before moving content into it.
+<p>'copy()' copies the element to the named area
 
 <div class="example">
 <pre>.sidenote { float: copy(sidenote) }
@@ -1936,15 +1936,20 @@ this specification, there will be a footnote:
 </div>
 
 
-<p>The 'clear()' notation clears the named area of its content before moving content into it.
+<p>to-margin() copies to 
 
 <div class="example">
 <pre>.sidenote { float: to-margin(top-center) }
 </pre>
 </div>
 
+<p>Prince supports:
 
-
+<pre>@page { 
+    @top { content: flow(header) }
+}
+h1 { flow: static(header) }
+</pre>
 
 <h2 id="bookmarks"><span class="secno">7 </span>Bookmarks</h2>
 
