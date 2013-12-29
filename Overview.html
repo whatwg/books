@@ -30,7 +30,7 @@ a.unclear, a.almost { color: orange }
   <p><a href="http://www.whatwg.org/" class="logo"><img width="100" alt="WHATWG" height="100" src="http://resources.whatwg.org/logo.svg"></a></p>
 	<h1>CSS Books</h1>
 	
-	<h2 class="no-num no-toc" id="living-standard-—-last-updated-28-december-2013">Living Standard — Last Updated 28 December 2013</h2>
+	<h2 class="no-num no-toc" id="living-standard-—-last-updated-29-december-2013">Living Standard — Last Updated 29 December 2013</h2>
 	
 	<dl>
 		<dt>This version:
@@ -52,7 +52,7 @@ a.unclear, a.almost { color: orange }
 
 	</dl>
 
-<p class="copyright"><a href="http://creativecommons.org/publicdomain/zero/1.0/" rel="license"><img src="http://i.creativecommons.org/p/zero/1.0/80x15.png" alt="CC0"></a>To the extent possible under law, the editor has waived all copyright and related or neighboring rights to this work. In addition, as of 28 December 2013, the editor has made this specification available under the
+<p class="copyright"><a href="http://creativecommons.org/publicdomain/zero/1.0/" rel="license"><img src="http://i.creativecommons.org/p/zero/1.0/80x15.png" alt="CC0"></a>To the extent possible under law, the editor has waived all copyright and related or neighboring rights to this work. In addition, as of 29 December 2013, the editor has made this specification available under the
 <a href="http://www.openwebfoundation.org/legal/the-owf-1-0-agreements/owfa-1-0" rel="license">Open Web Foundation Agreement Version 1.0</a>, which is available at <!--begin-link--><a href="http://www.openwebfoundation.org/legal/the-owf-1-0-agreements/owfa-1-0">http://www.openwebfoundation.org/legal/the-owf-1-0-agreements/owfa-1-0</a><!--end-link-->.
 
 </div>
@@ -99,7 +99,7 @@ a.unclear, a.almost { color: orange }
    <li><a href="#alignment-in-named-areas"><span class="secno">6.3 </span>Alignment in Named Areas</a></li>
    <li><a href="#note-calls:-::call"><span class="secno">6.4 </span>Note calls: <code>::call</code></a></li>
    <li><a href="#pulling-content:-target-pull()"><span class="secno">6.5 </span>Pulling content: <code>target-pull()</code></a></li>
-   <li><a href="#fixed-named-areas"><span class="secno">6.6 </span>Fixed named areas</a></ol></li>
+   <li><a href="#sticky()-and-reset()"><span class="secno">6.6 </span>sticky() and reset()</a></ol></li>
  <li><a href="#bookmarks"><span class="secno">7 </span>Bookmarks</a>
   <ol>
    <li><a href="#'bookmark-level'"><span class="secno">7.1 </span>'bookmark-level'</a></li>
@@ -1536,7 +1536,7 @@ and the settings in the default style sheet differentiates the two.
   margin-right: 10em;
   @area sidenote { position: absolute; right: -8em; top: 0; width: 6em; height: auto }
 }
-.sidenote { float: to(sidenote) }
+aside { float: to(sidenote) }
 </pre>
 
 </div>
@@ -1607,9 +1607,9 @@ content.
 <p>Content is added to named areas with the <code>to()</code> functional notation.
 
 <div class="example">
-<p>This code adds an element to the named area called "sidenote":
+<p>This code moves &lt;aside&gt; elements to the named area called "sidenote":
 
-<pre>span.note { float: to(sidenote); }
+<pre>aside { float: to(sidenote); }
 </pre>
 </div>
 
@@ -1710,7 +1710,7 @@ be deleted if the exact alignment cannot be achieved.
 <pre>img { float: to(sidenote) }                   /* this is the default */
 img { float: to(sidenote, align same-page) }  /* this is also default */
 
-img { float: to(sidenote, align-y }           /* float is only aligned along the y axis */
+img { float: to(sidenote, align-y) }          /* float is only aligned along the y axis */
 img { float: to(sidenote, fill) }             /* show float in the order they appear */
 img { float: to(sidenote, fill same-spread) } /* show float in the order they appear, use any matching named flow on the spread of the reference point */
 img { float: to(sidenote, same-page!) }       /* delete float if it doesn't end up on the same page */
@@ -1904,21 +1904,23 @@ this specification, there will be a footnote:
 </pre>
 </div>
 
-<h3 id="fixed-named-areas"><span class="secno">6.6 </span>Fixed named areas</h3>
+<h3 id="sticky()-and-reset()"><span class="secno">6.6 </span>sticky() and reset()</h3>
 
-<p>By floating elements into a statically positioned named area, the content remains for as long as the named area is visible.
+<p class="issue">Must be spelled out. But it should work.
+
+<p>Like 'to()', 'fix()' moves elements to a named area. Also, 'fix()', makes the element sticky -- it's shown on every page where the named area appears. 
 
 <div class="example">
-<pre>@page {
-  @area sidenote { 
-    position: fixed; left: -4cm; top: 0; bottom: 0; width: 3.5cm; 
-  }
-}
-.sidenote { float: to(sidenote) }
+<pre>.sidenote { float: fix(sidenote) }
 </pre>
 </div>
 
-<p class="issue">How is the named area emptied? What is the scope?</p>
+<p>The 'clear()' notation clears the named area of its content before moving content into it.
+
+<div class="example">
+<pre>.sidenote { float: clear(sidenote) }
+</pre>
+</div>
 
 
 
