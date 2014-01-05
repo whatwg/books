@@ -30,7 +30,7 @@ a.unclear, a.almost { color: orange }
   <p><a href="http://www.whatwg.org/" class="logo"><img width="100" alt="WHATWG" height="100" src="http://resources.whatwg.org/logo.svg"></a></p>
 	<h1>CSS Books</h1>
 	
-	<h2 class="no-num no-toc" id="living-standard-—-last-updated-29-december-2013">Living Standard — Last Updated 29 December 2013</h2>
+	<h2 class="no-num no-toc" id="living-standard-—-last-updated-5-january-2014">Living Standard — Last Updated 5 January 2014</h2>
 	
 	<dl>
 		<dt>This version:
@@ -52,7 +52,7 @@ a.unclear, a.almost { color: orange }
 
 	</dl>
 
-<p class="copyright"><a href="http://creativecommons.org/publicdomain/zero/1.0/" rel="license"><img src="http://i.creativecommons.org/p/zero/1.0/80x15.png" alt="CC0"></a>To the extent possible under law, the editor has waived all copyright and related or neighboring rights to this work. In addition, as of 29 December 2013, the editor has made this specification available under the
+<p class="copyright"><a href="http://creativecommons.org/publicdomain/zero/1.0/" rel="license"><img src="http://i.creativecommons.org/p/zero/1.0/80x15.png" alt="CC0"></a>To the extent possible under law, the editor has waived all copyright and related or neighboring rights to this work. In addition, as of 5 January 2014, the editor has made this specification available under the
 <a href="http://www.openwebfoundation.org/legal/the-owf-1-0-agreements/owfa-1-0" rel="license">Open Web Foundation Agreement Version 1.0</a>, which is available at <!--begin-link--><a href="http://www.openwebfoundation.org/legal/the-owf-1-0-agreements/owfa-1-0">http://www.openwebfoundation.org/legal/the-owf-1-0-agreements/owfa-1-0</a><!--end-link-->.
 
 </div>
@@ -1908,48 +1908,46 @@ this specification, there will be a footnote:
 
 <p class="issue">This section needs some work. 
 
-<p>Like 'to()', 'fix()' moves elements to a named area. Also, 'fix()', makes the element sticky -- it's shown on every page where the named area appears. 
 
 <div class="example">
-<pre>.sidenote { float: fix(sidenote) }
-</pre>
-</div>
+<p>Move an element to a named area:
 
-<p>The 'clear()' notation clears the named area of its content before moving content into it.
-
-<div class="example">
-<pre>.sidenote { float: clear(sidenote) }
-</pre>
-</div>
-
-
-<p>'copy()' copies the element to the named area
-
-<div class="example">
-<pre>.sidenote { float: copy(sidenote) }
+<pre>aside { flow: move(sidenote) }
 </pre>
 </div>
 
 <div class="example">
-<pre>.sidenote { float: clone(sidenote) }  /* copy &amp; sticky */
+<p>Move an element to a named area, and make it sticky, so that it stayi:
+
+<pre>h1.copy { float: move(sidenote, stick) }
 </pre>
 </div>
 
-
-<p>to-margin() copies to 
+<p>Erase other content in the box before moving the element into list
 
 <div class="example">
-<pre>.sidenote { float: to-margin(top-center) }
+<pre>aside { float: move(sidenote, erase) }
 </pre>
 </div>
 
+<div class="example">
+<pre>@page :left {
+  @
+
+h1 { float: copy(header) }
+</pre>
+</div>
+
+<!--
 <p>Prince supports:
 
-<pre>@page { 
+<pre>
+@page { 
     @top { content: flow(header) }
 }
 h1 { flow: static(header) }
 </pre>
+-->
 
 <h2 id="bookmarks"><span class="secno">7 </span>Bookmarks</h2>
 
@@ -2405,17 +2403,20 @@ div.chapter:column(1,*)     /* the first column on all pages */
 
 <h2 id="baseline-rhythms"><span class="secno">12 </span>Baseline rhythms</h2>
 
-<p>Text in adjacent columns often use the same baselines. This appears more pleasant to typographers, and reduces <em>show-through</em>, where a printed line shows through to the other side of the sheet. A headline or an image may disturb the <em>rhythm</em> of the baselines, but subsequent text should find it again. To support baseline alignment, the 'line-rhythm' property is introduced and 'vertical-align' is used to position elements within the space left open by aligning baselines.
+<p>Text in adjacent columns often use the same baselines. This appears more pleasant to typographers, and reduces <em>show-through</em>, where a printed line shows through to the other side of the sheet. A headline or an image may disturb the <em>rhythm</em> of the baselines, but subsequent text should find it again. To support baseline rhythms, the 'line-rhythm' property is introduced and 'vertical-align' is used to position elements within the space left open by aligning baselines.
 
-<h3 id="'line-rhythm'"><span class="secno">12.1 </span>'line-rhythm'</h3>
+<!--
+<h3>Alternative 1</h3>
 
-<table class="propdef">
+<h3>'line-rhythm'</h3>
+
+<table class=propdef>
     <tr>
       <td><em>Name:</em>
-      <td><dfn id="line-rhythm">line-rhythm</dfn>
+      <td><dfn>line-rhythm</dfn>
     <tr>
       <td><em>Value:</em>
-    <td>none | root | &lt;ident&gt;
+    <td>none | root | &lt;ident>
     <tr>
       <td><em>Initial:</em>
       <td>none
@@ -2432,7 +2433,7 @@ div.chapter:column(1,*)     /* the first column on all pages */
       <td><em>Media:</em>
       <td>visual
     <tr>
-      <td><em>Computed value:</em>
+      <td><em>Computed&nbsp;value:</em>
       <td>as specified
 </table>
 
@@ -2447,15 +2448,79 @@ div.chapter:column(1,*)     /* the first column on all pages */
 
 <dd>the content of the element aligns with the root baseline rhythm. The root baseline rhythm is established by the computed value of line-height and the dominant font of the root element.
 
-<dt>&lt;ident&gt;
+<dt>&lt;ident>
 
-<dd>If the specified baseline rhythm has not been established by an earlier element, the element establishes a new baseline rhythm based on the computed line-height of the dominant font of the element. The new baseline rhythm is given the specified name. These values are illegal rhythm names: 'none', 'inherit', 'root', 'auto' and 'initial'. 
+<dd>If the specified baseline rhythm has not been established by an earlier element, the element establishes a new baseline rhythm based on the computed line-height of the dominant font of the element. The new baseline rhythm is given the specified name. These values are illegal rhythm names: 'none', 'inherit', 'root', 'auto' and 'initial'. The scope of a new baseline rhythm is any element that follows in the document source. 
 
 </dl>
 
+-->
+
+<h3 id="'line-rhythm'"><span class="secno">12.1 </span>'line-rhythm'</h3>
+
+
+<table class="propdef">
+    <tr>
+      <td><em>Name:</em>
+      <td><dfn id="line-rhythm">line-rhythm</dfn>
+    <tr>
+      <td><em>Value:</em>
+    <td>normal | none | root | current
+    <tr>
+      <td><em>Initial:</em>
+      <td>normal
+    <tr>
+      <td><em>Applies to:</em>
+      <td>block containers
+    <tr>
+      <td><em>Inherited:</em>
+      <td>no
+    <tr>
+      <td><em>Percentages:</em>
+      <td>N/A
+    <tr>
+      <td><em>Media:</em>
+      <td>visual
+    <tr>
+      <td><em>Computed value:</em>
+      <td>as specified
+</table>
+
+<p>The values are:
+
+<dl>
+<dt>normal
+<dd>the element does not establish a new baseline rhythm, but its content aligns with the baseline rhythm used by the youngest ancestor with a value other than 'normal' or 'none'
+
+<dt>none
+<dd>the element does not establish a new baseline rhythm, nor does its content align with a baseline rhythm.
+
+<dt>root
+
+<dd>the content of the element aligns with the root baseline rhythm. The root baseline rhythm is established by the computed value of line-height and the dominant font of the root element.
+
+<dt>current
+
+<dt>the element establishes a new baseline rhythm, based on used value of 'line-height' and the first available font specified on the 'font-family' property'.
+
+</dt></dl>
+
+<!--
+<div class=example>
+<p>In this example, the body element sets a line rhythm which is used by all content, except for h1 and img elements:
+
+<pre>
+body { 
+  font: 16pt Times;
+  line-rhythm: current;
+}
+h1, img { line-rhythm: none }
+</pre>
+</div>
+-->
 
 <div class="example">
-<p>In this example, the rhythm of the document is established by the line-height of the root element. Headlines and figures are excempted.
+<p>In this example, the rhythm of the document is established by the line-height and font of the root element. Headlines and figures are excempted.
 
 <pre>body { line-rhythm: root }
 h1, h2, figure { line-rhythm: none }
@@ -2646,6 +2711,9 @@ klm nop.
 <p>The "note" rhythm is established by the first &lt;aside&gt; element, and later used by other &lt;aside&gt; elements. The result is that all &lt;aside&gt; elements use the same rhythm based on the line-height and dominant font of the first &lt;aside&gt; element. 
 
 </div>
+
+
+
 
 <!--
 
