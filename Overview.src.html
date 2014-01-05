@@ -1944,46 +1944,41 @@ A sentence consists of words&#xB9;.
 
 <p class=issue>This section needs some work. 
 
-<p>Like 'to()', 'fix()' moves elements to a named area. Also, 'fix()', makes the element sticky -- it's shown on every page where the named area appears. 
 
 <div class=example>
+<p>Move an element to a named area:
+
 <pre>
-.sidenote { float: fix(sidenote) }
-</pre>
-</div>
-
-<p>The 'clear()' notation clears the named area of its content before moving content into it.
-
-<div class=example>
-<pre>
-.sidenote { float: clear(sidenote) }
-</pre>
-</div>
-
-
-<p>'copy()' copies the element to the named area
-
-<div class=example>
-<pre>
-.sidenote { float: copy(sidenote) }
+aside { flow: move(sidenote) }
 </pre>
 </div>
 
 <div class=example>
+<p>Move an element to a named area, and make it sticky, so that it stayi:
+
 <pre>
-.sidenote { float: clone(sidenote) }  /* copy & sticky */
+h1.copy { float: move(sidenote, stick) }
 </pre>
 </div>
 
-
-<p>to-margin() copies to 
+<p>Erase other content in the box before moving the element into list
 
 <div class=example>
 <pre>
-.sidenote { float: to-margin(top-center) }
+aside { float: move(sidenote, erase) }
 </pre>
 </div>
 
+<div class=example>
+<pre>
+@page :left {
+  @
+
+h1 { float: copy(header) }
+</pre>
+</div>
+
+<!--
 <p>Prince supports:
 
 <pre>
@@ -1992,6 +1987,7 @@ A sentence consists of words&#xB9;.
 }
 h1 { flow: static(header) }
 </pre>
+-->
 
 <h2>Bookmarks</h2>
 
@@ -2467,7 +2463,10 @@ div.chapter:column(1,*)     /* the first column on all pages */
 
 <h2>Baseline rhythms</h2>
 
-<p>Text in adjacent columns often use the same baselines. This appears more pleasant to typographers, and reduces <em>show-through</em>, where a printed line shows through to the other side of the sheet. A headline or an image may disturb the <em>rhythm</em> of the baselines, but subsequent text should find it again. To support baseline alignment, the 'line-rhythm' property is introduced and 'vertical-align' is used to position elements within the space left open by aligning baselines.
+<p>Text in adjacent columns often use the same baselines. This appears more pleasant to typographers, and reduces <em>show-through</em>, where a printed line shows through to the other side of the sheet. A headline or an image may disturb the <em>rhythm</em> of the baselines, but subsequent text should find it again. To support baseline rhythms, the 'line-rhythm' property is introduced and 'vertical-align' is used to position elements within the space left open by aligning baselines.
+
+<!--
+<h3>Alternative 1</h3>
 
 <h3>'line-rhythm'</h3>
 
@@ -2511,13 +2510,77 @@ div.chapter:column(1,*)     /* the first column on all pages */
 
 <dt>&lt;ident>
 
-<dd>If the specified baseline rhythm has not been established by an earlier element, the element establishes a new baseline rhythm based on the computed line-height of the dominant font of the element. The new baseline rhythm is given the specified name. These values are illegal rhythm names: 'none', 'inherit', 'root', 'auto' and 'initial'. 
+<dd>If the specified baseline rhythm has not been established by an earlier element, the element establishes a new baseline rhythm based on the computed line-height of the dominant font of the element. The new baseline rhythm is given the specified name. These values are illegal rhythm names: 'none', 'inherit', 'root', 'auto' and 'initial'. The scope of a new baseline rhythm is any element that follows in the document source. 
 
 </dl>
 
+-->
+
+<h3>'line-rhythm'</h3>
+
+
+<table class=propdef>
+    <tr>
+      <td><em>Name:</em>
+      <td><dfn>line-rhythm</dfn>
+    <tr>
+      <td><em>Value:</em>
+    <td>normal | none | root | current
+    <tr>
+      <td><em>Initial:</em>
+      <td>normal
+    <tr>
+      <td><em>Applies to:</em>
+      <td>block containers
+    <tr>
+      <td><em>Inherited:</em>
+      <td>no
+    <tr>
+      <td><em>Percentages:</em>
+      <td>N/A
+    <tr>
+      <td><em>Media:</em>
+      <td>visual
+    <tr>
+      <td><em>Computed&nbsp;value:</em>
+      <td>as specified
+</table>
+
+<p>The values are:
+
+<dl>
+<dt>normal
+<dd>the element does not establish a new baseline rhythm, but its content aligns with the baseline rhythm used by the youngest ancestor with a value other than 'normal' or 'none'
+
+<dt>none
+<dd>the element does not establish a new baseline rhythm, nor does its content align with a baseline rhythm.
+
+<dt>root
+
+<dd>the content of the element aligns with the root baseline rhythm. The root baseline rhythm is established by the computed value of line-height and the dominant font of the root element.
+
+<dt>current
+
+<dt>the element establishes a new baseline rhythm, based on used value of 'line-height' and the first available font specified on the 'font-family' property'.
+
+</dl>
+
+<!--
+<div class=example>
+<p>In this example, the body element sets a line rhythm which is used by all content, except for h1 and img elements:
+
+<pre>
+body { 
+  font: 16pt Times;
+  line-rhythm: current;
+}
+h1, img { line-rhythm: none }
+</pre>
+</div>
+-->
 
 <div class=example>
-<p>In this example, the rhythm of the document is established by the line-height of the root element. Headlines and figures are excempted.
+<p>In this example, the rhythm of the document is established by the line-height and font of the root element. Headlines and figures are excempted.
 
 <pre>
 body { line-rhythm: root }
@@ -2711,6 +2774,9 @@ aside { line-rhythm: note }
 <p>The "note" rhythm is established by the first &lt;aside> element, and later used by other &lt;aside> elements. The result is that all &lt;aside> elements use the same rhythm based on the line-height and dominant font of the first &lt;aside> element. 
 
 </div>
+
+
+
 
 <!--
 
