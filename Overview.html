@@ -2490,18 +2490,17 @@ div.chapter:column(1,*)     /* the first column on all pages */
 
 <dl>
 <dt>normal
-<dd>the element does not establish a new baseline rhythm, but its content aligns with the baseline rhythm used by the youngest ancestor with a value other than 'normal' or 'none'
+<dd>the element does not establish a new baseline rhythm, but its content aligns with the baseline rhythm established by the youngest ancestor with a value other than 'normal' or 'none'
 
 <dt>none
-<dd>the element does not establish a new baseline rhythm, nor does its content align with a baseline rhythm.
+<dd>the element does not establish a new baseline rhythm, nor does its content align with a baseline rhythm
 
 <dt>root
-
-<dd>the content of the element aligns with the root baseline rhythm. The root baseline rhythm is established by the computed value of line-height and the dominant font of the root element.
+<dd>the content of the element aligns with the root baseline rhythm; the root baseline rhythm is established by the used value of 'line-height', and the first available font specified on the 'font-family' property, of the root element.
 
 <dt>current
 
-<dt>the element establishes a new baseline rhythm, based on used value of 'line-height' and the first available font specified on the 'font-family' property'.
+<dt>the element establishes a new baseline rhythm, based on used value of 'line-height' and the first available font specified on the 'font-family' property'
 
 </dt></dl>
 
