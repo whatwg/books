@@ -2576,7 +2576,7 @@ klm nop.
 
 </div>
 
-<p>Notice how the body text aligns with the baseline rhythm (illustrated in orange), while the heading, figure and figure caption do not. After the heading and figure, the main text starts again on the next available baseline.
+<p>Notice how the body text aligns with the baseline rhythm (shown in orange for illustration purposes), while the heading, figure and figure caption do not. After the heading and figure, the main text starts again on the next available baseline.
 </div>
 
 <p>The 'vertical-align' property is used to position elements within the space left open by aligning baselines. These values are supported on block containers: 'top', 'middle', 'bottom'. 
@@ -2694,20 +2694,21 @@ klm nop.
 
 
 <div class="example">
-<p>In this example there are sidenotes in different languages:
+<p>In this example there are sidenotes in different scripts:
 
-<pre>aside { line-rhythm: note }
+<pre>aside { font: 12pt serif; line-rhythm: current }
+[lang=ar] { font: 10pt 'Amiri', serif }
 
-&lt;div class=introduction&gt;
-  &lt;aside lang=en&gt; &lt;/aside&gt;
-&lt;/div&gt;
-
-&lt;div class=chapter&gt;
-  &lt;aside lang=ar&gt; &lt;/aside&gt;
-&lt;/div&gt;
+&lt;aside&gt;&lt;span lang=en&gt;...&lt;/span&gt;&lt;/aside&gt;
+...
+&lt;aside&gt;&lt;span lang=ar&gt;...&lt;/span&gt;&lt;/aside&gt;
 </pre>
 
-<p>The "note" rhythm is established by the first &lt;aside&gt; element, and later used by other &lt;aside&gt; elements. The result is that all &lt;aside&gt; elements use the same rhythm based on the line-height and dominant font of the first &lt;aside&gt; element. 
+<p>The &lt;aside&gt; elements establishe a baseline rhythm based on the
+used line height and font resulting from the specified "font: 12pt
+serif". Content inside the &lt;aside&gt; elements, even in different
+scripts, align with the line rhythm established by the &lt;aside&gt;
+elements.
 
 </div>
 
