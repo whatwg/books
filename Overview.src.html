@@ -100,6 +100,25 @@ e.g. to prevent denial of service attacks, to guard against running
 out of memory, or to work around platform-specific limitations.
 
 
+<h2>Introduction</h2>
+
+<p>A book is a collection of sheets, bound together within covers.
+Usually, the sheets are printed paper sheets of a uniform size. The
+book format, known as the <em>codex</em> was developed around 2000
+years ago and books gradually replaced scrolls, clay tablets and other
+competing formats. With the invention of the printing press, books
+could be printed and distributed inexpesively.
+
+<p>Each sheet of paper has two sides, and most books are have content
+on both sides of the sheets. Each side is called a "page". When a book
+is opened, two pages are visible; these form one "spread". The main
+problem when producing books from web content is to split content into
+pages and spreads of certain fixed sizes. This problem is not
+addressed by this specification. Instead, this specification describes
+how to achieve many of the features printers have developed over the
+centuries, e.g, running headers, footnotes, sidenotes, and page
+groups.
+
 
 <h2>Running headers and footers</h2>
 
@@ -1571,8 +1590,7 @@ img { float: to(photos) }
 <p>The result is a document where all content ends up on left pages, and where right pages hold only <code>img</code> elements.
 </div>
 
-<p>Areas with the same name are connected and content can flow from
-one area to the next, when necessary.
+<p>Areas with the same name are connected and content can flow from one area to the next, when necessary.
 
 <!--
 <p>Elements floated to a named area are, by default, positioned at the
@@ -1700,11 +1718,13 @@ finding the closest matching named area, and (c) starting the float on
 the same baseline as the reference point.
 
 
-<p>Elements may request alignments through an optional argument in <code>to()</code>. Values are:
+<p>Elements may request alignments through an optional argument
+in <code>to()</code>. These values express where on the page an
+element requests to be placed:
 
 <dl>
 <dt>align
-<dd>align float along both x and y axis. 
+<dd>align float along both x and y axis. This is the default.
 
 <dt>align-x
 <dd>align float only along x axis
@@ -1715,6 +1735,12 @@ the same baseline as the reference point.
 <dt>fill
 <dd>do not align the float along the x/y axis, show it in the order it appears
 
+</dl>
+
+<p>Also, and element may request to be placed on the same page or same spread as its reference point:
+
+<dl>
+
 <dt>same-page
 <dd>element requests placement on the same page as its reference point. This is the default.
 
@@ -1723,9 +1749,7 @@ the same baseline as the reference point.
 
 </dl>
 
-<p>A trailing "!" can be added to these keywords: align, align-x,
-align-y, same-page, same-sprea. This indicates that the float should
-be deleted if the exact alignment cannot be achieved.
+<p>When preferred alignment is expressed with these keywords, UAs should place floats as close as possible to the reference point. 
 
 <div class=example>
 
@@ -1748,10 +1772,11 @@ img { float: to(sidenote, align!) }           /* delete float if it doesn't end 
 <p>In this example, the "sidenote" named area has two fragments, one
 on the left side of the first column, and the other on the right side
 of the second column. The respective reference points are numbered 1,
-2, and 3. All three sidenotes are aligned along the x axis so that
-they appear in the closest matching named area. Also, they are aligned
-along the y axis so that the floats start on the same baseline as
-their respective reference points.
+2, and 3. Exact alignment along the y axis is possible and the first
+line of the sidenotes will therefore have the same baseline as the
+reference point. Exact alignment along the x axis is not possible, but
+the effect of x alignment is that sidenotes are placed in the 
+closest names area, either on the left or right.
 
 <pre>
             ........ .........
@@ -1777,7 +1802,7 @@ their respective reference points.
 
 <div class=example>
 
-<p>This example is similar to the previous one, except for the placement of the third reference point: it appears much closer to the second reference point. As a result, the second sidenote pushes down the third sidenote, which is no longer alinged along the y axis.
+<p>This example is similar to the previous one, except for the placement of the third reference point: it appears much closer to the second reference point. As a result, the second sidenote pushes down the third sidenote, which is no longer exactly aligned along the y axis.
 
 <pre>
             ........ .........
@@ -1843,12 +1868,19 @@ area. Inside that area, the floats are shown in the order they appear.
 </pre>
 </div>
 
+
+<p>Elements may also insist on being aligned exactly with its
+reference point. This is exapress by adding a trailing "!" to these
+keywords: 'align', 'align-x', 'align-y', 'same-page', 'same-spread'.
+If exact alignment is not possible, the float will be deleted.
+
+
 <div class=example>
 
 <p>In this example, floats insist on being aligned with their reference point:
 
 <pre>
-.sidenote { float: to(sidenote, align!) }
+.sidenote { float: to(sidenote, align-y!) }
 </pre>
 
 <p>However, there isn't space for the third sidenote in its preferred position. As a result, the third sidenote is deleted.
@@ -1864,7 +1896,6 @@ area. Inside that area, the floats are shown in the order they appear.
             ........ ......... 
 </pre>
 </div>
-
 
 
 
