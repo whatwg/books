@@ -1944,17 +1944,16 @@ A sentence consists of words&#xB9;.
 
 <p class=issue>This section needs some work. 
 
-
 <div class=example>
 <p>Move an element to a named area:
 
 <pre>
-aside { flow: move(sidenote) }
+aside { float: move(sidenote) }
 </pre>
 </div>
 
 <div class=example>
-<p>Move an element to a named area, and make it sticky, so that it stayi:
+<p>Move an element to a named area, and make it sticky, so that it is shown on succeeding pages, until erased:
 
 <pre>
 h1.copy { float: move(sidenote, stick) }
@@ -1970,13 +1969,33 @@ aside { float: move(sidenote, erase) }
 </div>
 
 <div class=example>
+<p>In this example, the h1 element is copied into a running header which is defined with @area. The copied element is restyled. It erases the running header when it enters, and is set to stick (until eased by another element):
+
 <pre>
 @page :left {
-  @
+  @area running-header { 
+    position: absolute; top: -2cm; left: 0; width: 3.5cm; height: 1cm 
+    @inside h1 {
+      font: 12pt sans-serif; 
+      text-align: right;
+    }
+  }
+}
+@page :right {
+  @area running-header { 
+    position: absolute; top: -2cm; right: 0; width: 3.5cm; height: 1cm 
+    @inside h1 {
+      font: 12pt sans-serif; 
+      text-align: right;
+    }
+  }
+}
 
-h1 { float: copy(header) }
+h1 { float: copy(header, stick erase) }
 </pre>
 </div>
+
+<p class=issue>Is there a better property to use than 'float'?
 
 <!--
 <p>Prince supports:
