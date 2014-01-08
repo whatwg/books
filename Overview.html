@@ -30,7 +30,7 @@ a.unclear, a.almost { color: orange }
   <p><a href="http://www.whatwg.org/" class="logo"><img width="100" alt="WHATWG" height="100" src="http://resources.whatwg.org/logo.svg"></a></p>
 	<h1>CSS Books</h1>
 	
-	<h2 class="no-num no-toc" id="living-standard-—-last-updated-5-january-2014">Living Standard — Last Updated 5 January 2014</h2>
+	<h2 class="no-num no-toc" id="living-standard-—-last-updated-8-january-2014">Living Standard — Last Updated 8 January 2014</h2>
 	
 	<dl>
 		<dt>This version:
@@ -52,7 +52,7 @@ a.unclear, a.almost { color: orange }
 
 	</dl>
 
-<p class="copyright"><a href="http://creativecommons.org/publicdomain/zero/1.0/" rel="license"><img src="http://i.creativecommons.org/p/zero/1.0/80x15.png" alt="CC0"></a>To the extent possible under law, the editor has waived all copyright and related or neighboring rights to this work. In addition, as of 5 January 2014, the editor has made this specification available under the
+<p class="copyright"><a href="http://creativecommons.org/publicdomain/zero/1.0/" rel="license"><img src="http://i.creativecommons.org/p/zero/1.0/80x15.png" alt="CC0"></a>To the extent possible under law, the editor has waived all copyright and related or neighboring rights to this work. In addition, as of 8 January 2014, the editor has made this specification available under the
 <a href="http://www.openwebfoundation.org/legal/the-owf-1-0-agreements/owfa-1-0" rel="license">Open Web Foundation Agreement Version 1.0</a>, which is available at <!--begin-link--><a href="http://www.openwebfoundation.org/legal/the-owf-1-0-agreements/owfa-1-0">http://www.openwebfoundation.org/legal/the-owf-1-0-agreements/owfa-1-0</a><!--end-link-->.
 
 </div>
@@ -1908,16 +1908,15 @@ this specification, there will be a footnote:
 
 <p class="issue">This section needs some work. 
 
-
 <div class="example">
 <p>Move an element to a named area:
 
-<pre>aside { flow: move(sidenote) }
+<pre>aside { float: move(sidenote) }
 </pre>
 </div>
 
 <div class="example">
-<p>Move an element to a named area, and make it sticky, so that it stayi:
+<p>Move an element to a named area, and make it sticky, so that it is shown on succeeding pages, until erased:
 
 <pre>h1.copy { float: move(sidenote, stick) }
 </pre>
@@ -1931,12 +1930,32 @@ this specification, there will be a footnote:
 </div>
 
 <div class="example">
-<pre>@page :left {
-  @
+<p>In this example, the h1 element is copied into a running header which is defined with @area. The copied element is restyled. It erases the running header when it enters, and is set to stick (until eased by another element):
 
-h1 { float: copy(header) }
+<pre>@page :left {
+  @area running-header { 
+    position: absolute; top: -2cm; left: 0; width: 3.5cm; height: 1cm 
+    @inside h1 {
+      font: 12pt sans-serif; 
+      text-align: right;
+    }
+  }
+}
+@page :right {
+  @area running-header { 
+    position: absolute; top: -2cm; right: 0; width: 3.5cm; height: 1cm 
+    @inside h1 {
+      font: 12pt sans-serif; 
+      text-align: right;
+    }
+  }
+}
+
+h1 { float: copy(header, stick erase) }
 </pre>
 </div>
+
+<p class="issue">Is there a better property to use than 'float'?
 
 <!--
 <p>Prince supports:
