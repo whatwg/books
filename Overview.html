@@ -1938,24 +1938,26 @@ this specification, there will be a footnote:
 
 <h3 id="cloning,-fixing-and-clearing-elements-in-named-areas"><span class="secno">7.6 </span>Cloning, fixing and clearing elements in named areas</h3>
 
+<p>A
+
 <div class="example">
 <p>Move an element to a named area:
 
-<pre>aside { float: move(sidenote) }
+<pre>aside { float: to(sidenote) }
 </pre>
 </div>
 
 <div class="example">
 <p>Move an element to a named area, and make it sticky, so that it is shown on succeeding pages, until erased:
 
-<pre>h1.copy { float: move(sidenote, stick) }
+<pre>h1.copy { float: to(sidenote, fill, stick) }
 </pre>
 </div>
 
 <p>Erase other content in the box before moving the element into list
 
 <div class="example">
-<pre>aside { float: move(sidenote, erase) }
+<pre>aside { float: to(sidenote, fill, erase) }
 </pre>
 </div>
 
@@ -1981,7 +1983,7 @@ this specification, there will be a footnote:
   }
 }
 
-h1 { float: copy(header, stick erase) }
+h1 { float: copy(header, fill, stick erase) }
 </pre>
 </div>
 
@@ -1999,11 +2001,11 @@ h1 { float: copy(header, stick erase) }
     }}}
 
 #pagecounter { 
-  float: move(running-header, stick); content: counter(page);  }
+  float: to(running-header, fill, stick); content: counter(page);  }
 #ornament { 
-  float: move(running-header, stick); color: red; content: "\2747" /* snow crystal */}
+  float: to(running-header, fill, stick); color: red; content: "\2747" /* snow crystal */}
 h1 { 
-  float: copy(running-header, stick); font: 12pt serif }
+  float: copy(running-header, fill, stick); font: 12pt serif }
 
 &lt;span id=pagecounter&gt;&lt;/span&gt;
 &lt;span id=ornament&gt;&lt;/span&gt;
