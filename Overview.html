@@ -1987,6 +1987,35 @@ h1 { float: copy(header, stick erase) }
 </pre>
 </div>
 
+
+<div class="example">
+<p>In this example, the named area called "running header" is placed in the center top of the page. It is filled with three elements, one being the copy 
+
+<pre>@page {
+  @area running-header { 
+    position: absolute; top: -2cm; left: 0; right: 0; height: 1cm; 
+    text-align: center;
+    @inside h1 {
+      font: 12pt sans-serif; 
+      display: inline; 
+    }}}
+
+#pagecounter { 
+  float: move(running-header, stick); content: counter(page);  }
+#ornament { 
+  float: move(running-header, stick); color: red; content: "\2747" /* snow crystal */}
+h1 { 
+  float: copy(running-header, stick); font: 12pt serif }
+
+&lt;span id=pagecounter&gt;&lt;/span&gt;
+&lt;span id=ornament&gt;&lt;/span&gt;
+&lt;h1&gt;Erin Hildebrand&lt;/h1&gt;
+</pre>
+
+</div>
+
+
+
 <p class="issue">Is there a better property to use than 'float'?
 
 <!--
