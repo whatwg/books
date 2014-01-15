@@ -2657,66 +2657,6 @@ klm nop.
 <p>Notice how the body text aligns with the baseline rhythm (shown in orange for illustration purposes), while the heading, figure and figure caption do not. After the heading and figure, the main text starts again on the next available baseline.
 </div>
 
-<p>The 'vertical-align' property is used to position elements within the space left open by aligning baselines. These values are supported on block containers: 'top', 'middle', 'bottom'. 
-
-<div class=example>
-
-<pre>
-h2, h2, figure {              h2, h2, figure { 
-  vertical-align: top            vertical-align: bottom 
-}                             }
-</pre>
-
-<div style="height: 240px;">
-<div style="position: relative; height: 240px; width: 300px; float: left;">
-<div style="white-space: pre; color: orange; position: absolute; background: #eee; width: 280px">
-     ____________________________
-     ____________________________
-     ____________________________
-     ____________________________
-     ____________________________
-     ____________________________
-     ____________________________
-     ____________________________
-     ____________________________
-
-</div>
-<div style="white-space: pre; position: absolute; top: 3px; left: 23px">
-Abc def ghi j
-klmn o pqrst 
-uvw xyz.
-</div>
-
-<div style="white-space: pre; position: absolute; top: 60px; left: 23px; font-size: 1.4em; font-weight: bold">
-Heading
-</div>
-
-<div style="white-space: pre; position: absolute; top: 113px; left: 23px">
-Abc def ghi j
-klmn o pqrst 
-uvw xyz. Abc
-de fghij klm
-</div>
-
-<div style="white-space: pre; position: absolute; top: 3px; left: 153px">
-nop q rstuw
-xyz.
-</div>
-
-<div style="position: absolute; top: 72px; left: 153px; width: 95px; height: 88px; background: black; opacity: 0.5">
-</div>
-<div style="position: absolute; top: 77px; left: 158px; width: 85px; height: 40px; background: red; opacity: 0.5"></div>
-
-<div style="position: absolute; top: 120px; left: 158px; width: 95px; font-size: 0.9em; font-style: italic; color: white">figure<br>caption
-</div>
-
-<div style="white-space: pre; position: absolute; top: 157px; left: 153px">
-Abc def ghij
-klm nop.
-</div>
-
-</div>
-
 
 
 <div style="position: relative; height: 240px; width: 300px; float: left; ">
@@ -2827,6 +2767,67 @@ elements.
 <dt>auto
 <dd>same as 'before' on top of column, same as 'after' at bottom of column
 </dl>
+
+
+<div class=example>
+
+<pre>
+h2, h2, figure {
+  line-rhythm-snap: before;
+}
+</pre>
+
+<div style="height: 240px;">
+<div style="position: relative; height: 240px; width: 300px; float: left;">
+<div style="white-space: pre; color: orange; position: absolute; background: #eee; width: 280px">
+     ____________________________
+     ____________________________
+     ____________________________
+     ____________________________
+     ____________________________
+     ____________________________
+     ____________________________
+     ____________________________
+     ____________________________
+
+</div>
+<div style="white-space: pre; position: absolute; top: 3px; left: 23px">
+Abc def ghi j
+klmn o pqrst 
+uvw xyz.
+</div>
+
+<div style="white-space: pre; position: absolute; top: 60px; left: 23px; font-size: 1.4em; font-weight: bold">
+Heading
+</div>
+
+<div style="white-space: pre; position: absolute; top: 113px; left: 23px">
+Abc def ghi j
+klmn o pqrst 
+uvw xyz. Abc
+de fghij klm
+</div>
+
+<div style="white-space: pre; position: absolute; top: 3px; left: 153px">
+nop q rstuw
+xyz.
+</div>
+
+<div style="position: absolute; top: 72px; left: 153px; width: 95px; height: 88px; background: black; opacity: 0.5">
+</div>
+<div style="position: absolute; top: 77px; left: 158px; width: 85px; height: 40px; background: red; opacity: 0.5"></div>
+
+<div style="position: absolute; top: 120px; left: 158px; width: 95px; font-size: 0.9em; font-style: italic; color: white">figure<br>caption
+</div>
+
+<div style="white-space: pre; position: absolute; top: 157px; left: 153px">
+Abc def ghij
+klm nop.
+</div>
+
+</div>
+
+
 
 
 <h3>'line-rhythm-reference'</h3>
