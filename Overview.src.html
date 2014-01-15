@@ -2543,58 +2543,8 @@ div.chapter:column(1,*)     /* the first column on all pages */
 
 <h2>Baseline rhythms</h2>
 
-<p>Text in adjacent columns often use the same baselines. This appears more pleasant to typographers, and reduces <em>show-through</em>, where a printed line shows through to the other side of the sheet. A headline or an image may disturb the <em>rhythm</em> of the baselines, but subsequent text should find it again. To support baseline rhythms, the 'line-rhythm' property is introduced and 'vertical-align' is used to position elements within the space left open by aligning baselines.
+<p>Text in adjacent columns often use the same baselines. This appears more pleasant to typographers, and reduces <em>show-through</em>, where a printed line shows through to the other side of the sheet. A headline or an image may disturb the <em>rhythm</em> of the baselines, but subsequent text should find it again. To support baseline rhythms, the 'line-rhythm' property is introduced and 'line-rhythm-snap' is used to position elements within the space left open by aligning baselines.
 
-<!--
-<h3>Alternative 1</h3>
-
-<h3>'line-rhythm'</h3>
-
-<table class=propdef>
-    <tr>
-      <td><em>Name:</em>
-      <td><dfn>line-rhythm</dfn>
-    <tr>
-      <td><em>Value:</em>
-    <td>none | root | &lt;ident>
-    <tr>
-      <td><em>Initial:</em>
-      <td>none
-    <tr>
-      <td><em>Applies to:</em>
-      <td>block containers
-    <tr>
-      <td><em>Inherited:</em>
-      <td>yes
-    <tr>
-      <td><em>Percentages:</em>
-      <td>N/A
-    <tr>
-      <td><em>Media:</em>
-      <td>visual
-    <tr>
-      <td><em>Computed&nbsp;value:</em>
-      <td>as specified
-</table>
-
-<p>Values are:
-
-<dl>
-<dt>none
-
-<dd>the element does not establish a new baseline rhythm, nor does its content align with a baseline rhythm.
-
-<dt>root
-
-<dd>the content of the element aligns with the root baseline rhythm. The root baseline rhythm is established by the computed value of line-height and the dominant font of the root element.
-
-<dt>&lt;ident>
-
-<dd>If the specified baseline rhythm has not been established by an earlier element, the element establishes a new baseline rhythm based on the computed line-height of the dominant font of the element. The new baseline rhythm is given the specified name. These values are illegal rhythm names: 'none', 'inherit', 'root', 'auto' and 'initial'. The scope of a new baseline rhythm is any element that follows in the document source. 
-
-</dl>
-
--->
 
 <h3>'line-rhythm'</h3>
 
@@ -2640,23 +2590,10 @@ div.chapter:column(1,*)     /* the first column on all pages */
 
 <dt>current
 
-<dd>the element establishes a new baseline rhythm, based on used value of 'line-height' and the first available font specified on the 'font-family' property'
+<dd>the element establishes a new baseline rhythm, based on used value of 'line-height' and the first available font specified on the 'font-family' property.
 
 </dl>
 
-<!--
-<div class=example>
-<p>In this example, the body element sets a line rhythm which is used by all content, except for h1 and img elements:
-
-<pre>
-body { 
-  font: 16pt Times;
-  line-rhythm: current;
-}
-h1, img { line-rhythm: none }
-</pre>
-</div>
--->
 
 <div class=example>
 <p>In this example, the rhythm of the document is established by the line-height and font of the root element. Headlines and figures are excempted.
@@ -2853,6 +2790,71 @@ scripts, fonts and sizes, align with the rhythm established by the &lt;aside>
 elements.
 
 </div>
+
+
+
+<h3>'line-rhythm-snap'</h3>
+
+<table class=propdef>
+    <tr>
+      <td><em>Name:</em>
+      <td><dfn>line-rhythm-snap</dfn>
+    <tr>
+      <td><em>Value:</em>
+    <td>auto | before | after | center
+    <tr>
+      <td><em>Initial:</em>
+      <td>auto
+    <tr>
+      <td><em>Applies to:</em>
+      <td>elements with 'line-rhythm: none'
+    <tr>
+      <td><em>Inherited:</em>
+      <td>no
+    <tr>
+      <td><em>Percentages:</em>
+      <td>N/A
+    <tr>
+      <td><em>Computed&nbsp;value:</em>
+      <td>[auto | before | after | center] [margin-box | border-box]
+</table>
+
+<p>This property describes how to align elements that do not align themselves with the line rhythm.
+
+<p>Values are:
+
+<dl>
+<dt>auto
+<dd>same as 'before' on top of column, same as 'after' at bottom of column
+</dl>
+
+
+<h3>'line-rhythm-reference'</h3>
+
+<table class=propdef>
+    <tr>
+      <td><em>Name:</em>
+      <td><dfn>line-rhythm-snap</dfn>
+    <tr>
+      <td><em>Value:</em>
+    <td>margin-box | border-box
+    <tr>
+      <td><em>Initial:</em>
+      <td>margin-box
+    <tr>
+      <td><em>Applies to:</em>
+      <td>block elements
+    <tr>
+      <td><em>Inherited:</em>
+      <td>no
+    <tr>
+      <td><em>Percentages:</em>
+      <td>N/A
+    <tr>
+      <td><em>Computed&nbsp;value:</em>
+      <td>specified value
+</table>
+
 
 
 
