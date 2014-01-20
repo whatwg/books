@@ -2555,7 +2555,7 @@ div.chapter:column(1,*)     /* the first column on all pages */
       <td><dfn>line-rhythm</dfn>
     <tr>
       <td><em>Value:</em>
-    <td>normal | none | root | current
+    <td>normal | none | root | new
     <tr>
       <td><em>Initial:</em>
       <td>normal
@@ -2582,13 +2582,15 @@ div.chapter:column(1,*)     /* the first column on all pages */
 <dt>normal
 <dd>the element does not establish a new baseline rhythm, but its content aligns with the baseline rhythm established by the youngest ancestor with a value other than 'normal' or 'none'
 
+<!--
 <dt>none
 <dd>the element does not establish a new baseline rhythm, nor does its content align with a baseline rhythm
+-->
 
 <dt>root
 <dd>the content of the element aligns with the root baseline rhythm; the root baseline rhythm is established by the used value of 'line-height', and the first available font specified on the 'font-family' property, of the root element.
 
-<dt>current
+<dt>new
 
 <dd>the element establishes a new baseline rhythm, based on used value of 'line-height' and the first available font specified on the 'font-family' property.
 
@@ -2602,7 +2604,7 @@ div.chapter:column(1,*)     /* the first column on all pages */
 
 <pre>
 body { line-rhythm: root }
-h1, h2, figure { line-rhythm: none }
+h1, h2, figure { line-rhythm: new }
 </pre>
 
 <p>One possible rendition is:
@@ -2719,7 +2721,7 @@ klm nop.
 <p>In this example there are sidenotes in different scripts:
 
 <pre>
-aside { font: 12pt serif; line-rhythm: current }
+aside { font: 12pt serif; line-rhythm: new }
 [lang=ar] { font: 10pt 'Amiri', serif }
 
 &lt;aside>&lt;span lang=en>...&lt;/span>&lt;/aside>
@@ -2750,7 +2752,7 @@ elements.
       <td>auto
     <tr>
       <td><em>Applies to:</em>
-      <td>elements with 'line-rhythm: none'
+      <td>block containers
     <tr>
       <td><em>Inherited:</em>
       <td>no
@@ -2759,7 +2761,7 @@ elements.
       <td>N/A
     <tr>
       <td><em>Computed&nbsp;value:</em>
-      <td>[auto | before | after | center] [margin-box | border-box]
+      <td>specified value
 </table>
 
 <p>This property describes how to align elements that do not align themselves with the line rhythm.
@@ -2768,7 +2770,7 @@ elements.
 
 <dl>
 <dt>auto
-<dd>same as 'before' on top of column, same as 'after' at bottom of column
+<dd>same as 'before' on top of column, same as 'after' at bottom of column, otherwise 'center'
 </dl>
 
 
