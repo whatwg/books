@@ -2534,11 +2534,11 @@ div.chapter:column(1,*)     /* the first column on all pages */
 
 <dt>root
 
-<dd>the element sets the root line rhythm for its content; the root baseline rhythm is established by the used value of 'line-height', and the first available font specified on the 'font-family' property, of the root element. 
+<dd>the element sets the root line rhythm for its content; the root baseline rhythm is established by finding the first baseline of the element by using the first available font specified on the 'font-family' property; thereafter the frequency of the rhythm is equal to the used value of 'line-height'
 
 <dt>new
 
-<dd>the element sets a new line rhythm for its content based on the used value of 'line-height' and the first available font specified on the 'font-family' property.
+<dd>the element sets a new line rhythm. The baseline rhythm is established by finding the first baseline of the element by using the first available font specified on the 'font-family' property; thereafter the frequency of the rhythm is equal to the used value of 'line-height'
 
 </dl>
 
