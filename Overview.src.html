@@ -2543,7 +2543,7 @@ div.chapter:column(1,*)     /* the first column on all pages */
 
 <h2>Baseline rhythms</h2>
 
-<p>Text in adjacent columns often use the same baselines. This appears more pleasant to typographers, and reduces <em>show-through</em>, where a printed line shows through to the other side of the sheet. A headline or an image may disturb the <em>rhythm</em> of the baselines, but subsequent text should find it again. The 'line-rhythm' property is introduced to set and clear baseline rhythms, while the 'line-rhythm-snap' property is used to position elements within the space left open by aligning baselines.
+<p>Text in adjacent columns often use the same baselines. This appears more pleasant to typographers, and reduces <em>show-through</em>, where a printed line shows through to the other side of the sheet. Subheadings and figures may disturb the <em>basline rhythm</em>, but subsequent text should find it again. The 'line-rhythm' property is introduced to set and clear baseline rhythms, while the 'line-rhythm-snap' property indicates how to align elements that do not align themselves with the baseline rhythm. 
 
 
 <h3>'line-rhythm'</h3>
@@ -2588,22 +2588,22 @@ div.chapter:column(1,*)     /* the first column on all pages */
 
 <dd>the element clears the line rhythm and its content will not align with a line rhythm (unless explicitly set on a child element).
 
-<dt>root
-
-<dd>the element sets the root line rhythm for its content; the root baseline rhythm is established by finding the first baseline of the element by using the first available font specified on the 'font-family' property; thereafter the frequency of the rhythm is equal to the used value of 'line-height'
-
 <dt>new
 
-<dd>the element sets a new line rhythm. The baseline rhythm is established by finding the first baseline of the element by using the first available font specified on the 'font-family' property; thereafter the frequency of the rhythm is equal to the used value of 'line-height'
+<dd>the element sets a new line rhythm. The new baseline rhythm is established by finding the first baseline of the element by using the first available font specified on the 'font-family' property; thereafter the frequency of the rhythm is equal to the used value of 'line-height'. The new line rhythm is used to align the content of the element, including child elements. Child elements may, however, establish their own line rhythm, or indicate that they do not seek alignment with the established line rhythm.
+
+<dt>root
+
+<dd>the element sets the line rhythm defined by the root element. The root line rhythm is defined by the first baseline of the element by using the first available font specified on the 'font-family' property; thereafter the frequency of the rhythm is equal to the used value of 'line-height' of the root element. The root line rhythm is not used unless explicitly referred to in a style sheet. 
 
 </dl>
 
 <div class=example>
-<p>In this example, the rhythm of the document is established by the line-height and font of the root element. Headlines and figures are excempted.
+<p>In this example, the rhythm of the document is established by the line-height and font of the root element. Content inside the body element will align with the root line rhythm, except for headlines and figures.
 
 <pre>
 body { line-rhythm: root }
-h1, h2, figure { line-rhythm: new }
+h1, h2, figure { line-rhythm: none }
 </pre>
 
 <p>One possible rendition is:
