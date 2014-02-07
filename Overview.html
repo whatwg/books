@@ -30,7 +30,7 @@ a.unclear, a.almost { color: orange }
   <p><a href="http://www.whatwg.org/" class="logo"><img width="100" alt="WHATWG" height="100" src="http://resources.whatwg.org/logo.svg"></a></p>
 	<h1>CSS Books</h1>
 	
-	<h2 class="no-num no-toc" id="living-standard-—-last-updated-26-january-2014">Living Standard — Last Updated 26 January 2014</h2>
+	<h2 class="no-num no-toc" id="living-standard-—-last-updated-7-february-2014">Living Standard — Last Updated 7 February 2014</h2>
 	
 	<dl>
 		<dt>This version:
@@ -52,7 +52,7 @@ a.unclear, a.almost { color: orange }
 
 	</dl>
 
-<p class="copyright"><a href="http://creativecommons.org/publicdomain/zero/1.0/" rel="license"><img src="http://i.creativecommons.org/p/zero/1.0/80x15.png" alt="CC0"></a>To the extent possible under law, the editor has waived all copyright and related or neighboring rights to this work. In addition, as of 26 January 2014, the editor has made this specification available under the
+<p class="copyright"><a href="http://creativecommons.org/publicdomain/zero/1.0/" rel="license"><img src="http://i.creativecommons.org/p/zero/1.0/80x15.png" alt="CC0"></a>To the extent possible under law, the editor has waived all copyright and related or neighboring rights to this work. In addition, as of 7 February 2014, the editor has made this specification available under the
 <a href="http://www.openwebfoundation.org/legal/the-owf-1-0-agreements/owfa-1-0" rel="license">Open Web Foundation Agreement Version 1.0</a>, which is available at <!--begin-link--><a href="http://www.openwebfoundation.org/legal/the-owf-1-0-agreements/owfa-1-0">http://www.openwebfoundation.org/legal/the-owf-1-0-agreements/owfa-1-0</a><!--end-link-->.
 
 </div>
@@ -100,7 +100,8 @@ a.unclear, a.almost { color: orange }
    <li><a href="#alignment-in-named-areas"><span class="secno">7.3 </span>Alignment in Named Areas</a></li>
    <li><a href="#note-calls:-::call"><span class="secno">7.4 </span>Note calls: <code>::call</code></a></li>
    <li><a href="#pulling-content:-target-pull()"><span class="secno">7.5 </span>Pulling content: <code>target-pull()</code></a></li>
-   <li><a href="#cloning,-fixing-and-clearing-elements-in-named-areas"><span class="secno">7.6 </span>Cloning, fixing and clearing elements in named areas</a></ol></li>
+   <li><a href="#fixing-and-clearing-elements-in-named-areas"><span class="secno">7.6 </span>Fixing and clearing elements in named areas</a></li>
+   <li><a href="#cloning-elements"><span class="secno">7.7 </span>Cloning elements</a></ol></li>
  <li><a href="#bookmarks"><span class="secno">8 </span>Bookmarks</a>
   <ol>
    <li><a href="#'bookmark-level'"><span class="secno">8.1 </span>'bookmark-level'</a></li>
@@ -116,7 +117,8 @@ a.unclear, a.almost { color: orange }
  <li><a href="#baseline-rhythms"><span class="secno">13 </span>Baseline rhythms</a>
   <ol>
    <li><a href="#'line-rhythm'"><span class="secno">13.1 </span>'line-rhythm'</a></li>
-   <li><a href="#'line-rhythm-snap'"><span class="secno">13.2 </span>'line-rhythm-snap'</a></ol></li>
+   <li><a href="#'line-rhythm-snap'"><span class="secno">13.2 </span>'line-rhythm-snap'</a></li>
+   <li><a href="#'line-rhythm-reference'"><span class="secno">13.3 </span>'line-rhythm-reference'</a></ol></li>
  <li><a href="#extending-the-box-model"><span class="secno">14 </span>Extending the box model</a>
   <ol>
    <li><a href="#'box-edge'"><span class="secno">14.1 </span>'box-edge'</a></ol></li>
@@ -124,7 +126,10 @@ a.unclear, a.almost { color: orange }
  <li><a href="#microtypography"><span class="secno">16 </span>Microtypography</a>
   <ol>
    <li><a href="#minimum,-maximum-and-optimal-spacing"><span class="secno">16.1 </span>Minimum, maximum and optimal spacing</a></ol></li>
- <li><a href="#appendix-a:-default-style-sheet"><span class="secno">17 </span>Appendix A: Default style sheet</a></li>
+ <li><a href="#spatial-layout-of-pages;-@layout"><span class="secno">17 </span>Spatial layout of pages; @layout</a>
+  <ol>
+   <li><a href="#page-shift-effects"><span class="secno">17.1 </span>Page shift effects</a></ol></li>
+ <li><a href="#appendix-a:-default-style-sheet"><span class="secno">18 </span>Appendix A: Default style sheet</a></li>
  <li><a href="#references" class="no-num">References</a></li>
  <li><a href="#acknowledgments" class="no-num">Acknowledgments</a></ol>
 <!--end-toc-->
@@ -208,10 +213,10 @@ proposed definition of the property, one has to go back to the <a href="http://w
 1999:
 -->
 
-<p>A Named string is a variable that can hold a string of text. Named
-strings are created with the 'string-set' property which copies a
-string of text into a named string. Only text is copied; not style,
-structure, or replaced content.
+<p>A named string can be thought of as a variable that hold a
+string of text. Named strings are created with the 'string-set'
+property which copies a string of text into a named string. Only text
+is copied; not style, structure, or replaced content. 
 
 <div class="code-example">
 <a href="http://people.opera.com/howcome/2013/tests/books/e-string-set-motivational.html">html</a><br>
@@ -266,11 +271,7 @@ property:
       <td>as specified value
 </table>
 
-<p>The 'string-set' property accepts a comma-separated list of named
-strings. Each named string is followed by a content list that
-specifies which text to copy into the named string. Whenever an
-element with value of 'string-set' different from ''none'' is
-encountered, the named strings are assigned their respective value.
+<p>The 'string-set' property accepts a comma-separated list of named strings. Each named string is followed by a content list that specifies the text to assign to the named string. Whenever an element with value of 'string-set' different from ''none'' is encountered, the named strings are assigned their respective value. Implementations must keep track of named string assigments on a per-element basis; references to named strings can only be resolved after pagination (see <a href="#using-named-strings">Using named strings</a> below).
 
 <p name="content-list">&lt;content-list&gt; expands to one or more of these values, in any order:
 
@@ -392,9 +393,11 @@ names in CSS.
 
 <h4 id="using-named-strings"><span class="secno">3.1.2 </span>Using named strings</h4>
 
-<p>The content of named strings can be recalled by using the
-''string()'' value on the 'content' property. The ''string()'' value has
-one required argument: the name of the string.
+<p>Named strings can be referred to with the ''string()'' value on the
+'content' property. The ''string()'' value has one required argument
+(the name of the string), and one optional argument that indicates
+which string assignment to use. References to named strings can only
+be resolved after pagination.
 
 <div class="example">
 <pre>@page { @top-center { content: string(header) }}
@@ -1730,9 +1733,12 @@ element requests to be placed:
 <dt>same-spread
 <dd>element requests placement on the same spread as its reference point
 
+<dt>any-page
+<dd>element does not request to be placed on an speicific page. Combined with 'fill', this value creates a separate flow of content
+
 </dl>
 
-<p>When preferred alignment is expressed with these keywords, UAs should place floats as close as possible to the reference point. 
+<p>When preferred alignment is expressed, UAs should place floats as close as possible to the reference point. 
 
 <div class="example">
 
@@ -1845,7 +1851,7 @@ area. Inside that area, the floats are shown in the order they appear.
 
 
 <p>Elements may also insist on being aligned exactly with its
-reference point. This is exapress by adding a trailing "!" to these
+reference point. This is expressed by adding a trailing "!" to these
 keywords: 'align', 'align-x', 'align-y', 'same-page', 'same-spread'.
 If exact alignment is not possible, the float will be deleted.
 
@@ -1940,9 +1946,7 @@ this specification, there will be a footnote:
 </pre>
 </div>
 
-<h3 id="cloning,-fixing-and-clearing-elements-in-named-areas"><span class="secno">7.6 </span>Cloning, fixing and clearing elements in named areas</h3>
-
-<p>A
+<h3 id="fixing-and-clearing-elements-in-named-areas"><span class="secno">7.6 </span>Fixing and clearing elements in named areas</h3>
 
 <div class="example">
 <p>Move an element to a named area:
@@ -1954,16 +1958,18 @@ this specification, there will be a footnote:
 <div class="example">
 <p>Move an element to a named area, and make it sticky, so that it is shown on succeeding pages, until erased:
 
-<pre>h1.copy { float: to(sidenote, fill, stick) }
+<pre>h1.copy { float: to(sidenote, stick) }
 </pre>
 </div>
 
 <p>Erase other content in the box before moving the element into list
 
 <div class="example">
-<pre>aside { float: to(sidenote, fill, erase) }
+<pre>aside { float: to(sidenote, erase) }
 </pre>
 </div>
+
+<h3 id="cloning-elements"><span class="secno">7.7 </span>Cloning elements</h3>
 
 <div class="example">
 <p>In this example, the h1 element is copied into a running header which is defined with @area. The copied element is restyled. It erases the running header when it enters, and is set to stick (until eased by another element):
@@ -1987,7 +1993,7 @@ this specification, there will be a footnote:
   }
 }
 
-h1 { float: copy(header, fill, stick erase) }
+h1 { float: copy-to(header, fill stick erase) }
 </pre>
 </div>
 
@@ -2009,7 +2015,7 @@ h1 { float: copy(header, fill, stick erase) }
 #ornament { 
   float: to(running-header, fill, stick); color: red; content: "\2747" /* snow crystal */}
 h1 { 
-  float: copy(running-header, fill, stick); font: 12pt serif }
+  float: copy-to(running-header, fill, stick); font: 12pt serif }
 
 &lt;span id=pagecounter&gt;&lt;/span&gt;
 &lt;span id=ornament&gt;&lt;/span&gt;
@@ -2032,6 +2038,26 @@ h1 {
 h1 { flow: static(header) }
 </pre>
 -->
+
+
+<!--
+<h3>Floating elements to margin boxes</h3>
+
+<p>Margin boxes can be considered a special type of named areas. Unlike names areas, margin boxes 
+
+<ul>
+<li>are predefined (there are 16 of them) 
+<li>come with default settings on 'text-align' and 'vertical-align'
+</ul>
+
+<p>The 'to-margin()' function moves elements to margin areas, while the 'copy-to-margin()' copies elements into margin areas.
+
+<div class=example>
+div.running-header { float: to-margin(top-left) }  /* move to top-left margin area */
+h1 { float: copy-to-margin(top-right) }            /* copy to margin area */
+</div>
+-->
+
 
 <h2 id="bookmarks"><span class="secno">8 </span>Bookmarks</h2>
 
@@ -2726,7 +2752,7 @@ elements.
 
 <div class="example">
 
-<p>In this example, element that do not follow the rhythm will snap upwards.
+<p>In this example, elements that do not follow the rhythm will snap upwards towards their older siblings.
 
 <pre>h2, h2, figure {
   line-rhythm-snap: before;
@@ -2786,6 +2812,45 @@ klm nop.
 </div>
 
 
+<h3 id="'line-rhythm-reference'"><span class="secno">13.3 </span>'line-rhythm-reference'</h3>
+
+<table class="propdef">
+    <tr>
+      <td><em>Name:</em>
+      <td><dfn id="line-rhythm-reference">line-rhythm-reference</dfn>
+    <tr>
+      <td><em>Value:</em>
+    <td>content-box | margin-box | border-box 
+    <tr>
+      <td><em>Initial:</em>
+      <td>content-box
+    <tr>
+      <td><em>Applies to:</em>
+      <td>block containers
+    <tr>
+      <td><em>Inherited:</em>
+      <td>no
+    <tr>
+      <td><em>Percentages:</em>
+      <td>N/A
+    <tr>
+      <td><em>Computed value:</em>
+      <td>specified value
+</table>
+
+<p>When snapping an element 
+
+<p>Values are:
+<dl>
+<dt>content-box
+<dd>The content edge is snapped to the nearest grid line. 
+<dt>margin-box
+<dd>The margin edge is snapped to the nearest grid line. 
+<dt>border-box
+<dd>The border edge is snapped to the nearest grid line. 
+</dl>
+
+
 <h2 id="extending-the-box-model"><span class="secno">14 </span>Extending the box model</h2>
 
 <h3 id="'box-edge'"><span class="secno">14.1 </span>'box-edge'</h3>
@@ -2814,7 +2879,7 @@ klm nop.
       <td>specified value
 </table>
 
-<p>This property describes whether the half-leading is shown along the edges of the boxes generated by the element. Values are:
+<p>This property describes whether the half-leading is shown at the top/bottom of columns/pages. Values are:
 
 <dl>
 <dt>half-leading
@@ -2988,6 +3053,12 @@ http://www.w3.org/Style/Group/css3-src/css3-linebox/Overview.html#LineStacking
 
 <h2 id="character-substitution"><span class="secno">15 </span>Character substitution</h2>
 
+<div class="code-example">
+<a href="http://www.wiumlie.no/2014/tests/books/named-strings.html">html</a><br>
+<a href="http://www.wiumlie.no/howcome/2014/tests/books/named-strings-ah.pdf" class="pass">AH</a>
+<a href="http://www.wiumlie.no/2014/tests/books/named-strings-pr.pdf" class="almost">PR</a>
+</div>
+
 <p>It is sometimes convenient to replace one character or string with another without changing the source document. The ‘text-replace’ property offers a way to perform the replacement in the style sheet.
 
 <table class="propdef">
@@ -3028,12 +3099,10 @@ http://www.w3.org/Style/Group/css3-src/css3-linebox/Overview.html#LineStacking
 <p>This property replaces all occurrences of a certain string with another string in the content of the element. The property accepts pairs of strings as value, in addition to the initial 'none' value. For each pair of strings, occurrences of the first string in the content will be replaced with the second string. If 'none' is specified, no replacements will occur.
 
 <div class="code-example">
-
 <a href="http://people.opera.com/howcome/2013/tests/books/e-character-substitution-motivational.html">html</a><br>
 <a href="http://people.opera.com/howcome/2013/tests/books/e-character-substitution-motivational-ah.pdf" class="fail">AH</a>
 <a href="http://people.opera.com/howcome/2013/tests/books/e-character-substitution-motivational-pr.pdf" class="pass">PR</a>
 </div>
-
 
 <div class="example">
 <p>In this example, three consecutive period characters are replaced with an ellipsis character and the apostrophe character is replaced with a quotation character:
@@ -3173,6 +3242,139 @@ word-spacing: 80% 100% 120%;
 
 </div>
 
+<h2 id="spatial-layout-of-pages;-@layout"><span class="secno">17 </span>Spatial layout of pages; @layout</h2>
+
+<p>In commonly used apps, pages are often laid out spatially so that
+users can nagivate from one page to another by moving up, down, right
+or left. To support this feature for web content, a new @-rule is
+proposed: @layout. The purpose of @layout is to describe how pages are
+laid out spatially relative to the current document.
+
+<p>Four new properties are allowed inside @layout: nav-up, nav-right, nav-bottom, nav-right. 
+
+<p class="note">The name of the properties inside @navigation are borrowed from <a href="http://www.w3.org/TR/2004/CR-css3-ui-20040511/#nav-dir">CSS3 Basic User Interface Module</a>.
+
+<p>The properties accept these values:
+
+<dl>
+
+<dt>go()
+
+<dd>the function takes one argument, which refers to the <tt>rel</tt> attribute of the <tt>link</tt> element
+
+<div class="example">
+<pre>&lt;link rel=index href="../index.html"&gt;
+&lt;link rel=previous href=g3.html&gt;
+&lt;link rel=next href=g1.html&gt;
+...
+
+@layout {
+  nav-up: go(index); 
+  nav-left: go(previous); 
+  nav-right: go(next); 
+}
+</pre>
+</div>
+
+<p class="issue">This functionality relies on semantics in HTML and CSS. Other languages may have other other ways to describe such semantics. One possible solution for other languages is  "link[rel=index] { nav-up: attr(href) }"
+
+<dt>''back''
+
+<dd>The keyword takes the user one step back in the history of browsed pages.
+
+<div class="example">
+<pre>@navigation {
+  nav-left: back;
+}
+</pre>
+</div>
+
+<dt>url()
+
+<dd>The funcation takes one argument: a URL. Relative URLs are
+relative to the style sheet.
+
+<div class="example">
+<pre>@layout {
+  nav-up: url(..);
+  nav-down: url(a1.html);
+}
+</pre>
+</div>
+
+<dt>url-doc()
+
+<dd>The function is identical to url(), except that relative URLs are
+relative to the document, not to the style sheet.
+
+<div class="example">
+<pre>@layout {
+  nav-up: url-doc(..);
+  nav-down: url-doc(a1.html);
+}
+</pre>
+</div>
+
+</dl>
+
+
+
+<div class="example">
+
+<p>Combined with the <a href="http://www.w3.org/TR/2011/WD-css3-conditional-20110901/#at-document">@document-rule</a>, navigation maps can be described:
+
+<pre>@document url("http://example.com/foo") {
+  @layout {
+    nav-right: link-rel(next);
+  }
+}
+
+@document url("http://example.com/bar") {
+  @layout {
+    nav-up: link-rel(next);
+  }
+}
+</pre>
+
+</div>
+
+
+<h3 id="page-shift-effects"><span class="secno">17.1 </span>Page shift effects</h3>
+
+<p>To describe page shift effects, four new properties inside
+@navigation are proposed: nav-up-shift, nav-right-shift,
+nav-down-shift, nav-left-shift. These properties take one of several
+keyword values:
+
+<dl>
+
+<dt>pan
+<dd>pans to the new page; this is the initial value
+
+<dt>turn
+<dd>turns the page, like soft book pages do
+
+<dt>flip
+<dd>flips the page, like stiff cardbord
+
+<dt>fold
+<dd>the old page folds, like an accordion
+
+</dl>
+
+<p class="issue">The proposed keyword values are loosely described. Are
+there better ways to describe transitions?
+
+<div class="example">
+<pre>@navigation {
+   nav-up-shift: pan;
+   nav-down-shift: flip;
+}
+</pre>
+</div>
+
+
+
 <!--
 <h2>Conditional text</h2>
 
@@ -3185,7 +3387,7 @@ a:target-layout(attr(href url), previous-page) { content: " on the previous page
 </div>
 -->
 
-<h2 id="appendix-a:-default-style-sheet"><span class="secno">17 </span>Appendix A: Default style sheet</h2>
+<h2 id="appendix-a:-default-style-sheet"><span class="secno">18 </span>Appendix A: Default style sheet</h2>
 
 <pre>@page {
   counter-reset: footnote;
