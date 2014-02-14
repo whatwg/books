@@ -117,8 +117,7 @@ a.unclear, a.almost { color: orange }
  <li><a href="#baseline-rhythms"><span class="secno">13 </span>Baseline rhythms</a>
   <ol>
    <li><a href="#'baseline-grid'"><span class="secno">13.1 </span>'baseline-grid'</a></li>
-   <li><a href="#'block-snap'"><span class="secno">13.2 </span>'block-snap'</a></li>
-   <li><a href="#'line-rhythm-reference'"><span class="secno">13.3 </span>'line-rhythm-reference'</a></ol></li>
+   <li><a href="#'block-snap'"><span class="secno">13.2 </span>'block-snap'</a></ol></li>
  <li><a href="#extending-the-box-model"><span class="secno">14 </span>Extending the box model</a>
   <ol>
    <li><a href="#'box-edge'"><span class="secno">14.1 </span>'box-edge'</a></ol></li>
@@ -2536,7 +2535,7 @@ div.chapter:column(1,*)     /* the first column on all pages */
 <table class="propdef">
     <tr>
       <td><em>Name:</em>
-      <td><dfn id="line-rhythm">line-rhythm</dfn>
+      <td><dfn id="baseline-grid">baseline-grid</dfn>
     <tr>
       <td><em>Value:</em>
     <td>normal | none | root | new
@@ -2585,8 +2584,8 @@ div.chapter:column(1,*)     /* the first column on all pages */
 <div class="example">
 <p>In this example, the rhythm of the document is established by the line-height and font of the root element. Content inside the body element will align with the root line rhythm, except for headlines and figures.
 
-<pre>body { line-rhythm: root }
-h1, h2, figure { line-rhythm: none }
+<pre>body { baseline-grid: root }
+h1, h2, figure { baseline-grid: none }
 </pre>
 
 <p>One possible rendition is:
@@ -2702,7 +2701,7 @@ klm nop.
 <div class="example">
 <p>In this example there are sidenotes in different scripts:
 
-<pre>aside { font: 12pt serif; line-rhythm: new }
+<pre>aside { font: 12pt serif; baseline-grid: new }
 [lang=ar] { font: 10pt 'Amiri', serif }
 
 &lt;aside&gt;&lt;span lang=en&gt;...&lt;/span&gt;&lt;/aside&gt;
@@ -2721,7 +2720,7 @@ elements.
 <p>The root element always establishes a line rhythm that can be referred to with the 'root' keyword. However, content within the root element will not align with the root line rhythm unless explicity set. In this example, the line rhythm is explicitly set on the root element and its content will therefore align with the root line rhythm.
 
 <pre>:root {
-  line-rhythm: root;
+  baseline-grid: root;
 }
 <pre></pre>
 </pre></div>
@@ -2825,13 +2824,13 @@ klm nop.
 </div>
 </div>
 
+<!--
+<h3>'line-rhythm-reference'</h3>
 
-<h3 id="'line-rhythm-reference'"><span class="secno">13.3 </span>'line-rhythm-reference'</h3>
-
-<table class="propdef">
+<table class=propdef>
     <tr>
       <td><em>Name:</em>
-      <td><dfn id="line-rhythm-reference">line-rhythm-reference</dfn>
+      <td><dfn>line-rhythm-reference</dfn>
     <tr>
       <td><em>Value:</em>
     <td>content-box | margin-box | border-box 
@@ -2848,7 +2847,7 @@ klm nop.
       <td><em>Percentages:</em>
       <td>N/A
     <tr>
-      <td><em>Computed value:</em>
+      <td><em>Computed&nbsp;value:</em>
       <td>specified value
 </table>
 
@@ -2863,6 +2862,7 @@ klm nop.
 <dt>border-box
 <dd>The border edge is snapped to the nearest grid line. 
 </dl>
+-->
 
 
 <h2 id="extending-the-box-model"><span class="secno">14 </span>Extending the box model</h2>
