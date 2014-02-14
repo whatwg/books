@@ -116,8 +116,8 @@ a.unclear, a.almost { color: orange }
  <li><a href="#selecting-columns"><span class="secno">12 </span>Selecting columns</a></li>
  <li><a href="#baseline-rhythms"><span class="secno">13 </span>Baseline rhythms</a>
   <ol>
-   <li><a href="#'line-rhythm'"><span class="secno">13.1 </span>'line-rhythm'</a></li>
-   <li><a href="#'line-rhythm-snap'"><span class="secno">13.2 </span>'line-rhythm-snap'</a></li>
+   <li><a href="#'baseline-grid'"><span class="secno">13.1 </span>'baseline-grid'</a></li>
+   <li><a href="#'block-snap'"><span class="secno">13.2 </span>'block-snap'</a></li>
    <li><a href="#'line-rhythm-reference'"><span class="secno">13.3 </span>'line-rhythm-reference'</a></ol></li>
  <li><a href="#extending-the-box-model"><span class="secno">14 </span>Extending the box model</a>
   <ol>
@@ -2527,10 +2527,10 @@ div.chapter:column(1,*)     /* the first column on all pages */
 
 <h2 id="baseline-rhythms"><span class="secno">13 </span>Baseline rhythms</h2>
 
-<p>Text in adjacent columns often use the same baselines. This appears more pleasant to typographers, and reduces <em>show-through</em>, where a printed line shows through to the other side of the sheet. Subheadings and figures may disturb the <em>basline rhythm</em>, but subsequent text should find it again. The 'line-rhythm' property is introduced to set and clear baseline rhythms, while the 'line-rhythm-snap' property indicates how to align elements that do not align themselves with the baseline rhythm. 
+<p>Text in adjacent columns often use the same baselines. This appears more pleasant to typographers, and reduces <em>show-through</em>, where a printed line shows through to the other side of the sheet. Subheadings and figures may disturb the <em>basline rhythm</em>, but subsequent text should find it again. The 'baseline-grid' property is introduced to set and clear baseline rhythms, while the 'block-snap' property indicates how to align elements that do not align themselves with the baseline rhythm. 
 
 
-<h3 id="'line-rhythm'"><span class="secno">13.1 </span>'line-rhythm'</h3>
+<h3 id="'baseline-grid'"><span class="secno">13.1 </span>'baseline-grid'</h3>  
 
 
 <table class="propdef">
@@ -2728,12 +2728,12 @@ elements.
 
 
 
-<h3 id="'line-rhythm-snap'"><span class="secno">13.2 </span>'line-rhythm-snap'</h3>
+<h3 id="'block-snap'"><span class="secno">13.2 </span>'block-snap'</h3>
 
 <table class="propdef">
     <tr>
       <td><em>Name:</em>
-      <td><dfn id="line-rhythm-snap">line-rhythm-snap</dfn>
+      <td><dfn id="block-snap">block-snap</dfn>
     <tr>
       <td><em>Value:</em>
     <td>auto | before | after | center
@@ -2769,7 +2769,7 @@ elements.
 <p>In this example, elements that do not follow the rhythm will snap upwards towards their older siblings.
 
 <pre>h2, h2, figure {
-  line-rhythm-snap: before;
+  block-snap: before;
 }
 </pre>
 
