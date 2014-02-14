@@ -2587,7 +2587,7 @@ div.chapter:column(1,*)     /* the first column on all pages */
 <table class=propdef>
     <tr>
       <td><em>Name:</em>
-      <td><dfn>line-rhythm</dfn>
+      <td><dfn>baseline-grid</dfn>
     <tr>
       <td><em>Value:</em>
     <td>normal | none | root | new
@@ -2637,8 +2637,8 @@ div.chapter:column(1,*)     /* the first column on all pages */
 <p>In this example, the rhythm of the document is established by the line-height and font of the root element. Content inside the body element will align with the root line rhythm, except for headlines and figures.
 
 <pre>
-body { line-rhythm: root }
-h1, h2, figure { line-rhythm: none }
+body { baseline-grid: root }
+h1, h2, figure { baseline-grid: none }
 </pre>
 
 <p>One possible rendition is:
@@ -2755,7 +2755,7 @@ klm nop.
 <p>In this example there are sidenotes in different scripts:
 
 <pre>
-aside { font: 12pt serif; line-rhythm: new }
+aside { font: 12pt serif; baseline-grid: new }
 [lang=ar] { font: 10pt 'Amiri', serif }
 
 &lt;aside>&lt;span lang=en>...&lt;/span>&lt;/aside>
@@ -2775,7 +2775,7 @@ elements.
 
 <pre>
 :root {
-  line-rhythm: root;
+  baseline-grid: root;
 }
 <pre>
 </pre>
@@ -2881,7 +2881,7 @@ klm nop.
 </div>
 </div>
 
-
+<!--
 <h3>'line-rhythm-reference'</h3>
 
 <table class=propdef>
@@ -2919,6 +2919,7 @@ klm nop.
 <dt>border-box
 <dd>The border edge is snapped to the nearest grid line. 
 </dl>
+-->
 
 
 <h2>Extending the box model</h2>
