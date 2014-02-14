@@ -2578,10 +2578,10 @@ div.chapter:column(1,*)     /* the first column on all pages */
 
 <h2>Baseline rhythms</h2>
 
-<p>Text in adjacent columns often use the same baselines. This appears more pleasant to typographers, and reduces <em>show-through</em>, where a printed line shows through to the other side of the sheet. Subheadings and figures may disturb the <em>basline rhythm</em>, but subsequent text should find it again. The 'line-rhythm' property is introduced to set and clear baseline rhythms, while the 'line-rhythm-snap' property indicates how to align elements that do not align themselves with the baseline rhythm. 
+<p>Text in adjacent columns often use the same baselines. This appears more pleasant to typographers, and reduces <em>show-through</em>, where a printed line shows through to the other side of the sheet. Subheadings and figures may disturb the <em>basline rhythm</em>, but subsequent text should find it again. The 'baseline-grid' property is introduced to set and clear baseline rhythms, while the 'block-snap' property indicates how to align elements that do not align themselves with the baseline rhythm. 
 
 
-<h3>'line-rhythm'</h3>
+<h3>'baseline-grid'</h3>  
 
 
 <table class=propdef>
@@ -2783,12 +2783,12 @@ elements.
 
 
 
-<h3>'line-rhythm-snap'</h3>
+<h3>'block-snap'</h3>
 
 <table class=propdef>
     <tr>
       <td><em>Name:</em>
-      <td><dfn>line-rhythm-snap</dfn>
+      <td><dfn>block-snap</dfn>
     <tr>
       <td><em>Value:</em>
     <td>auto | before | after | center
@@ -2825,7 +2825,7 @@ elements.
 
 <pre>
 h2, h2, figure {
-  line-rhythm-snap: before;
+  block-snap: before;
 }
 </pre>
 
