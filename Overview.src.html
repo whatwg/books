@@ -2319,12 +2319,23 @@ h1, h2 { bookmark-state: open }
 </pre>
 </div>
 
+<div class=example>
+<p>In this example, pages the chapter page group will cycle through pink, lime and white backgrounds:
+<pre>
+@page chapter:nth(3n) { background: pink }
+@page chapter:nth(3n+1)) { background: lime }
+@page chapter:nth(3n+2)) { background: white }
+</pre>
+</div>
+
+
+
 <h3>The <code>range()</code> page pseudo-class</h3>
 
 <p>The :range() page pseudo-class is added to select a range of pages. The syntax is:
 
 <pre>
-  :range( S* [ [0-9]+ S* - S* [0-9] ] | [0-9]+\+ ] S* )
+  :range( S* [ [0-9]+ S* - S* [0-9] ] | [0-9]+\+ | [0-9]+ ] S* )
 </pre>
 
 <div class=example>
@@ -2338,6 +2349,13 @@ h1, h2 { bookmark-state: open }
 <p>In this example, all but page 1 and 2 will have a pink background. 
 <pre>
 @page :range(3+) { background: pink }
+</pre>
+</div>
+
+<div class=example>
+<p>In this example, the second page of all chapter page groups will have a pink background. 
+<pre>
+@page chapter:range(2) { background: pink }
 </pre>
 </div>
 
