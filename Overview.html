@@ -30,7 +30,7 @@ a.unclear, a.almost { color: orange }
   <p><a href="http://www.whatwg.org/" class="logo"><img width="100" alt="WHATWG" height="100" src="http://resources.whatwg.org/logo.svg"></a></p>
 	<h1>CSS Books</h1>
 	
-	<h2 class="no-num no-toc" id="living-standard-—-last-updated-14-february-2014">Living Standard — Last Updated 14 February 2014</h2>
+	<h2 class="no-num no-toc" id="living-standard-—-last-updated-16-february-2014">Living Standard — Last Updated 16 February 2014</h2>
 	
 	<dl>
 		<dt>This version:
@@ -52,7 +52,7 @@ a.unclear, a.almost { color: orange }
 
 	</dl>
 
-<p class="copyright"><a href="http://creativecommons.org/publicdomain/zero/1.0/" rel="license"><img src="http://i.creativecommons.org/p/zero/1.0/80x15.png" alt="CC0"></a>To the extent possible under law, the editor has waived all copyright and related or neighboring rights to this work. In addition, as of 14 February 2014, the editor has made this specification available under the
+<p class="copyright"><a href="http://creativecommons.org/publicdomain/zero/1.0/" rel="license"><img src="http://i.creativecommons.org/p/zero/1.0/80x15.png" alt="CC0"></a>To the extent possible under law, the editor has waived all copyright and related or neighboring rights to this work. In addition, as of 16 February 2014, the editor has made this specification available under the
 <a href="http://www.openwebfoundation.org/legal/the-owf-1-0-agreements/owfa-1-0" rel="license">Open Web Foundation Agreement Version 1.0</a>, which is available at <!--begin-link--><a href="http://www.openwebfoundation.org/legal/the-owf-1-0-agreements/owfa-1-0">http://www.openwebfoundation.org/legal/the-owf-1-0-agreements/owfa-1-0</a><!--end-link-->.
 
 </div>
@@ -2280,11 +2280,21 @@ h1, h2 { bookmark-state: open }
 </pre>
 </div>
 
+<div class="example">
+<p>In this example, pages the chapter page group will cycle through pink, lime and white backgrounds:
+<pre>@page chapter:nth(3n) { background: pink }
+@page chapter:nth(3n+1)) { background: lime }
+@page chapter:nth(3n+2)) { background: white }
+</pre>
+</div>
+
+
+
 <h3 id="the-range()-page-pseudo-class"><span class="secno">9.2 </span>The <code>range()</code> page pseudo-class</h3>
 
 <p>The :range() page pseudo-class is added to select a range of pages. The syntax is:
 
-<pre>  :range( S* [ [0-9]+ S* - S* [0-9] ] | [0-9]+\+ ] S* )
+<pre>  :range( S* [ [0-9]+ S* - S* [0-9] ] | [0-9]+\+ | [0-9]+ ] S* )
 </pre>
 
 <div class="example">
@@ -2296,6 +2306,12 @@ h1, h2 { bookmark-state: open }
 <div class="example">
 <p>In this example, all but page 1 and 2 will have a pink background. 
 <pre>@page :range(3+) { background: pink }
+</pre>
+</div>
+
+<div class="example">
+<p>In this example, the second page of all chapter page groups will have a pink background. 
+<pre>@page chapter:range(2) { background: pink }
 </pre>
 </div>
 
