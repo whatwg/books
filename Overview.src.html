@@ -1983,6 +1983,7 @@ A sentence consists of words&#xB9;.
 </pre>
 </div>
 
+
 <h3>Fixing and clearing elements in named areas</h3>
 
 <div class=example>
@@ -2009,8 +2010,22 @@ aside { flow: area(sidenote, erase) }
 </pre>
 </div>
 
+
+
 <h3>Cloning elements</h3>
 
+<div class example>
+<pre>
+H2 {display: block; font-weight: bold; running: chapter}
+H2:running {display: inline; font-weight: normal}
+ 
+@page {
+  @top-center { content: element(chapter) }
+}
+</pre>
+</div>
+
+<!--
 <div class=example>
 <p>In this example, the h1 element is copied into a running header which is defined with @area. The copied element is restyled. It erases the running header when it enters, and is set to stick (until eased by another element):
 
@@ -2034,7 +2049,7 @@ aside { flow: area(sidenote, erase) }
   }
 }
 
-h1 { float: copy-to(header, fill stick erase) }
+h1 { flow: copy-to(header, fill stick erase) }
 </pre>
 </div>
 
@@ -2066,21 +2081,20 @@ h1 {
 
 </div>
 
-
-
-<p class=issue>Is there a better property to use than 'float'?
-
-<!--
-<p>Prince supports:
-
-<pre>
-@page { 
-    @top { content: flow(header) }
-}
-h1 { flow: static(header) }
-</pre>
 -->
 
+<!--
+<h3>Flowing elements to margin boxes</h3>
+
+<pre>
+@page :left {
+  @area 
+
+  }
+
+div.running-header { flow: margin(top-left) }  /* move element to top-left margin area */
+</pre>
+-->
 
 <!--
 <h3>Floating elements to margin boxes</h3>
@@ -2487,6 +2501,11 @@ or like pseudo-elements
 </div>
 -->
 
+<h2>Conditional content</h2>
+
+
+
+
 
 <h2>Selecting elements within pages</h2>
 
@@ -2807,7 +2826,7 @@ aside { font: 12pt serif; baseline-grid: new }
       <td><dfn>baseline-block-snap</dfn>
     <tr>
       <td><em>Value:</em>
-    <td>auto | before | after | center
+    <td>[before | after | center | auto] || [margin-box | border-box]
     <tr>
       <td><em>Initial:</em>
       <td>auto
@@ -2835,15 +2854,14 @@ aside { font: 12pt serif; baseline-grid: new }
 <dt>auto
 <dd>same as 'before' on top of column, same as 'after' at bottom of column, otherwise 'center'
 <dt>before
-<dd>the blank area is element is placed as after the conten early as possible, while honori
+<dd>the element is placed as close to the previous content as possible
 <dt>after
-<dd>same as 'before' on top of column, same as 'after' at bottom of column, otherwise 'center'
+<dd>the element is placed as close to the following content as possible
 <dt>center
-<dd>same as 'before' on top of column, same as 'after' at bottom of column, otherwise 'center'
+<dd>the element is centered between the previous and following content. 
+<td>margin-box
+<td>border-box
 </dl>
-
-<p class=issue>
-      [auto | before | after | center] || [margin-box | border-box]
 
 
 <div class=example>
@@ -3222,12 +3240,12 @@ body { text-replace: "..." "\2026" "'" "\2019" }
 html:lang(fr) { text-replace "!" "\202F!" }
 </pre>
 
-<p>As a result, the string "Mai, oui!" is changed to "Mai, oui&#x202F;!".
+<p>As a result, the string "Mais, oui!" is changed to "Mais, oui&#x202F;!".
 
 </div>
 
 <div class=example>
-<p>In this example, a <em>hair space</a> is added before and after em-dashes.
+<p>In this example, a <em>hair space</em> is added before and after em-dashes.
 
 <pre>
 body { text-replace: "—" "\200A—\200A" }
