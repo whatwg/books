@@ -1582,7 +1582,7 @@ and the settings in the default style sheet differentiates the two.
   margin-right: 10em;
   @area sidenote { position: absolute; right: -8em; top: 0; width: 6em; height: auto }
 }
-aside { float: to(sidenote) }
+aside { flow: area(sidenote) }
 </pre>
 
 </div>
@@ -1597,7 +1597,7 @@ aside { float: to(sidenote) }
     height: 1vh;
   }
 }
-img { float: to(photos) }
+img { flow: area(photos) }
 </pre>
 <p>The result is a document where all content ends up on left pages, and where right pages hold only <code>img</code> elements.
 </div>
@@ -1630,7 +1630,7 @@ content.
     @area { position: absolute; right: -4cm; top: 0; bottom: 0; width: 3.5cm; } /* right */
   }
 }
-.sidenote { float: to(sidenote) }
+.sidenote { flow: area(sidenote) }
 </pre>
 
 <p>One possible rendering is:
@@ -1658,7 +1658,7 @@ content.
 <p>This code moves &lt;aside> elements to the named area called "sidenote":
 
 <pre>
-aside { float: to(sidenote); }
+aside { flow: area(sidenote); }
 </pre>
 </div>
 
@@ -1698,7 +1698,7 @@ div.line:nth-of-type(2n+1)::after { content: leader(space) counter(line) }
 .footnote::footnote-call { content: "[" counter(footnote, lower-alpha) "]" }
 .footnote::footnote-marker { content: "[" counter(footnote, lower-alpha) "]" }
 
-.fn2 { float: to(fn2) }
+.fn2 { flow: area(fn2) }
 .fn2::call { content: "" }
 .fn2::marker { content: "[" counter(line) "]" }
 </pre>
@@ -1724,7 +1724,7 @@ And is, despite of war and wasting fire,
 <p>Content floated to a named area is, by default, aligned with its
 reference point. The content will, if possible, be placed on the same
 page as the reference point, and be aligned with the reference point
-along both the x axis and the y axis. That is, the effect of aligning
+along the baseline of the reference point. That is, the effect of aligning
 a float to its reference point is limited to (a) choosing the page, (b)
 finding the closest matching named area, and (c) starting the float on
 the same baseline as the reference point.
@@ -1769,14 +1769,14 @@ element requests to be placed:
 <div class=example>
 
 <pre>
-img { float: to(sidenote) }                   /* this is the default */
-img { float: to(sidenote, align same-page) }  /* this is also default */
+img { flow: area(sidenote) }                   /* this is the default */
+img { flow: area(sidenote, align same-page) }  /* this is also default */
 
-img { float: to(sidenote, align-y) }          /* float is only aligned along the y axis */
-img { float: to(sidenote, fill) }             /* show float in the order they appear */
-img { float: to(sidenote, fill same-spread) } /* show float in the order they appear, use any matching named flow on the spread of the reference point */
-img { float: to(sidenote, same-page!) }       /* delete float if it doesn't end up on the same page */
-img { float: to(sidenote, align!) }           /* delete float if it doesn't end up exactly in the requested position */
+img { flow: area(sidenote, align-y) }          /* float is only aligned along the y axis */
+img { flow: area(sidenote, fill) }             /* show float in the order they appear */
+img { flow: area(sidenote, fill same-spread) } /* show float in the order they appear, use any matching named flow on the spread of the reference point */
+img { flow: area(sidenote, same-page!) }       /* delete float if it doesn't end up on the same page */
+img { flow: area(sidenote, align!) }           /* delete float if it doesn't end up exactly in the requested position */
 </pre>
 
 </div>
@@ -1809,7 +1809,7 @@ closest names area, either on the left or right.
 <p>The code used to achieve this is:
 
 <pre>
-.sidenote { float: to(sidenote, align) }
+.sidenote { flow: area(sidenote, align) }
 </pre>
 
 </div>
@@ -1839,7 +1839,7 @@ closest names area, either on the left or right.
 <p>In this example, floats are only aligned along the x axis:
 
 <pre>
-.sidenote { float: to(sidenote, align-x) }
+.sidenote { flow: area(sidenote, align-x) }
 </pre>
 
 <p>As a result, floats are placed in the closest matching named
@@ -1864,7 +1864,7 @@ area. Inside that area, the floats are shown in the order they appear.
 <p>In this example, floats are not aligned with the reference point. 
 
 <pre>
-.sidenote { float: to(sidenote, fill) }
+.sidenote { flow: area(sidenote, fill) }
 </pre>
 
 <p>As a result, floats are placed in the first matching named area on the page of the reference point. 
@@ -1895,7 +1895,7 @@ If exact alignment is not possible, the float will be deleted.
 <p>In this example, floats insist on being aligned with their reference point:
 
 <pre>
-.sidenote { float: to(sidenote, align-y!) }
+.sidenote { flow: area(sidenote, align-y!) }
 </pre>
 
 <p>However, there isn't space for the third sidenote in its preferred position. As a result, the third sidenote is deleted.
@@ -1922,7 +1922,7 @@ If exact alignment is not possible, the float will be deleted.
 <div class=example>
 <pre>
 .sidenote { 
-  float: to(sidenote);
+  flow: area(sidenote);
   counter-increment: sn;
 }
 .sidenote::call { 
@@ -1992,7 +1992,7 @@ A sentence consists of words&#xB9;.
 <p>Move an element to a named area:
 
 <pre>
-aside { float: to(sidenote) }
+aside { flow: area(sidenote) }
 </pre>
 </div>
 
@@ -2000,7 +2000,7 @@ aside { float: to(sidenote) }
 <p>Move an element to a named area, and make it sticky, so that it is shown on succeeding pages, until erased:
 
 <pre>
-h1.copy { float: to(sidenote, stick) }
+h1.copy { flow: area(sidenote, stick) }
 </pre>
 </div>
 
@@ -2008,7 +2008,7 @@ h1.copy { float: to(sidenote, stick) }
 
 <div class=example>
 <pre>
-aside { float: to(sidenote, erase) }
+aside { flow: area(sidenote, erase) }
 </pre>
 </div>
 
@@ -2056,9 +2056,9 @@ h1 { float: copy-to(header, fill stick erase) }
     }}}
 
 #pagecounter { 
-  float: to(running-header, fill, stick); content: counter(page);  }
+  flow: area(running-header, fill, stick); content: counter(page);  }
 #ornament { 
-  float: to(running-header, fill, stick); color: red; content: "\2747" /* snow crystal */}
+  flow: area(running-header, fill, stick); color: red; content: "\2747" /* snow crystal */}
 h1 { 
   float: copy-to(running-header, fill, stick); font: 12pt serif }
 
@@ -2098,7 +2098,7 @@ h1 { flow: static(header) }
 <p>The 'to-margin()' function moves elements to margin areas, while the 'copy-to-margin()' copies elements into margin areas.
 
 <div class=example>
-div.running-header { float: to-margin(top-left) }  /* move to top-left margin area */
+div.running-header { flow: area-margin(top-left) }  /* move to top-left margin area */
 h1 { float: copy-to-margin(top-right) }            /* copy to margin area */
 </div>
 -->
@@ -2596,11 +2596,10 @@ div.chapter:column(1,*)     /* the first column on all pages */
 
 <h2>Baseline rhythms</h2>
 
-<p>Text in adjacent columns often use the same baselines. This appears more pleasant to typographers, and reduces <em>show-through</em>, where a printed line shows through to the other side of the sheet. Subheadings and figures may disturb the <em>basline rhythm</em>, but subsequent text should find it again. The 'baseline-grid' property is introduced to set and clear baseline rhythms, while the 'block-snap' property indicates how to align elements that do not align themselves with the baseline rhythm. 
+<p>Text in adjacent columns often use the same baselines. This appears more pleasant to typographers, and reduces <em>show-through</em>, where a printed line shows through to the other side of the sheet. Subheadings and figures may disturb the <em>baseline rhythm</em>, but subsequent text should find it again. The 'baseline-grid' property is introduced to set and clear baseline rhythms, while the 'baseline-block-snap' property indicates how to align elements that do not align themselves with the baseline rhythm. 
 
 
 <h3>'baseline-grid'</h3>  
-
 
 <table class=propdef>
     <tr>
@@ -2643,13 +2642,18 @@ div.chapter:column(1,*)     /* the first column on all pages */
 
 <dt>new
 
-<dd>the element sets a new line rhythm. The new baseline rhythm is established by finding the first baseline of the element by using the first available font specified on the 'font-family' property; thereafter the frequency of the rhythm is equal to the used value of 'line-height'. The new line rhythm is used to align the content of the element, including child elements. Child elements may, however, establish their own line rhythm, or indicate that they do not seek alignment with the established line rhythm.
+<dd>the element sets a new line rhythm. The new baseline rhythm is established by finding the first baseline of the element by using the first available font specified on the 'font-family' property; thereafter the frequency of the rhythm is equal to the used value of 'line-height'. The new line rhythm is used to align the content of the element, including child elements. Child elements may, however, establish their own line rhythm, or indicate that they do not seek alignment with the established line rhythm. 
 
 <dt>root
 
 <dd>the element sets the line rhythm defined by the root element. The root line rhythm is defined by the first baseline of the element by using the first available font specified on the 'font-family' property; thereafter the frequency of the rhythm is equal to the used value of 'line-height' of the root element. The root line rhythm is not used unless explicitly referred to in a style sheet. 
 
 </dl>
+
+<p class=issue>Should there also be a predefined line rhythm defined by the page area?</p>
+
+<!--<p>When a line rhythm is set, baselines are adjusted to ...-->
+
 
 <div class=example>
 <p>In this example, the rhythm of the document is established by the line-height and font of the root element. Content inside the body element will align with the root line rhythm, except for headlines and figures.
@@ -2801,12 +2805,12 @@ elements.
 
 
 
-<h3>'block-snap'</h3>
+<h3>'baseline-block-snap'</h3>
 
 <table class=propdef>
     <tr>
       <td><em>Name:</em>
-      <td><dfn>block-snap</dfn>
+      <td><dfn>baseline-block-snap</dfn>
     <tr>
       <td><em>Value:</em>
     <td>auto | before | after | center
@@ -2815,7 +2819,7 @@ elements.
       <td>auto
     <tr>
       <td><em>Applies to:</em>
-      <td>block containers
+      <td>elements with 'baseline-grid: new' or 'baseline-grid: none'
     <tr>
       <td><em>Inherited:</em>
       <td>no
@@ -2827,14 +2831,30 @@ elements.
       <td>specified value
 </table>
 
-<p>This property describes how to align elements that do not align themselves with the line rhythm.
+<p class=issue>Should this property be called 'baseline-snap'?
+
+<p>Element
+
+<p>Baseline alignment may cause content to be moved to subsequent baselines, thus resulting in blank areas. If other content appear between there is This property describes where contenethe blank area is placed.
+
+<p>This property describes how to align elements that do not align themselves with line rhythm.
 
 <p>Values are:
 
 <dl>
 <dt>auto
 <dd>same as 'before' on top of column, same as 'after' at bottom of column, otherwise 'center'
+<dt>before
+<dd>the blank area is element is placed as after the conten early as possible, while honori
+<dt>after
+<dd>same as 'before' on top of column, same as 'after' at bottom of column, otherwise 'center'
+<dt>center
+<dd>same as 'before' on top of column, same as 'after' at bottom of column, otherwise 'center'
 </dl>
+
+
+<p class=issue>
+      [auto | before | after | center] || [margin-box | border-box]
 
 
 <div class=example>
@@ -2843,7 +2863,7 @@ elements.
 
 <pre>
 h2, h2, figure {
-  block-snap: before;
+  baseline-block-snap: before;
 }
 </pre>
 
@@ -2940,6 +2960,7 @@ klm nop.
 -->
 
 
+<!--
 <h2>Extending the box model</h2>
 
 <h3>'box-edge'</h3>
@@ -2970,13 +2991,14 @@ klm nop.
 
 <p>This property describes whether the half-leading is shown at the top/bottom of columns/pages. Values are:
 
+
 <dl>
 <dt>half-leading
 <dd>the half-leading is calculated as per <a href="http://www.w3.org/TR/CSS2/visudet.html#leading">CSS 2.1 section 10.8.1</a>
 <dt>em-box
 <dd>half-leading is not added before the first line and after the last line of boxes generated by the element
 </dl>
-
+-->
 <!--
 <div class=example>
 <p>In this example, the root element establishes a line rhythm, 
@@ -2989,7 +3011,7 @@ klm nop.
 </pre>
 </div>
 -->
-
+<!--
 <div class=example>
 <p>In thix example, the half-leading is removed from the top and bottom of boxes belonging to a &lt;p&gt; element.
 
@@ -3015,7 +3037,7 @@ div { box-edge: em-box }
 </div>
 
 
-
+-->
 
 <!--
 
