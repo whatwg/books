@@ -30,7 +30,7 @@ a.unclear, a.almost { color: orange }
   <p><a href="http://www.whatwg.org/" class="logo"><img width="100" alt="WHATWG" height="100" src="http://resources.whatwg.org/logo.svg"></a></p>
 	<h1>CSS Books</h1>
 	
-	<h2 class="no-num no-toc" id="living-standard-—-last-updated-16-february-2014">Living Standard — Last Updated 16 February 2014</h2>
+	<h2 class="no-num no-toc" id="living-standard-—-last-updated-21-february-2014">Living Standard — Last Updated 21 February 2014</h2>
 	
 	<dl>
 		<dt>This version:
@@ -52,7 +52,7 @@ a.unclear, a.almost { color: orange }
 
 	</dl>
 
-<p class="copyright"><a href="http://creativecommons.org/publicdomain/zero/1.0/" rel="license"><img src="http://i.creativecommons.org/p/zero/1.0/80x15.png" alt="CC0"></a>To the extent possible under law, the editor has waived all copyright and related or neighboring rights to this work. In addition, as of 16 February 2014, the editor has made this specification available under the
+<p class="copyright"><a href="http://creativecommons.org/publicdomain/zero/1.0/" rel="license"><img src="http://i.creativecommons.org/p/zero/1.0/80x15.png" alt="CC0"></a>To the extent possible under law, the editor has waived all copyright and related or neighboring rights to this work. In addition, as of 21 February 2014, the editor has made this specification available under the
 <a href="http://www.openwebfoundation.org/legal/the-owf-1-0-agreements/owfa-1-0" rel="license">Open Web Foundation Agreement Version 1.0</a>, which is available at <!--begin-link--><a href="http://www.openwebfoundation.org/legal/the-owf-1-0-agreements/owfa-1-0">http://www.openwebfoundation.org/legal/the-owf-1-0-agreements/owfa-1-0</a><!--end-link-->.
 
 </div>
@@ -117,18 +117,15 @@ a.unclear, a.almost { color: orange }
  <li><a href="#baseline-rhythms"><span class="secno">13 </span>Baseline rhythms</a>
   <ol>
    <li><a href="#'baseline-grid'"><span class="secno">13.1 </span>'baseline-grid'</a></li>
-   <li><a href="#'block-snap'"><span class="secno">13.2 </span>'block-snap'</a></ol></li>
- <li><a href="#extending-the-box-model"><span class="secno">14 </span>Extending the box model</a>
+   <li><a href="#'baseline-block-snap'"><span class="secno">13.2 </span>'baseline-block-snap'</a></ol></li>
+ <li><a href="#character-substitution"><span class="secno">14 </span>Character substitution</a></li>
+ <li><a href="#microtypography"><span class="secno">15 </span>Microtypography</a>
   <ol>
-   <li><a href="#'box-edge'"><span class="secno">14.1 </span>'box-edge'</a></ol></li>
- <li><a href="#character-substitution"><span class="secno">15 </span>Character substitution</a></li>
- <li><a href="#microtypography"><span class="secno">16 </span>Microtypography</a>
+   <li><a href="#minimum,-maximum-and-optimal-spacing"><span class="secno">15.1 </span>Minimum, maximum and optimal spacing</a></ol></li>
+ <li><a href="#spatial-layout-of-pages;-@layout"><span class="secno">16 </span>Spatial layout of pages; @layout</a>
   <ol>
-   <li><a href="#minimum,-maximum-and-optimal-spacing"><span class="secno">16.1 </span>Minimum, maximum and optimal spacing</a></ol></li>
- <li><a href="#spatial-layout-of-pages;-@layout"><span class="secno">17 </span>Spatial layout of pages; @layout</a>
-  <ol>
-   <li><a href="#page-shift-effects"><span class="secno">17.1 </span>Page shift effects</a></ol></li>
- <li><a href="#appendix-a:-default-style-sheet"><span class="secno">18 </span>Appendix A: Default style sheet</a></li>
+   <li><a href="#page-shift-effects"><span class="secno">16.1 </span>Page shift effects</a></ol></li>
+ <li><a href="#appendix-a:-default-style-sheet"><span class="secno">17 </span>Appendix A: Default style sheet</a></li>
  <li><a href="#references" class="no-num">References</a></li>
  <li><a href="#acknowledgments" class="no-num">Acknowledgments</a></ol>
 <!--end-toc-->
@@ -1576,7 +1573,7 @@ and the settings in the default style sheet differentiates the two.
   margin-right: 10em;
   @area sidenote { position: absolute; right: -8em; top: 0; width: 6em; height: auto }
 }
-aside { float: to(sidenote) }
+aside { flow: area(sidenote) }
 </pre>
 
 </div>
@@ -1590,7 +1587,7 @@ aside { float: to(sidenote) }
     height: 1vh;
   }
 }
-img { float: to(photos) }
+img { flow: area(photos) }
 </pre>
 <p>The result is a document where all content ends up on left pages, and where right pages hold only <code>img</code> elements.
 </div>
@@ -1622,7 +1619,7 @@ content.
     @area { position: absolute; right: -4cm; top: 0; bottom: 0; width: 3.5cm; } /* right */
   }
 }
-.sidenote { float: to(sidenote) }
+.sidenote { flow: area(sidenote) }
 </pre>
 
 <p>One possible rendering is:
@@ -1648,7 +1645,7 @@ content.
 <div class="example">
 <p>This code moves &lt;aside&gt; elements to the named area called "sidenote":
 
-<pre>aside { float: to(sidenote); }
+<pre>aside { flow: area(sidenote); }
 </pre>
 </div>
 
@@ -1686,7 +1683,7 @@ div.line:nth-of-type(2n+1)::after { content: leader(space) counter(line) }
 .footnote::footnote-call { content: "[" counter(footnote, lower-alpha) "]" }
 .footnote::footnote-marker { content: "[" counter(footnote, lower-alpha) "]" }
 
-.fn2 { float: to(fn2) }
+.fn2 { flow: area(fn2) }
 .fn2::call { content: "" }
 .fn2::marker { content: "[" counter(line) "]" }
 </pre>
@@ -1711,7 +1708,7 @@ And is, despite of war and wasting fire,
 <p>Content floated to a named area is, by default, aligned with its
 reference point. The content will, if possible, be placed on the same
 page as the reference point, and be aligned with the reference point
-along both the x axis and the y axis. That is, the effect of aligning
+along the baseline of the reference point. That is, the effect of aligning
 a float to its reference point is limited to (a) choosing the page, (b)
 finding the closest matching named area, and (c) starting the float on
 the same baseline as the reference point.
@@ -1755,14 +1752,14 @@ element requests to be placed:
 
 <div class="example">
 
-<pre>img { float: to(sidenote) }                   /* this is the default */
-img { float: to(sidenote, align same-page) }  /* this is also default */
+<pre>img { flow: area(sidenote) }                   /* this is the default */
+img { flow: area(sidenote, align same-page) }  /* this is also default */
 
-img { float: to(sidenote, align-y) }          /* float is only aligned along the y axis */
-img { float: to(sidenote, fill) }             /* show float in the order they appear */
-img { float: to(sidenote, fill same-spread) } /* show float in the order they appear, use any matching named flow on the spread of the reference point */
-img { float: to(sidenote, same-page!) }       /* delete float if it doesn't end up on the same page */
-img { float: to(sidenote, align!) }           /* delete float if it doesn't end up exactly in the requested position */
+img { flow: area(sidenote, align-y) }          /* float is only aligned along the y axis */
+img { flow: area(sidenote, fill) }             /* show float in the order they appear */
+img { flow: area(sidenote, fill same-spread) } /* show float in the order they appear, use any matching named flow on the spread of the reference point */
+img { flow: area(sidenote, same-page!) }       /* delete float if it doesn't end up on the same page */
+img { flow: area(sidenote, align!) }           /* delete float if it doesn't end up exactly in the requested position */
 </pre>
 
 </div>
@@ -1793,7 +1790,7 @@ closest names area, either on the left or right.
 
 <p>The code used to achieve this is:
 
-<pre>.sidenote { float: to(sidenote, align) }
+<pre>.sidenote { flow: area(sidenote, align) }
 </pre>
 
 </div>
@@ -1821,7 +1818,7 @@ closest names area, either on the left or right.
 
 <p>In this example, floats are only aligned along the x axis:
 
-<pre>.sidenote { float: to(sidenote, align-x) }
+<pre>.sidenote { flow: area(sidenote, align-x) }
 </pre>
 
 <p>As a result, floats are placed in the closest matching named
@@ -1844,7 +1841,7 @@ area. Inside that area, the floats are shown in the order they appear.
 
 <p>In this example, floats are not aligned with the reference point. 
 
-<pre>.sidenote { float: to(sidenote, fill) }
+<pre>.sidenote { flow: area(sidenote, fill) }
 </pre>
 
 <p>As a result, floats are placed in the first matching named area on the page of the reference point. 
@@ -1873,7 +1870,7 @@ If exact alignment is not possible, the float will be deleted.
 
 <p>In this example, floats insist on being aligned with their reference point:
 
-<pre>.sidenote { float: to(sidenote, align-y!) }
+<pre>.sidenote { flow: area(sidenote, align-y!) }
 </pre>
 
 <p>However, there isn't space for the third sidenote in its preferred position. As a result, the third sidenote is deleted.
@@ -1898,7 +1895,7 @@ If exact alignment is not possible, the float will be deleted.
 
 <div class="example">
 <pre>.sidenote { 
-  float: to(sidenote);
+  flow: area(sidenote);
   counter-increment: sn;
 }
 .sidenote::call { 
@@ -1964,21 +1961,21 @@ this specification, there will be a footnote:
 <div class="example">
 <p>Move an element to a named area:
 
-<pre>aside { float: to(sidenote) }
+<pre>aside { flow: area(sidenote) }
 </pre>
 </div>
 
 <div class="example">
 <p>Move an element to a named area, and make it sticky, so that it is shown on succeeding pages, until erased:
 
-<pre>h1.copy { float: to(sidenote, stick) }
+<pre>h1.copy { flow: area(sidenote, stick) }
 </pre>
 </div>
 
 <p>Erase other content in the box before moving the element into list
 
 <div class="example">
-<pre>aside { float: to(sidenote, erase) }
+<pre>aside { flow: area(sidenote, erase) }
 </pre>
 </div>
 
@@ -2024,9 +2021,9 @@ h1 { float: copy-to(header, fill stick erase) }
     }}}
 
 #pagecounter { 
-  float: to(running-header, fill, stick); content: counter(page);  }
+  flow: area(running-header, fill, stick); content: counter(page);  }
 #ornament { 
-  float: to(running-header, fill, stick); color: red; content: "\2747" /* snow crystal */}
+  flow: area(running-header, fill, stick); color: red; content: "\2747" /* snow crystal */}
 h1 { 
   float: copy-to(running-header, fill, stick); font: 12pt serif }
 
@@ -2066,7 +2063,7 @@ h1 { flow: static(header) }
 <p>The 'to-margin()' function moves elements to margin areas, while the 'copy-to-margin()' copies elements into margin areas.
 
 <div class=example>
-div.running-header { float: to-margin(top-left) }  /* move to top-left margin area */
+div.running-header { flow: area-margin(top-left) }  /* move to top-left margin area */
 h1 { float: copy-to-margin(top-right) }            /* copy to margin area */
 </div>
 -->
@@ -2542,11 +2539,10 @@ div.chapter:column(1,*)     /* the first column on all pages */
 
 <h2 id="baseline-rhythms"><span class="secno">13 </span>Baseline rhythms</h2>
 
-<p>Text in adjacent columns often use the same baselines. This appears more pleasant to typographers, and reduces <em>show-through</em>, where a printed line shows through to the other side of the sheet. Subheadings and figures may disturb the <em>basline rhythm</em>, but subsequent text should find it again. The 'baseline-grid' property is introduced to set and clear baseline rhythms, while the 'block-snap' property indicates how to align elements that do not align themselves with the baseline rhythm. 
+<p>Text in adjacent columns often use the same baselines. This appears more pleasant to typographers, and reduces <em>show-through</em>, where a printed line shows through to the other side of the sheet. Subheadings and figures may disturb the <em>baseline rhythm</em>, but subsequent text should find it again. The 'baseline-grid' property is introduced to set and clear baseline rhythms, while the 'baseline-block-snap' property indicates how to align elements that do not align themselves with the baseline rhythm. 
 
 
 <h3 id="'baseline-grid'"><span class="secno">13.1 </span>'baseline-grid'</h3>  
-
 
 <table class="propdef">
     <tr>
@@ -2589,13 +2585,18 @@ div.chapter:column(1,*)     /* the first column on all pages */
 
 <dt>new
 
-<dd>the element sets a new line rhythm. The new baseline rhythm is established by finding the first baseline of the element by using the first available font specified on the 'font-family' property; thereafter the frequency of the rhythm is equal to the used value of 'line-height'. The new line rhythm is used to align the content of the element, including child elements. Child elements may, however, establish their own line rhythm, or indicate that they do not seek alignment with the established line rhythm.
+<dd>the element sets a new line rhythm. The new baseline rhythm is established by finding the first baseline of the element by using the first available font specified on the 'font-family' property; thereafter the frequency of the rhythm is equal to the used value of 'line-height'. The new line rhythm is used to align the content of the element, including child elements. Child elements may, however, establish their own line rhythm, or indicate that they do not seek alignment with the established line rhythm. 
 
 <dt>root
 
 <dd>the element sets the line rhythm defined by the root element. The root line rhythm is defined by the first baseline of the element by using the first available font specified on the 'font-family' property; thereafter the frequency of the rhythm is equal to the used value of 'line-height' of the root element. The root line rhythm is not used unless explicitly referred to in a style sheet. 
 
 </dl>
+
+<p class="issue">Should there also be a predefined line rhythm defined by the page area?</p>
+
+<!--<p>When a line rhythm is set, baselines are adjusted to ...-->
+
 
 <div class="example">
 <p>In this example, the rhythm of the document is established by the line-height and font of the root element. Content inside the body element will align with the root line rhythm, except for headlines and figures.
@@ -2743,12 +2744,12 @@ elements.
 
 
 
-<h3 id="'block-snap'"><span class="secno">13.2 </span>'block-snap'</h3>
+<h3 id="'baseline-block-snap'"><span class="secno">13.2 </span>'baseline-block-snap'</h3>
 
 <table class="propdef">
     <tr>
       <td><em>Name:</em>
-      <td><dfn id="block-snap">block-snap</dfn>
+      <td><dfn id="baseline-block-snap">baseline-block-snap</dfn>
     <tr>
       <td><em>Value:</em>
     <td>auto | before | after | center
@@ -2757,7 +2758,7 @@ elements.
       <td>auto
     <tr>
       <td><em>Applies to:</em>
-      <td>block containers
+      <td>elements with 'baseline-grid: new' or 'baseline-grid: none'
     <tr>
       <td><em>Inherited:</em>
       <td>no
@@ -2769,14 +2770,30 @@ elements.
       <td>specified value
 </table>
 
-<p>This property describes how to align elements that do not align themselves with the line rhythm.
+<p class="issue">Should this property be called 'baseline-snap'?
+
+<p>Element
+
+<p>Baseline alignment may cause content to be moved to subsequent baselines, thus resulting in blank areas. If other content appear between there is This property describes where contenethe blank area is placed.
+
+<p>This property describes how to align elements that do not align themselves with line rhythm.
 
 <p>Values are:
 
 <dl>
 <dt>auto
 <dd>same as 'before' on top of column, same as 'after' at bottom of column, otherwise 'center'
+<dt>before
+<dd>the blank area is element is placed as after the conten early as possible, while honori
+<dt>after
+<dd>same as 'before' on top of column, same as 'after' at bottom of column, otherwise 'center'
+<dt>center
+<dd>same as 'before' on top of column, same as 'after' at bottom of column, otherwise 'center'
 </dl>
+
+
+<p class="issue">
+      [auto | before | after | center] || [margin-box | border-box]
 
 
 <div class="example">
@@ -2784,7 +2801,7 @@ elements.
 <p>In this example, elements that do not follow the rhythm will snap upwards towards their older siblings.
 
 <pre>h2, h2, figure {
-  block-snap: before;
+  baseline-block-snap: before;
 }
 </pre>
 
@@ -2881,14 +2898,15 @@ klm nop.
 -->
 
 
-<h2 id="extending-the-box-model"><span class="secno">14 </span>Extending the box model</h2>
+<!--
+<h2>Extending the box model</h2>
 
-<h3 id="'box-edge'"><span class="secno">14.1 </span>'box-edge'</h3>
+<h3>'box-edge'</h3>
 
-<table class="propdef">
+<table class=propdef>
     <tr>
       <td><em>Name:</em>
-      <td><dfn id="box-edge">box-edge</dfn>
+      <td><dfn>box-edge</dfn>
     <tr>
       <td><em>Value:</em>
     <td>half-leading | em-box
@@ -2905,11 +2923,12 @@ klm nop.
       <td><em>Percentages:</em>
       <td>N/A
     <tr>
-      <td><em>Computed value:</em>
+      <td><em>Computed&nbsp;value:</em>
       <td>specified value
 </table>
 
 <p>This property describes whether the half-leading is shown at the top/bottom of columns/pages. Values are:
+
 
 <dl>
 <dt>half-leading
@@ -2917,7 +2936,7 @@ klm nop.
 <dt>em-box
 <dd>half-leading is not added before the first line and after the last line of boxes generated by the element
 </dl>
-
+-->
 <!--
 <div class=example>
 <p>In this example, the root element establishes a line rhythm, 
@@ -2930,11 +2949,12 @@ klm nop.
 </pre>
 </div>
 -->
-
-<div class="example">
+<!--
+<div class=example>
 <p>In thix example, the half-leading is removed from the top and bottom of boxes belonging to a &lt;p&gt; element.
 
-<pre>p { box-edge: em-box }
+<pre>
+p { box-edge: em-box }
 
 &lt;p&gt;Hello, world.&lt;/p&gt;
 </pre>
@@ -2942,10 +2962,11 @@ klm nop.
 
 <p>This property only has effect when set on the youngest block-level element.
 
-<div class="example">
+<div class=example>
 <p>In this example, the half-leading is not removed from the top and bottom of boxes belonging to a &lt;p&gt; element.
 
-<pre>div { box-edge: em-box }
+<pre>
+div { box-edge: em-box }
 
 &lt;div&gt;
   &lt;p&gt;Hello, world.&lt;/p&gt;
@@ -2954,7 +2975,7 @@ klm nop.
 </div>
 
 
-
+-->
 
 <!--
 
@@ -3081,7 +3102,7 @@ div.figure { height: 20px; line-box-contain: block inline replaced line-grid }
 http://www.w3.org/Style/Group/css3-src/css3-linebox/Overview.html#LineStacking
 -->
 
-<h2 id="character-substitution"><span class="secno">15 </span>Character substitution</h2>
+<h2 id="character-substitution"><span class="secno">14 </span>Character substitution</h2>
 
 <div class="code-example">
 <a href="http://www.wiumlie.no/2014/tests/books/named-strings.html">html</a><br>
@@ -3195,11 +3216,11 @@ h3 { text-replace: "foobar" "barfoo" }      /* accept value, but ... */
 
 <p>This property is evaluated after the <span class="property">content</span> property, and before <span class="property">text-transform</span>.
 
-<h2 id="microtypography"><span class="secno">16 </span>Microtypography</h2>
+<h2 id="microtypography"><span class="secno">15 </span>Microtypography</h2>
 
 <p>Microtypography is a range of methods for improving the appearance of text. Often, small adjustments in the space between letters and words can achieve a more even presentation with less need for hyphenation and fewer widows and orphans. This specification extends two existing CSS properties — 'letter-spacing' and 'word-spacing' — with minimum and maximum values to guide User Agents when laying out text. 
 
-<h3 id="minimum,-maximum-and-optimal-spacing"><span class="secno">16.1 </span>Minimum, maximum and optimal spacing</h3>
+<h3 id="minimum,-maximum-and-optimal-spacing"><span class="secno">15.1 </span>Minimum, maximum and optimal spacing</h3>
 
 
 <p>The 'letter-spacing' and 'word-spacing' properties are extended to accept up to three values:
@@ -3272,7 +3293,7 @@ word-spacing: 80% 100% 120%;
 
 </div>
 
-<h2 id="spatial-layout-of-pages;-@layout"><span class="secno">17 </span>Spatial layout of pages; @layout</h2>
+<h2 id="spatial-layout-of-pages;-@layout"><span class="secno">16 </span>Spatial layout of pages; @layout</h2>
 
 <p>In commonly used apps, pages are often laid out spatially so that
 users can nagivate from one page to another by moving up, down, right
@@ -3369,7 +3390,7 @@ relative to the document, not to the style sheet.
 </div>
 
 
-<h3 id="page-shift-effects"><span class="secno">17.1 </span>Page shift effects</h3>
+<h3 id="page-shift-effects"><span class="secno">16.1 </span>Page shift effects</h3>
 
 <p>To describe page shift effects, four new properties inside
 @navigation are proposed: nav-up-shift, nav-right-shift,
@@ -3417,7 +3438,7 @@ a:target-layout(attr(href url), previous-page) { content: " on the previous page
 </div>
 -->
 
-<h2 id="appendix-a:-default-style-sheet"><span class="secno">18 </span>Appendix A: Default style sheet</h2>
+<h2 id="appendix-a:-default-style-sheet"><span class="secno">17 </span>Appendix A: Default style sheet</h2>
 
 <pre>@page {
   counter-reset: footnote;
