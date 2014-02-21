@@ -96,7 +96,7 @@ a.unclear, a.almost { color: orange }
  <li><a href="#named-areas"><span class="secno">7 </span>Named Areas</a>
   <ol>
    <li><a href="#creating-names-areas:-@area"><span class="secno">7.1 </span>Creating names areas: <code>@area</code></a></li>
-   <li><a href="#floating-content-into-named-areas:-to()"><span class="secno">7.2 </span>Floating content into named areas: <code>to()</code></a></li>
+   <li><a href="#flowing-content-into-named-areas:-area()"><span class="secno">7.2 </span>Flowing content into named areas: <code>area()</code></a></li>
    <li><a href="#alignment-in-named-areas"><span class="secno">7.3 </span>Alignment in Named Areas</a></li>
    <li><a href="#note-calls:-::call"><span class="secno">7.4 </span>Note calls: <code>::call</code></a></li>
    <li><a href="#pulling-content:-target-pull()"><span class="secno">7.5 </span>Pulling content: <code>target-pull()</code></a></li>
@@ -1638,9 +1638,9 @@ content.
 </div>
 
 
-<h3 id="floating-content-into-named-areas:-to()"><span class="secno">7.2 </span>Floating content into named areas: <code>to()</code></h3>
+<h3 id="flowing-content-into-named-areas:-area()"><span class="secno">7.2 </span>Flowing content into named areas: <code>area()</code></h3>
 
-<p>Content is added to named areas with the <code>to()</code> functional notation.
+<p>Content is added to named areas with the <code>area()</code> functional notation.
 
 <div class="example">
 <p>This code moves &lt;aside&gt; elements to the named area called "sidenote":
@@ -1651,11 +1651,8 @@ content.
 
 <p>The syntax is:
 
-<pre>  to( <a href="http://www.w3.org/TR/css3-values/#custom-idents">&lt;custom-ident&gt;</a> )
+<pre>  area( <a href="http://www.w3.org/TR/css3-values/#custom-idents">&lt;custom-ident&gt;</a> )
 </pre>
-
-
-<p class="issue">Is 'float' the best property to use? Could the syntax be aligned with regions? Prince uses the 'flow' property. 
 
 
 <div class="code-example">
