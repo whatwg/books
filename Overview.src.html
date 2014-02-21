@@ -2591,9 +2591,9 @@ div.chapter:column(1,*)     /* the first column on all pages */
 
 
 
-<h2>Baseline rhythms</h2>
+<h2>Baseline grids</h2>
 
-<p>Text in adjacent columns often use the same baselines. This appears more pleasant to typographers, and reduces <em>show-through</em>, where a printed line shows through to the other side of the sheet. Subheadings and figures may disturb the <em>baseline rhythm</em>, but subsequent text should find it again. The 'baseline-grid' property is introduced to set and clear baseline rhythms, while the 'baseline-block-snap' property indicates how to align elements that do not align themselves with the baseline rhythm. 
+<p>Text in adjacent columns often use the same baselines. This appears more pleasant to typographers, and reduces <em>show-through</em>, where a printed line shows through to the other side of the sheet. By aligning text to a grid of baselines, a baseline rhythm is established. Subheadings and figures may disturb the <em>baseline rhythm</em>, but subsequent text should find it again. The 'baseline-grid' property is introduced to set and clear baseline grids, while the 'baseline-block-snap' property indicates how to align elements that do not align themselves with the baseline grids. 
 
 
 <h3>'baseline-grid'</h3>  
@@ -2625,25 +2625,25 @@ div.chapter:column(1,*)     /* the first column on all pages */
       <td>as specified
 </table>
 
-<p>This property is used to set or clear the line rhythm for its content. The values are:
+<p>This property is used to set or clear the baseline grid for its content. The values are:
 
 <dl>
 
 <dt>normal
 
-<dd>the element neither sets nor clears the line rhythm for its content
+<dd>the element neither sets nor clears the baseline grid for its content
 
 <dt>none
 
-<dd>the element clears the line rhythm and its content will not align with a line rhythm (unless explicitly set on a child element).
+<dd>the element clears the baseline grid and its content will not align with a baseline grid (unless explicitly set on a child element).
 
 <dt>new
 
-<dd>the element sets a new line rhythm. The new baseline rhythm is established by finding the first baseline of the element by using the first available font specified on the 'font-family' property; thereafter the frequency of the rhythm is equal to the used value of 'line-height'. The new line rhythm is used to align the content of the element, including child elements. Child elements may, however, establish their own line rhythm, or indicate that they do not seek alignment with the established line rhythm. 
+<dd>the element defines and sets a new baseline grid. The new baseline grid is defined by establishing the first baseline of the element by using the first available font; thereafter the frequency of the baseline grid is equal to the used value of 'line-height'. The new baseline grid is used to align the content of the element, including child elements. Child elements may, however, set their own baseline grids, or indicate that they do not seek alignment with a baseline grid.
 
 <dt>root
 
-<dd>the element sets the line rhythm defined by the root element. The root line rhythm is defined by the first baseline of the element by using the first available font specified on the 'font-family' property; thereafter the frequency of the rhythm is equal to the used value of 'line-height' of the root element. The root line rhythm is not used unless explicitly referred to in a style sheet. 
+<dd>the element sets the <dfn>root baseline grid</dfn>. The root baseline grid is defined by the root element; the calculation for finding the root baseline grid is the same as for the 'new' value. While the root element defines the root baseline grid, the root element does not automatically set the root baseline grid.
 
 </dl>
 
@@ -2653,7 +2653,7 @@ div.chapter:column(1,*)     /* the first column on all pages */
 
 
 <div class=example>
-<p>In this example, the rhythm of the document is established by the line-height and font of the root element. Content inside the body element will align with the root line rhythm, except for headlines and figures.
+<p>In this example, the baseline grid of the document is defined by the 'line-height' and font properties of the root element. Content inside the body element will align with the root baseline grid, except for headlines and figures.
 
 <pre>
 body { baseline-grid: root }
@@ -2711,7 +2711,7 @@ klm nop.
 
 </div>
 
-<p>Notice how the body text aligns with the baseline rhythm (shown in orange for illustration purposes), while the heading, figure and figure caption do not. After the heading and figure, the main text starts again on the next available baseline.
+<p>Notice how the body text aligns with the baseline grid (shown in orange for illustration purposes), while the heading, figure and figure caption do not. After the heading and figure, the main text starts again on the next available baseline.
 </div>
 
 
@@ -2782,15 +2782,13 @@ aside { font: 12pt serif; baseline-grid: new }
 &lt;aside>&lt;span lang=ar>...&lt;/span>&lt;/aside>
 </pre>
 
-<p>The &lt;aside> elements establish a baseline rhythm from the specified <code>font: 12pt
-serif</code>. Content inside the &lt;aside> elements, even in different
-scripts, fonts and sizes, align with the rhythm established by the &lt;aside>
-elements.
+<p>The &lt;aside> elements establish a baseline grid from the used fond (<code>font: 12pt serif</code>). Content inside the &lt;aside> elements, even in different scripts, fonts and sizes, align with the baseline grid established by the &lt;aside> elements.
 
 </div>
 
 <div class=example>
-<p>The root element always establishes a line rhythm that can be referred to with the 'root' keyword. However, content within the root element will not align with the root line rhythm unless explicity set. In this example, the line rhythm is explicitly set on the root element and its content will therefore align with the root line rhythm.
+
+<p>The root element establishes a baseline grid that can be referred to with the 'root' keyword. However, content within the root element will not align with the root line rhythm unless explicity set. In this example, the baseline grid is explicitly set on the root element and its content will therefore align with the root baseline grid.
 
 <pre>
 :root {
@@ -2799,7 +2797,6 @@ elements.
 <pre>
 </pre>
 </div>
-
 
 
 <h3>'baseline-block-snap'</h3>
@@ -2828,10 +2825,6 @@ elements.
       <td>specified value
 </table>
 
-<p class=issue>Should this property be called 'baseline-snap'?
-
-<p>Element
-
 <p>Baseline alignment may cause content to be moved to subsequent baselines, thus resulting in blank areas. If other content appear between there is This property describes where contenethe blank area is placed.
 
 <p>This property describes how to align elements that do not align themselves with line rhythm.
@@ -2849,14 +2842,13 @@ elements.
 <dd>same as 'before' on top of column, same as 'after' at bottom of column, otherwise 'center'
 </dl>
 
-
 <p class=issue>
       [auto | before | after | center] || [margin-box | border-box]
 
 
 <div class=example>
 
-<p>In this example, elements that do not follow the rhythm will snap upwards towards their older siblings.
+<p>In this example, elements that do not follow the baseline grid will snap upwards towards their older siblings.
 
 <pre>
 h2, h2, figure {
@@ -3205,7 +3197,6 @@ http://www.w3.org/Style/Group/css3-src/css3-linebox/Overview.html#LineStacking
   <td>as specified value
 </table>
 
-
 <p>This property replaces all occurrences of a certain string with another string in the content of the element. The property accepts pairs of strings as value, in addition to the initial 'none' value. For each pair of strings, occurrences of the first string in the content will be replaced with the second string. If 'none' is specified, no replacements will occur.
 
 <div class=code-example>
@@ -3230,6 +3221,19 @@ body { text-replace: "..." "\2026" "'" "\2019" }
 <pre>
 html:lang(fr) { text-replace "!" "\202F!" }
 </pre>
+
+<p>As a result, the string "Mai, oui!" is changed to "Mai, oui&#x202F;!".
+
+</div>
+
+<div class=example>
+<p>In this example, a <em>hair space</a> is added before and after em-dashes.
+
+<pre>
+body { text-replace: "—" "\200A—\200A" }
+</pre>
+
+<p>As a result, this string "not&emdash;not yet" is changed to "not&#x200A;&emdash;&#x200A;not yet".
 </div>
 
 <!--
