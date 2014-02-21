@@ -112,20 +112,21 @@ a.unclear, a.almost { color: orange }
    <li><a href="#the-nth()-page-pseudo-class"><span class="secno">9.1 </span>The <code>nth()</code> page pseudo-class</a></li>
    <li><a href="#the-range()-page-pseudo-class"><span class="secno">9.2 </span>The <code>range()</code> page pseudo-class</a></ol></li>
  <li><a href="#page-groups"><span class="secno">10 </span>Page groups</a></li>
- <li><a href="#selecting-elements-within-pages"><span class="secno">11 </span>Selecting elements within pages</a></li>
- <li><a href="#selecting-columns"><span class="secno">12 </span>Selecting columns</a></li>
- <li><a href="#baseline-grids"><span class="secno">13 </span>Baseline grids</a>
+ <li><a href="#conditional-content"><span class="secno">11 </span>Conditional content</a></li>
+ <li><a href="#selecting-elements-within-pages"><span class="secno">12 </span>Selecting elements within pages</a></li>
+ <li><a href="#selecting-columns"><span class="secno">13 </span>Selecting columns</a></li>
+ <li><a href="#baseline-grids"><span class="secno">14 </span>Baseline grids</a>
   <ol>
-   <li><a href="#'baseline-grid'"><span class="secno">13.1 </span>'baseline-grid'</a></li>
-   <li><a href="#'baseline-block-snap'"><span class="secno">13.2 </span>'baseline-block-snap'</a></ol></li>
- <li><a href="#character-substitution"><span class="secno">14 </span>Character substitution</a></li>
- <li><a href="#microtypography"><span class="secno">15 </span>Microtypography</a>
+   <li><a href="#'baseline-grid'"><span class="secno">14.1 </span>'baseline-grid'</a></li>
+   <li><a href="#'baseline-block-snap'"><span class="secno">14.2 </span>'baseline-block-snap'</a></ol></li>
+ <li><a href="#character-substitution"><span class="secno">15 </span>Character substitution</a></li>
+ <li><a href="#microtypography"><span class="secno">16 </span>Microtypography</a>
   <ol>
-   <li><a href="#minimum,-maximum-and-optimal-spacing"><span class="secno">15.1 </span>Minimum, maximum and optimal spacing</a></ol></li>
- <li><a href="#spatial-layout-of-pages;-@layout"><span class="secno">16 </span>Spatial layout of pages; @layout</a>
+   <li><a href="#minimum,-maximum-and-optimal-spacing"><span class="secno">16.1 </span>Minimum, maximum and optimal spacing</a></ol></li>
+ <li><a href="#spatial-layout-of-pages;-@layout"><span class="secno">17 </span>Spatial layout of pages; @layout</a>
   <ol>
-   <li><a href="#page-shift-effects"><span class="secno">16.1 </span>Page shift effects</a></ol></li>
- <li><a href="#appendix-a:-default-style-sheet"><span class="secno">17 </span>Appendix A: Default style sheet</a></li>
+   <li><a href="#page-shift-effects"><span class="secno">17.1 </span>Page shift effects</a></ol></li>
+ <li><a href="#appendix-a:-default-style-sheet"><span class="secno">18 </span>Appendix A: Default style sheet</a></li>
  <li><a href="#references" class="no-num">References</a></li>
  <li><a href="#acknowledgments" class="no-num">Acknowledgments</a></ol>
 <!--end-toc-->
@@ -1953,6 +1954,7 @@ this specification, there will be a footnote:
 </pre>
 </div>
 
+
 <h3 id="fixing-and-clearing-elements-in-named-areas"><span class="secno">7.6 </span>Fixing and clearing elements in named areas</h3>
 
 <div class="example">
@@ -1976,12 +1978,26 @@ this specification, there will be a footnote:
 </pre>
 </div>
 
+
+
 <h3 id="cloning-elements"><span class="secno">7.7 </span>Cloning elements</h3>
 
-<div class="example">
+<div example="" class="">
+<pre>H2 {display: block; font-weight: bold; running: chapter}
+H2:running {display: inline; font-weight: normal}
+ 
+@page {
+  @top-center { content: element(chapter) }
+}
+</pre>
+</div>
+
+<!--
+<div class=example>
 <p>In this example, the h1 element is copied into a running header which is defined with @area. The copied element is restyled. It erases the running header when it enters, and is set to stick (until eased by another element):
 
-<pre>@page :left {
+<pre>
+@page :left {
   @area running-header { 
     position: absolute; top: -2cm; left: 0; width: 3.5cm; height: 1cm 
     @inside h1 {
@@ -2000,15 +2016,16 @@ this specification, there will be a footnote:
   }
 }
 
-h1 { float: copy-to(header, fill stick erase) }
+h1 { flow: copy-to(header, fill stick erase) }
 </pre>
 </div>
 
 
-<div class="example">
+<div class=example>
 <p>In this example, the named area called "running header" is placed in the center top of the page. It is filled with three elements, one being the copy 
 
-<pre>@page {
+<pre>
+@page {
   @area running-header { 
     position: absolute; top: -2cm; left: 0; right: 0; height: 1cm; 
     text-align: center;
@@ -2024,28 +2041,27 @@ h1 { float: copy-to(header, fill stick erase) }
 h1 { 
   float: copy-to(running-header, fill, stick); font: 12pt serif }
 
-&lt;span id=pagecounter&gt;&lt;/span&gt;
-&lt;span id=ornament&gt;&lt;/span&gt;
-&lt;h1&gt;Erin Hildebrand&lt;/h1&gt;
+&lt;span id=pagecounter>&lt;/span>
+&lt;span id=ornament>&lt;/span>
+&lt;h1>Erin Hildebrand&lt;/h1>
 </pre>
 
 </div>
 
-
-
-<p class="issue">Is there a better property to use than 'float'?
-
-<!--
-<p>Prince supports:
-
-<pre>
-@page { 
-    @top { content: flow(header) }
-}
-h1 { flow: static(header) }
-</pre>
 -->
 
+<!--
+<h3>Flowing elements to margin boxes</h3>
+
+<pre>
+@page :left {
+  @area 
+
+  }
+
+div.running-header { flow: margin(top-left) }  /* move element to top-left margin area */
+</pre>
+-->
 
 <!--
 <h3>Floating elements to margin boxes</h3>
@@ -2436,8 +2452,13 @@ or like pseudo-elements
 </div>
 -->
 
+<h2 id="conditional-content"><span class="secno">11 </span>Conditional content</h2>
 
-<h2 id="selecting-elements-within-pages"><span class="secno">11 </span>Selecting elements within pages</h2>
+
+
+
+
+<h2 id="selecting-elements-within-pages"><span class="secno">12 </span>Selecting elements within pages</h2>
 
 
 <p>To select elements within a page, normal selectors can be combined with a page selector. 
@@ -2518,7 +2539,7 @@ or like pseudo-elements
 </div>
 
 
-<h2 id="selecting-columns"><span class="secno">12 </span>Selecting columns</h2>
+<h2 id="selecting-columns"><span class="secno">13 </span>Selecting columns</h2>
 
 <p class="issue">This section is not fully developed. 
 
@@ -2534,12 +2555,12 @@ div.chapter:column(1,*)     /* the first column on all pages */
 
 
 
-<h2 id="baseline-grids"><span class="secno">13 </span>Baseline grids</h2>
+<h2 id="baseline-grids"><span class="secno">14 </span>Baseline grids</h2>
 
 <p>Text in adjacent columns often use the same baselines. This appears more pleasant to typographers, and reduces <em>show-through</em>, where a printed line shows through to the other side of the sheet. By aligning text to a grid of baselines, a baseline rhythm is established. Subheadings and figures may disturb the <em>baseline rhythm</em>, but subsequent text should find it again. The 'baseline-grid' property is introduced to set and clear baseline grids, while the 'baseline-block-snap' property indicates how to align elements that do not align themselves with the baseline grids. 
 
 
-<h3 id="'baseline-grid'"><span class="secno">13.1 </span>'baseline-grid'</h3>  
+<h3 id="'baseline-grid'"><span class="secno">14.1 </span>'baseline-grid'</h3>  
 
 <table class="propdef">
     <tr>
@@ -2738,7 +2759,7 @@ klm nop.
 </pre></div>
 
 
-<h3 id="'baseline-block-snap'"><span class="secno">13.2 </span>'baseline-block-snap'</h3>
+<h3 id="'baseline-block-snap'"><span class="secno">14.2 </span>'baseline-block-snap'</h3>
 
 <table class="propdef">
     <tr>
@@ -2746,7 +2767,7 @@ klm nop.
       <td><dfn id="baseline-block-snap">baseline-block-snap</dfn>
     <tr>
       <td><em>Value:</em>
-    <td>auto | before | after | center
+    <td>[before | after | center | auto] || [margin-box | border-box]
     <tr>
       <td><em>Initial:</em>
       <td>auto
@@ -2774,15 +2795,14 @@ klm nop.
 <dt>auto
 <dd>same as 'before' on top of column, same as 'after' at bottom of column, otherwise 'center'
 <dt>before
-<dd>the blank area is element is placed as after the conten early as possible, while honori
+<dd>the element is placed as close to the previous content as possible
 <dt>after
-<dd>same as 'before' on top of column, same as 'after' at bottom of column, otherwise 'center'
+<dd>the element is placed as close to the following content as possible
 <dt>center
-<dd>same as 'before' on top of column, same as 'after' at bottom of column, otherwise 'center'
+<dd>the element is centered between the previous and following content. 
+margin-box
+border-box
 </dl>
-
-<p class="issue">
-      [auto | before | after | center] || [margin-box | border-box]
 
 
 <div class="example">
@@ -3091,7 +3111,7 @@ div.figure { height: 20px; line-box-contain: block inline replaced line-grid }
 http://www.w3.org/Style/Group/css3-src/css3-linebox/Overview.html#LineStacking
 -->
 
-<h2 id="character-substitution"><span class="secno">14 </span>Character substitution</h2>
+<h2 id="character-substitution"><span class="secno">15 </span>Character substitution</h2>
 
 <div class="code-example">
 <a href="http://www.wiumlie.no/2014/tests/books/named-strings.html">html</a><br>
@@ -3158,18 +3178,18 @@ http://www.w3.org/Style/Group/css3-src/css3-linebox/Overview.html#LineStacking
 <pre>html:lang(fr) { text-replace "!" "\202F!" }
 </pre>
 
-<p>As a result, the string "Mai, oui!" is changed to "Mai, oui !".
+<p>As a result, the string "Mais, oui!" is changed to "Mais, oui !".
 
 </div>
 
 <div class="example">
-<p>In this example, a <em>hair space is added before and after em-dashes.
+<p>In this example, a <em>hair space</em> is added before and after em-dashes.
 
-</em><pre><em>body { text-replace: "—" "\200A—\200A" }
-</em></pre><em>
+<pre>body { text-replace: "—" "\200A—\200A" }
+</pre>
 
 <p>As a result, this string "no—not yet" is changed to "no — not yet".
-</em></div><em>
+</div>
 
 
 
@@ -3218,11 +3238,11 @@ h3 { text-replace: "foobar" "barfoo" }      /* accept value, but ... */
 
 <p>This property is evaluated after the <span class="property">content</span> property, and before <span class="property">text-transform</span>.
 
-<h2 id="microtypography"><span class="secno">15 </span>Microtypography</h2>
+<h2 id="microtypography"><span class="secno">16 </span>Microtypography</h2>
 
 <p>Microtypography is a range of methods for improving the appearance of text. Often, small adjustments in the space between letters and words can achieve a more even presentation with less need for hyphenation and fewer widows and orphans. This specification extends two existing CSS properties — 'letter-spacing' and 'word-spacing' — with minimum and maximum values to guide User Agents when laying out text. 
 
-<h3 id="minimum,-maximum-and-optimal-spacing"><span class="secno">15.1 </span>Minimum, maximum and optimal spacing</h3>
+<h3 id="minimum,-maximum-and-optimal-spacing"><span class="secno">16.1 </span>Minimum, maximum and optimal spacing</h3>
 
 
 <p>The 'letter-spacing' and 'word-spacing' properties are extended to accept up to three values:
@@ -3295,7 +3315,7 @@ word-spacing: 80% 100% 120%;
 
 </div>
 
-<h2 id="spatial-layout-of-pages;-@layout"><span class="secno">16 </span>Spatial layout of pages; @layout</h2>
+<h2 id="spatial-layout-of-pages;-@layout"><span class="secno">17 </span>Spatial layout of pages; @layout</h2>
 
 <p>In commonly used apps, pages are often laid out spatially so that
 users can nagivate from one page to another by moving up, down, right
@@ -3392,7 +3412,7 @@ relative to the document, not to the style sheet.
 </div>
 
 
-<h3 id="page-shift-effects"><span class="secno">16.1 </span>Page shift effects</h3>
+<h3 id="page-shift-effects"><span class="secno">17.1 </span>Page shift effects</h3>
 
 <p>To describe page shift effects, four new properties inside
 @navigation are proposed: nav-up-shift, nav-right-shift,
@@ -3440,7 +3460,7 @@ a:target-layout(attr(href url), previous-page) { content: " on the previous page
 </div>
 -->
 
-<h2 id="appendix-a:-default-style-sheet"><span class="secno">17 </span>Appendix A: Default style sheet</h2>
+<h2 id="appendix-a:-default-style-sheet"><span class="secno">18 </span>Appendix A: Default style sheet</h2>
 
 <pre>@page {
   counter-reset: footnote;
@@ -3493,4 +3513,3 @@ Jacob Grundtvig Refstrup,  James Elmore, Ian Tindale, Murakami Shinyu, Paul E.
 Merrell, Philip Taylor, Brad Kemper, Peter Linss, Daniel Glazman, Tantek Çelik, Florian Rivoal, Alex Mogilevsky, Simon Sapin, Cameron McCormack, Liam R E Quin, Peter Moulder, Morten Stenshorne, Rune Lillesveen, Lars Erik Bolstad, Anton Prowse, Michel Onoff, Dave Cramer.</p>
 
 
-</em>
