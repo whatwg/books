@@ -2623,7 +2623,7 @@ div.chapter:column(1,*)     /* the first column on all pages */
       <td><dfn>baseline-grid</dfn>
     <tr>
       <td><em>Value:</em>
-    <td>normal | none | root | new
+    <td>normal | none | new | root | page
     <tr>
       <td><em>Initial:</em>
       <td>normal
@@ -2663,6 +2663,10 @@ div.chapter:column(1,*)     /* the first column on all pages */
 <dt>root
 
 <dd>the element sets the <dfn>root baseline grid</dfn>. The root baseline grid is defined by the root element; the calculation for finding the root baseline grid is the same as for the 'new' value. While the root element defines the root baseline grid, the root element does not automatically set the root baseline grid.
+
+<dt>page
+
+<dd>the page area sets the <dfn>page baseline grid</dfn>. The page baseline grid is defined by the page area and the root element; the calculation for finding the page baseline grid is the same as for the root baseline grid, except that the page area is used to position the baselines.
 
 </dl>
 
