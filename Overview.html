@@ -30,7 +30,7 @@ a.unclear, a.almost { color: orange }
   <p><a href="http://www.whatwg.org/" class="logo"><img width="100" alt="WHATWG" height="100" src="http://resources.whatwg.org/logo.svg"></a></p>
 	<h1>CSS Books</h1>
 	
-	<h2 class="no-num no-toc" id="living-standard-—-last-updated-21-february-2014">Living Standard — Last Updated 21 February 2014</h2>
+	<h2 class="no-num no-toc" id="living-standard-—-last-updated-26-february-2014">Living Standard — Last Updated 26 February 2014</h2>
 	
 	<dl>
 		<dt>This version:
@@ -52,7 +52,7 @@ a.unclear, a.almost { color: orange }
 
 	</dl>
 
-<p class="copyright"><a href="http://creativecommons.org/publicdomain/zero/1.0/" rel="license"><img src="http://i.creativecommons.org/p/zero/1.0/80x15.png" alt="CC0"></a>To the extent possible under law, the editor has waived all copyright and related or neighboring rights to this work. In addition, as of 21 February 2014, the editor has made this specification available under the
+<p class="copyright"><a href="http://creativecommons.org/publicdomain/zero/1.0/" rel="license"><img src="http://i.creativecommons.org/p/zero/1.0/80x15.png" alt="CC0"></a>To the extent possible under law, the editor has waived all copyright and related or neighboring rights to this work. In addition, as of 26 February 2014, the editor has made this specification available under the
 <a href="http://www.openwebfoundation.org/legal/the-owf-1-0-agreements/owfa-1-0" rel="license">Open Web Foundation Agreement Version 1.0</a>, which is available at <!--begin-link--><a href="http://www.openwebfoundation.org/legal/the-owf-1-0-agreements/owfa-1-0">http://www.openwebfoundation.org/legal/the-owf-1-0-agreements/owfa-1-0</a><!--end-link-->.
 
 </div>
@@ -2568,7 +2568,7 @@ div.chapter:column(1,*)     /* the first column on all pages */
       <td><dfn id="baseline-grid">baseline-grid</dfn>
     <tr>
       <td><em>Value:</em>
-    <td>normal | none | root | new
+    <td>normal | none | new | root | page
     <tr>
       <td><em>Initial:</em>
       <td>normal
@@ -2608,6 +2608,10 @@ div.chapter:column(1,*)     /* the first column on all pages */
 <dt>root
 
 <dd>the element sets the <dfn id="root-baseline-grid">root baseline grid</dfn>. The root baseline grid is defined by the root element; the calculation for finding the root baseline grid is the same as for the 'new' value. While the root element defines the root baseline grid, the root element does not automatically set the root baseline grid.
+
+<dt>page
+
+<dd>the page area sets the <dfn id="page-baseline-grid">page baseline grid</dfn>. The page baseline grid is defined by the page area and the root element; the calculation for finding the page baseline grid is the same as for the root baseline grid, except that the page area is used to position the baselines.
 
 </dl>
 
