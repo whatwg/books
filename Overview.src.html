@@ -1099,8 +1099,11 @@ with a <em>footnote call</em> in the main text which corresponds to
 a <em>footnote marker</em> in the <em>footnote area</em>. The
 rendering of footnotes is complex. As far as possible, footnotes try
 to reuse other parts of CSS. However, due to the typographic
-traditions of footnotes, some new functionality is required to support
-footnotes in CSS:
+traditions of footnotes, some new functionality is required.
+
+<!--
+ to support
+footnotes in CSS.
 
 <ul>
 <li>one new value on the 'float' property: ''footnote''
@@ -1110,9 +1113,9 @@ footnotes in CSS:
 <li>one new value on the 'content' property: ''target-pull()''
 <li>border segments (see <a href="http://dev.w3.org/csswg/css-backgrounds-4/#border-clip">border-clip</a>)
 <li><a href="http://www.w3.org/TR/2011/WD-css3-lists-20110524/#super-decimal">super-decimal</a>
-<!--<li>two new 'list-style-type' values: ''super-decimal'', and symbol(...)-->
+<li>two new 'list-style-type' values: ''super-decimal'', and symbol(...)
 </ul>
-
+-->
 
 <div class=example>
 <p>In its simplest form, making a footnote is simple.
@@ -1261,7 +1264,7 @@ spanning all columns of the outermost multicol element:
 @page {
   @footnote {
     float: bottom;
-    column-span: all;
+    float-reference: page; 
   }
 }
 </pre>
@@ -1278,20 +1281,19 @@ spanning all columns of the outermost multicol element:
   @footnote {
     float: bottom;
     column-span: none;
-    width: 100%;
   }
 }
 </pre>
 </div>
 
 <div class="example">
-<p>These rules place the footnote area at the bottom of the page, spanning all columns. Also, the footnote area is split into three columns which the footnotes are flowed into:
+<p>These rules place the footnote area at the bottom of the page. Also, the footnote area is split into three columns which the footnotes are flowed into:
 
 <pre>
 @page {
   @footnote {
     float: bottom;
-    column-span: all;
+    float-reference: page;
     columns: 3; 
   }
 }
@@ -2667,7 +2669,6 @@ div.chapter:column(1,*)     /* the first column on all pages */
 <dt>page
 
 <dd>the page box sets the <dfn>page baseline grid</dfn>. The page baseline grid is defined by the page box and the root element; the calculation for finding the page baseline grid is the same as for the root baseline grid, except that the page box is used to position the baselines.
-
 </dl>
 
 
