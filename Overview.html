@@ -2343,7 +2343,7 @@ h1, h2 { bookmark-state: open }
 </pre>
 </div>
 
-<p>A new page group is started when an element is set to a named page which is different from the preceding element, or differen from the ancestor element.
+<p>A new page group is started when an element is set to a named page which is different from the preceding element, or different from the ancestor element.
 
 <div class="example">
 <p>In this example, the first article starts a new page group due to having a different named page than its ancestor. However, the second article continues in the same page group as the first, due to having the same named page. As a result, there will only be one page with a green background.
@@ -2359,10 +2359,10 @@ article { page: chapter }
 </pre>
 </div>
 
-<p>To enable page groups to be 
+<p>To enable page groups to be created when sibling elements use the same named page, the 'break-before' and 'break-after' properties are consulted. When a forced page break has been set between the two elements (either 'break-after: page' on the first element, or 'break-before: page' on the second element), the second element will create a new page group. 
 
 <div class="example">
-<p>In this example, both articles start new page groups due to having an explicit page break before the element.
+<p>In this example, both articles start new page groups due to there being an explicit page break between them.
 
 <pre>@page chapter:first { background: lime }
 body { page: upright }
