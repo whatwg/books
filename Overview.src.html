@@ -2505,8 +2505,58 @@ or like pseudo-elements
 
 <h2>Conditional content</h2>
 
+<p>Content is sometimes displayed or hidden based on their placement
+after formatting. This specification proposes the 'condition' property
+to express conditions that must be met in order for the element to be
+displayed; if the condition is not met, the effect will be as if
+'display: none' had been set.
+
+<div class=example>
+<p>In this example, thematic breaks witin the prose is normally indicated by a few blank lines. However, if the thematic break appears at a page break, it will be indicated by three asterisks.
+
+<pre>
+  .tb1 { margin: 1em 0; text-align: center; condition: at-page-break }
+  .tb2 { content: "\a\a\a"; condition: not-at-page-break }
+
+  &lt;div class=tb1>***&lt;/div>
+  &lt;div class=tb2>&lt;/div>
+</pre>
+</div>
 
 
+<h2>Clipping column rules</h2>
+
+
+<h3>column-rule-clip</h3>  
+
+<table class=propdef>
+    <tr>
+      <td><em>Name:</em>
+      <td><dfn>column-rule-clip</dfn>
+    <tr>
+      <td><em>Value:</em>
+    <td>&lt;length> &lt;length>?
+    <tr>
+      <td><em>Initial:</em>
+      <td>0
+    <tr>
+      <td><em>Applies to:</em>
+      <td>multicol elements
+    <tr>
+      <td><em>Inherited:</em>
+      <td>no
+    <tr>
+      <td><em>Percentages:</em>
+      <td>N/A
+    <tr>
+      <td><em>Media:</em>
+      <td>visual
+    <tr>
+      <td><em>Computed&nbsp;value:</em>
+      <td>as specified
+</table>
+
+<p>If one value is specified, the top and bottom of all column rules are clipped by specified length. If two values are specified, the first value applies to the top column rules and the second value applies to the bottom column rules. 
 
 
 <h2>Selecting elements within pages</h2>
@@ -2528,12 +2578,6 @@ or like pseudo-elements
 <pre>
   @page \S+ &lt;page-selector> \S+ &lt;selector> 
 </pre>
-
-<p>The selector 
-
-
-
-
 
 
 <p>In an alternative longhand syntax, selectors are placed inside an @inside-block:
