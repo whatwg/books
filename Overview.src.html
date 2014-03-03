@@ -2307,7 +2307,9 @@ h1, h2 { bookmark-state: open }
 
 <h2>Page selectors</h2>
 
-<p>In CSS2, <a href="http://www.w3.org/TR/CSS2/page.html#page-selectors">first, left and right pages</a>, as well as named pages, can be selected. This specification adds more advanced page selectors. Page selectors are similar to normal selectors in the sense that they query a data set and select parts of it. However, page selectors and normal selector are different in what they query (normal selectors query a document tree; page selectors query a sequence of pages) and what they select (normal selectors find structured elements, page selectors find formatted pages). This specification adds two page pseudo-classes: nth() and range(). 
+<p>A document consists of a linear sequence of pages. In simple documents, all pages have the same page area and marginalia. In more complex documents, pages may have different sizes, marginalia and orientation. Being able to style pages differently is therefore important.
+
+<p>In CSS2, <a href="http://www.w3.org/TR/CSS2/page.html#page-selectors">first, left and right pages</a>, as well as named pages, can be selected. This specification adds more advanced page selectors. Page selectors are similar to normal selectors in the sense that they query a data set and select parts of it. However, page selectors and normal selector are different in what they query (normal selectors query a document tree; page selectors query a sequence of pages) and what they select (normal selectors find structured elements, page selectors find formatted pages). 
 
 <h3>The <code>nth()</code> page pseudo-class</h3>
 
@@ -2332,18 +2334,11 @@ h1, h2 { bookmark-state: open }
 </pre>
 </div>
 
-<div class=example>
-<p>In this example, pages the chapter page group will cycle through pink, lime and white backgrounds:
-<pre>
-@page chapter:nth(3n) { background: pink }
-@page chapter:nth(3n+1)) { background: lime }
-@page chapter:nth(3n+2)) { background: white }
-</pre>
-</div>
 
-
-
+<!--
 <h3>The <code>range()</code> page pseudo-class</h3>
+
+<p class=issue>This may be more important when printing a document, than when styling a document.
 
 <p>The :range() page pseudo-class is added to select a range of pages. The syntax is:
 
@@ -2371,10 +2366,63 @@ h1, h2 { bookmark-state: open }
 @page chapter:range(2) { background: pink }
 </pre>
 </div>
+-->
 
+<h3>Page groups</h2>
 
-<h2>Page groups</h2>
+<p>A <dfn>page group</dfn> is a sequence of pages with the same name. Being able to style the first page of page group different from the other pages in the page group is important. To support this, the named page and the <code>:first</code> and <code>:nth()</code> selector can be combined with the page name in page selectors:
 
+<div class=example>
+<p>In this example, various background colors will be set on different pages in the "chapter" page group:
+<pre>
+@page chapter:first { background: pink }  /* the first page */
+@page chapter:nth(1) { background: pink }  /* the first page */
+@page chapter:nth(2) { background: lime }  /* the second page */
+@page chapter:nth(3n+2) { background: white }  /* every third page */
+</pre>
+</div>
+
+<p>A new page group is started when an element is set to a named page which is different from the preceding element, or differen from the ancestor element.
+
+<div class=example>
+<p>In this example, the first article starts a new page group due to having a different named page than its ancestor. However, the second article continues in the same page group as the first, due to having the same named page. As a result, there will only be one page with a green background.
+
+<pre>
+@page chapter:first { background: green }
+body { page: upright }
+article { page: chapter }
+
+&lt;body>
+  &lt;article>...&lt;/article>
+  &lt;article>...&lt;/article>
+&lt;/body>
+</pre>
+</div>
+
+<p>To enable page groups to be 
+
+<div class=example>
+<p>In this example, both articles start new page groups due to having an explicit page break before the element.
+
+<pre>
+@page chapter:first { background: lime }
+body { page: upright }
+article { page: chapter; break-before: page }
+
+&lt;body>
+  &lt;article>...&lt;/article>
+  &lt;article>...&lt;/article>
+&lt;/body>
+</pre>
+</div>
+
+<!--
+ are named with the 'page' property, and
+selected with a <a href="http://www.w3.org/TR/css3-page/#page-type-selector">page
+type selector</a>. 
+-->
+
+<!--
 <p>A document consists of a linear sequence of pages. In simple
 documents, all pages have the same page area and marginalia. In more
 complex documents, pages may have different sizes, marginalia and
@@ -2471,13 +2519,27 @@ article {
 @page chapter:first { ... }   /* selects the first page of every "chapter" page group */
 </pre>
 
-<p>This is similar to how the ":nth-of-type()" selector works. 
+<p>This is similar to how the <code>:nth-of-type()</code> selector works. 
 
-<!--<p>Another way to think of it is that a page selector without any explicit page group has a default, invisible page group. If it had been named "document", the selector for the first page in the document would have been "document:first".-->
 
 </div>
 
+<h3>Automatic page groups</h3>
 
+<p>An alternative to setting page groups explicitly is to assume
+that elements with 'break-before: page' starts a new page group:
+
+<pre>
+@page chapter:first { background: yellow }
+
+.chapter {
+   page: chapter; 
+   break-before: page;
+}
+</pre>
+
+
+<!--<p>Another way to think of it is that a page selector without any explicit page group has a default, invisible page group. If it had been named "document", the selector for the first page in the document would have been "document:first".-->
 
 <!--
 <p class=note>Another wayComplex page selectors
@@ -2535,10 +2597,10 @@ displayed; if the condition is not met, the effect will be as if
       <td><dfn>column-rule-clip</dfn>
     <tr>
       <td><em>Value:</em>
-    <td>&lt;length> &lt;length>?
+    <td>none | auto | [ &lt;length> &lt;length>? ]
     <tr>
       <td><em>Initial:</em>
-      <td>0
+      <td>none
     <tr>
       <td><em>Applies to:</em>
       <td>multicol elements
@@ -2556,11 +2618,20 @@ displayed; if the condition is not met, the effect will be as if
       <td>as specified
 </table>
 
-<p>If one value is specified, the top and bottom of all column rules are clipped by specified length. If two values are specified, the first value applies to the top column rules and the second value applies to the bottom column rules. 
+<p>Values are:
 
+<dl>
+<dt>none
+<dd>no clipping is performed
+
+<dt>auto
+<dd>column rules are clipped so that they align with prominent font features; for latin scripts this means that the top end of the column rule aligns with the ex-height of the dominant font, while the bottom end of the rule aligns with the baseline of the dominiant font. 
+
+<dt>length
+<dd>If one value is specified, the top and bottom of all column rules are clipped by specified length. If two values are specified, the first value applies to the top column rules and the second value applies to the bottom column rules. 
+</dl>
 
 <h2>Selecting elements within pages</h2>
-
 
 <p>To select elements within a page, normal selectors can be combined with a page selector. 
 
