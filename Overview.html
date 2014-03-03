@@ -30,7 +30,7 @@ a.unclear, a.almost { color: orange }
   <p><a href="http://www.whatwg.org/" class="logo"><img width="100" alt="WHATWG" height="100" src="http://resources.whatwg.org/logo.svg"></a></p>
 	<h1>CSS Books</h1>
 	
-	<h2 class="no-num no-toc" id="living-standard-—-last-updated-2-march-2014">Living Standard — Last Updated 2 March 2014</h2>
+	<h2 class="no-num no-toc" id="living-standard-—-last-updated-3-march-2014">Living Standard — Last Updated 3 March 2014</h2>
 	
 	<dl>
 		<dt>This version:
@@ -52,7 +52,7 @@ a.unclear, a.almost { color: orange }
 
 	</dl>
 
-<p class="copyright"><a href="http://creativecommons.org/publicdomain/zero/1.0/" rel="license"><img src="http://i.creativecommons.org/p/zero/1.0/80x15.png" alt="CC0"></a>To the extent possible under law, the editor has waived all copyright and related or neighboring rights to this work. In addition, as of 2 March 2014, the editor has made this specification available under the
+<p class="copyright"><a href="http://creativecommons.org/publicdomain/zero/1.0/" rel="license"><img src="http://i.creativecommons.org/p/zero/1.0/80x15.png" alt="CC0"></a>To the extent possible under law, the editor has waived all copyright and related or neighboring rights to this work. In addition, as of 3 March 2014, the editor has made this specification available under the
 <a href="http://www.openwebfoundation.org/legal/the-owf-1-0-agreements/owfa-1-0" rel="license">Open Web Foundation Agreement Version 1.0</a>, which is available at <!--begin-link--><a href="http://www.openwebfoundation.org/legal/the-owf-1-0-agreements/owfa-1-0">http://www.openwebfoundation.org/legal/the-owf-1-0-agreements/owfa-1-0</a><!--end-link-->.
 
 </div>
@@ -113,20 +113,23 @@ a.unclear, a.almost { color: orange }
    <li><a href="#the-range()-page-pseudo-class"><span class="secno">9.2 </span>The <code>range()</code> page pseudo-class</a></ol></li>
  <li><a href="#page-groups"><span class="secno">10 </span>Page groups</a></li>
  <li><a href="#conditional-content"><span class="secno">11 </span>Conditional content</a></li>
- <li><a href="#selecting-elements-within-pages"><span class="secno">12 </span>Selecting elements within pages</a></li>
- <li><a href="#selecting-columns"><span class="secno">13 </span>Selecting columns</a></li>
- <li><a href="#baseline-grids"><span class="secno">14 </span>Baseline grids</a>
+ <li><a href="#clipping-column-rules"><span class="secno">12 </span>Clipping column rules</a>
   <ol>
-   <li><a href="#'baseline-grid'"><span class="secno">14.1 </span>'baseline-grid'</a></li>
-   <li><a href="#'baseline-block-snap'"><span class="secno">14.2 </span>'baseline-block-snap'</a></ol></li>
- <li><a href="#character-substitution"><span class="secno">15 </span>Character substitution</a></li>
- <li><a href="#microtypography"><span class="secno">16 </span>Microtypography</a>
+   <li><a href="#column-rule-clip"><span class="secno">12.1 </span>column-rule-clip</a></ol></li>
+ <li><a href="#selecting-elements-within-pages"><span class="secno">13 </span>Selecting elements within pages</a></li>
+ <li><a href="#selecting-columns"><span class="secno">14 </span>Selecting columns</a></li>
+ <li><a href="#baseline-grids"><span class="secno">15 </span>Baseline grids</a>
   <ol>
-   <li><a href="#minimum,-maximum-and-optimal-spacing"><span class="secno">16.1 </span>Minimum, maximum and optimal spacing</a></ol></li>
- <li><a href="#spatial-layout-of-pages;-@layout"><span class="secno">17 </span>Spatial layout of pages; @layout</a>
+   <li><a href="#'baseline-grid'"><span class="secno">15.1 </span>'baseline-grid'</a></li>
+   <li><a href="#'baseline-block-snap'"><span class="secno">15.2 </span>'baseline-block-snap'</a></ol></li>
+ <li><a href="#character-substitution"><span class="secno">16 </span>Character substitution</a></li>
+ <li><a href="#microtypography"><span class="secno">17 </span>Microtypography</a>
   <ol>
-   <li><a href="#page-shift-effects"><span class="secno">17.1 </span>Page shift effects</a></ol></li>
- <li><a href="#appendix-a:-default-style-sheet"><span class="secno">18 </span>Appendix A: Default style sheet</a></li>
+   <li><a href="#minimum,-maximum-and-optimal-spacing"><span class="secno">17.1 </span>Minimum, maximum and optimal spacing</a></ol></li>
+ <li><a href="#spatial-layout-of-pages;-@layout"><span class="secno">18 </span>Spatial layout of pages; @layout</a>
+  <ol>
+   <li><a href="#page-shift-effects"><span class="secno">18.1 </span>Page shift effects</a></ol></li>
+ <li><a href="#appendix-a:-default-style-sheet"><span class="secno">19 </span>Appendix A: Default style sheet</a></li>
  <li><a href="#references" class="no-num">References</a></li>
  <li><a href="#acknowledgments" class="no-num">Acknowledgments</a></ol>
 <!--end-toc-->
@@ -2456,11 +2459,60 @@ or like pseudo-elements
 
 <h2 id="conditional-content"><span class="secno">11 </span>Conditional content</h2>
 
+<p>Content is sometimes displayed or hidden based on their placement
+after formatting. This specification proposes the 'condition' property
+to express conditions that must be met in order for the element to be
+displayed; if the condition is not met, the effect will be as if
+'display: none' had been set.
+
+<div class="example">
+<p>In this example, thematic breaks witin the prose is normally indicated by a few blank lines. However, if the thematic break appears at a page break, it will be indicated by three asterisks.
+
+<pre>  .tb1 { margin: 1em 0; text-align: center; condition: at-page-break }
+  .tb2 { content: "\a\a\a"; condition: not-at-page-break }
+
+  &lt;div class=tb1&gt;***&lt;/div&gt;
+  &lt;div class=tb2&gt;&lt;/div&gt;
+</pre>
+</div>
 
 
+<h2 id="clipping-column-rules"><span class="secno">12 </span>Clipping column rules</h2>
 
 
-<h2 id="selecting-elements-within-pages"><span class="secno">12 </span>Selecting elements within pages</h2>
+<h3 id="column-rule-clip"><span class="secno">12.1 </span>column-rule-clip</h3>  
+
+<table class="propdef">
+    <tr>
+      <td><em>Name:</em>
+      <td><dfn id="column-rule-clip-0">column-rule-clip</dfn>
+    <tr>
+      <td><em>Value:</em>
+    <td>&lt;length&gt; &lt;length&gt;?
+    <tr>
+      <td><em>Initial:</em>
+      <td>0
+    <tr>
+      <td><em>Applies to:</em>
+      <td>multicol elements
+    <tr>
+      <td><em>Inherited:</em>
+      <td>no
+    <tr>
+      <td><em>Percentages:</em>
+      <td>N/A
+    <tr>
+      <td><em>Media:</em>
+      <td>visual
+    <tr>
+      <td><em>Computed value:</em>
+      <td>as specified
+</table>
+
+<p>If one value is specified, the top and bottom of all column rules are clipped by specified length. If two values are specified, the first value applies to the top column rules and the second value applies to the bottom column rules. 
+
+
+<h2 id="selecting-elements-within-pages"><span class="secno">13 </span>Selecting elements within pages</h2>
 
 
 <p>To select elements within a page, normal selectors can be combined with a page selector. 
@@ -2477,12 +2529,6 @@ or like pseudo-elements
 
 <pre>  @page \S+ &lt;page-selector&gt; \S+ &lt;selector&gt; 
 </pre>
-
-<p>The selector 
-
-
-
-
 
 
 <p>In an alternative longhand syntax, selectors are placed inside an @inside-block:
@@ -2541,7 +2587,7 @@ or like pseudo-elements
 </div>
 
 
-<h2 id="selecting-columns"><span class="secno">13 </span>Selecting columns</h2>
+<h2 id="selecting-columns"><span class="secno">14 </span>Selecting columns</h2>
 
 <p class="issue">This section is not fully developed. 
 
@@ -2557,12 +2603,12 @@ div.chapter:column(1,*)     /* the first column on all pages */
 
 
 
-<h2 id="baseline-grids"><span class="secno">14 </span>Baseline grids</h2>
+<h2 id="baseline-grids"><span class="secno">15 </span>Baseline grids</h2>
 
 <p>Text in adjacent columns often use the same baselines. This appears more pleasant to typographers, and reduces <em>show-through</em>, where a printed line shows through to the other side of the sheet. By aligning text to a grid of baselines, a baseline rhythm is established. Subheadings and figures may disturb the <em>baseline rhythm</em>, but subsequent text should find it again. The 'baseline-grid' property is introduced to set and clear baseline grids, while the 'baseline-block-snap' property indicates how to align elements that do not align themselves with the baseline grids. 
 
 
-<h3 id="'baseline-grid'"><span class="secno">14.1 </span>'baseline-grid'</h3>  
+<h3 id="'baseline-grid'"><span class="secno">15.1 </span>'baseline-grid'</h3>  
 
 <table class="propdef">
     <tr>
@@ -2760,7 +2806,7 @@ klm nop.
 </pre></div>
 
 
-<h3 id="'baseline-block-snap'"><span class="secno">14.2 </span>'baseline-block-snap'</h3>
+<h3 id="'baseline-block-snap'"><span class="secno">15.2 </span>'baseline-block-snap'</h3>
 
 <table class="propdef">
     <tr>
@@ -3112,7 +3158,7 @@ div.figure { height: 20px; line-box-contain: block inline replaced line-grid }
 http://www.w3.org/Style/Group/css3-src/css3-linebox/Overview.html#LineStacking
 -->
 
-<h2 id="character-substitution"><span class="secno">15 </span>Character substitution</h2>
+<h2 id="character-substitution"><span class="secno">16 </span>Character substitution</h2>
 
 <div class="code-example">
 <a href="http://www.wiumlie.no/2014/tests/books/named-strings.html">html</a><br>
@@ -3239,11 +3285,11 @@ h3 { text-replace: "foobar" "barfoo" }      /* accept value, but ... */
 
 <p>This property is evaluated after the <span class="property">content</span> property, and before <span class="property">text-transform</span>.
 
-<h2 id="microtypography"><span class="secno">16 </span>Microtypography</h2>
+<h2 id="microtypography"><span class="secno">17 </span>Microtypography</h2>
 
 <p>Microtypography is a range of methods for improving the appearance of text. Often, small adjustments in the space between letters and words can achieve a more even presentation with less need for hyphenation and fewer widows and orphans. This specification extends two existing CSS properties — 'letter-spacing' and 'word-spacing' — with minimum and maximum values to guide User Agents when laying out text. 
 
-<h3 id="minimum,-maximum-and-optimal-spacing"><span class="secno">16.1 </span>Minimum, maximum and optimal spacing</h3>
+<h3 id="minimum,-maximum-and-optimal-spacing"><span class="secno">17.1 </span>Minimum, maximum and optimal spacing</h3>
 
 
 <p>The 'letter-spacing' and 'word-spacing' properties are extended to accept up to three values:
@@ -3316,7 +3362,7 @@ word-spacing: 80% 100% 120%;
 
 </div>
 
-<h2 id="spatial-layout-of-pages;-@layout"><span class="secno">17 </span>Spatial layout of pages; @layout</h2>
+<h2 id="spatial-layout-of-pages;-@layout"><span class="secno">18 </span>Spatial layout of pages; @layout</h2>
 
 <p>In commonly used apps, pages are often laid out spatially so that
 users can nagivate from one page to another by moving up, down, right
@@ -3413,7 +3459,7 @@ relative to the document, not to the style sheet.
 </div>
 
 
-<h3 id="page-shift-effects"><span class="secno">17.1 </span>Page shift effects</h3>
+<h3 id="page-shift-effects"><span class="secno">18.1 </span>Page shift effects</h3>
 
 <p>To describe page shift effects, four new properties inside
 @navigation are proposed: nav-up-shift, nav-right-shift,
@@ -3461,7 +3507,7 @@ a:target-layout(attr(href url), previous-page) { content: " on the previous page
 </div>
 -->
 
-<h2 id="appendix-a:-default-style-sheet"><span class="secno">18 </span>Appendix A: Default style sheet</h2>
+<h2 id="appendix-a:-default-style-sheet"><span class="secno">19 </span>Appendix A: Default style sheet</h2>
 
 <pre>@page {
   counter-reset: footnote;
