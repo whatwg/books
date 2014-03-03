@@ -110,26 +110,25 @@ a.unclear, a.almost { color: orange }
  <li><a href="#page-selectors"><span class="secno">9 </span>Page selectors</a>
   <ol>
    <li><a href="#the-nth()-page-pseudo-class"><span class="secno">9.1 </span>The <code>nth()</code> page pseudo-class</a></li>
-   <li><a href="#the-range()-page-pseudo-class"><span class="secno">9.2 </span>The <code>range()</code> page pseudo-class</a></ol></li>
- <li><a href="#page-groups"><span class="secno">10 </span>Page groups</a></li>
- <li><a href="#conditional-content"><span class="secno">11 </span>Conditional content</a></li>
- <li><a href="#clipping-column-rules"><span class="secno">12 </span>Clipping column rules</a>
+   <li><a href="#page-groups"><span class="secno">9.2 </span>Page groups</a></ol></li>
+ <li><a href="#conditional-content"><span class="secno">10 </span>Conditional content</a></li>
+ <li><a href="#clipping-column-rules"><span class="secno">11 </span>Clipping column rules</a>
   <ol>
-   <li><a href="#column-rule-clip"><span class="secno">12.1 </span>column-rule-clip</a></ol></li>
- <li><a href="#selecting-elements-within-pages"><span class="secno">13 </span>Selecting elements within pages</a></li>
- <li><a href="#selecting-columns"><span class="secno">14 </span>Selecting columns</a></li>
- <li><a href="#baseline-grids"><span class="secno">15 </span>Baseline grids</a>
+   <li><a href="#column-rule-clip"><span class="secno">11.1 </span>column-rule-clip</a></ol></li>
+ <li><a href="#selecting-elements-within-pages"><span class="secno">12 </span>Selecting elements within pages</a></li>
+ <li><a href="#selecting-columns"><span class="secno">13 </span>Selecting columns</a></li>
+ <li><a href="#baseline-grids"><span class="secno">14 </span>Baseline grids</a>
   <ol>
-   <li><a href="#'baseline-grid'"><span class="secno">15.1 </span>'baseline-grid'</a></li>
-   <li><a href="#'baseline-block-snap'"><span class="secno">15.2 </span>'baseline-block-snap'</a></ol></li>
- <li><a href="#character-substitution"><span class="secno">16 </span>Character substitution</a></li>
- <li><a href="#microtypography"><span class="secno">17 </span>Microtypography</a>
+   <li><a href="#'baseline-grid'"><span class="secno">14.1 </span>'baseline-grid'</a></li>
+   <li><a href="#'baseline-block-snap'"><span class="secno">14.2 </span>'baseline-block-snap'</a></ol></li>
+ <li><a href="#character-substitution"><span class="secno">15 </span>Character substitution</a></li>
+ <li><a href="#microtypography"><span class="secno">16 </span>Microtypography</a>
   <ol>
-   <li><a href="#minimum,-maximum-and-optimal-spacing"><span class="secno">17.1 </span>Minimum, maximum and optimal spacing</a></ol></li>
- <li><a href="#spatial-layout-of-pages;-@layout"><span class="secno">18 </span>Spatial layout of pages; @layout</a>
+   <li><a href="#minimum,-maximum-and-optimal-spacing"><span class="secno">16.1 </span>Minimum, maximum and optimal spacing</a></ol></li>
+ <li><a href="#spatial-layout-of-pages;-@layout"><span class="secno">17 </span>Spatial layout of pages; @layout</a>
   <ol>
-   <li><a href="#page-shift-effects"><span class="secno">18.1 </span>Page shift effects</a></ol></li>
- <li><a href="#appendix-a:-default-style-sheet"><span class="secno">19 </span>Appendix A: Default style sheet</a></li>
+   <li><a href="#page-shift-effects"><span class="secno">17.1 </span>Page shift effects</a></ol></li>
+ <li><a href="#appendix-a:-default-style-sheet"><span class="secno">18 </span>Appendix A: Default style sheet</a></li>
  <li><a href="#references" class="no-num">References</a></li>
  <li><a href="#acknowledgments" class="no-num">Acknowledgments</a></ol>
 <!--end-toc-->
@@ -2272,7 +2271,9 @@ h1, h2 { bookmark-state: open }
 
 <h2 id="page-selectors"><span class="secno">9 </span>Page selectors</h2>
 
-<p>In CSS2, <a href="http://www.w3.org/TR/CSS2/page.html#page-selectors">first, left and right pages</a>, as well as named pages, can be selected. This specification adds more advanced page selectors. Page selectors are similar to normal selectors in the sense that they query a data set and select parts of it. However, page selectors and normal selector are different in what they query (normal selectors query a document tree; page selectors query a sequence of pages) and what they select (normal selectors find structured elements, page selectors find formatted pages). This specification adds two page pseudo-classes: nth() and range(). 
+<p>A document consists of a linear sequence of pages. In simple documents, all pages have the same page area and marginalia. In more complex documents, pages may have different sizes, marginalia and orientation. Being able to style pages differently is therefore important.
+
+<p>In CSS2, <a href="http://www.w3.org/TR/CSS2/page.html#page-selectors">first, left and right pages</a>, as well as named pages, can be selected. This specification adds more advanced page selectors. Page selectors are similar to normal selectors in the sense that they query a data set and select parts of it. However, page selectors and normal selector are different in what they query (normal selectors query a document tree; page selectors query a sequence of pages) and what they select (normal selectors find structured elements, page selectors find formatted pages). 
 
 <h3 id="the-nth()-page-pseudo-class"><span class="secno">9.1 </span>The <code>nth()</code> page pseudo-class</h3>
 
@@ -2295,44 +2296,92 @@ h1, h2 { bookmark-state: open }
 </pre>
 </div>
 
-<div class="example">
-<p>In this example, pages the chapter page group will cycle through pink, lime and white backgrounds:
-<pre>@page chapter:nth(3n) { background: pink }
-@page chapter:nth(3n+1)) { background: lime }
-@page chapter:nth(3n+2)) { background: white }
-</pre>
-</div>
 
+<!--
+<h3>The <code>range()</code> page pseudo-class</h3>
 
-
-<h3 id="the-range()-page-pseudo-class"><span class="secno">9.2 </span>The <code>range()</code> page pseudo-class</h3>
+<p class=issue>This may be more important when printing a document, than when styling a document.
 
 <p>The :range() page pseudo-class is added to select a range of pages. The syntax is:
 
-<pre>  :range( S* [ [0-9]+ S* - S* [0-9] ] | [0-9]+\+ | [0-9]+ ] S* )
+<pre>
+  :range( S* [ [0-9]+ S* - S* [0-9] ] | [0-9]+\+ | [0-9]+ ] S* )
 </pre>
 
-<div class="example">
+<div class=example>
 <p>In this example, page 3, 4, and 5 of the document will have a pink background. 
-<pre>@page :range(3-5) { background: pink }
+<pre>
+@page :range(3-5) { background: pink }
 </pre>
 </div>
 
-<div class="example">
+<div class=example>
 <p>In this example, all but page 1 and 2 will have a pink background. 
-<pre>@page :range(3+) { background: pink }
+<pre>
+@page :range(3+) { background: pink }
 </pre>
 </div>
+
+<div class=example>
+<p>In this example, the second page of all chapter page groups will have a pink background. 
+<pre>
+@page chapter:range(2) { background: pink }
+</pre>
+</div>
+-->
+
+<h3 id="page-groups"><span class="secno">9.2 </span>Page groups</h3>
+
+<p>A <dfn id="page-group">page group</dfn> is a sequence of pages with the same name. Being able to style the first page of page group different from the other pages in the page group is important. To support this, the named page and the <code>:first</code> and <code>:nth()</code> selector can be combined with the page name in page selectors:
 
 <div class="example">
-<p>In this example, the second page of all chapter page groups will have a pink background. 
-<pre>@page chapter:range(2) { background: pink }
+<p>In this example, various background colors will be set on different pages in the "chapter" page group:
+<pre>@page chapter:first { background: pink }  /* the first page */
+@page chapter:nth(1) { background: pink }  /* the first page */
+@page chapter:nth(2) { background: lime }  /* the second page */
+@page chapter:nth(3n+2) { background: white }  /* every third page */
 </pre>
 </div>
 
+<p>A new page group is started when an element is set to a named page which is different from the preceding element, or differen from the ancestor element.
 
-<h2 id="page-groups"><span class="secno">10 </span>Page groups</h2>
+<div class="example">
+<p>In this example, the first article starts a new page group due to having a different named page than its ancestor. However, the second article continues in the same page group as the first, due to having the same named page. As a result, there will only be one page with a green background.
 
+<pre>@page chapter:first { background: green }
+body { page: upright }
+article { page: chapter }
+
+&lt;body&gt;
+  &lt;article&gt;...&lt;/article&gt;
+  &lt;article&gt;...&lt;/article&gt;
+&lt;/body&gt;
+</pre>
+</div>
+
+<p>To enable page groups to be 
+
+<div class="example">
+<p>In this example, both articles start new page groups due to having an explicit page break before the element.
+
+<pre>@page chapter:first { background: lime }
+body { page: upright }
+article { page: chapter; break-before: page }
+
+&lt;body&gt;
+  &lt;article&gt;...&lt;/article&gt;
+  &lt;article&gt;...&lt;/article&gt;
+&lt;/body&gt;
+</pre>
+</div>
+
+<!--
+ are named with the 'page' property, and
+selected with a <a href="http://www.w3.org/TR/css3-page/#page-type-selector">page
+type selector</a>. 
+-->
+
+<!--
 <p>A document consists of a linear sequence of pages. In simple
 documents, all pages have the same page area and marginalia. In more
 complex documents, pages may have different sizes, marginalia and
@@ -2345,11 +2394,13 @@ type selector</a>.
 
 <p>The syntax of page selectors are:
 
-<pre>@page [ \S+ &lt;page-group&gt;? [ : page-pseudo-class ]* ] | [ \S* [ : *page-pseudo-class ]+
+<pre>
+@page [ \S+ &lt;page-group>? [ : page-pseudo-class ]* ] | [ \S* [ : *page-pseudo-class ]+
 </pre>
 
-<div class="example">
-<pre>@page chapter { @bottom-center { content: counter(page) }
+<div class=example>
+<pre>
+@page chapter { @bottom-center { content: counter(page) }
 div.introduction { page: chapter }
 </pre>
 </div>
@@ -2360,10 +2411,10 @@ into several page groups in order to, e.g., address the first page in
 the group. The 'page-group' property expresses whether an element
 starts a new page group or not.
 
-<table class="propdef">
+<table class=propdef>
     <tr>
       <td><em>Name:</em>
-      <td><dfn id="page-group">page-group</dfn>
+      <td><dfn>page-group</dfn>
     <tr>
       <td><em>Value:</em>
     <td>auto | start 
@@ -2383,7 +2434,7 @@ starts a new page group or not.
       <td><em>Media:</em>
       <td>paged
     <tr>
-      <td><em>Computed value:</em>
+      <td><em>Computed&nbsp;value:</em>
       <td>as specified
 </table>
 
@@ -2399,11 +2450,12 @@ starts a new page group or not.
 </dl>
 
 
-<div class="example">
+<div class=example>
 
 <p>In this example, each article starts a new page group so that the first page of each article has a pink background.
 
-<pre>@page funky:first {
+<pre>
+@page funky:first {
   background: pink;
 }
 article {
@@ -2418,20 +2470,35 @@ article {
 
 <p>When a <a href="http://www.w3.org/TR/css3-page/#page-pseudo-class">page pseudo-class</a> is combined with a <a href="http://www.w3.org/TR/css3-page/#page-type-selector">page type selector</a> (also called a "page group selector"), the page pseudo-classes query pages within that page group.
 
-<div class="example">
+<div class=example>
 <p>When used alone, ":first" selects the first page of the document. When combined with a page group selector, ":first" selects the first page in a page group
 
-<pre>@page :first { ...  }         /* selects the first page of the document */
+<pre>
+@page :first { ...  }         /* selects the first page of the document */
 @page chapter:first { ... }   /* selects the first page of every "chapter" page group */
 </pre>
 
-<p>This is similar to how the ":nth-of-type()" selector works. 
+<p>This is similar to how the <code>:nth-of-type()</code> selector works. 
 
-<!--<p>Another way to think of it is that a page selector without any explicit page group has a default, invisible page group. If it had been named "document", the selector for the first page in the document would have been "document:first".-->
 
 </div>
 
+<h3>Automatic page groups</h3>
 
+<p>An alternative to setting page groups explicitly is to assume
+that elements with 'break-before: page' starts a new page group:
+
+<pre>
+@page chapter:first { background: yellow }
+
+.chapter {
+   page: chapter; 
+   break-before: page;
+}
+</pre>
+
+
+<!--<p>Another way to think of it is that a page selector without any explicit page group has a default, invisible page group. If it had been named "document", the selector for the first page in the document would have been "document:first".-->
 
 <!--
 <p class=note>Another wayComplex page selectors
@@ -2457,7 +2524,7 @@ or like pseudo-elements
 </div>
 -->
 
-<h2 id="conditional-content"><span class="secno">11 </span>Conditional content</h2>
+<h2 id="conditional-content"><span class="secno">10 </span>Conditional content</h2>
 
 <p>Content is sometimes displayed or hidden based on their placement
 after formatting. This specification proposes the 'condition' property
@@ -2477,10 +2544,10 @@ displayed; if the condition is not met, the effect will be as if
 </div>
 
 
-<h2 id="clipping-column-rules"><span class="secno">12 </span>Clipping column rules</h2>
+<h2 id="clipping-column-rules"><span class="secno">11 </span>Clipping column rules</h2>
 
 
-<h3 id="column-rule-clip"><span class="secno">12.1 </span>column-rule-clip</h3>  
+<h3 id="column-rule-clip"><span class="secno">11.1 </span>column-rule-clip</h3>  
 
 <table class="propdef">
     <tr>
@@ -2488,10 +2555,10 @@ displayed; if the condition is not met, the effect will be as if
       <td><dfn id="column-rule-clip-0">column-rule-clip</dfn>
     <tr>
       <td><em>Value:</em>
-    <td>&lt;length&gt; &lt;length&gt;?
+    <td>none | auto | [ &lt;length&gt; &lt;length&gt;? ]
     <tr>
       <td><em>Initial:</em>
-      <td>0
+      <td>none
     <tr>
       <td><em>Applies to:</em>
       <td>multicol elements
@@ -2509,11 +2576,20 @@ displayed; if the condition is not met, the effect will be as if
       <td>as specified
 </table>
 
-<p>If one value is specified, the top and bottom of all column rules are clipped by specified length. If two values are specified, the first value applies to the top column rules and the second value applies to the bottom column rules. 
+<p>Values are:
 
+<dl>
+<dt>none
+<dd>no clipping is performed
 
-<h2 id="selecting-elements-within-pages"><span class="secno">13 </span>Selecting elements within pages</h2>
+<dt>auto
+<dd>column rules are clipped so that they align with prominent font features; for latin scripts this means that the top end of the column rule aligns with the ex-height of the dominant font, while the bottom end of the rule aligns with the baseline of the dominiant font. 
 
+<dt>length
+<dd>If one value is specified, the top and bottom of all column rules are clipped by specified length. If two values are specified, the first value applies to the top column rules and the second value applies to the bottom column rules. 
+</dl>
+
+<h2 id="selecting-elements-within-pages"><span class="secno">12 </span>Selecting elements within pages</h2>
 
 <p>To select elements within a page, normal selectors can be combined with a page selector. 
 
@@ -2587,7 +2663,7 @@ displayed; if the condition is not met, the effect will be as if
 </div>
 
 
-<h2 id="selecting-columns"><span class="secno">14 </span>Selecting columns</h2>
+<h2 id="selecting-columns"><span class="secno">13 </span>Selecting columns</h2>
 
 <p class="issue">This section is not fully developed. 
 
@@ -2603,12 +2679,12 @@ div.chapter:column(1,*)     /* the first column on all pages */
 
 
 
-<h2 id="baseline-grids"><span class="secno">15 </span>Baseline grids</h2>
+<h2 id="baseline-grids"><span class="secno">14 </span>Baseline grids</h2>
 
 <p>Text in adjacent columns often use the same baselines. This appears more pleasant to typographers, and reduces <em>show-through</em>, where a printed line shows through to the other side of the sheet. By aligning text to a grid of baselines, a baseline rhythm is established. Subheadings and figures may disturb the <em>baseline rhythm</em>, but subsequent text should find it again. The 'baseline-grid' property is introduced to set and clear baseline grids, while the 'baseline-block-snap' property indicates how to align elements that do not align themselves with the baseline grids. 
 
 
-<h3 id="'baseline-grid'"><span class="secno">15.1 </span>'baseline-grid'</h3>  
+<h3 id="'baseline-grid'"><span class="secno">14.1 </span>'baseline-grid'</h3>  
 
 <table class="propdef">
     <tr>
@@ -2806,7 +2882,7 @@ klm nop.
 </pre></div>
 
 
-<h3 id="'baseline-block-snap'"><span class="secno">15.2 </span>'baseline-block-snap'</h3>
+<h3 id="'baseline-block-snap'"><span class="secno">14.2 </span>'baseline-block-snap'</h3>
 
 <table class="propdef">
     <tr>
@@ -3158,7 +3234,7 @@ div.figure { height: 20px; line-box-contain: block inline replaced line-grid }
 http://www.w3.org/Style/Group/css3-src/css3-linebox/Overview.html#LineStacking
 -->
 
-<h2 id="character-substitution"><span class="secno">16 </span>Character substitution</h2>
+<h2 id="character-substitution"><span class="secno">15 </span>Character substitution</h2>
 
 <div class="code-example">
 <a href="http://www.wiumlie.no/2014/tests/books/named-strings.html">html</a><br>
@@ -3285,11 +3361,11 @@ h3 { text-replace: "foobar" "barfoo" }      /* accept value, but ... */
 
 <p>This property is evaluated after the <span class="property">content</span> property, and before <span class="property">text-transform</span>.
 
-<h2 id="microtypography"><span class="secno">17 </span>Microtypography</h2>
+<h2 id="microtypography"><span class="secno">16 </span>Microtypography</h2>
 
 <p>Microtypography is a range of methods for improving the appearance of text. Often, small adjustments in the space between letters and words can achieve a more even presentation with less need for hyphenation and fewer widows and orphans. This specification extends two existing CSS properties — 'letter-spacing' and 'word-spacing' — with minimum and maximum values to guide User Agents when laying out text. 
 
-<h3 id="minimum,-maximum-and-optimal-spacing"><span class="secno">17.1 </span>Minimum, maximum and optimal spacing</h3>
+<h3 id="minimum,-maximum-and-optimal-spacing"><span class="secno">16.1 </span>Minimum, maximum and optimal spacing</h3>
 
 
 <p>The 'letter-spacing' and 'word-spacing' properties are extended to accept up to three values:
@@ -3362,7 +3438,7 @@ word-spacing: 80% 100% 120%;
 
 </div>
 
-<h2 id="spatial-layout-of-pages;-@layout"><span class="secno">18 </span>Spatial layout of pages; @layout</h2>
+<h2 id="spatial-layout-of-pages;-@layout"><span class="secno">17 </span>Spatial layout of pages; @layout</h2>
 
 <p>In commonly used apps, pages are often laid out spatially so that
 users can nagivate from one page to another by moving up, down, right
@@ -3459,7 +3535,7 @@ relative to the document, not to the style sheet.
 </div>
 
 
-<h3 id="page-shift-effects"><span class="secno">18.1 </span>Page shift effects</h3>
+<h3 id="page-shift-effects"><span class="secno">17.1 </span>Page shift effects</h3>
 
 <p>To describe page shift effects, four new properties inside
 @navigation are proposed: nav-up-shift, nav-right-shift,
@@ -3507,7 +3583,7 @@ a:target-layout(attr(href url), previous-page) { content: " on the previous page
 </div>
 -->
 
-<h2 id="appendix-a:-default-style-sheet"><span class="secno">19 </span>Appendix A: Default style sheet</h2>
+<h2 id="appendix-a:-default-style-sheet"><span class="secno">18 </span>Appendix A: Default style sheet</h2>
 
 <pre>@page {
   counter-reset: footnote;
