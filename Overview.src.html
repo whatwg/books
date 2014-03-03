@@ -2512,15 +2512,15 @@ displayed; if the condition is not met, the effect will be as if
 'display: none' had been set.
 
 <div class=example>
-<p>In this example, thematic breaks witin the prose is normally indicated by a few blank lines. However, if the thematic break appears at a page break, it will be indicated by three asterisks.
+<p>In this example, thematic breaks within the prose is normally indicated by a few blank lines. However, if the thematic break appears at a page break, it will be indicated by three asterisks.
 
 <pre>
-  .tb1 { margin: 1em 0; text-align: center; condition: at-page-break }
-  .tb2 { content: "\a\a\a"; condition: not-at-page-break }
+  .tb:before { content: "***"; condition: at-page-break; margin: 1em 0; text-align: center;  }
+  .tb:after  { content: "\a\a\a"; condition: not-at-page-break }
 
-  &lt;div class=tb1>***&lt;/div>
-  &lt;div class=tb2>&lt;/div>
+  &lt;div class=tb>&lt;/div>
 </pre>
+
 </div>
 
 
