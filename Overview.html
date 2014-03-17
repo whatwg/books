@@ -30,7 +30,7 @@ a.unclear, a.almost { color: orange }
   <p><a href="http://www.whatwg.org/" class="logo"><img width="100" alt="WHATWG" height="100" src="http://resources.whatwg.org/logo.svg"></a></p>
 	<h1>CSS Books</h1>
 	
-	<h2 class="no-num no-toc" id="living-standard-—-last-updated-3-march-2014">Living Standard — Last Updated 3 March 2014</h2>
+	<h2 class="no-num no-toc" id="living-standard-—-last-updated-17-march-2014">Living Standard — Last Updated 17 March 2014</h2>
 	
 	<dl>
 		<dt>This version:
@@ -52,7 +52,7 @@ a.unclear, a.almost { color: orange }
 
 	</dl>
 
-<p class="copyright"><a href="http://creativecommons.org/publicdomain/zero/1.0/" rel="license"><img src="http://i.creativecommons.org/p/zero/1.0/80x15.png" alt="CC0"></a>To the extent possible under law, the editor has waived all copyright and related or neighboring rights to this work. In addition, as of 3 March 2014, the editor has made this specification available under the
+<p class="copyright"><a href="http://creativecommons.org/publicdomain/zero/1.0/" rel="license"><img src="http://i.creativecommons.org/p/zero/1.0/80x15.png" alt="CC0"></a>To the extent possible under law, the editor has waived all copyright and related or neighboring rights to this work. In addition, as of 17 March 2014, the editor has made this specification available under the
 <a href="http://www.openwebfoundation.org/legal/the-owf-1-0-agreements/owfa-1-0" rel="license">Open Web Foundation Agreement Version 1.0</a>, which is available at <!--begin-link--><a href="http://www.openwebfoundation.org/legal/the-owf-1-0-agreements/owfa-1-0">http://www.openwebfoundation.org/legal/the-owf-1-0-agreements/owfa-1-0</a><!--end-link-->.
 
 </div>
@@ -2589,6 +2589,8 @@ displayed; if the condition is not met, the effect will be as if
 <dd>If one value is specified, the top and bottom of all column rules are clipped by specified length. If two values are specified, the first value applies to the top column rules and the second value applies to the bottom column rules. 
 </dl>
 
+<p>Spanners split column rules, and each fragment is possibly clipped by this property.
+
 <h2 id="selecting-elements-within-pages"><span class="secno">12 </span>Selecting elements within pages</h2>
 
 <p>To select elements within a page, normal selectors can be combined with a page selector. 
@@ -2681,7 +2683,16 @@ div.chapter:column(1,*)     /* the first column on all pages */
 
 <h2 id="baseline-grids"><span class="secno">14 </span>Baseline grids</h2>
 
-<p>Text in adjacent columns often use the same baselines. This appears more pleasant to typographers, and reduces <em>show-through</em>, where a printed line shows through to the other side of the sheet. By aligning text to a grid of baselines, a baseline rhythm is established. Subheadings and figures may disturb the <em>baseline rhythm</em>, but subsequent text should find it again. The 'baseline-grid' property is introduced to set and clear baseline grids, while the 'baseline-block-snap' property indicates how to align elements that do not align themselves with the baseline grids. 
+<!-- http://antennahouse.com/xslfo/extension.htm#axf.baseline-grid -->
+
+<div class="code-example">
+<a href="http://www.wiumlie.no/2014/tests/books/baseline-grid.html">html</a><br>
+<a href="http://www.wiumlie.no/2014/tests/books/baseline-grid-ah.pdf" class="pass">AH</a>
+<a href="http://www.wiumlie.no/2014/tests/books/baseline-grid-pr.pdf" class="pass">PR</a>
+</div>
+
+
+<p>Text in adjacent columns often use the same baselines. This appears more pleasant to typographers, and reduces <em>show-through</em>, where a printed line shows through to the other side of the sheet. By aligning text to a grid of baselines, a <em>baseline rhythm</em> is established. Subheadings and figures may disturb the baseline rhythm, but subsequent text should find it again. The 'baseline-grid' property is introduced to set and clear baseline grids, while the 'baseline-block-snap' property indicates how to align elements that do not align themselves with the baseline grids. 
 
 
 <h3 id="'baseline-grid'"><span class="secno">14.1 </span>'baseline-grid'</h3>  
@@ -2692,7 +2703,7 @@ div.chapter:column(1,*)     /* the first column on all pages */
       <td><dfn id="baseline-grid">baseline-grid</dfn>
     <tr>
       <td><em>Value:</em>
-    <td>normal | none | new | root | page
+    <td>normal | none | new | root <!--| page-->
     <tr>
       <td><em>Initial:</em>
       <td>normal
@@ -2733,9 +2744,11 @@ div.chapter:column(1,*)     /* the first column on all pages */
 
 <dd>the element sets the <dfn id="root-baseline-grid">root baseline grid</dfn>. The root baseline grid is defined by the root element; the calculation for finding the root baseline grid is the same as for the 'new' value. While the root element defines the root baseline grid, the root element does not automatically set the root baseline grid.
 
+<!--
 <dt>page
 
-<dd>the page box sets the <dfn id="page-baseline-grid">page baseline grid</dfn>. The page baseline grid is defined by the page box and the root element; the calculation for finding the page baseline grid is the same as for the root baseline grid, except that the page box is used to position the baselines.
+<dd>the page box sets the <dfn>page baseline grid</dfn>. The page baseline grid is defined by the page box and the root element; the calculation for finding the page baseline grid is the same as for the root baseline grid, except that the page box is used to position the baselines.
+-->
 </dl>
 
 
@@ -2908,11 +2921,7 @@ klm nop.
       <td>specified value
 </table>
 
-<p>Baseline alignment may cause content to be moved to subsequent baselines, thus resulting in blank areas. If other content appear between there is This property describes where contenethe blank area is placed.
-
-<p>This property describes how to align elements that do not align themselves with line rhythm.
-
-<p>Values are:
+<p>This property describes how to align content that is not baseline-aligned. Values are:
 
 <dl>
 <dt>auto
@@ -2923,8 +2932,11 @@ klm nop.
 <dd>the element is placed as close to the following content as possible
 <dt>center
 <dd>the element is centered between the previous and following content. 
-margin-box
-border-box
+
+<dt>margin-box
+<dd>the margin edge is used to align the block on the baseline grid
+<dt>border-box
+<dd>the border edge is used to align the block on the baseline grid
 </dl>
 
 
