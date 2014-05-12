@@ -1176,6 +1176,7 @@ A sentence consists of words&#xB9;.
 &#xB9; Most often.
 </pre>
 </div>
+
 -->
 
 <div class=example>
@@ -1720,66 +1721,29 @@ And is, despite of war and wasting fire,
 
 <h3>Alignment in Named Areas</h3>
 
-<p>Content floated to a named area is, by default, aligned with its
-reference point. The content will, if possible, be placed on the same
+<p>Content floated to a named area is, by default, aligned with the basline of its
+reference point. That is, the content will, if possible, start on the same
 page as the reference point, and be aligned with the reference point
-along the baseline of the reference point. That is, the effect of aligning
-a float to its reference point is limited to (a) choosing the page, (b)
-finding the closest matching named area, and (c) starting the float on
-the same baseline as the reference point.
-
+along the baseline. 
 
 <p>Elements may request alignments through an optional argument
-in <code>to()</code>. These values express where on the page an
+in <code>area()</code>. These values express where on the page an
 element requests to be placed:
 
 <dl>
-<dt>align
-<dd>align float along both x and y axis. This is the default.
-
-<dt>align-x
-<dd>align float only along x axis
-
-<dt>align-y
-<dd>align float only along y axis
+<dt>baseline
+<dd>the first baseline of the float is aligned with the first baseline of the reference point. This is the default.
 
 <dt>fill
-<dd>do not align the float along the x/y axis, show it in the order it appears
+<dd>the float is moved to the first first available position in the named area
+
+<dt>top-edge
+<dd>the top border edge of the float is aligned with the top border edge of the BFC of the reference point
+
+<dt>bottom-edge
+<dd>the bottom border edge of the float is aligned with the bottom border edge of the BFC of the reference point
 
 </dl>
-
-<p>Also, and element may request to be placed on the same page or same spread as its reference point:
-
-<dl>
-
-<dt>same-page
-<dd>element requests placement on the same page as its reference point. This is the default.
-
-<dt>same-spread
-<dd>element requests placement on the same spread as its reference point
-
-<dt>any-page
-<dd>element does not request to be placed on an speicific page. Combined with 'fill', this value creates a separate flow of content
-
-</dl>
-
-<p>When preferred alignment is expressed, UAs should place floats as close as possible to the reference point. 
-
-<div class=example>
-
-<pre>
-img { flow: area(sidenote) }                   /* this is the default */
-img { flow: area(sidenote, align same-page) }  /* this is also default */
-
-img { flow: area(sidenote, align-y) }          /* float is only aligned along the y axis */
-img { flow: area(sidenote, fill) }             /* show float in the order they appear */
-img { flow: area(sidenote, fill same-spread) } /* show float in the order they appear, use any matching named flow on the spread of the reference point */
-img { flow: area(sidenote, same-page!) }       /* delete float if it doesn't end up on the same page */
-img { flow: area(sidenote, align!) }           /* delete float if it doesn't end up exactly in the requested position */
-</pre>
-
-</div>
-
 
 <div class=example>
 
@@ -1808,15 +1772,14 @@ closest names area, either on the left or right.
 <p>The code used to achieve this is:
 
 <pre>
-.sidenote { flow: area(sidenote, align) }
+.sidenote { flow: area(sidenote) }
 </pre>
 
 </div>
 
-
 <div class=example>
 
-<p>This example is similar to the previous one, except for the placement of the third reference point: it appears much closer to the second reference point. As a result, the second sidenote pushes down the third sidenote, which is no longer exactly aligned along the y axis.
+<p>This example is similar to the previous one, except for the placement of the third reference point: it appears much closer to the second reference point. As a result, the second sidenote pushes down the third sidenote, which is no longer exactly aligned along the baseline.
 
 <pre>
             ........ .........
@@ -1833,31 +1796,153 @@ closest names area, either on the left or right.
 </div>
 
 
-<div class=example>
 
-<p>In this example, floats are only aligned along the x axis:
+
+<div class=example>
+Consider this code:
 
 <pre>
-.sidenote { flow: area(sidenote, align-x) }
+.s1 { float: area(sidenote, fill)
+.s2 { float: area(sidenote, fill)
 </pre>
 
-<p>As a result, floats are placed in the closest matching named
-area. Inside that area, the floats are shown in the order they appear.
+<p>When there is one sidenote area, to the left of the first column, the rendering may look like:
 
 <pre>
-      first ........ ......... second
-   sidenote ........ ......... sidenote
-            ........ ...2..... third
-            ........ .....3... sidenote
-            ........ .........
-            ....1... .........
-            ........ .........
-            ........ ......... 
-            ........ ......... 
+┌─────┐......1.....  ............
+│ s1  │............  ............
+└─────┘............  ............
+┌─────┐............  ............
+│ s2  │............  ............
+└─────┘............  ............
+       ............  ....2.......
+       ............  ............
+       ............  ............
+</pre>
+</div>
+
+<div class=example>
+This example is similar to the previous example, except that there are two sidenote areas: left of the first column, and right of the second column. The sidnote elements are move to the closest sidnote area:
+<pre>
+.s1 { float: area(sidenote, fill)
+.s2 { float: area(sidenote, fill)
+</pre>
+
+<pre>
+┌─────┐......x.....  ............┌─────┐
+│ s1  │............  ............│ s2  │
+└─────┘............  ............└─────┘
+       ............  ............
+       ............  ............
+       ............  ............
+       ............  ....x.......
+       ............  ............
+       ............  ............
 </pre>
 </div>
 
 
+<div class=example>
+
+<pre>
+.s1 { float: area(sidenote, bottom-edge) 
+.s2 { float: area(sidenote, top-edge)
+</pre>
+
+<pre>
+       ............  ............
+       ............  ............
+       ┌──────────┐  ............
+       │ fig1     │  ┌──────────┐┌─────┐
+┌─────┐│          │  │ fig2     ││ s2  │ 
+│ s1  ││          │  │          │└─────┘
+└─────┘└──────────┘  │          │
+       ............  └──────────┘
+       ............  ............
+       ............  ............
+       ............  ............
+</pre>
+</div>
+
+
+<div class=example>
+<pre>
+&lt;figure>
+  &lt;img>
+  &lt;figcaption>caption&lt;/figcaption>
+&lt;/figure>
+</pre>
+
+<pre>
+figure { float: top; clear: page }
+figcaption { float: area(sidenote) }
+</pre>
+
+<pre>
+ ┌──────────────────────┐
+ │ image                │
+ │                      │
+ │                      │
+ └──────────────────────┘
+ ┌────────┐  ...........
+ │caption │  ...........
+ └────────┘  ...........
+             ...........
+             ...........
+</pre>
+</div>
+
+
+<!--
+<dl>
+<dt>align
+<dd>align float along both x and y axis. This is the default.
+
+<dt>align-x
+<dd>align float only along x axis
+
+<dt>align-y
+<dd>align float only along y axis
+
+<dt>fill
+<dd>do not align the float along the x/y axis, show it in the order it appears
+
+</dl>
+-->
+
+<p>Also, and element may request to be placed on the same page or same spread as its reference point:
+
+<dl>
+
+<dt>same-page
+<dd>element requests placement on the same page as its reference point. This is the default.
+
+<dt>same-spread
+<dd>element requests placement on the same spread as its reference point
+
+<dt>any-page
+<dd>element does not request to be placed on an speicific page. Combined with 'fill', this value creates a separate flow of content
+
+</dl>
+
+
+<div class=example>
+
+<pre>
+img { flow: area(sidenote) }                      /* this is the default */
+img { flow: area(sidenote, baseline same-page) }  /* this is also default */
+
+img { flow: area(sidenote, fill) }             /* show float in the order they appear */
+img { flow: area(sidenote, fill same-spread) } /* show float in the order they appear, use any matching named flow on the spread of the reference point */
+</pre>
+
+</div>
+
+
+
+
+
+<!--
 <div class=example>
 
 <p>In this example, floats are not aligned with the reference point. 
@@ -1881,11 +1966,11 @@ area. Inside that area, the floats are shown in the order they appear.
 
 </pre>
 </div>
-
+-->
 
 <p>Elements may also insist on being aligned exactly with its
 reference point. This is expressed by adding a trailing "!" to these
-keywords: 'align', 'align-x', 'align-y', 'same-page', 'same-spread'.
+keywords: 'fill', 'baseline', 'same-page', 'same-spread'.
 If exact alignment is not possible, the float will be deleted.
 
 
