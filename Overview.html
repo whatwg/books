@@ -30,7 +30,7 @@ a.unclear, a.almost { color: orange }
   <p><a class="logo" href="http://www.whatwg.org/"><img alt="WHATWG" height="100" width="100" src="http://resources.whatwg.org/logo.svg"></a></p>
 	<h1>CSS Books</h1>
 	
-	<h2 class="no-num no-toc" id="living-standard-—-last-updated-20-july-2014">Living Standard — Last Updated 20 July 2014</h2>
+	<h2 class="no-num no-toc" id="living-standard-—-last-updated-24-july-2014">Living Standard — Last Updated 24 July 2014</h2>
 	
 	<dl>
 		<dt>This version:
@@ -52,7 +52,7 @@ a.unclear, a.almost { color: orange }
 
 	</dl>
 
-<p class="copyright"><a href="http://creativecommons.org/publicdomain/zero/1.0/" rel="license"><img alt="CC0" src="http://i.creativecommons.org/p/zero/1.0/80x15.png"></a>To the extent possible under law, the editor has waived all copyright and related or neighboring rights to this work. In addition, as of 20 July 2014, the editor has made this specification available under the
+<p class="copyright"><a href="http://creativecommons.org/publicdomain/zero/1.0/" rel="license"><img alt="CC0" src="http://i.creativecommons.org/p/zero/1.0/80x15.png"></a>To the extent possible under law, the editor has waived all copyright and related or neighboring rights to this work. In addition, as of 24 July 2014, the editor has made this specification available under the
 <a href="http://www.openwebfoundation.org/legal/the-owf-1-0-agreements/owfa-1-0" rel="license">Open Web Foundation Agreement Version 1.0</a>, which is available at <!--begin-link--><a href="http://www.openwebfoundation.org/legal/the-owf-1-0-agreements/owfa-1-0">http://www.openwebfoundation.org/legal/the-owf-1-0-agreements/owfa-1-0</a><!--end-link-->.
 
 </div>
@@ -1675,6 +1675,33 @@ content.
 </pre>
 
 
+<div class="example">
+
+<p>In this example, there are two streams of footnotes, both using named areas. The first stream flowed into the "fn1" area, and the second is flowed into "fn2". The first stream is referenced by numbers, and the second by lower-alpha. 
+
+<pre>@page { 
+  @area fn1 { float: bottom; float-reference: page }
+  @area fn2 { float: bottom; float-reference: page }
+}
+
+.fn1 { flow: area(fn1); counter-increment: fn1 }
+.fn1::call { content: "[" counter(fn1) "]" }
+.fn2::marker { content: "[" counter(fn1) "]" }
+
+.fn2 { flow: area(fn2); counter-increment: fn2 }
+.fn2::call { content: "[" counter(fn2, lower-alpha) "]" }
+.fn2::marker { content: "[" counter(fn2, lower-alpha) "]" }
+</pre>
+
+<p>In the formatted result, the named areas appear at the bottom of the page; fn1 is floated to the bottom first and therefore appears below fn2.
+
+<pre>[a] From "Childe Harold's Pilgrimage" by Lord Byron
+[3] The use of uppercase "W" indicates great wisdom
+</pre>
+
+</div>
+
+
 <div class="code-example">
 <a href="http://www.wiumlie.no/2014/tests/books/e-leaders-line-numbers.html">html</a><br>
 <a class="pass" href="http://www.wiumlie.no/2014/tests/books/e-leaders-line-numbers-ah.pdf">AH</a>
@@ -1683,14 +1710,13 @@ content.
 
 <div class="example">
 
-<p>In this example, there are two streams of footnotes. The first stream is floated to the predefined "footnote" area, and the second is floated to a name area called "fn2". The first stream is referenced by line numbers, and the second by lower-alpha. 
+<p>In this example, there are two streams of footnotes. The first stream is floated to the predefined "footnote" area, and the second is flowed to a name area called "fn2". The first stream is referenced by line numbers, and the second by lower-alpha. 
 
 <pre>@page { 
   counter-reset: line 
   @area fn2 {
     float: bottom; 
-    column-span: all;
-    columns: 2;
+    float-reference: page;
   }
 }
 div.line { counter-increment: line }
@@ -1718,6 +1744,9 @@ And is, despite of war and wasting fire,
 </pre>
 
 </div>
+
+
+
 
 
 <h3 id="alignment-in-named-areas"><span class="secno">7.3 </span>Alignment in Named Areas</h3>
