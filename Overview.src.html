@@ -1686,6 +1686,35 @@ aside { flow: area(sidenote); }
 </pre>
 
 
+<div class=example>
+
+<p>In this example, there are two streams of footnotes, both using named areas. The first stream flowed into the "fn1" area, and the second is flowed into "fn2". The first stream is referenced by numbers, and the second by lower-alpha. 
+
+<pre>
+@page { 
+  @area fn1 { float: bottom; float-reference: page }
+  @area fn2 { float: bottom; float-reference: page }
+}
+
+.fn1 { flow: area(fn1); counter-increment: fn1 }
+.fn1::call { content: "[" counter(fn1) "]" }
+.fn2::marker { content: "[" counter(fn1) "]" }
+
+.fn2 { flow: area(fn2); counter-increment: fn2 }
+.fn2::call { content: "[" counter(fn2, lower-alpha) "]" }
+.fn2::marker { content: "[" counter(fn2, lower-alpha) "]" }
+</pre>
+
+<p>In the formatted result, the named areas appear at the bottom of the page; fn1 is floated to the bottom first and therefore appears below fn2.
+
+<pre>
+[a] From "Childe Harold's Pilgrimage" by Lord Byron
+[3] The use of uppercase "W" indicates great wisdom
+</pre>
+
+</div>
+
+
 <div class=code-example>
 <a href="http://www.wiumlie.no/2014/tests/books/e-leaders-line-numbers.html">html</a><br>
 <a class=pass href="http://www.wiumlie.no/2014/tests/books/e-leaders-line-numbers-ah.pdf">AH</a>
@@ -1694,15 +1723,14 @@ aside { flow: area(sidenote); }
 
 <div class=example>
 
-<p>In this example, there are two streams of footnotes. The first stream is floated to the predefined "footnote" area, and the second is floated to a name area called "fn2". The first stream is referenced by line numbers, and the second by lower-alpha. 
+<p>In this example, there are two streams of footnotes. The first stream is floated to the predefined "footnote" area, and the second is flowed to a name area called "fn2". The first stream is referenced by line numbers, and the second by lower-alpha. 
 
 <pre>
 @page { 
   counter-reset: line 
   @area fn2 {
     float: bottom; 
-    column-span: all;
-    columns: 2;
+    float-reference: page;
   }
 }
 div.line { counter-increment: line }
@@ -1731,6 +1759,9 @@ And is, despite of war and wasting fire,
 </pre>
 
 </div>
+
+
+
 
 
 <h3>Alignment in Named Areas</h3>
