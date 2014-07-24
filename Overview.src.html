@@ -1887,10 +1887,10 @@ This example is similar to the previous example, except that there are two siden
 
 
 <div class=example>
-<p>In this example, figures appear in the main flow, while captions are flowed to the closest sidenote areas (there are two: left of the first column, and right of the second column). The captions are aligned with the top of the element of the figure element.
+<p>In this example, figures appear in the main flow, while captions are flowed to the closest sidenote areas (there are two: left of the first column, and right of the second column). The captions are aligned with the top of the figure element.
 
 <pre>
-figcaption { flow: area(sidenote, top-edge) 
+figcaption { flow: area(sidenote, top-edge) }
 
 &lt;figure>
   &lt;figcaption>s1&lt;/figcaption>
@@ -1917,17 +1917,7 @@ figcaption { flow: area(sidenote, top-edge)
 
 
 <div class=example>
-<pre>
-&lt;figure>
-  &lt;img>
-  &lt;figcaption>caption&lt;/figcaption>
-&lt;/figure>
-</pre>
-
-<pre>
-figure { float: top; clear: page }
-figcaption { flow: area(sidenote) }
-</pre>
+<p>In this example, the figure has an image that spans the width of the page and bleeds to the edges. The caption follows underneath, in the sidenote area. The intended rendering is:
 
 <pre>
  ┌──────────────────────┐
@@ -1941,6 +1931,26 @@ figcaption { flow: area(sidenote) }
              ...........
              ...........
 </pre>
+
+<P>The style sheet define two name areas, one for the photograph and one for the sidenote. The "photo" named area is floated to the top, while the "sidenote" area is absolutely positioned. The two named areas overlap. Therefore, the order of the content is significant; the image is first flowed into the "photo" area. The position of the caption will be influcence by the height of the image. 
+
+<pre>
+@page { 
+  margin: 7mm 7mm 7mm 40mm; 
+  @area photo { float: top; float-reference: bleed-box }
+  @area sidenote { position: absolute; left: -40mm; top: 0; bottom: 0; width: 35mm; }
+}
+figure img { flow: area(photo); clear: page }
+figcaption { flow: area(sidenote) }
+
+...
+
+&lt;figure>
+  &lt;img>
+  &lt;figcaption>caption&lt;/figcaption>
+&lt;/figure>
+</pre>
+
 </div>
 
 
