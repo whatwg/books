@@ -1714,7 +1714,6 @@ aside { flow: area(sidenote); }
 
 </div>
 
-
 <div class=code-example>
 <a href="http://www.wiumlie.no/2014/tests/books/e-leaders-line-numbers.html">html</a><br>
 <a class=pass href="http://www.wiumlie.no/2014/tests/books/e-leaders-line-numbers-ah.pdf">AH</a>
@@ -1867,20 +1866,20 @@ Consider this code:
 </div>
 
 <div class=example>
-This example is similar to the previous example, except that there are two sidenote areas: left of the first column, and right of the second column. The sidnote elements are move to the closest sidnote area:
+This example is similar to the previous example, except that there are two sidenote areas: left of the first column, and right of the second column. The sidenote elements are move to the closest sidenote area:
 <pre>
 .s1 { flow: area(sidenote, fill)
 .s2 { flow: area(sidenote, fill)
 </pre>
 
 <pre>
-┌─────┐......x.....  ............┌─────┐
+┌─────┐......1.....  ............┌─────┐
 │ s1  │............  ............│ s2  │
 └─────┘............  ............└─────┘
        ............  ............
        ............  ............
        ............  ............
-       ............  ....x.......
+       ............  ....2.......
        ............  ............
        ............  ............
 </pre>
@@ -1888,20 +1887,27 @@ This example is similar to the previous example, except that there are two siden
 
 
 <div class=example>
+<p>In this example, figures appear in the main flow, while captions are flowed to the closest sidenote areas (there are two: left of the first column, and right of the second column). The captions are aligned with the top of the element of the figure element.
 
 <pre>
-.s1 { flow: area(sidenote, bottom-edge) 
-.s2 { flow: area(sidenote, top-edge)
+figcaption { flow: area(sidenote, top-edge) 
+
+&lt;figure>
+  &lt;figcaption>s1&lt;/figcaption>
+&lt;/figure>
+&lt;figure>
+  &lt;figcaption>s2&lt;/figcaption>
+&lt;/figure>
 </pre>
 
 <pre>
        ............  ............
        ............  ............
-       ┌──────────┐  ............
-       │ fig1     │  ┌──────────┐┌─────┐
-┌─────┐│          │  │ fig2     ││ s2  │ 
-│ s1  ││          │  │          │└─────┘
-└─────┘└──────────┘  │          │
+┌─────┐┌──────────┐  ............
+│ s1  ││ fig1     │  ┌──────────┐┌─────┐
+└─────┘│          │  │ fig2     ││ s2  │ 
+       │          │  │          │└─────┘
+       └──────────┘  │          │
        ............  └──────────┘
        ............  ............
        ............  ............
