@@ -1769,28 +1769,29 @@ And is, despite of war and wasting fire,
 <dd>element requests that its first baseline is aligned with the baseline of its reference point in the closest named area. This is the default value.
 
 <dt>top-edge
-<dd>element requests that its top border edge is aligned with the top border edge of the BFC of the reference point
+<dd>element requests that its top border edge is aligned with the top border edge of the BFC of the reference point in the closest named area
 
 <dt>bottom-edge
-<dd>element requests that it bottom border edge is aligned with the bottom border edge of the BFC of the reference point
+<dd>element requests that it bottom border edge is aligned with the bottom border edge of the BFC of the reference point in the closest matching named area
 
 <dt>close
-<dd>element requests to be filled into the closest named area, on the same page as the reference point.
+<dd>element requests to be filled into the closest matching named area, on the same page as the reference point; "filled in" means that the element will be placed after any other element that has been place in the matching named area
 
 <dt>same-page
-<dd>element requests to be filled into any named area (with the requested name) on the same page as the reference point. 
+<dd>element requests to be filled into any matching named area on the same page as the reference point. 
 
 <dt>same-spread
-<dd>element requests to be filled into any named area (with the requested name) on the same spread as the reference point
+<dd>element requests to be filled into any matching named area on the same spread as the reference point
 
 <dt>fill
-<dd>element requests to be filled into any named are (with the requested name), regardless of page
+<dd>element requests to be filled into any matching named area regardless of page
 
 </dl>
 
+
 <div class=example>
 
-<p>In this example, thre are two named areas called "sidenote", one
+<p>In this example, there are two named areas called "sidenote", one
 on the left side of the first column, and the other on the right side
 of the second column. Three reference points are marked with 1,
 2, and 3. Exact alignment along the baseline is possible for all three notes.
@@ -1839,8 +1840,6 @@ which is equal to
             ........ .........
 </pre>
 </div>
-
-
 
 
 <div class=example>
@@ -1954,8 +1953,8 @@ figcaption { flow: area(sidenote) }
 
 </div>
 
-
-<p>If the reqested alignment point can be achieved in two or more named areas, the closest named area is chosen. If the requested alignment is not possible in any named area, the closest named area is chosen and the element is 
+<!--
+<p>If the requested placement can be achieved in two or more named areas, the closest named area is chosen. If the requested alignment is not possible in any named area, the closest named area is chosen and the element is 
 
 
 
@@ -1970,7 +1969,7 @@ img { flow: area(sidenote, fill same-spread) } /* show float in the order they a
 </pre>
 
 </div>
-
+-->
 
 <div class=example>
 In this example, photographs are shown on right pages while the corresponding captions are flowed to a sidenote area on the right.
