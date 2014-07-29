@@ -329,7 +329,7 @@ title {
   content: "foo"; 
   text-transform: uppercase;
   text-replace: "foo" "bar";
-  string-set: tittel content();
+  string-set: title content();
 }
 </pre>
 </div>
@@ -349,7 +349,7 @@ be resolved after pagination.
 @page { @right-middle { content: string(index) }}
 @page { @top-left { content: string(entry) }}
 h1 { string-set: header "Chapter " counter(chapter) content() }
-dt { string-set: index first-letter, entry content() }
+dt { string-set: index content(first-letter), entry content() }
 </pre>
 <!--h1 { string-set: header "Chapter " counter(chapter) contents }
 dt { string-set: index content-first-letter, entry contents }-->
@@ -1321,7 +1321,7 @@ spanning all columns of the outermost multicol element:
 @page {
   @footnote {
     float: bottom;
-    float-defer: last;
+    float-defer-column: last;
   }
 }
 </pre>
@@ -2448,8 +2448,8 @@ h1, h2 { bookmark-state: open }
 <p>In this example, pages in a document will cycle through pink, lime and white backgrounds:
 <pre>
 @page :nth(3n) { background: pink }
-@page :nth(3n+1)) { background: lime }
-@page :nth(3n+2)) { background: white }
+@page :nth(3n+1) { background: lime }
+@page :nth(3n+2) { background: white }
 </pre>
 </div>
 
@@ -2760,7 +2760,7 @@ displayed; if the condition is not met, the effect will be as if
 <pre>
 @page :first p { background: lime } 
 @page :nth(1) .sidenote { background: lime } 
-@page :nth(3n+1)) p:first-line { background: lime }
+@page :nth(3n+1) p:first-line { background: lime }
 @page funky:nth(1) p { background: pink } 
 </pre>
 </div>
