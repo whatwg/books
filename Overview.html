@@ -30,7 +30,7 @@ a.unclear, a.almost { color: orange }
   <p><a class="logo" href="http://www.whatwg.org/"><img alt="WHATWG" height="100" width="100" src="http://resources.whatwg.org/logo.svg"></a></p>
 	<h1>CSS Books</h1>
 	
-	<h2 class="no-num no-toc" id="living-standard-—-last-updated-27-july-2014">Living Standard — Last Updated 27 July 2014</h2>
+	<h2 class="no-num no-toc" id="living-standard-—-last-updated-29-july-2014">Living Standard — Last Updated 29 July 2014</h2>
 	
 	<dl>
 		<dt>This version:
@@ -52,7 +52,7 @@ a.unclear, a.almost { color: orange }
 
 	</dl>
 
-<p class="copyright"><a href="http://creativecommons.org/publicdomain/zero/1.0/" rel="license"><img alt="CC0" src="http://i.creativecommons.org/p/zero/1.0/80x15.png"></a>To the extent possible under law, the editor has waived all copyright and related or neighboring rights to this work. In addition, as of 27 July 2014, the editor has made this specification available under the
+<p class="copyright"><a href="http://creativecommons.org/publicdomain/zero/1.0/" rel="license"><img alt="CC0" src="http://i.creativecommons.org/p/zero/1.0/80x15.png"></a>To the extent possible under law, the editor has waived all copyright and related or neighboring rights to this work. In addition, as of 29 July 2014, the editor has made this specification available under the
 <a href="http://www.openwebfoundation.org/legal/the-owf-1-0-agreements/owfa-1-0" rel="license">Open Web Foundation Agreement Version 1.0</a>, which is available at <!--begin-link--><a href="http://www.openwebfoundation.org/legal/the-owf-1-0-agreements/owfa-1-0">http://www.openwebfoundation.org/legal/the-owf-1-0-agreements/owfa-1-0</a><!--end-link-->.
 
 </div>
@@ -384,7 +384,7 @@ names in CSS.
   content: "foo"; 
   text-transform: uppercase;
   text-replace: "foo" "bar";
-  string-set: tittel content();
+  string-set: title content();
 }
 </pre>
 </div>
@@ -403,7 +403,7 @@ be resolved after pagination.
 @page { @right-middle { content: string(index) }}
 @page { @top-left { content: string(entry) }}
 h1 { string-set: header "Chapter " counter(chapter) content() }
-dt { string-set: index first-letter, entry content() }
+dt { string-set: index content(first-letter), entry content() }
 </pre>
 <!--h1 { string-set: header "Chapter " counter(chapter) contents }
 dt { string-set: index content-first-letter, entry contents }-->
@@ -1324,7 +1324,7 @@ spanning all columns of the outermost multicol element:
 <pre>@page {
   @footnote {
     float: bottom;
-    float-defer: last;
+    float-defer-column: last;
   }
 }
 </pre>
@@ -2402,8 +2402,8 @@ h1, h2 { bookmark-state: open }
 <div class="example">
 <p>In this example, pages in a document will cycle through pink, lime and white backgrounds:
 <pre>@page :nth(3n) { background: pink }
-@page :nth(3n+1)) { background: lime }
-@page :nth(3n+2)) { background: white }
+@page :nth(3n+1) { background: lime }
+@page :nth(3n+2) { background: white }
 </pre>
 </div>
 
@@ -2709,7 +2709,7 @@ displayed; if the condition is not met, the effect will be as if
 <div class="example">
 <pre>@page :first p { background: lime } 
 @page :nth(1) .sidenote { background: lime } 
-@page :nth(3n+1)) p:first-line { background: lime }
+@page :nth(3n+1) p:first-line { background: lime }
 @page funky:nth(1) p { background: pink } 
 </pre>
 </div>
@@ -3571,7 +3571,7 @@ laid out spatially relative to the current document.
 
 <p>Four new properties are allowed inside @layout: nav-up, nav-right, nav-bottom, nav-right. 
 
-<p class="note">The name of the properties inside @navigation are borrowed from <a href="http://www.w3.org/TR/2004/CR-css3-ui-20040511/#nav-dir">CSS3 Basic User Interface Module</a>.
+<p class="note">The name of the properties inside @layout are borrowed from <a href="http://www.w3.org/TR/2004/CR-css3-ui-20040511/#nav-dir">CSS3 Basic User Interface Module</a>.
 
 <p>The properties accept these values:
 
@@ -3602,7 +3602,7 @@ laid out spatially relative to the current document.
 <dd>The keyword takes the user one step back in the history of browsed pages.
 
 <div class="example">
-<pre>@navigation {
+<pre>@layout {
   nav-left: back;
 }
 </pre>
@@ -3662,7 +3662,7 @@ relative to the document, not to the style sheet.
 <h3 id="page-shift-effects"><span class="secno">17.1 </span>Page shift effects</h3>
 
 <p>To describe page shift effects, four new properties inside
-@navigation are proposed: nav-up-shift, nav-right-shift,
+@layout are proposed: nav-up-shift, nav-right-shift,
 nav-down-shift, nav-left-shift. These properties take one of several
 keyword values:
 
@@ -3686,7 +3686,7 @@ keyword values:
 there better ways to describe transitions?
 
 <div class="example">
-<pre>@navigation {
+<pre>@layout {
    nav-up-shift: pan;
    nav-down-shift: flip;
 }
