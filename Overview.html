@@ -30,7 +30,7 @@ a.unclear, a.almost { color: orange }
   <p><a class="logo" href="http://www.whatwg.org/"><img alt="WHATWG" height="100" width="100" src="http://resources.whatwg.org/logo.svg"></a></p>
 	<h1>CSS Books</h1>
 	
-	<h2 class="no-num no-toc" id="living-standard-—-last-updated-29-july-2014">Living Standard — Last Updated 29 July 2014</h2>
+	<h2 class="no-num no-toc" id="living-standard-—-last-updated-17-august-2014">Living Standard — Last Updated 17 August 2014</h2>
 	
 	<dl>
 		<dt>This version:
@@ -52,7 +52,7 @@ a.unclear, a.almost { color: orange }
 
 	</dl>
 
-<p class="copyright"><a href="http://creativecommons.org/publicdomain/zero/1.0/" rel="license"><img alt="CC0" src="http://i.creativecommons.org/p/zero/1.0/80x15.png"></a>To the extent possible under law, the editor has waived all copyright and related or neighboring rights to this work. In addition, as of 29 July 2014, the editor has made this specification available under the
+<p class="copyright"><a href="http://creativecommons.org/publicdomain/zero/1.0/" rel="license"><img alt="CC0" src="http://i.creativecommons.org/p/zero/1.0/80x15.png"></a>To the extent possible under law, the editor has waived all copyright and related or neighboring rights to this work. In addition, as of 17 August 2014, the editor has made this specification available under the
 <a href="http://www.openwebfoundation.org/legal/the-owf-1-0-agreements/owfa-1-0" rel="license">Open Web Foundation Agreement Version 1.0</a>, which is available at <!--begin-link--><a href="http://www.openwebfoundation.org/legal/the-owf-1-0-agreements/owfa-1-0">http://www.openwebfoundation.org/legal/the-owf-1-0-agreements/owfa-1-0</a><!--end-link-->.
 
 </div>
@@ -2097,8 +2097,10 @@ this specification, there will be a footnote:
 
 <h3 id="cloning-elements"><span class="secno">7.7 </span>Cloning elements</h3>
 
-<div example="" class="">
-<pre>H2 {display: block; font-weight: bold; running: chapter}
+<!--
+<div class example>
+<pre>
+H2 {display: block; font-weight: bold; running: chapter}
 H2:running {display: inline; font-weight: normal}
  
 @page {
@@ -2106,13 +2108,13 @@ H2:running {display: inline; font-weight: normal}
 }
 </pre>
 </div>
+-->
 
-<!--
-<div class=example>
+
+<div class="example">
 <p>In this example, the h1 element is copied into a running header which is defined with @area. The copied element is restyled. It erases the running header when it enters, and is set to stick (until eased by another element):
 
-<pre>
-@page :left {
+<pre>@page :left {
   @area running-header { 
     position: absolute; top: -2cm; left: 0; width: 3.5cm; height: 1cm 
     @inside h1 {
@@ -2136,11 +2138,10 @@ h1 { flow: copy-to(header, fill stick erase) }
 </div>
 
 
-<div class=example>
+<div class="example">
 <p>In this example, the named area called "running header" is placed in the center top of the page. It is filled with three elements, one being the copy 
 
-<pre>
-@page {
+<pre>@page {
   @area running-header { 
     position: absolute; top: -2cm; left: 0; right: 0; height: 1cm; 
     text-align: center;
@@ -2154,16 +2155,15 @@ h1 { flow: copy-to(header, fill stick erase) }
 #ornament { 
   flow: area(running-header, fill, stick); color: red; content: "\2747" /* snow crystal */}
 h1 { 
-  float: copy-to(running-header, fill, stick); font: 12pt serif }
+  flow: copy-to(running-header, fill, stick); font: 12pt serif }
 
-&lt;span id=pagecounter>&lt;/span>
-&lt;span id=ornament>&lt;/span>
-&lt;h1>Erin Hildebrand&lt;/h1>
+&lt;span id=pagecounter&gt;&lt;/span&gt;
+&lt;span id=ornament&gt;&lt;/span&gt;
+&lt;h1&gt;Erin Hildebrand&lt;/h1&gt;
 </pre>
 
 </div>
 
--->
 
 <!--
 <h3>Flowing elements to margin boxes</h3>
