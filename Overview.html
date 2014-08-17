@@ -1583,8 +1583,9 @@ and the settings in the default style sheet differentiates the two.
 <p>Named areas are can be absolutely positioned, or positiond with the 'float' property.
 
 <div class="example">
-<p>In this example, both left and right pages have a sidenote area which <code>aside</code>
-@page :left {
+<p>In this example, both left and right pages have a sidenote area which <code>aside</code> elements are flowed to:
+
+<pre>@page :left {
   margin-left: 10em;
   @area sidenote { position: absolute; left: -8em; top: 0; width: 6em; height: auto }
 }
@@ -1593,7 +1594,7 @@ and the settings in the default style sheet differentiates the two.
   @area sidenote { position: absolute; right: -8em; top: 0; width: 6em; height: auto }
 }
 aside { flow: baseline(sidenote) }
-
+</pre>
 
 <p>The baseline of the sidenotes are aligned with the baseline of their reference point.
 
