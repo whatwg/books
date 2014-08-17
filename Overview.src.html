@@ -2135,6 +2135,7 @@ aside { flow: area(sidenote, erase) }
 
 <h3>Cloning elements</h3>
 
+<!--
 <div class example>
 <pre>
 H2 {display: block; font-weight: bold; running: chapter}
@@ -2145,8 +2146,9 @@ H2:running {display: inline; font-weight: normal}
 }
 </pre>
 </div>
+-->
 
-<!--
+
 <div class=example>
 <p>In this example, the h1 element is copied into a running header which is defined with @area. The copied element is restyled. It erases the running header when it enters, and is set to stick (until eased by another element):
 
@@ -2193,7 +2195,7 @@ h1 { flow: copy-to(header, fill stick erase) }
 #ornament { 
   flow: area(running-header, fill, stick); color: red; content: "\2747" /* snow crystal */}
 h1 { 
-  float: copy-to(running-header, fill, stick); font: 12pt serif }
+  flow: copy-to(running-header, fill, stick); font: 12pt serif }
 
 &lt;span id=pagecounter>&lt;/span>
 &lt;span id=ornament>&lt;/span>
@@ -2202,7 +2204,6 @@ h1 {
 
 </div>
 
--->
 
 <!--
 <h3>Flowing elements to margin boxes</h3>
