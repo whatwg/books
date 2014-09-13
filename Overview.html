@@ -166,7 +166,7 @@ out of memory, or to work around platform-specific limitations.
 
 <p>A book is a collection of sheets, bound together within covers.
 Usually, the sheets are printed paper sheets of a uniform size. The
-book format, known as the <em>codex</em> was developed around 2000
+book format, known as the <em>codex</em>, was developed around 2000
 years ago and books gradually replaced scrolls, clay tablets and other
 competing formats. With the invention of the printing press, books
 could be printed and distributed inexpesively.
@@ -569,16 +569,15 @@ running headers and footers is introduced.
 several pages; they are said to be <em>running elements</em>. To
 support running elements, a new value – running() – is
 introduced on the 'position' property. It has one required argument:
-the name by which the running element can be referred to. A running
-element is not shown in its natural place; there it is treated as if
+the name by which the running element can be referred. A running
+element is not shown in its natural place; it is treated as if
 'display: none' had been set. Instead, the running element is
 displayed when referred to by the ''element()'' value.
 
 <p>Like counters and named strings, the name of a running element is chosen by
-the style sheet author, and the names have a separate namespace. A
-running element can hold one element, including its pseudo-elements
-and its descendants. Whenever a new element is assigned to a running
-element, the old element is lost.
+the style sheet author. Each running element has its own namespace, may hold only 
+one element, including its pseudo-elements and its descendants. Whenever a new 
+element is assigned to a running element, the old element is lost.
 
 <p class="note">User agents, however, must be able to remember the
 result of more than one assignment as the ''element()'' value
