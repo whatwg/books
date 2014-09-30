@@ -30,7 +30,7 @@ a.unclear, a.almost { color: orange }
   <p><a class="logo" href="http://www.whatwg.org/"><img alt="WHATWG" height="100" width="100" src="http://resources.whatwg.org/logo.svg"></a></p>
 	<h1>CSS Books</h1>
 	
-	<h2 class="no-num no-toc" id="living-standard-—-last-updated-18-august-2014">Living Standard — Last Updated 18 August 2014</h2>
+	<h2 class="no-num no-toc" id="living-standard-—-last-updated-30-september-2014">Living Standard — Last Updated 30 September 2014</h2>
 	
 	<dl>
 		<dt>This version:
@@ -52,7 +52,7 @@ a.unclear, a.almost { color: orange }
 
 	</dl>
 
-<p class="copyright"><a href="http://creativecommons.org/publicdomain/zero/1.0/" rel="license"><img alt="CC0" src="http://i.creativecommons.org/p/zero/1.0/80x15.png"></a>To the extent possible under law, the editor has waived all copyright and related or neighboring rights to this work. In addition, as of 18 August 2014, the editor has made this specification available under the
+<p class="copyright"><a href="http://creativecommons.org/publicdomain/zero/1.0/" rel="license"><img alt="CC0" src="http://i.creativecommons.org/p/zero/1.0/80x15.png"></a>To the extent possible under law, the editor has waived all copyright and related or neighboring rights to this work. In addition, as of 30 September 2014, the editor has made this specification available under the
 <a href="http://www.openwebfoundation.org/legal/the-owf-1-0-agreements/owfa-1-0" rel="license">Open Web Foundation Agreement Version 1.0</a>, which is available at <!--begin-link--><a href="http://www.openwebfoundation.org/legal/the-owf-1-0-agreements/owfa-1-0">http://www.openwebfoundation.org/legal/the-owf-1-0-agreements/owfa-1-0</a><!--end-link-->.
 
 </div>
@@ -2858,7 +2858,6 @@ div.chapter:column(1,*)     /* the first column on all pages */
 
 <p>Text in adjacent columns often use the same baselines. This appears more pleasant to typographers, and reduces <em>show-through</em>, where a printed line shows through to the other side of the sheet. By aligning text to a grid of baselines, a <em>baseline rhythm</em> is established. Subheadings and figures may disturb the baseline rhythm, but subsequent text should find it again. The 'baseline-grid' property is introduced to set and clear baseline grids, while the 'baseline-block-snap' property indicates how to align elements that do not align themselves with the baseline grids. 
 
-
 <h3 id="'baseline-grid'"><span class="secno">14.1 </span>'baseline-grid'</h3>  
 
 <table class="propdef">
@@ -2888,38 +2887,37 @@ div.chapter:column(1,*)     /* the first column on all pages */
       <td>as specified
 </table>
 
-<p>This property is used to set or clear the baseline grid for its content. The values are:
+<p>This property is used to <em>define</em>, <em>engage<em>, and <em>clear</em> baseline grids. When a baseline grid is enganged, it will be <em>in effect</em> on content inside the block container (including child elements) until another baseline grid is engaged, or the baseline grid is cleared. When a baseline grid is in effect, content will be aligned with the baseline grid.
 
-<dl>
+</em></em><dl><em><em>
 
 <dt>normal
 
-<dd>the element neither sets nor clears the baseline grid for its content
+<dd>The element does not define, engage, or clear a baseline grid. 
 
 <dt>none
 
-<dd>the element clears the baseline grid and its content will not align with a baseline grid (unless explicitly set on a child element).
+<dd>the element clears the baseline grid
 
 <dt>new
 
-<dd>the element defines and sets a new baseline grid. The new baseline grid is defined by establishing the first baseline of the element by using the first available font; thereafter the frequency of the baseline grid is equal to the used value of 'line-height'. The new baseline grid is used to align the content of the element, including child elements. Child elements may, however, set their own baseline grids, or indicate that they do not seek alignment with a baseline grid.
+<dd>the element defines and engages a new baseline grid for its content. The new baseline grid is defined by establishing the first baseline of the element by using the first available font; thereafter the frequency of the baseline grid is equal to the used value of 'line-height'. 
 
 <dt>root
 
-<dd>the element sets the <dfn id="root-baseline-grid">root baseline grid</dfn>. The root baseline grid is defined by the root element; the calculation for finding the root baseline grid is the same as for the 'new' value. While the root element defines the root baseline grid, the root element does not automatically set the root baseline grid.
+<dd>the element enganges the <dfn id="root-baseline-grid">root baseline grid</dfn>. The root baseline grid is automatically defined by the root element; the calculation for finding the root baseline grid is the same as for the 'new' value. While the root element defines the root baseline grid, it does not engage it. 
 
-<!--
 <dt>page
 
-<dd>the page box sets the <dfn>page baseline grid</dfn>. The page baseline grid is defined by the page box and the root element; the calculation for finding the page baseline grid is the same as for the root baseline grid, except that the page box is used to position the baselines.
--->
-</dl>
+<dd>the page box sets the <dfn id="page-baseline-grid">page baseline grid</dfn>. The page baseline grid is defined by the page box on the current page and the font properties of the root element; the calculation for finding the page baseline grid is the same as for the root baseline grid, except that the page box is used to position the baseline grid.
+
+</em></em></dl><em><em>
 
 
 <div class="example">
-<p>In this example, the baseline grid of the document is defined by the 'line-height' and font properties of the root element. Content inside the body element will align with the root baseline grid, except for headlines and figures.
+<p>In this example, the <code>article</code> element defines an enganges a baseline grid. Content inside the article will align with the baseline grid, except for headlines and figures.
 
-<pre>body { baseline-grid: root }
+<pre>article { baseline-grid: new }
 h1, h2, figure { baseline-grid: none }
 </pre>
 
@@ -3044,19 +3042,27 @@ klm nop.
 &lt;aside&gt;&lt;span lang=ar&gt;...&lt;/span&gt;&lt;/aside&gt;
 </pre>
 
-<p>The &lt;aside&gt; elements establish a baseline grid from the used fond (<code>font: 12pt serif</code>). Content inside the &lt;aside&gt; elements, even in different scripts, fonts and sizes, align with the baseline grid established by the &lt;aside&gt; elements.
+<p>The &lt;aside&gt; elements establish a baseline grid from the used font (<code>font: 12pt serif</code>). Content inside the &lt;aside&gt; elements, even in different scripts, fonts and sizes, align with the baseline grid established by the &lt;aside&gt; elements.
 
 </div>
 
 <div class="example">
 
-<p>The root element establishes a baseline grid that can be referred to with the 'root' keyword. However, content within the root element will not align with the root line rhythm unless explicity set. In this example, the baseline grid is explicitly set on the root element and its content will therefore align with the root baseline grid.
+<p>The root element defines a baseline grid that can be referred to with the 'root' keyword. However, the root element does not automatically engage the baseline grid. In this example, the root baseline grid is enganged by the root element and its content will therefore align with the root baseline grid.
 
-<pre>:root {
-  baseline-grid: root;
-}
+<pre>:root { baseline-grid: root }
 <pre></pre>
 </pre></div>
+
+
+<div class="example">
+
+<p>The 'page' baseline grid is automatically defined so that pages with different page margins still can align content to to the same baseline grid. In this example, the 'page' basedline grid is applied to all sidenotes:
+
+<pre>aside { baseline-grid: page }
+<pre></pre>
+</pre></div>
+
 
 
 <h3 id="'baseline-block-snap'"><span class="secno">14.2 </span>'baseline-block-snap'</h3>
@@ -3085,7 +3091,7 @@ klm nop.
       <td>specified value
 </table>
 
-<p>This property describes how to align content that is not baseline-aligned. Values are:
+<p>This property describes how to align content that is not aligned to a baseline grid. Values are:
 
 <dl>
 <dt>auto
@@ -3813,3 +3819,4 @@ Jacob Grundtvig Refstrup,  James Elmore, Ian Tindale, Murakami Shinyu, Paul E.
 Merrell, Philip Taylor, Brad Kemper, Peter Linss, Daniel Glazman, Tantek Çelik, Florian Rivoal, Alex Mogilevsky, Simon Sapin, Cameron McCormack, Liam R E Quin, Peter Moulder, Morten Stenshorne, Rune Lillesveen, Lars Erik Bolstad, Anton Prowse, Michel Onoff, Dave Cramer.</p>
 
 
+</em></em>
