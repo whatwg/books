@@ -5,10 +5,13 @@
 .head h1 { padding: 1em 0 }
 span.minor { letter-spacing: 0; color: black; font-size: 0.8em; font-weight: normal }
 
+/*
 div.example {
   border-left: 0.3em solid black;
   margin: 0;
 }
+*/
+
 .code-example {
   text-align: right;
   float: left;
@@ -30,7 +33,7 @@ a.unclear, a.almost { color: orange }
   <p><a class="logo" href="http://www.whatwg.org/"><img alt="WHATWG" height="100" width="100" src="https://resources.whatwg.org/logo.svg"></a></p>
 	<h1>CSS Books</h1>
 	
-	<h2 class="no-num no-toc" id="living-standard-—-last-updated-30-september-2014">Living Standard — Last Updated 30 September 2014</h2>
+	<h2 class="no-num no-toc" id="living-standard-—-last-updated-1-october-2014">Living Standard — Last Updated 1 October 2014</h2>
 	
 	<dl>
 		<dt>This version:
@@ -52,7 +55,7 @@ a.unclear, a.almost { color: orange }
 
 	</dl>
 
-<p class="copyright"><a href="https://creativecommons.org/publicdomain/zero/1.0/" rel="license"><img alt="CC0" src="https://i.creativecommons.org/p/zero/1.0/80x15.png"></a>To the extent possible under law, the editor has waived all copyright and related or neighboring rights to this work. In addition, as of 30 September 2014, the editor has made this specification available under the
+<p class="copyright"><a href="https://creativecommons.org/publicdomain/zero/1.0/" rel="license"><img alt="CC0" src="https://i.creativecommons.org/p/zero/1.0/80x15.png"></a>To the extent possible under law, the editor has waived all copyright and related or neighboring rights to this work. In addition, as of 1 October 2014, the editor has made this specification available under the
 <a href="http://www.openwebfoundation.org/legal/the-owf-1-0-agreements/owfa-1-0" rel="license">Open Web Foundation Agreement Version 1.0</a>, which is available at <!--begin-link--><a href="http://www.openwebfoundation.org/legal/the-owf-1-0-agreements/owfa-1-0">http://www.openwebfoundation.org/legal/the-owf-1-0-agreements/owfa-1-0</a><!--end-link-->.
 
 </div>
@@ -999,7 +1002,7 @@ cite::before { content: leader('  ') }
 leaders of consecutive lines.
 
 <div class="example">
-In this example, the dotted lines are aligned horizontally so that the dots appear directly above and below each other:
+<p>In this example, the dotted lines are aligned horizontally so that the dots appear directly above and below each other:
 <pre>  Alfa ........ 5
   Bravo ...... 41
   Charlie ... 125
@@ -1204,7 +1207,9 @@ A sentence consists of words&#xB9;.
 -->
 
 <div class="example">
-Consider this markup:
+
+<p>Consider this markup:
+
 <pre>&lt;p&gt;Sorry, &lt;span title="This is, of course, a lie."&gt;we're closing for lunch&lt;/span&gt;.
 </pre>
 
@@ -1456,7 +1461,7 @@ by one each time an element with ''float: footnote'' appears.
 <p>The footnote counter can be reset with the 'counter-reset' property.
 
 <div class="example">
-This code resets the "footnote" counter on a per-page page basis:
+<p>This code resets the "footnote" counter on a per-page page basis:
 <pre>@page { counter-reset: footnote }
 </pre>
 </div>
@@ -1715,7 +1720,6 @@ img { flow: fill(photos) }
 -->
 
 <div class="example">
-
 <p>In this example there are two streams of footnotes, both using named areas. The first stream flowed into the "fn1" area, and the second is flowed into "fn2". The first stream is referenced by numbers, and the second by lower-alpha. 
 
 <pre>@page { 
@@ -1749,7 +1753,6 @@ img { flow: fill(photos) }
 -->
 
 <div class="example">
-
 <p>In this example there are two streams of footnotes. The first stream is floated to the predefined "footnote" area, and the second is flowed to a name area called "fn2". The first stream is referenced by line numbers, and the second by lower-alpha. 
 
 <pre>@page { 
@@ -1789,7 +1792,7 @@ And is, despite of war and wasting fire,
 
 
 <div class="example">
-Consider this code:
+<p>Consider this code:
 
 <pre>.s1 { flow: area(sidenote, fill)
 .s2 { flow: area(sidenote, fill)
@@ -1810,7 +1813,8 @@ Consider this code:
 </div>
 
 <div class="example">
-This example is similar to the previous example, except that there are two sidenote areas: left of the first column, and right of the second column. The sidenote elements are move to the closest sidenote area:
+<p>This example is similar to the previous example, except that there are two sidenote areas: left of the first column, and right of the second column. The sidenote elements are move to the closest sidenote area:
+
 <pre>.s1 { flow: area(sidenote, fill)
 .s2 { flow: area(sidenote, fill)
 </pre>
@@ -1910,7 +1914,7 @@ img { flow: area(sidenote, fill same-spread) } /* show float in the order they a
 -->
 
 <div class="example">
-In this example, photographs are shown on right pages while the corresponding captions are flowed to a sidenote area on left pages.
+<p>In this example, photographs are shown on right pages while the corresponding captions are flowed to a sidenote area on left pages.
 
 <pre>@page :right {
   margin-right: 10em;
@@ -2104,7 +2108,6 @@ this specification, there will be a footnote:
 </div>
 
 <div class="example">
-
 <p>When footnotes are long or complex, it may be impractical to keep their content at the point of reference. Instead, the content of the footnote may be stored at some other point in the source file.  This example shows how to fetch the content of a note and place it in a footnote.
 
 <pre>&lt;style&gt;
