@@ -1635,33 +1635,40 @@ content.
 <p>The 'flow' property is introduced to flow content into a named area. A functional notation indicates alignment within the named area. These values are defined:
 
 <dl>
-<dt>fill()
-<dd>element requests to be filled into the first available space in the first matching named area
-
-<dt>closest()
-<dd>element requests to be filled into the first available space in the closest matching named area
 
 <dt>baseline()
-<dd>element requests that its first baseline is aligned with the baseline of its reference point in the closest named area
+<dd>element requests that its first baseline is aligned with the baseline of its reference point in the closest matching named area
 
-<dt>top()
-<dd>element requests that its top border edge is aligned with the top border edge of the BFC of the reference point in the closest named area
+<dt>same-page()
 
-<dt>bottom()
+<dd>element requests to be filled into the first available space in the first matching named area on the same page
+
+<dt>same-spread()
+
+<dd>element requests to be filled into the first available space in the first matching named area on the same spread
+
+<dt>fill()
+
+<dd>element requests to be filled into the first available space in the first matching named area on any page
+
+<dt>top-edge()
+<dd>element requests that its top border edge is aligned with the top border edge of the BFC of the reference point in the closest matching named area
+
+<dt>bottom-edge()
 <dd>element requests that it bottom border edge is aligned with the bottom border edge of the BFC of the reference point in the closest matching named area
 
 </dl>
 
 <div class="example">
-<p>This code moves &lt;aside&gt; elements to the named area called "sidenote":
+<p>This code moves &lt;aside&gt; elements to the named area called "sidenote" on the same page as the referenc point:
 
-<pre>aside { flow: fill(sidenote, same-page); }
+<pre>aside { flow: same-page(sidenote); }
 </pre>
 </div>
 
 
 <div class="example">
-<p>In this example, images are flowed to the right page, where the "photos" area take up all available space:
+<p>In this example, images are flowed to right pages, where the "photos" area take up all available space:
 <pre>@page :right {
   @area photos {
     float: top;
@@ -1719,11 +1726,11 @@ img { flow: fill(photos) }
   @area fn2 { float: bottom; float-reference: page }
 }
 
-.fn1 { flow: fill(fn1); counter-increment: fn1 }
+.fn1 { flow: same-page(fn1); counter-increment: fn1 }
 .fn1::call { content: "[" counter(fn1) "]" }
 .fn2::marker { content: "[" counter(fn1) "]" }
 
-.fn2 { flow: fill(fn2); counter-increment: fn2 }
+.fn2 { flow: same-page(fn2); counter-increment: fn2 }
 .fn2::call { content: "[" counter(fn2, lower-alpha) "]" }
 .fn2::marker { content: "[" counter(fn2, lower-alpha) "]" }
 </pre>
@@ -1761,7 +1768,7 @@ div.line:nth-of-type(2n+1)::after { content: leader(space) counter(line) }
 .footnote::footnote-call { content: "[" counter(footnote, lower-alpha) "]" }
 .footnote::footnote-marker { content: "[" counter(footnote, lower-alpha) "]" }
 
-.fn2 { flow: fill(fn2) }
+.fn2 { flow: same-page(fn2) }
 .fn2::call { content: "" }
 .fn2::marker { content: "[" counter(line) "]" }
 </pre>
@@ -1786,8 +1793,8 @@ And is, despite of war and wasting fire,
 <div class="example">
 <p>Consider this code:
 
-<pre>.s1 { flow: fill(sidenote)
-.s2 { flow: fill(sidenote)
+<pre>.s1 { flow: same-page(sidenote) }
+.s2 { flow: same-page(sidenote) }
 </pre>
 
 <p>When there is one sidenote area, to the left of the first column, the rendering may look like:
@@ -1807,8 +1814,8 @@ And is, despite of war and wasting fire,
 <div class="example">
 <p>This example is similar to the previous example, except that there are two sidenote areas: left of the first column, and right of the second column. The sidenote elements are move to the closest sidenote area:
 
-<pre>.s1 { flow: fill(sidenote)
-.s2 { flow: fill(sidenote)
+<pre>.s1 { flow: same-page(sidenote)
+.s2 { flow: same-page(sidenote)
 </pre>
 
 <pre>┌─────┐......1.....  ............┌─────┐
@@ -1827,7 +1834,7 @@ And is, despite of war and wasting fire,
 <div class="example">
 <p>In this example, figures appear in the main flow, while captions are flowed to the closest sidenote areas (there are two: left of the first column, and right of the second column). The captions are aligned with the top of the figure element.
 
-<pre>figcaption { flow: top(sidenote) }
+<pre>figcaption { flow: top-edge(sidenote) }
 
 &lt;figure&gt;
   &lt;figcaption&gt;s1&lt;/figcaption&gt;
@@ -1867,15 +1874,15 @@ And is, despite of war and wasting fire,
              ...........
 </pre>
 
-<p>The style sheet define two name areas, one for the photograph and one for the sidenote. The "photo" named area is floated to the top, while the "sidenote" area is absolutely positioned. The two named areas overlap. Therefore, the order of the content is significant; the image is first flowed into the "photo" area. The position of the caption will be influcence by the height of the image. 
+<p>The style sheet define two name areas, one for the photograph and one for the sidenote. The "photo" named area is floated to the top, while the "sidenote" area is absolutely positioned. The two named areas overlap. Therefore, the order of the content is significant; the image is first flowed into the "photo" area. The position of the caption will be influcenced by the height of the image. 
 
 <pre>@page { 
   margin: 7mm 7mm 7mm 40mm; 
   @area photo { float: top; float-reference: bleed-box }
   @area sidenote { position: absolute; left: -40mm; top: 0; bottom: 0; width: 35mm; }
 }
-figure img { flow: fill(photo); clear: page }
-figcaption { flow: fill(sidenote) }
+figure img { flow: same-page(photo); clear: page }
+figcaption { flow: same-page(sidenote) }
 
 ...
 
@@ -1919,9 +1926,8 @@ img { flow: area(sidenote, fill same-spread) } /* show float in the order they a
   margin-left: 10em;
   @area sidenote { position: absolute; right: -8em; top: 0; width: 6em; height: auto }
 }
-img { flow: area(photos) }
-figure { flow: area(photos, fill) }
-figcaption { flow: area(sidenote, fill same-spread) }
+img { flow: same-page(photos) }
+figure { flow: same-page(photos) }
 </pre>
 
 <p>When there is one sidenote area, to the left of the first column, the rendering may look like:
@@ -1946,13 +1952,7 @@ figcaption { flow: area(sidenote, fill same-spread) }
 
 <dl>
 <dt>exact
-<dd>element insists on exact alingment, if this is not possible
-
-<dt>same-page
-<dd>element requests to be filled into any matching named area on the same page as the reference point. 
-
-<dt>same-spread
-<dd>element requests to be filled into any matching named area on the same spread as the reference point
+<dd>element insists on exact alingment, if this is not possible the element will not be shown
 
 </dl>
 
