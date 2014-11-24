@@ -6,7 +6,7 @@
 span.minor { letter-spacing: 0; color: black; font-size: 0.8em; font-weight: normal }
 
 .code-example { position: relative; color: black; background: #ddeeff; font-style: italic; margin-left: 2em; padding-left: 2em; }
-.code-example::before { content: 'Tests'; background: #008; color: white; padding: 0.15em 0.25em; font-style: normal; position: absolute; top: -0.2em; left: -1.5em; transform: rotate(-5deg); }
+.code-example::before { content: 'Test'; background: #008; color: white; padding: 0.15em 0.25em; font-style: normal; position: absolute; top: -0.2em; left: -1.5em; transform: rotate(-5deg); }
 
 a { text-decoration: none }
 a.pass { color: green }
@@ -90,11 +90,11 @@ a.unclear, a.almost { color: orange }
   <ol>
    <li><a href="#creating-names-areas:-@area"><span class="secno">7.1 </span>Creating names areas: <code>@area</code></a></li>
    <li><a href="#flowing-content-to-a-named-area:-'flow'"><span class="secno">7.2 </span>Flowing content to a named area: 'flow'</a></li>
-   <li><a href="#placement-constraints"><span class="secno">7.3 </span>Placement constraints</a></li>
+   <li><a href="#placement-policy"><span class="secno">7.3 </span>Placement policy</a></li>
    <li><a href="#note-calls:-::call"><span class="secno">7.4 </span>Note calls: <code>::call</code></a></li>
    <li><a href="#pulling-content:-target-pull()"><span class="secno">7.5 </span>Pulling content: <code>target-pull()</code></a></li>
    <li><a href="#fixing-and-clearing-elements-in-named-areas"><span class="secno">7.6 </span>Fixing and clearing elements in named areas</a></li>
-   <li><a href="#cloning-elements"><span class="secno">7.7 </span>Cloning elements</a></ol></li>
+   <li><a href="#floating-elements-to-margin-boxes"><span class="secno">7.7 </span>Floating elements to margin boxes</a></ol></li>
  <li><a href="#bookmarks"><span class="secno">8 </span>Bookmarks</a>
   <ol>
    <li><a href="#'bookmark-level'"><span class="secno">8.1 </span>'bookmark-level'</a></li>
@@ -1630,37 +1630,43 @@ content.
 
 <h3 id="flowing-content-to-a-named-area:-'flow'"><span class="secno">7.2 </span>Flowing content to a named area: 'flow'</h3>
 
-<p>The 'flow' property is introduced to flow content into a named area. A functional notation indicates alignment within the named area. These values are defined:
+<p>The 'flow' property is introduced to flow content into a named area. A functional notation indicates alignment within the named area.
+
+<pre>   area(&lt;ident&gt; [, &lt;alignment&gt; [, &lt;constraint&gt; ]]);
+<pre>
+<p>Aligmment is one of:
 
 <dl>
 
-<dt>baseline()
-<dd>element requests that its first baseline is aligned with the baseline of its reference point in the closest matching named area
+<dt>baseline
+<dd>element requests that its first baseline is aligned with the baseline of its reference point in the closest matching named area. This is the default value.
 
-<dt>same-page()
+<dt>same-page
 
 <dd>element requests to be filled into the first available space in the first matching named area on the same page
 
-<dt>same-spread()
+<dt>same-spread
 
 <dd>element requests to be filled into the first available space in the first matching named area on the same spread
 
-<dt>fill()
-
+<dt>fill
 <dd>element requests to be filled into the first available space in the first matching named area on any page
 
-<dt>top-edge()
+<dt>top-edge
 <dd>element requests that its top border edge is aligned with the top border edge of the BFC of the reference point in the closest matching named area
 
-<dt>bottom-edge()
+<dt>bottom-edge
 <dd>element requests that it bottom border edge is aligned with the bottom border edge of the BFC of the reference point in the closest matching named area
 
 </dl>
 
-<div class="example">
-<p>This code moves &lt;aside&gt; elements to the named area called "sidenote" on the same page as the referenc point:
+<p>An optional exclamation mark ('!') can be added to the above keywords to express that aligment is essential: if it cannot be honored, the ele,ment will not be shown.
 
-<pre>aside { flow: same-page(sidenote); }
+
+<div class="example">
+<p>This code moves &lt;aside&gt; elements to the named area called "sidenote" on the same page as the reference point:
+
+<pre>aside { flow: area(sidenote, same-page); }
 </pre>
 </div>
 
@@ -1675,7 +1681,7 @@ content.
     height: 1vh;
   }
 }
-img { flow: fill(photos) }
+img { flow: area(photos) }
 </pre>
 
 <p>The result is a document where content in the normal flow is shown on left pages, and right pages hold images. The images are filled into the named area in sequential order. 
@@ -1692,7 +1698,7 @@ img { flow: fill(photos) }
     @area { position: absolute; right: -4cm; top: 0; bottom: 0; width: 3.5cm; } /* right */
   }
 }
-.sidenote { flow: baseline(sidenote) }
+.sidenote { flow: area(sidenote, baseline) }
 </pre>
 
 <p>One possible rendering is:
@@ -1724,11 +1730,11 @@ img { flow: fill(photos) }
   @area fn2 { float: bottom; float-reference: page }
 }
 
-.fn1 { flow: same-page(fn1); counter-increment: fn1 }
+.fn1 { flow: area(fn1, same-page); counter-increment: fn1 }
 .fn1::call { content: "[" counter(fn1) "]" }
 .fn2::marker { content: "[" counter(fn1) "]" }
 
-.fn2 { flow: same-page(fn2); counter-increment: fn2 }
+.fn2 { flow: area(fn2,same-page); counter-increment: fn2 }
 .fn2::call { content: "[" counter(fn2, lower-alpha) "]" }
 .fn2::marker { content: "[" counter(fn2, lower-alpha) "]" }
 </pre>
@@ -1766,7 +1772,7 @@ div.line:nth-of-type(2n+1)::after { content: leader(space) counter(line) }
 .footnote::footnote-call { content: "[" counter(footnote, lower-alpha) "]" }
 .footnote::footnote-marker { content: "[" counter(footnote, lower-alpha) "]" }
 
-.fn2 { flow: same-page(fn2) }
+.fn2 { flow: area(fn2, same-page) }
 .fn2::call { content: "" }
 .fn2::marker { content: "[" counter(line) "]" }
 </pre>
@@ -1791,8 +1797,8 @@ And is, despite of war and wasting fire,
 <div class="example">
 <p>Consider this code:
 
-<pre>.s1 { flow: same-page(sidenote) }
-.s2 { flow: same-page(sidenote) }
+<pre>.s1 { flow: area(sidenote, same-page) }
+.s2 { flow: area(sidenote, same-page) }
 </pre>
 
 <p>When there is one sidenote area, to the left of the first column, the rendering may look like:
@@ -1812,8 +1818,8 @@ And is, despite of war and wasting fire,
 <div class="example">
 <p>This example is similar to the previous example, except that there are two sidenote areas: left of the first column, and right of the second column. The sidenote elements are move to the closest sidenote area:
 
-<pre>.s1 { flow: same-page(sidenote)
-.s2 { flow: same-page(sidenote)
+<pre>.s1 { flow: area(sidenote, same-page)
+.s2 { flow: area(sidenote, same-page)
 </pre>
 
 <pre>┌─────┐......1.....  ............┌─────┐
@@ -1832,7 +1838,7 @@ And is, despite of war and wasting fire,
 <div class="example">
 <p>In this example, figures appear in the main flow, while captions are flowed to the closest sidenote areas (there are two: left of the first column, and right of the second column). The captions are aligned with the top of the figure element.
 
-<pre>figcaption { flow: top-edge(sidenote) }
+<pre>figcaption { flow: area(sidenote, top-edge) }
 
 &lt;figure&gt;
   &lt;figcaption&gt;s1&lt;/figcaption&gt;
@@ -1879,8 +1885,8 @@ And is, despite of war and wasting fire,
   @area photo { float: top; float-reference: bleed-box }
   @area sidenote { position: absolute; left: -40mm; top: 0; bottom: 0; width: 35mm; }
 }
-figure img { flow: same-page(photo); clear: page }
-figcaption { flow: same-page(sidenote) }
+figure img { flow: area(photo, same-page); clear: page }
+figcaption { flow: area(sidenote, same-page) }
 
 ...
 
@@ -1924,8 +1930,8 @@ img { flow: area(sidenote, fill same-spread) } /* show float in the order they a
   margin-left: 10em;
   @area sidenote { position: absolute; right: -8em; top: 0; width: 6em; height: auto }
 }
-img { flow: same-page(photos) }
-figure { flow: same-page(photos) }
+img { flow: area(photos) }
+caption { flow: area(sidenote) }
 </pre>
 
 <p>When there is one sidenote area, to the left of the first column, the rendering may look like:
@@ -1944,13 +1950,19 @@ figure { flow: same-page(photos) }
 
 
 
-<h3 id="placement-constraints"><span class="secno">7.3 </span>Placement constraints</h3>
+<h3 id="placement-policy"><span class="secno">7.3 </span>Placement policy</h3>
 
-<p>An optional third second argument indicates a placement constraint:
+<p>An optional argument indicates a placement policy:
 
 <dl>
-<dt>exact
-<dd>element insists on exact alingment, if this is not possible the element will not be shown
+<dt>erase
+<dd>element erases any other content which may have been flowed to the named area
+
+<dt>stick
+<dd>Element sticks to the named area and is repeated on any subsequent pages which has the same named ares. Also, element erases any other content which may have been flowed to the named area. 
+
+<dt>copy
+<dd>rather than being moved, element is copied to the named area.
 
 </dl>
 
@@ -1976,7 +1988,7 @@ of the second column. Three reference points are marked with 1,
 
 <p>The code used to achieve this is:
 
-<pre>.sidenote { flow: baseline(sidenote) }
+<pre>.sidenote { flow: area(sidenote, baseline) }
 </pre>
 
 </div>
@@ -2001,9 +2013,9 @@ of the second column. Three reference points are marked with 1,
 
 <div class="example">
 
-<p>This example is similar to the previous one, except that the 'exact' keyword is added as a second argument:
+<p>This example is similar to the previous one, except that 'baseline!' is used:
 
-<pre>.sidenote { flow: baseline(sidenote, exact) }
+<pre>.sidenote { flow: area(sidenote, baseline!) }
 </pre>
 
 <p>As a result, the third sidnote (which cannot be granted its requested placement) is not shown:
@@ -2022,32 +2034,6 @@ of the second column. Three reference points are marked with 1,
 </div>
 
 
-<!--
-<p>If the requested placement is not possible (due to other conten alredy being place there, or due to there not being a suitable positioned named area), the element is placed at the first possible placement after the requested placement. However, elements may insist on exact placement. This is expressed by adding a trailing "!" to the keywords. If exact alignment has been requested, but is not possible, the element will not be displayed. 
-
-<div class=example>
-
-<p>In this example, floats insist on being aligned with their baseline of the reference point:
-
-<pre>
-.sidenote { flow: area(sidenote, baseline!) }
-</pre>
-
-<p>However, there isn't space for the third sidenote in its preferred position. As a result, the third sidenote is deleted.
-
-<pre>
-            ........ .........
-            ........ ..2...... second
-            ........ .....3... sidenote
-            ........ ......... 
-            ........ ......... 
-      first ....1... .........
-   sidenote ........ .........
-            ........ ......... 
-</pre>
-</div>
--->
-
 
 <h3 id="note-calls:-::call"><span class="secno">7.4 </span>Note calls: <code>::call</code></h3>
 
@@ -2055,7 +2041,7 @@ of the second column. Three reference points are marked with 1,
 
 <div class="example">
 <pre>.sidenote { 
-  flow: area(sidenote);
+  flow: area(sidenote, same-page);
   counter-increment: sn;
 }
 .sidenote::call { 
@@ -2121,40 +2107,23 @@ this specification, there will be a footnote:
 <div class="example">
 <p>Move an element to a named area:
 
-<pre>aside { flow: area(sidenote) }
+<pre>aside { flow: area(sidenote, same-page) }
 </pre>
 </div>
 
 <div class="example">
 <p>Move an element to a named area, and make it sticky, so that it is shown on succeeding pages, until erased:
 
-<pre>h1.copy { flow: area(sidenote, stick) }
+<pre>h1.copy { flow: area(sidenote, same-page, stick) }
 </pre>
 </div>
 
 <p>Erase other content in the box before moving the element into list
 
 <div class="example">
-<pre>aside { flow: area(sidenote, erase) }
+<pre>aside { flow: area(sidenote, same-page, erase) }
 </pre>
 </div>
-
-
-
-<h3 id="cloning-elements"><span class="secno">7.7 </span>Cloning elements</h3>
-
-<!--
-<div class example>
-<pre>
-H2 {display: block; font-weight: bold; running: chapter}
-H2:running {display: inline; font-weight: normal}
- 
-@page {
-  @top-center { content: element(chapter) }
-}
-</pre>
-</div>
--->
 
 
 <div class="example">
@@ -2179,7 +2148,7 @@ H2:running {display: inline; font-weight: normal}
   }
 }
 
-h1 { flow: copy-to(header, fill stick erase) }
+h1 { flow: area(running-header, same-page, stick) }
 </pre>
 </div>
 
@@ -2201,7 +2170,7 @@ h1 { flow: copy-to(header, fill stick erase) }
 #ornament { 
   flow: area(running-header, fill, stick); color: red; content: "\2747" /* snow crystal */}
 h1 { 
-  flow: copy-to(running-header, fill, stick); font: 12pt serif }
+  flow: area(running-header, fill, copy stick); font: 12pt serif }
 
 &lt;span id=pagecounter&gt;&lt;/span&gt;
 &lt;span id=ornament&gt;&lt;/span&gt;
@@ -2224,23 +2193,23 @@ div.running-header { flow: margin(top-left) }  /* move element to top-left margi
 </pre>
 -->
 
-<!--
-<h3>Floating elements to margin boxes</h3>
 
-<p>Margin boxes can be considered a special type of named areas. Unlike names areas, margin boxes 
+<h3 id="floating-elements-to-margin-boxes"><span class="secno">7.7 </span>Floating elements to margin boxes</h3>
+
+<p>Margin boxes can be considered a special type of named areas. Unlike names areas, margin boxes:
 
 <ul>
 <li>are predefined (there are 16 of them) 
 <li>come with default settings on 'text-align' and 'vertical-align'
 </ul>
 
-<p>The 'to-margin()' function moves elements to margin areas, while the 'copy-to-margin()' copies elements into margin areas.
+<p>The 'margin()' function moves elements to margin areas:
 
-<div class=example>
-div.running-header { flow: area-margin(top-left) }  /* move to top-left margin area */
-h1 { float: copy-to-margin(top-right) }            /* copy to margin area */
+<div class="example">
+div.running-header { flow: margin(top-left) }      /* move to top-left margin area */
+h1 { flow: margin(top-right, copy) }               /* copy to margin area */
 </div>
--->
+
 
 
 <h2 id="bookmarks"><span class="secno">8 </span>Bookmarks</h2>
@@ -3766,3 +3735,4 @@ Jacob Grundtvig Refstrup,  James Elmore, Ian Tindale, Murakami Shinyu, Paul E.
 Merrell, Philip Taylor, Brad Kemper, Peter Linss, Daniel Glazman, Tantek Çelik, Florian Rivoal, Alex Mogilevsky, Simon Sapin, Cameron McCormack, Liam R E Quin, Peter Moulder, Morten Stenshorne, Rune Lillesveen, Lars Erik Bolstad, Anton Prowse, Michel Onoff, Dave Cramer.</p>
 
 
+</pre></pre>
