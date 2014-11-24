@@ -6,13 +6,10 @@
 <style>
 .head h1 { padding: 1em 0 }
 span.minor { letter-spacing: 0; color: black; font-size: 0.8em; font-weight: normal }
-.code-example::before { content: "Tests with renditions: " }
-.code-example {
-  border: thin solid black;
-  text-align: right;
-  float: left;
-  width: 5em;
-}
+
+.code-example { position: relative; color: green; background: #DDFFDD; font-style: italic; margin-left: 2em; padding-left: 2em; }
+.code-example::before { content: 'Tests'; background: green; color: white; padding: 0.15em 0.25em; font-style: normal; position: absolute; top: -0.2em; left: -1.5em; transform: rotate(-5deg); }
+
 a { text-decoration: none }
 a.pass { color: green }
 a.fail { color: red }
