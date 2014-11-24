@@ -2035,20 +2035,6 @@ of the second column. Three reference points are marked with 1,
 
 
 
-<h3 id="note-calls:-::call"><span class="secno">7.4 </span>Note calls: <code>::call</code></h3>
-
-<p>Elements that are floated to named areas can add a "call", similar to a footnote-call, at the place where they were floated from. 
-
-<div class="example">
-<pre>.sidenote { 
-  flow: area(sidenote, same-page);
-  counter-increment: sn;
-}
-.sidenote::call { 
-  content: counter(sn, lower-alpha); font-size: 0.6em; vertical-align: top;
-}
-</pre>
-</div>
 
 <div class="example">
 <p>First, move an element to a named area:
@@ -2123,6 +2109,21 @@ h1 {
 
 </div>
 
+
+<h3 id="note-calls:-::call"><span class="secno">7.4 </span>Note calls: <code>::call</code></h3>
+
+<p>Elements that are floated to named areas can add a "call", similar to a footnote-call, at the place where they were floated from. 
+
+<div class="example">
+<pre>.sidenote { 
+  flow: area(sidenote, same-page);
+  counter-increment: sn;
+}
+.sidenote::call { 
+  content: counter(sn, lower-alpha); font-size: 0.6em; vertical-align: top;
+}
+</pre>
+</div>
 
 <h3 id="floating-elements-to-margin-boxes"><span class="secno">7.5 </span>Floating elements to margin boxes</h3>
 
