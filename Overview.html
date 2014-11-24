@@ -92,9 +92,8 @@ a.unclear, a.almost { color: orange }
    <li><a href="#flowing-content-to-a-named-area:-'flow'"><span class="secno">7.2 </span>Flowing content to a named area: 'flow'</a></li>
    <li><a href="#placement-policy"><span class="secno">7.3 </span>Placement policy</a></li>
    <li><a href="#note-calls:-::call"><span class="secno">7.4 </span>Note calls: <code>::call</code></a></li>
-   <li><a href="#pulling-content:-target-pull()"><span class="secno">7.5 </span>Pulling content: <code>target-pull()</code></a></li>
-   <li><a href="#fixing-and-clearing-elements-in-named-areas"><span class="secno">7.6 </span>Fixing and clearing elements in named areas</a></li>
-   <li><a href="#floating-elements-to-margin-boxes"><span class="secno">7.7 </span>Floating elements to margin boxes</a></ol></li>
+   <li><a href="#floating-elements-to-margin-boxes"><span class="secno">7.5 </span>Floating elements to margin boxes</a></li>
+   <li><a href="#pulling-content:-target-pull()"><span class="secno">7.6 </span>Pulling content: <code>target-pull()</code></a></ol></li>
  <li><a href="#bookmarks"><span class="secno">8 </span>Bookmarks</a>
   <ol>
    <li><a href="#'bookmark-level'"><span class="secno">8.1 </span>'bookmark-level'</a></li>
@@ -2051,69 +2050,13 @@ of the second column. Three reference points are marked with 1,
 </pre>
 </div>
 
-
-<h3 id="pulling-content:-target-pull()"><span class="secno">7.5 </span>Pulling content: <code>target-pull()</code></h3>
-
 <div class="example">
-
-<p>To support legacy browsers, it is often better to make a link to
-the note rather than including the text inline. This example shows how
-to fetch the content of a note and place it in a footnote.
-
-<pre>&lt;style&gt;
-@media print {
-  .footnote {
-    float: footnote;
-    content: target-pull(attr(href url)) }
-  .call { display: none }
-}
-&lt;/style&gt;
-...
-&lt;p&gt;A sentence consists of words&lt;a class="footnote" href="#words"&gt; [3]&lt;/a&gt;.
-...
-&lt;p id=words&gt;&lt;span class="call"&gt;[3]&lt;/span&gt; Most often.
-</pre>
-
-<p>When shown in a legacy browser, the content of the element will be
-shown as a clickable link to an endnote. When printed according to
-this specification, there will be a footnote:
-
-<pre>A sentence consists of words¹.
-
-¹ Most often.
-</pre>
-</div>
-
-<div class="example">
-<p>When footnotes are long or complex, it may be impractical to keep their content at the point of reference. Instead, the content of the footnote may be stored at some other point in the source file.  This example shows how to fetch the content of a note and place it in a footnote.
-
-<pre>&lt;style&gt;
-@media print {
-  .footnote {
-    float: footnote;
-    content: target-pull(attr(href url)) }
-}
-&lt;/style&gt;
-...
-&lt;p&gt;A sentence consists of words&lt;a class="footnote" href="#words"&gt;&lt;/a&gt;.
-...
-&lt;div id=words&gt;Most often, a sentence consists of words. However, some sentences also 
-  have &lt;em&gt;numbers&lt;/em&gt;. And punctuation, don't forget punctuation.&lt;/div&gt;
-</pre>
-</div>
-
-
-<h3 id="fixing-and-clearing-elements-in-named-areas"><span class="secno">7.6 </span>Fixing and clearing elements in named areas</h3>
-
-<div class="example">
-<p>Move an element to a named area:
+<p>First, move an element to a named area:
 
 <pre>aside { flow: area(sidenote, same-page) }
 </pre>
-</div>
 
-<div class="example">
-<p>Move an element to a named area, and make it sticky, so that it is shown on succeeding pages, until erased:
+<p>Then, make the element stick so that it is shown on succeeding pages:
 
 <pre>h1.copy { flow: area(sidenote, same-page, stick) }
 </pre>
@@ -2181,21 +2124,7 @@ h1 {
 </div>
 
 
-<!--
-<h3>Flowing elements to margin boxes</h3>
-
-<pre>
-@page :left {
-  @area 
-
-  }
-
-div.running-header { flow: margin(top-left) }  /* move element to top-left margin area */
-</pre>
--->
-
-
-<h3 id="floating-elements-to-margin-boxes"><span class="secno">7.7 </span>Floating elements to margin boxes</h3>
+<h3 id="floating-elements-to-margin-boxes"><span class="secno">7.5 </span>Floating elements to margin boxes</h3>
 
 <p>Margin boxes can be considered a special type of named areas. Unlike names areas, margin boxes:
 
@@ -2210,6 +2139,60 @@ div.running-header { flow: margin(top-left) }  /* move element to top-left margi
 div.running-header { flow: margin(top-left) }      /* move to top-left margin area */
 h1 { flow: margin(top-right, copy) }               /* copy to margin area */
 </div>
+
+
+
+<h3 id="pulling-content:-target-pull()"><span class="secno">7.6 </span>Pulling content: <code>target-pull()</code></h3>
+
+<div class="example">
+
+<p>To support legacy browsers, it is often better to make a link to
+the note rather than including the text inline. This example shows how
+to fetch the content of a note and place it in a footnote.
+
+<pre>&lt;style&gt;
+@media print {
+  .footnote {
+    float: footnote;
+    content: target-pull(attr(href url)) }
+  .call { display: none }
+}
+&lt;/style&gt;
+...
+&lt;p&gt;A sentence consists of words&lt;a class="footnote" href="#words"&gt; [3]&lt;/a&gt;.
+...
+&lt;p id=words&gt;&lt;span class="call"&gt;[3]&lt;/span&gt; Most often.
+</pre>
+
+<p>When shown in a legacy browser, the content of the element will be
+shown as a clickable link to an endnote. When printed according to
+this specification, there will be a footnote:
+
+<pre>A sentence consists of words¹.
+
+¹ Most often.
+</pre>
+</div>
+
+<div class="example">
+<p>When footnotes are long or complex, it may be impractical to keep their content at the point of reference. Instead, the content of the footnote may be stored at some other point in the source file.  This example shows how to fetch the content of a note and place it in a footnote.
+
+<pre>&lt;style&gt;
+@media print {
+  .footnote {
+    float: footnote;
+    content: target-pull(attr(href url)) }
+}
+&lt;/style&gt;
+...
+&lt;p&gt;A sentence consists of words&lt;a class="footnote" href="#words"&gt;&lt;/a&gt;.
+...
+&lt;div id=words&gt;Most often, a sentence consists of words. However, some sentences also 
+  have &lt;em&gt;numbers&lt;/em&gt;. And punctuation, don't forget punctuation.&lt;/div&gt;
+</pre>
+</div>
+
+
 
 
 
