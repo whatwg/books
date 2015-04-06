@@ -1132,7 +1132,7 @@ footnotes in CSS.
 .footnote { float: footnote }
 &lt;/style>
 
-&lt;p>A sentence consists of words. &lt;span class="footnote">Most often.&lt;/span>.
+&lt;p>A sentence consists of words.&lt;span class="footnote">Most often.&lt;/span>.
 </pre>
 
 <p>In this example, the text <q>Most often.</q> will be placed in a
@@ -1141,12 +1141,36 @@ corresponding marker will be shown next to the footnote. Here is one
 possible rendering:
 
 <pre>
-A sentence consists of words. &#xB9;
+A sentence consists of words.&#xB9;
 
 &#xB9; Most often.
 </pre>
-
 </div>
+
+<div class=example>
+<p>Footnotes make sense in paged media, but in continous media the information is better displayed inline. Here is an example of how to support both paged and contious media:
+
+<pre>
+&lt;style>
+@media print {
+.footnote { float: footnote }
+}
+@media screen {
+.footnote::before { content: " (" }
+.footnote::after { content: ")" }
+}
+&lt;/style>
+
+&lt;p>A sentence consists of words.&lt;span class="footnote">Most often.&lt;/span>.
+</pre>
+
+<p>In contious media, the presentaion will be:
+
+<pre>
+A sentence consists of words. (Most often.)
+</pre>
+</div>
+
 
 
 <!--
@@ -1329,13 +1353,12 @@ content which may compete for the same space on the same page.
 
 <div class="example">
 <pre>
-@page { @footnote { float: bottom; column-span: all }}
-figure { float: bottom }
+@page { @footnote { float: bottom; float-reference: page; }}
+figure { float: bottom; column-span: all }
 </pre>
 
 <p>If figures and footnotes are on the same page, the footnotes will appear below the figures as they are floated to the bottom before the figures.
 </div>
-
 
 <p>Potentially, every page has a footnote area. If there
 are no footnotes on the page, the footnote area will not take up any
@@ -1343,7 +1366,7 @@ space. If there are footnotes on a page, the layout of the footnote
 area will be determined by the properties/values set on it, and by the
 footnote elements inside it.
 
-<p>These properties apply to the footnote area: 'content', 'border',
+<p>These properties apply to the footnote area: 'float', 'float-reference', 'content', 'border',
 'padding', 'margin', 'height', 'width', 'max-height', 'max-width',
 'min-height', 'min-width', and the background properties.
 
@@ -1370,10 +1393,9 @@ specification.
 }
 </pre>
 
-<p>The result of this code is a footnote area separated from other content above it by margin, border and padding. Only 4em of the border is visible due to the 'border-clip' property, which is defined in <a href="http://dev.w3.org/csswg/css4-background/">CSS Backgrounds and Borders Module Level 4</a>.   <!--[[!CSS4BACKGROUND]]-->.
+<p>The result of this code is a footnote area separated from other content above it by margin, border and padding. Only 4em of the border is visible due to the 'border-clip' property, which is defined in <a href="http://dev.w3.org/csswg/css4-background/">CSS Backgrounds and Borders Module Level 4</a>.   <!--[[!CSS4BACKGROUND]]-->
 
 </div>
-
 
 <!--
 <p class="issue">Footnotes in tables and floats may be problematic. In
@@ -2238,14 +2260,17 @@ A sentence consists of words&#xB9;.
 
 
 
+<h2>Inside/outside properties</h2>
+
+<p>Named areas, as defined above, is a powerful mechanism which can render many types of sidenotes. However, the implementation cost is significant. 
 
 
 <h2>Bookmarks</h2>
 
 <div class=code-example>
-<a href="http://www.wiumlie.no/2014/tests/books/bookmarks.html">html</a>
+<a href="http://www.wiumlie.no/2015/tests/books/bookmarks.html">html</a>
 <a class=pass href="http://www.wiumlie.no/2014/tests/books/bookmarks-ah.pdf">AntennaHouse</a>
-<a class=pass href="http://www.wiumlie.no/2014/tests/books/bookmarks-pr.pdf">Prince</a>
+<a class=pass href="http://www.wiumlie.no/2015/tests/books/bookmarks-pr.pdf">Prince</a>
 </div>
 
 <p>Some document formats have the capability to represent bookmarks
