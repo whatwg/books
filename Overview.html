@@ -23,7 +23,7 @@ a.unclear, a.almost { color: orange }
   <p><a class="logo" href="http://www.whatwg.org/"><img alt="WHATWG" height="100" width="100" src="https://resources.whatwg.org/logo.svg"></a></p>
 	<h1>CSS Books</h1>
 	
-	<h2 class="no-num no-toc" id="living-standard-—-last-updated-6-april-2015">Living Standard — Last Updated 6 April 2015</h2>
+	<h2 class="no-num no-toc" id="living-standard-—-last-updated-7-april-2015">Living Standard — Last Updated 7 April 2015</h2>
 	
 	<dl>
 		<dt>This version:
@@ -45,7 +45,7 @@ a.unclear, a.almost { color: orange }
 
 	</dl>
 
-<p class="copyright"><a href="https://creativecommons.org/publicdomain/zero/1.0/" rel="license"><img alt="CC0" src="https://i.creativecommons.org/p/zero/1.0/80x15.png"></a>To the extent possible under law, the editor has waived all copyright and related or neighboring rights to this work. In addition, as of 6 April 2015, the editor has made this specification available under the
+<p class="copyright"><a href="https://creativecommons.org/publicdomain/zero/1.0/" rel="license"><img alt="CC0" src="https://i.creativecommons.org/p/zero/1.0/80x15.png"></a>To the extent possible under law, the editor has waived all copyright and related or neighboring rights to this work. In addition, as of 7 April 2015, the editor has made this specification available under the
 <a href="http://www.openwebfoundation.org/legal/the-owf-1-0-agreements/owfa-1-0" rel="license">Open Web Foundation Agreement Version 1.0</a>, which is available at <!--begin-link--><a href="http://www.openwebfoundation.org/legal/the-owf-1-0-agreements/owfa-1-0">http://www.openwebfoundation.org/legal/the-owf-1-0-agreements/owfa-1-0</a><!--end-link-->.
 
 </div>
@@ -1316,6 +1316,7 @@ spanning all columns of the outermost multicol element:
 <pre>@page {
   @footnote {
     float: bottom;
+    float-reference: column; 
   }
 }
 </pre>
@@ -2727,6 +2728,21 @@ displayed; if the condition is not met, the effect will be as if
 <p>Spanners split column rules, and each fragment is possibly clipped by this property.
 
 <h2 id="selecting-elements-within-pages"><span class="secno">12 </span>Selecting elements within pages</h2>
+
+<p class="note">This section sketches several possible solutions. 
+
+
+<div class="example">
+
+<p>To select elements depending on which page they start on, these pseudo-classes can be used:
+
+<pre>aside:left { background: red }
+aside:right { background: green }
+aside:first { background: blue }
+aside:nth(4n+1) { background: pink }
+</pre>
+</div>
+
 
 <p>To select elements within a page, normal selectors can be combined with a page selector. 
 
