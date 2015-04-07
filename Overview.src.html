@@ -1314,6 +1314,7 @@ spanning all columns of the outermost multicol element:
 @page {
   @footnote {
     float: bottom;
+    float-reference: column; 
   }
 }
 </pre>
@@ -2782,6 +2783,22 @@ displayed; if the condition is not met, the effect will be as if
 <p>Spanners split column rules, and each fragment is possibly clipped by this property.
 
 <h2>Selecting elements within pages</h2>
+
+<p class="note">This section sketches several possible solutions. 
+
+
+<div class=example>
+
+<p>To select elements depending on which page they start on, these pseudo-classes can be used:
+
+<pre>
+aside:left { background: red }
+aside:right { background: green }
+aside:first { background: blue }
+aside:nth(4n+1) { background: pink }
+</pre>
+</div>
+
 
 <p>To select elements within a page, normal selectors can be combined with a page selector. 
 
