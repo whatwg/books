@@ -15,20 +15,20 @@ a.unclear, a.almost { color: orange }
 .issue { background: #FAA; padding: 0.2em 0.4em; margin: 0.3em 0 }
 .issue::before { content: "Issue: " }
 </style>
-<link href="https://www.whatwg.org/style/specification" rel="stylesheet" type="text/css">
+<link href="https://resources.whatwg.org/standard.css" rel="stylesheet" type="text/css">
 
 <body class="draft">
 <div class="head">
-  <p><a class="logo" href="http://www.whatwg.org/"><img alt="WHATWG" height="100" width="100" src="https://resources.whatwg.org/logo.svg"></a></p>
+  <p><a class="logo" href="https://whatwg.org/"><img alt="WHATWG" height="100" width="100" src="https://resources.whatwg.org/logo.svg"></a></p>
 	<h1>CSS Books</h1>
-	
-	<h2 class="no-num no-toc" id="living-standard-—-last-updated-12-december-2016">Living Standard — Last Updated 12 December 2016</h2>
-	
+
+	<h2 class="no-num no-toc" id="living-idea-—-last-updated-21-august-2017">Living Idea — Last Updated 21 August 2017</h2>
+
 	<dl>
 		<dt>This version:
-		<dd><!--begin-link--><a href="https://books.spec.whatwg.org/">https://books.spec.whatwg.org/</a><!--end-link-->
-		
-	
+		<dd><!--begin-link--><a href="https://books.idea.whatwg.org/">https://books.idea.whatwg.org/</a><!--end-link-->
+
+
 		<dt>Editor:
 		<dd class="vcard">
 			<span class="fn">Håkon Wium Lie</span>,
@@ -36,10 +36,10 @@ a.unclear, a.almost { color: orange }
 			<span class="email">howcome@opera.com</span>
 
 		<dt>Participate:</dt>
-		<dd><a href="http://www.whatwg.org/mailing-list">whatwg@whatwg.org</a></dd>
-		<dd><a href="http://lists.w3.org/Archives/Public/www-style/">www-style@w3.org</a></dd>
+		<dd><a href="https://whatwg.org/mailing-list">whatwg@whatwg.org</a></dd>
+		<dd><a href="https://lists.w3.org/Archives/Public/www-style/">www-style@w3.org</a></dd>
 
-<dd><a href="http://www.w3.org/Bugs/Public/enter_bug.cgi?product=WHATWG&amp;component=Books">file a bug</a> (<a href="https://www.w3.org/Bugs/Public/buglist.cgi?product=WHATWG&amp;component=Books&amp;resolution=---">open bugs</a>)</dd>
+<dd><a href="https://www.w3.org/Bugs/Public/enter_bug.cgi?product=WHATWG&amp;component=Books">file a bug</a> (<a href="https://www.w3.org/Bugs/Public/buglist.cgi?product=WHATWG&amp;component=Books&amp;resolution=---">open bugs</a>)</dd>
 
 
 	</dl>
@@ -51,11 +51,11 @@ a.unclear, a.almost { color: orange }
 
 <h2 class="no-num no-toc" id="abstract">Abstract</h2>
 
-<p>This specification defines features often used when printing books or magazines. Using this functionality, documents written in HTML can be presented in a book-like manner, either on screen or on paper. Real books are being published with functionality described in this specification. 
+<p>This specification defines features often used when printing books or magazines. Using this functionality, documents written in HTML can be presented in a book-like manner, either on screen or on paper. Real books are being published with functionality described in this specification.
 
 <h2 class="no-num no-toc" id="status">Status</h2>
 
-<p>This specification is in the process of establishing itself in WHATWG. As such, the term "Living Standard" indicates a goal. However, most of this specification has been interoperably implemented and is in daily use by publishers. Implementation coverage is <a href="http://www.wiumlie.no/2014/tests/books/coverage.html">documented here</a>.
+<p>This specification is in the process of establishing itself in WHATWG. Most of this specification has been interoperably implemented and is in daily use by publishers. Implementation coverage is <a href="http://www.wiumlie.no/2014/tests/books/coverage.html">documented here</a>.
 
 <h2 class="no-num no-toc" id="table-of-contents">Table of Contents</h2>
 
@@ -206,7 +206,7 @@ proposed definition of the property, one has to go back to the <a href="http://w
 <p>A named string can be thought of as a variable that hold a
 string of text. Named strings are created with the 'string-set'
 property which copies a string of text into a named string. Only text
-is copied; not style, structure, or replaced content. 
+is copied; not style, structure, or replaced content.
 
 <div class="code-example">
 <a href="http://www.wiumlie.no/2014/tests/books/e-string-set-motivational.html">html</a>
@@ -356,10 +356,10 @@ names in CSS.
 <p>In this example, the named string called <em>index</em> will hold the first letter of &lt;dt&gt; elements.
 <pre>dt { string-set: index content(first-letter) }
 </pre>
-<p>One-letter running headers are often used in dictionaries. 
+<p>One-letter running headers are often used in dictionaries.
 </div>
 
-<p>The textual content is copied regardless of values on other CSS properties. 
+<p>The textual content is copied regardless of values on other CSS properties.
 
 <div class="code-example">
 <a href="http://www.wiumlie.no/2014/tests/books/e-string-set-other-declarations.html">html</a>
@@ -372,7 +372,7 @@ names in CSS.
 
 <pre>title {
   display: none;
-  content: "foo"; 
+  content: "foo";
   text-transform: uppercase;
   text-replace: "foo" "bar";
   string-set: title content();
@@ -447,7 +447,7 @@ dt { string-set: index content(first-letter), term content(text) }
 <pre>h2 { string-set: header content() }
 </pre>
 
-<p>The value of the <em>header</em> string 
+<p>The value of the <em>header</em> string
 
 <table class="string-set-example">
 <tr>
@@ -607,7 +607,7 @@ optional second argument. The syntax is defined as:
 <pre>  element( <a href="http://www.w3.org/TR/css3-values/#custom-idents">&lt;custom-ident&gt;</a> [ , [ first | start | last | first-except ]]? )
 </pre>
 
-<p>The keywords have the same meaning as for the ''string()'' value. 
+<p>The keywords have the same meaning as for the ''string()'' value.
 
 <p>The ''element()'' value is only allowed on the 'content' property within a margin box. The ''element()'' value cannot be combined with any other values.
 
@@ -707,7 +707,7 @@ possible. The expansion of a leader from its minimum length never
 causes line breaks to change. At the end of the leader, a partial
 leader string may be shown.
 
-<p>Line-breaking characters inside leader strings must be ignored. A list of line-breaking characters are found in 
+<p>Line-breaking characters inside leader strings must be ignored. A list of line-breaking characters are found in
 <a href="http://www.unicode.org/standard/reports/tr13/tr13-5.html">[Unicode
 Technical Report #13]</a>. Other white space characters are collapsed according to the values of
 white-space properties. A leader consisting only of whitespace
@@ -744,9 +744,9 @@ minimum leader length must be honored.
 
 <div class="example">
 <p>By setting 'white-space: pre', the white space in the leader string is preserved:
-<pre>h1::after { 
+<pre>h1::after {
   content: leader('  -  ');
-  white-space: pre; 
+  white-space: pre;
 }
 &lt;h1&gt;Dashing news&lt;/h1&gt;
 </pre>
@@ -757,9 +757,9 @@ minimum leader length must be honored.
 
 <div class="example">
 
-<p>If a leader is set on an inline element inside a justified paragraph, there will not be any empty space on the line. Therefore, the leader is shown only once. 
+<p>If a leader is set on an inline element inside a justified paragraph, there will not be any empty space on the line. Therefore, the leader is shown only once.
 
-<pre>span::after { 
+<pre>span::after {
   content: leader('...');
 }
 
@@ -821,12 +821,12 @@ Asia............134
 
 </div>
 
-<p>The appearance of leaders is influenced by the same set of properties that influence the appearance of fixed strings. 
+<p>The appearance of leaders is influenced by the same set of properties that influence the appearance of fixed strings.
 
 <div class="example">
 <p>The same properties can affect the presentation of the fixed string and the leader.
 
-<pre> 
+<pre>
 content: "...";
 content: leader("...");
 </pre>
@@ -840,7 +840,7 @@ content: leader("...");
 
 
 <div class="example">
-<p>Line numbers sometimes displayed on the side of poetry, for reference purposes. In this example, a counter is dsplayed on every other line and pushed to the right by an invisible leader. 
+<p>Line numbers sometimes displayed on the side of poetry, for reference purposes. In this example, a counter is dsplayed on every other line and pushed to the right by an invisible leader.
 
 <pre>@page { counter-reset: line }
 .line { counter-increment: line }
@@ -855,15 +855,15 @@ Wins as it wanders, dazzles where it dwells,       3
 Glance o'er this page, nor to my verse deny
 </pre>
 
-<p>Note that the formatter doesn't really count lines, but rather elements marked up as lines. 
+<p>Note that the formatter doesn't really count lines, but rather elements marked up as lines.
 </div>
 
 <!--
-<p>If the presence of a minimum length leader at the end of a line results in subsequent content being moved to the next line, the leader will also appear at the beginning of the next line. 
+<p>If the presence of a minimum length leader at the end of a line results in subsequent content being moved to the next line, the leader will also appear at the beginning of the next line.
 -->
 
-<p>A leader is only present on one line. If the presence of a minimum length leader at the end of a line results in subsequent content being moved to the next line, the leader will also be moved to the next line. 
-  
+<p>A leader is only present on one line. If the presence of a minimum length leader at the end of a line results in subsequent content being moved to the next line, the leader will also be moved to the next line.
+
 <div class="example">
 <p>Consider this code:
 
@@ -892,7 +892,7 @@ Glance o'er this page, nor to my verse deny
 
 <p>The purpose of a leader is most often to connect two
 strings visually. To achieve this, User Agents may chose to move
-content appearing before the leader onto the same line as the leader. 
+content appearing before the leader onto the same line as the leader.
 
 <div class="example">
 <p>In this renditon, the User Agen has chosen to move "Adams" to the next line to preserve a visual connection:
@@ -912,7 +912,7 @@ content appearing before the leader onto the same line as the leader.
 </pre>
 
 <pre>|Dou|glas
-|Ada|ms  
+|Ada|ms
 |...|42
 </pre>
 </div>
@@ -924,8 +924,8 @@ content appearing before the leader onto the same line as the leader.
 cite::before { content: leader('  ') }
 &lt;/style&gt;
 &lt;blockquote&gt;
-  For a moment, nothing happend. 
-  Then, after a second or so, 
+  For a moment, nothing happend.
+  Then, after a second or so,
   nothing continued to happen.
     &lt;cite&gt;Douglas Adams&lt;/cite&gt;
 &lt;/blockquote&gt;
@@ -958,8 +958,8 @@ cite::before { content: leader('  ') }
 cite::before { content: leader('  ') }
 &lt;/style>
 &lt;blockquote>
-  For a moment, nothing happend. 
-  Then, after a second or so, 
+  For a moment, nothing happend.
+  Then, after a second or so,
   nothing continued to happen.
     &lt;cite>Douglas&nbsp;Adams&lt;/cite>
 &lt;/blockquote>
@@ -1300,7 +1300,7 @@ spanning all columns of the outermost multicol element:
 <pre>@page {
   @footnote {
     float: bottom;
-    float-reference: page; 
+    float-reference: page;
   }
 }
 </pre>
@@ -1315,7 +1315,7 @@ spanning all columns of the outermost multicol element:
 <pre>@page {
   @footnote {
     float: bottom;
-    float-reference: column; 
+    float-reference: column;
   }
 }
 </pre>
@@ -1328,7 +1328,7 @@ spanning all columns of the outermost multicol element:
   @footnote {
     float: bottom;
     float-reference: page;
-    columns: 3; 
+    columns: 3;
   }
 }
 </pre>
@@ -1458,9 +1458,9 @@ footnote is generated. That is, the "footnote" counter is incremented
 by one each time an element with ''float: footnote'' appears.
 
 <div class="example">
-<p>This code adds square brackets around footnote calls and 
+<p>This code adds square brackets around footnote calls and
 
-<pre>::footnote-call { 
+<pre>::footnote-call {
   content: " [" counter(footnote) "]";
 }
 </pre>
@@ -1504,7 +1504,7 @@ As a result, the "footnote" counter is incremented each time a footnote is gener
 
 <div class="example">
 
-<p>Footnotes can also be combined with other counters. In this example, a poem is shown with line numbers on the side. The "line" counter is also used in the footnoter marker. 
+<p>Footnotes can also be combined with other counters. In this example, a poem is shown with line numbers on the side. The "line" counter is also used in the footnoter marker.
 
 <pre>@page { counter-reset: line }
 div.line { counter-increment: line }
@@ -1576,7 +1576,7 @@ and the settings in the default style sheet differentiates the two.
 .sidenote { float: sidenote }
 </pre>
 
-<p>It is important to note that it is the sidenote area that is descibed by @sidenote, and not the elements that are floated into the sidenote area. 
+<p>It is important to note that it is the sidenote area that is descibed by @sidenote, and not the elements that are floated into the sidenote area.
 </div>
 
 -->
@@ -1588,7 +1588,7 @@ and the settings in the default style sheet differentiates the two.
 <p class=issue>what role should fixed areas have
 -->
 
-<p>The page area and footnote area are predefined areas in CSS; all content is shown in the page area by default, and footnotes can be floated to the page area. This section describes a generic mechanism to create <dfn id="named-areas-0">named areas</dfn>, how to posistion named areas, and how to flow content into named areas. 
+<p>The page area and footnote area are predefined areas in CSS; all content is shown in the page area by default, and footnotes can be floated to the page area. This section describes a generic mechanism to create <dfn id="named-areas-0">named areas</dfn>, how to posistion named areas, and how to flow content into named areas.
 
 <h3 id="creating-names-areas:-@area"><span class="secno">7.1 </span>Creating names areas: <code>@area</code></h3>
 
@@ -1597,7 +1597,7 @@ and the settings in the default style sheet differentiates the two.
 <p>Named areas are can be absolutely positioned, or positiond with the 'float' property. When absolutely positioned, measurements are relative to the page box.
 
 <div class="example">
-<p>In this example, a named area called <em>sidenote</em> is created. 
+<p>In this example, a named area called <em>sidenote</em> is created.
 
 <pre>@page {
   margin-left: 10em;
@@ -1638,7 +1638,7 @@ content.
 <div class="example">
 <pre>@page {
   margin-left: 1cm 5cm;  /* wide side margins */
-  @area sidenote { 
+  @area sidenote {
     @area { position: absolute; left: -4cm; top: 0; bottom: 0; width: 3.5cm; } /* left */
     @area { position: absolute; right: -4cm; top: 0; bottom: 0; width: 3.5cm; } /* right */
   }
@@ -1704,7 +1704,7 @@ content.
 img { flow: area(photos) }
 </pre>
 
-<p>The result is a document where content in the normal flow is shown on left pages, and right pages hold images. The images are filled into the named area in sequential order. 
+<p>The result is a document where content in the normal flow is shown on left pages, and right pages hold images. The images are filled into the named area in sequential order.
 
 </div>
 
@@ -1713,7 +1713,7 @@ img { flow: area(photos) }
 <div class="example">
 <pre>@page {
   margin-left: 1cm 5cm;  /* wide side margins */
-  @area sidenote { 
+  @area sidenote {
     @area { position: absolute; left: -4cm; top: 0; bottom: 0; width: 3.5cm; } /* left */
     @area { position: absolute; right: -4cm; top: 0; bottom: 0; width: 3.5cm; } /* right */
   }
@@ -1743,9 +1743,9 @@ img { flow: area(photos) }
 -->
 
 <div class="example">
-<p>In this example there are two streams of footnotes, both using named areas. The first stream flowed into the "fn1" area, and the second is flowed into "fn2". The first stream is referenced by numbers, and the second by lower-alpha. 
+<p>In this example there are two streams of footnotes, both using named areas. The first stream flowed into the "fn1" area, and the second is flowed into "fn2". The first stream is referenced by numbers, and the second by lower-alpha.
 
-<pre>@page { 
+<pre>@page {
   @area fn1 { float: bottom; float-reference: page }
   @area fn2 { float: bottom; float-reference: page }
 }
@@ -1776,12 +1776,12 @@ img { flow: area(photos) }
 -->
 
 <div class="example">
-<p>In this example there are two streams of footnotes. The first stream is floated to the predefined "footnote" area, and the second is flowed to a name area called "fn2". The first stream is referenced by line numbers, and the second by lower-alpha. 
+<p>In this example there are two streams of footnotes. The first stream is floated to the predefined "footnote" area, and the second is flowed to a name area called "fn2". The first stream is referenced by line numbers, and the second by lower-alpha.
 
-<pre>@page { 
-  counter-reset: line 
+<pre>@page {
+  counter-reset: line
   @area fn2 {
-    float: bottom; 
+    float: bottom;
     float-reference: page;
   }
 }
@@ -1872,7 +1872,7 @@ And is, despite of war and wasting fire,
        ............  ............
 ┌─────┐┌──────────┐  ............
 │ s1  ││ fig1     │  ┌──────────┐┌─────┐
-└─────┘│          │  │ fig2     ││ s2  │ 
+└─────┘│          │  │ fig2     ││ s2  │
        │          │  │          │└─────┘
        └──────────┘  │          │
        ............  └──────────┘
@@ -1898,10 +1898,10 @@ And is, despite of war and wasting fire,
              ...........
 </pre>
 
-<p>The style sheet define two name areas, one for the photograph and one for the sidenote. The "photo" named area is floated to the top, while the "sidenote" area is absolutely positioned. The two named areas overlap. Therefore, the order of the content is significant; the image is first flowed into the "photo" area. The position of the caption will be influcenced by the height of the image. 
+<p>The style sheet define two name areas, one for the photograph and one for the sidenote. The "photo" named area is floated to the top, while the "sidenote" area is absolutely positioned. The two named areas overlap. Therefore, the order of the content is significant; the image is first flowed into the "photo" area. The position of the caption will be influcenced by the height of the image.
 
-<pre>@page { 
-  margin: 7mm 7mm 7mm 40mm; 
+<pre>@page {
+  margin: 7mm 7mm 7mm 40mm;
   @area photo { float: top; float-reference: bleed-box }
   @area sidenote { position: absolute; left: -40mm; top: 0; bottom: 0; width: 35mm; }
 }
@@ -1919,7 +1919,7 @@ figcaption { flow: area(sidenote, same-page) }
 </div>
 
 <!--
-<p>If the requested placement can be achieved in two or more named areas, the closest named area is chosen. If the requested alignment is not possible in any named area, the closest named area is chosen and the element is 
+<p>If the requested placement can be achieved in two or more named areas, the closest named area is chosen. If the requested alignment is not possible in any named area, the closest named area is chosen and the element is
 
 
 
@@ -1964,7 +1964,7 @@ caption { flow: area(sidenote) }
 └─────┘ ............ │photo 2   │
         .........2.. │          │
         ............ └──────────┘
-        ............  
+        ............
 </pre>
 </div>
 
@@ -1981,7 +1981,7 @@ caption { flow: area(sidenote) }
 <dd>element erases any other content which may have been flowed to the named area
 
 <dt>stick
-<dd>Element sticks to the named area and is repeated on any subsequent pages which has the same named ares. Also, element erases any other content which may have been flowed to the named area. 
+<dd>Element sticks to the named area and is repeated on any subsequent pages which has the same named ares. Also, element erases any other content which may have been flowed to the named area.
 
 <dt>copy
 <dd>rather than being moved, the element is copied to the named area.
@@ -2026,8 +2026,8 @@ of the second column. Three reference points are marked with 1,
             ........ ......... third
       first ....1... ......... sidenote
    sidenote ........ .........
-            ........ ......... 
-            ........ ......... 
+            ........ .........
+            ........ .........
             ........ .........
 </pre>
 </div>
@@ -2046,11 +2046,11 @@ of the second column. Three reference points are marked with 1,
             ........ .........
             ........ ...2..... second
             ........ .....3... sidenote
-            ........ ......... 
-      first ....1... ......... 
+            ........ .........
+      first ....1... .........
    sidenote ........ .........
-            ........ ......... 
-            ........ ......... 
+            ........ .........
+            ........ .........
             ........ .........
 </pre>
 </div>
@@ -2081,19 +2081,19 @@ of the second column. Three reference points are marked with 1,
 <p>In this example, the h1 element is copied into a running header which is defined with @area. The copied element is restyled. It erases the running header when it enters, and is set to stick (until eased by another element):
 
 <pre>@page :left {
-  @area running-header { 
-    position: absolute; top: -2cm; left: 0; width: 3.5cm; height: 1cm 
+  @area running-header {
+    position: absolute; top: -2cm; left: 0; width: 3.5cm; height: 1cm
     @inside h1 {
-      font: 12pt sans-serif; 
+      font: 12pt sans-serif;
       text-align: right;
     }
   }
 }
 @page :right {
-  @area running-header { 
-    position: absolute; top: -2cm; right: 0; width: 3.5cm; height: 1cm 
+  @area running-header {
+    position: absolute; top: -2cm; right: 0; width: 3.5cm; height: 1cm
     @inside h1 {
-      font: 12pt sans-serif; 
+      font: 12pt sans-serif;
       text-align: right;
     }
   }
@@ -2105,22 +2105,22 @@ h1 { flow: area(running-header, same-page, stick) }
 
 
 <div class="example">
-<p>In this example, the named area called "running header" is placed in the center top of the page. It is filled with three elements, one being the copy 
+<p>In this example, the named area called "running header" is placed in the center top of the page. It is filled with three elements, one being the copy
 
 <pre>@page {
-  @area running-header { 
-    position: absolute; top: -2cm; left: 0; right: 0; height: 1cm; 
+  @area running-header {
+    position: absolute; top: -2cm; left: 0; right: 0; height: 1cm;
     text-align: center;
     @inside h1 {
-      font: 12pt sans-serif; 
-      display: inline; 
+      font: 12pt sans-serif;
+      display: inline;
     }}}
 
-#pagecounter { 
+#pagecounter {
   flow: area(running-header, fill, stick); content: counter(page);  }
-#ornament { 
+#ornament {
   flow: area(running-header, fill, stick); color: red; content: "\2747" /* snow crystal */}
-h1 { 
+h1 {
   flow: area(running-header, fill, copy stick); font: 12pt serif }
 
 &lt;span id=pagecounter&gt;&lt;/span&gt;
@@ -2133,14 +2133,14 @@ h1 {
 
 <h3 id="note-calls:-::call"><span class="secno">7.4 </span>Note calls: <code>::call</code></h3>
 
-<p>Elements that are floated to named areas can add a "call", similar to a footnote-call, at the place where they were floated from. 
+<p>Elements that are floated to named areas can add a "call", similar to a footnote-call, at the place where they were floated from.
 
 <div class="example">
-<pre>.sidenote { 
+<pre>.sidenote {
   flow: area(sidenote, same-page);
   counter-increment: sn;
 }
-.sidenote::call { 
+.sidenote::call {
   content: counter(sn, lower-alpha); font-size: 0.6em; vertical-align: top;
 }
 </pre>
@@ -2151,7 +2151,7 @@ h1 {
 <p>Margin boxes can be considered a special type of named areas. Unlike names areas, margin boxes:
 
 <ul>
-<li>are predefined (there are 16 of them) 
+<li>are predefined (there are 16 of them)
 <li>come with default settings on 'text-align' and 'vertical-align'
 </ul>
 
@@ -2209,7 +2209,7 @@ this specification, there will be a footnote:
 ...
 &lt;p&gt;A sentence consists of words&lt;a class="footnote" href="#words"&gt;&lt;/a&gt;.
 ...
-&lt;div id=words&gt;Most often, a sentence consists of words. However, some sentences also 
+&lt;div id=words&gt;Most often, a sentence consists of words. However, some sentences also
   have &lt;em&gt;numbers&lt;/em&gt;. And punctuation, don't forget punctuation.&lt;/div&gt;
 </pre>
 </div>
@@ -2218,7 +2218,7 @@ this specification, there will be a footnote:
 <!--
 <h2>Inside/outside properties</h2>
 
-<p>Named areas, as defined above, is a powerful mechanism which can render many types of sidenotes. However, the implementation cost is significant. 
+<p>Named areas, as defined above, is a powerful mechanism which can render many types of sidenotes. However, the implementation cost is significant.
 -->
 
 <h2 id="bookmarks"><span class="secno">8 </span>Bookmarks</h2>
@@ -2234,7 +2234,7 @@ into the document. These bookmarks can e.g. be used to show an outline
 or an index of the document. Bookmarks are typically shown outside the
 document itself, often in a tree-structured and clickable table of
 contents. To generate bookmarks, these properties are defined:
-'bookmark-level', 'bookmark-label', and 'bookmark-state'. 
+'bookmark-level', 'bookmark-label', and 'bookmark-state'.
 
 <h3 id="'bookmark-level'"><span class="secno">8.1 </span>'bookmark-level'</h3>
 
@@ -2336,11 +2336,11 @@ h1, h2, h3 { bookmark-label: content() }
 </div>
 
 <div class="example">
-<p>This code will make bookmarks from links. 
+<p>This code will make bookmarks from links.
 <pre>a[href] { bookmark-label: attr(href); bookmark-level: 1 }
 a[title] { bookmark-label: attr(title); bookmark-level: 1 }
 </pre>
-<p>If a <code>title</code> attribute exisits, its value will be used as the bookmark label. Otherwisee, the URL is used. 
+<p>If a <code>title</code> attribute exisits, its value will be used as the bookmark label. Otherwisee, the URL is used.
 </div>
 
 <div class="example">
@@ -2408,7 +2408,7 @@ h1, h2 { bookmark-state: open }
 
 <p>A document consists of a linear sequence of pages. In simple documents, all pages have the same page area and marginalia. In more complex documents, pages may have different sizes, marginalia and orientation. Being able to style pages differently is therefore important.
 
-<p>In CSS2, <a href="http://www.w3.org/TR/CSS2/page.html#page-selectors">first, left and right pages</a>, as well as named pages, can be selected. This specification adds more advanced page selectors. Page selectors are similar to normal selectors in the sense that they query a data set and select parts of it. However, page selectors and normal selector are different in what they query (normal selectors query a document tree; page selectors query a sequence of pages) and what they select (normal selectors find structured elements, page selectors find formatted pages). 
+<p>In CSS2, <a href="http://www.w3.org/TR/CSS2/page.html#page-selectors">first, left and right pages</a>, as well as named pages, can be selected. This specification adds more advanced page selectors. Page selectors are similar to normal selectors in the sense that they query a data set and select parts of it. However, page selectors and normal selector are different in what they query (normal selectors query a document tree; page selectors query a sequence of pages) and what they select (normal selectors find structured elements, page selectors find formatted pages).
 
 <h3 id="the-nth()-page-pseudo-class"><span class="secno">9.1 </span>The <code>nth()</code> page pseudo-class</h3>
 
@@ -2416,8 +2416,8 @@ h1, h2 { bookmark-state: open }
 
 <div class="example">
 <p>These are equivalent, they both select the first page of a document:
-<pre>@page :first { background: lime } 
-@page :nth(1) { background: lime } 
+<pre>@page :first { background: lime }
+@page :nth(1) { background: lime }
 </pre>
 </div>
 
@@ -2444,21 +2444,21 @@ h1, h2 { bookmark-state: open }
 </pre>
 
 <div class=example>
-<p>In this example, page 3, 4, and 5 of the document will have a pink background. 
+<p>In this example, page 3, 4, and 5 of the document will have a pink background.
 <pre>
 @page :range(3-5) { background: pink }
 </pre>
 </div>
 
 <div class=example>
-<p>In this example, all but page 1 and 2 will have a pink background. 
+<p>In this example, all but page 1 and 2 will have a pink background.
 <pre>
 @page :range(3+) { background: pink }
 </pre>
 </div>
 
 <div class=example>
-<p>In this example, the second page of all chapter page groups will have a pink background. 
+<p>In this example, the second page of all chapter page groups will have a pink background.
 <pre>
 @page chapter:range(2) { background: pink }
 </pre>
@@ -2494,7 +2494,7 @@ article { page: chapter }
 </pre>
 </div>
 
-<p>To enable page groups to be created when sibling elements use the same named page, the 'break-before' and 'break-after' properties are consulted. When a forced page break has been set between the two elements (either 'break-after: page' on the first element, or 'break-before: page' on the second element), the second element will create a new page group. 
+<p>To enable page groups to be created when sibling elements use the same named page, the 'break-before' and 'break-after' properties are consulted. When a forced page break has been set between the two elements (either 'break-after: page' on the first element, or 'break-before: page' on the second element), the second element will create a new page group.
 
 <div class="example">
 <p>In this example, both articles start new page groups due to there being an explicit page break between them.
@@ -2513,7 +2513,7 @@ article { page: chapter; break-before: page }
 <!--
  are named with the 'page' property, and
 selected with a <a href="http://www.w3.org/TR/css3-page/#page-type-selector">page
-type selector</a>. 
+type selector</a>.
 -->
 
 <!--
@@ -2525,7 +2525,7 @@ important. Styling can be based on automatic classification (like the
 pseudo-classes described in the previous section), or explicitly named
 page groups. Page groups are named with the 'page' property, and
 selected with a <a href="http://www.w3.org/TR/css3-page/#page-type-selector">page
-type selector</a>. 
+type selector</a>.
 
 <p>The syntax of page selectors are:
 
@@ -2552,7 +2552,7 @@ starts a new page group or not.
       <td><dfn>page-group</dfn>
     <tr>
       <td><em>Value:</em>
-    <td>auto | start 
+    <td>auto | start
     <tr>
       <td><em>Initial:</em>
       <td>auto
@@ -2573,7 +2573,7 @@ starts a new page group or not.
       <td>as specified
 </table>
 
-<p>This property determines whether the element starts a new page group or not. 
+<p>This property determines whether the element starts a new page group or not.
 
 <dl>
 <dt>auto
@@ -2613,7 +2613,7 @@ article {
 @page chapter:first { ... }   /* selects the first page of every "chapter" page group */
 </pre>
 
-<p>This is similar to how the <code>:nth-of-type()</code> selector works. 
+<p>This is similar to how the <code>:nth-of-type()</code> selector works.
 
 
 </div>
@@ -2627,7 +2627,7 @@ that elements with 'break-before: page' starts a new page group:
 @page chapter:first { background: yellow }
 
 .chapter {
-   page: chapter; 
+   page: chapter;
    break-before: page;
 }
 </pre>
@@ -2646,9 +2646,9 @@ or like pseudo-elements
 <!--
 <h3>Complex page selectors</h3>
 
-<p>Complex page selectors are formed by combining several <a href="http://www.w3.org/TR/css3-page/#page-pseudo-class">page pseudo-classes</a>, or by combining one <a href="http://www.w3.org/TR/css3-page/#page-type-selector">page type selector</a>, called "page group selector" in this document, with one or more page pseudo-classes. 
+<p>Complex page selectors are formed by combining several <a href="http://www.w3.org/TR/css3-page/#page-pseudo-class">page pseudo-classes</a>, or by combining one <a href="http://www.w3.org/TR/css3-page/#page-type-selector">page type selector</a>, called "page group selector" in this document, with one or more page pseudo-classes.
 
-<p>When two or more page pseudo-classes are combined into a complex page selector, it selects all pages that match all pseudo-classes. 
+<p>When two or more page pseudo-classes are combined into a complex page selector, it selects all pages that match all pseudo-classes.
 
 <div class=example>
 <pre>
@@ -2682,7 +2682,7 @@ displayed; if the condition is not met, the effect will be as if
 <h2 id="clipping-column-rules"><span class="secno">11 </span>Clipping column rules</h2>
 
 
-<h3 id="column-rule-clip"><span class="secno">11.1 </span>column-rule-clip</h3>  
+<h3 id="column-rule-clip"><span class="secno">11.1 </span>column-rule-clip</h3>
 
 <table class="propdef">
     <tr>
@@ -2718,17 +2718,17 @@ displayed; if the condition is not met, the effect will be as if
 <dd>no clipping is performed
 
 <dt>auto
-<dd>column rules are clipped so that they align with prominent font features; for latin scripts this means that the top end of the column rule aligns with the ex-height of the dominant font, while the bottom end of the rule aligns with the baseline of the dominiant font. 
+<dd>column rules are clipped so that they align with prominent font features; for latin scripts this means that the top end of the column rule aligns with the ex-height of the dominant font, while the bottom end of the rule aligns with the baseline of the dominiant font.
 
 <dt>length
-<dd>If one value is specified, the top and bottom of all column rules are clipped by specified length. If two values are specified, the first value applies to the top column rules and the second value applies to the bottom column rules. 
+<dd>If one value is specified, the top and bottom of all column rules are clipped by specified length. If two values are specified, the first value applies to the top column rules and the second value applies to the bottom column rules.
 </dl>
 
 <p>Spanners split column rules, and each fragment is possibly clipped by this property.
 
 <h2 id="selecting-elements-within-pages"><span class="secno">12 </span>Selecting elements within pages</h2>
 
-<p class="note">This section sketches several possible solutions. 
+<p class="note">This section sketches several possible solutions.
 
 
 <div class="example">
@@ -2743,19 +2743,19 @@ aside:nth(4n+1) { background: pink }
 </div>
 
 
-<p>To select elements within a page, normal selectors can be combined with a page selector. 
+<p>To select elements within a page, normal selectors can be combined with a page selector.
 
 <div class="example">
-<pre>@page :first p { background: lime } 
-@page :nth(1) .sidenote { background: lime } 
+<pre>@page :first p { background: lime }
+@page :nth(1) .sidenote { background: lime }
 @page :nth(3n+1) p:first-line { background: lime }
-@page funky:nth(1) p { background: pink } 
+@page funky:nth(1) p { background: pink }
 </pre>
 </div>
 
 <p>The syntax is:
 
-<pre>  @page \S+ &lt;page-selector&gt; \S+ &lt;selector&gt; 
+<pre>  @page \S+ &lt;page-selector&gt; \S+ &lt;selector&gt;
 </pre>
 
 
@@ -2764,8 +2764,8 @@ aside:nth(4n+1) { background: pink }
 <div class="example">
 <p>These are identical:
 
-<pre>@page :left { 
-  @inside { 
+<pre>@page :left {
+  @inside {
     p { text-align: left }
   }
 }
@@ -2780,14 +2780,14 @@ aside:nth(4n+1) { background: pink }
 <p>In this example, two sidenote areas are declared. Paragraphs inside those areas are given a differnet styling based on which side they are in.
 <pre>@page {
   margin-left: 1cm 5cm;  /* wide side margins */
-  @area sidenote { 
-    @area { 
+  @area sidenote {
+    @area {
       position: absolute; left: -4cm; top: 0; bottom: 0; width: 3.5cm; /* left sidenote */
       @inside p {
         text-align: right;   /* paragraphs in left sidenotes are aligned right */
       }
     }
-    @area { 
+    @area {
       position: absolute; right: -4cm; top: 0; bottom: 0; width: 3.5cm; /* right sidenote */
       @inside p {
         text-align: left;   /* paragraphs in right sidenotes are aligned left */
@@ -2817,7 +2817,7 @@ aside:nth(4n+1) { background: pink }
 
 <h2 id="selecting-columns"><span class="secno">13 </span>Selecting columns</h2>
 
-<p class="issue">This section is not fully developed. 
+<p class="issue">This section is not fully developed.
 
 <div class="example">
 <pre>div.chapter:column(3)       /* the 3rd column of the element */
@@ -2842,9 +2842,9 @@ div.chapter:column(1,*)     /* the first column on all pages */
 </div>
 
 
-<p>Text in adjacent columns often use the same baselines. This appears more pleasant to typographers, and reduces <em>show-through</em>, where a printed line shows through to the other side of the sheet. By aligning text to a grid of baselines, a <em>baseline rhythm</em> is established. Subheadings and figures may disturb the baseline rhythm, but subsequent text should find it again. The 'baseline-grid' property is introduced to define, engage and clear baseline grids, while the 'baseline-block-snap' property indicates how to align elements that do not align themselves with a baseline grid. 
+<p>Text in adjacent columns often use the same baselines. This appears more pleasant to typographers, and reduces <em>show-through</em>, where a printed line shows through to the other side of the sheet. By aligning text to a grid of baselines, a <em>baseline rhythm</em> is established. Subheadings and figures may disturb the baseline rhythm, but subsequent text should find it again. The 'baseline-grid' property is introduced to define, engage and clear baseline grids, while the 'baseline-block-snap' property indicates how to align elements that do not align themselves with a baseline grid.
 
-<h3 id="'baseline-grid'"><span class="secno">14.1 </span>'baseline-grid'</h3>  
+<h3 id="'baseline-grid'"><span class="secno">14.1 </span>'baseline-grid'</h3>
 
 <table class="propdef">
     <tr>
@@ -2879,7 +2879,7 @@ div.chapter:column(1,*)     /* the first column on all pages */
 
 <dt>normal
 
-<dd>The element does not define, engage, or clear a baseline grid. 
+<dd>The element does not define, engage, or clear a baseline grid.
 
 <dt>none
 
@@ -2887,11 +2887,11 @@ div.chapter:column(1,*)     /* the first column on all pages */
 
 <dt>new
 
-<dd>the element defines and engages a new baseline grid for its content. The new baseline grid is defined by establishing the first baseline of the element by using the first available font; thereafter the frequency of the baseline grid is equal to the used value of 'line-height'. 
+<dd>the element defines and engages a new baseline grid for its content. The new baseline grid is defined by establishing the first baseline of the element by using the first available font; thereafter the frequency of the baseline grid is equal to the used value of 'line-height'.
 
 <dt>root
 
-<dd>the element enganges the <dfn id="root-baseline-grid">root baseline grid</dfn>. The root baseline grid is automatically defined by the root element; the calculation for finding the root baseline grid is the same as for the 'new' value. While the root element defines the root baseline grid, it does not engage it. 
+<dd>the element enganges the <dfn id="root-baseline-grid">root baseline grid</dfn>. The root baseline grid is automatically defined by the root element; the calculation for finding the root baseline grid is the same as for the 'new' value. While the root element defines the root baseline grid, it does not engage it.
 
 <dt>page
 
@@ -2924,7 +2924,7 @@ h1, h2, figure { baseline-grid: none }
 </div>
 <div style="white-space: pre; position: absolute; top: 3px; left: 23px">
 Abc def ghi j
-klmn o pqrst 
+klmn o pqrst
 uvw xyz.
 </div>
 
@@ -2934,7 +2934,7 @@ Heading
 
 <div style="white-space: pre; position: absolute; top: 118px; left: 23px">
 Abc def ghi j
-klmn o pqrst 
+klmn o pqrst
 uvw xyz. Abc
 de fghij klm
 </div>
@@ -3042,7 +3042,7 @@ klm nop.
 <dt>after
 <dd>the element is placed as close to the following content as possible
 <dt>center
-<dd>the element is centered between the previous and following content. 
+<dd>the element is centered between the previous and following content.
 
 <dt>margin-box
 <dd>the margin edge is used to align the block on the baseline grid
@@ -3076,7 +3076,7 @@ klm nop.
 </div>
 <div style="white-space: pre; position: absolute; top: 3px; left: 23px">
 Abc def ghi j
-klmn o pqrst 
+klmn o pqrst
 uvw xyz.
 </div>
 
@@ -3086,7 +3086,7 @@ Heading
 
 <div style="white-space: pre; position: absolute; top: 118px; left: 23px">
 Abc def ghi j
-klmn o pqrst 
+klmn o pqrst
 uvw xyz. Abc
 de fghij klm
 </div>
@@ -3120,7 +3120,7 @@ klm nop.
       <td><dfn>line-rhythm-reference</dfn>
     <tr>
       <td><em>Value:</em>
-    <td>content-box | margin-box | border-box 
+    <td>content-box | margin-box | border-box
     <tr>
       <td><em>Initial:</em>
       <td>content-box
@@ -3138,16 +3138,16 @@ klm nop.
       <td>specified value
 </table>
 
-<p>When snapping an element 
+<p>When snapping an element
 
 <p>Values are:
 <dl>
 <dt>content-box
-<dd>The content edge is snapped to the nearest grid line. 
+<dd>The content edge is snapped to the nearest grid line.
 <dt>margin-box
-<dd>The margin edge is snapped to the nearest grid line. 
+<dd>The margin edge is snapped to the nearest grid line.
 <dt>border-box
-<dd>The border edge is snapped to the nearest grid line. 
+<dd>The border edge is snapped to the nearest grid line.
 </dl>
 -->
 
@@ -3193,7 +3193,7 @@ klm nop.
 -->
 <!--
 <div class=example>
-<p>In this example, the root element establishes a line rhythm, 
+<p>In this example, the root element establishes a line rhythm,
 
 <pre>
 :root {
@@ -3242,21 +3242,21 @@ div { box-edge: em-box }
 
 <div class=example>
 <pre>
-article { 
-  columns: 3; 
+article {
+  columns: 3;
   line-stacking-strategy: grid-height;
 }
 </pre>
 </div>
 
-<p>When <code>line-stacking-strategy</code> is set to <code>grid-height</code>, the stack height of each line is the smallest multiple of the element's <code>line-height</code> computed value that can contain the block progression of all the inline elements on that line when those elements are properly aligned. The 'line-height' property value is ignored for inline elements. 
+<p>When <code>line-stacking-strategy</code> is set to <code>grid-height</code>, the stack height of each line is the smallest multiple of the element's <code>line-height</code> computed value that can contain the block progression of all the inline elements on that line when those elements are properly aligned. The 'line-height' property value is ignored for inline elements.
 
 <h3>Idea 2</h3>
 
-<p>Another possible solution is to say: 
+<p>Another possible solution is to say:
 
 <ol>
-<li>For each block-level element, find the "natural" set of baselines given by the computed value of 'line-height' and the used font. 
+<li>For each block-level element, find the "natural" set of baselines given by the computed value of 'line-height' and the used font.
 <li>When baseline alignment in turned on, each line is placed on the closest "natural" baseline.
 </ol>
 
@@ -3264,8 +3264,8 @@ article {
 
 <div class=example>
 <pre>
-article { 
-  columns: 3; 
+article {
+  columns: 3;
   line-stacking-strategy: baseline-alignment;
 }
 </pre>
@@ -3274,15 +3274,15 @@ article {
 
 <h3>Idea 3</h3>
 
-<p>One problem with both Idea 1 and Idea 2 is that all content is aligned. This may not be desireable in all cases. For example, a headline will typically use a larger font size and if all lines in the headline are aligned with a "natural" baseline (or something similar), lots of white space will be generated. Therefore, we need a way to turn off baseline alignment for certain elements. 
+<p>One problem with both Idea 1 and Idea 2 is that all content is aligned. This may not be desireable in all cases. For example, a headline will typically use a larger font size and if all lines in the headline are aligned with a "natural" baseline (or something similar), lots of white space will be generated. Therefore, we need a way to turn off baseline alignment for certain elements.
 
 <div class=example>
 
 <p>In this example, the <code>article</code> element defines a set baselines to be used by its own content as well as its child elements. Child elements can opt out of the scheme by setting <code>line-stacking: normal</code> (or something):
 
 <pre>
-article { 
-  columns: 3; 
+article {
+  columns: 3;
   line-stacking: set-baselines;
 }
 article p { line-stacking: use-baselines }
@@ -3305,7 +3305,7 @@ article img { display: block; vertical-align: bottom }
 
 <pre>
 html { baseline-grid: root }
-article { baseline-grid: 
+article { baseline-grid:
 p { baseline-grid: root }
 img { baseline-grid: none }
 
@@ -3318,7 +3318,7 @@ p {
   line-snap: baseline
 }
 h1 {
-  line-grid: 
+  line-grid:
 
 </pre>
 
@@ -3368,7 +3368,7 @@ http://www.w3.org/Style/Group/css3-src/css3-linebox/Overview.html#LineStacking
 
 <table class="propdef">
 <tr>
-  <td><em>Name:</em> 
+  <td><em>Name:</em>
   <td><dfn id="text-replace">text-replace</dfn>
 
 <tr>
@@ -3418,7 +3418,7 @@ http://www.w3.org/Style/Group/css3-src/css3-linebox/Overview.html#LineStacking
 </div>
 
 <div class="example">
-<p>In this example, a narrow no-break space is added before exclamation marks in French texts. This is known as "quart de cadratin" in French. 
+<p>In this example, a narrow no-break space is added before exclamation marks in French texts. This is known as "quart de cadratin" in French.
 
 <pre>html:lang(fr) { text-replace "!" "\202F!" }
 </pre>
@@ -3450,7 +3450,7 @@ body { text-replace: "Soviet Union" "Russia" }
 
 <p>Text replacements are applied serially; the first pair of strings is applied to the textual content of the element, then the second pair of strings is applied to the outcome etc.
 
-<div class="example"> 
+<div class="example">
 
 <p>The two rules below yield the same result. In the first rule all 'a' characters are converted to 'b'. Subsequently, all 'b' characters are converted to 'c'. In the second rule, all 'a' and 'b' characters are converted directly to 'c'.
 
@@ -3468,7 +3468,7 @@ body { text-replace: "a" "c" "b" "c" }
 </pre>
 </div>
 
-<p>If the first string of a pair is empty, or if an odd number of strings has been specified, the whole value is ignored and no text replacements are performed. Text replacements do not occur across element boundaries. 
+<p>If the first string of a pair is empty, or if an odd number of strings has been specified, the whole value is ignored and no text replacements are performed. Text replacements do not occur across element boundaries.
 
 <div class="example">
 <p>No text replacement will occur in this example:
@@ -3485,7 +3485,7 @@ h3 { text-replace: "foobar" "barfoo" }      /* accept value, but ... */
 
 <h2 id="microtypography"><span class="secno">16 </span>Microtypography</h2>
 
-<p>Microtypography is a range of methods for improving the appearance of text. Often, small adjustments in the space between letters and words can achieve a more even presentation with less need for hyphenation and fewer widows and orphans. This specification extends two existing CSS properties — 'letter-spacing' and 'word-spacing' — with minimum and maximum values to guide User Agents when laying out text. 
+<p>Microtypography is a range of methods for improving the appearance of text. Often, small adjustments in the space between letters and words can achieve a more even presentation with less need for hyphenation and fewer widows and orphans. This specification extends two existing CSS properties — 'letter-spacing' and 'word-spacing' — with minimum and maximum values to guide User Agents when laying out text.
 
 <h3 id="minimum,-maximum-and-optimal-spacing"><span class="secno">16.1 </span>Minimum, maximum and optimal spacing</h3>
 
@@ -3505,14 +3505,14 @@ h3 { text-replace: "foobar" "barfoo" }      /* accept value, but ... */
 <dd>The spacing is the normal spacing for the current font. This value allows the user agent to alter the space between characters in order to justify text.
 
 <dt>&lt;length&gt;
-<dd>Specifies extra spacing in addition to the default space between characters and words. Values may be negative, but there may be implementation-specific limits. 
+<dd>Specifies extra spacing in addition to the default space between characters and words. Values may be negative, but there may be implementation-specific limits.
 
 <dt>&lt;percentage&gt;
-<dd>Relative to width of space character. 
+<dd>Relative to width of space character.
 
 <dd>
 
-<p>If one value is specified, it describes the optimum value, as well as the minimum and maximum values. If two values are specified, the first denotes the optimum and the minimum, and the second denotes the maximum. If three values are specified, they describe the optimum, minimum and maximum values. 
+<p>If one value is specified, it describes the optimum value, as well as the minimum and maximum values. If two values are specified, the first denotes the optimum and the minimum, and the second denotes the maximum. If three values are specified, they describe the optimum, minimum and maximum values.
 
 </dl>
 
@@ -3568,7 +3568,7 @@ or left. To support this feature for web content, a new @-rule is
 proposed: @layout. The purpose of @layout is to describe how pages are
 laid out spatially relative to the current document.
 
-<p>Four new properties are allowed inside @layout: nav-up, nav-right, nav-bottom, nav-right. 
+<p>Four new properties are allowed inside @layout: nav-up, nav-right, nav-bottom, nav-right.
 
 <p class="note">The name of the properties inside @layout are borrowed from <a href="http://www.w3.org/TR/2004/CR-css3-ui-20040511/#nav-dir">CSS3 Basic User Interface Module</a>.
 
@@ -3587,9 +3587,9 @@ laid out spatially relative to the current document.
 ...
 
 @layout {
-  nav-up: go(index); 
-  nav-left: go(previous); 
-  nav-right: go(next); 
+  nav-up: go(index);
+  nav-left: go(previous);
+  nav-right: go(next);
 }
 </pre>
 </div>
