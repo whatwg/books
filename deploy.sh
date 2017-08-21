@@ -13,5 +13,5 @@ else
     eval `ssh-agent -s`
     ssh-add deploy_key
     echo "$SERVER $SERVER_PUBLIC_KEY" > known_hosts
-    scp -o UserKnownHostsFile=known_hosts Overview.html $DEPLOY_USER@$SERVER:$WEB_ROOT/
+    scp -o UserKnownHostsFile=known_hosts Overview.html $DEPLOY_USER@$SERVER:$WEB_ROOT/index.html
 fi
