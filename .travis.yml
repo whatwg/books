@@ -3,7 +3,6 @@ language: generic
 env:
   global:
     - ENCRYPTION_LABEL="449379889ff3"
-    - DEPLOY_USER="admin"
     - SERVER="165.227.248.76"
     - SERVER_PUBLIC_KEY="ecdsa-sha2-nistp256 AAAAE2VjZHNhLXNoYTItbmlzdHAyNTYAAAAIbmlzdHAyNTYAAABBBDt6Igtp73aTOYXuFb8qLtgs80wWF6cNi3/AItpWAMpX3PymUw7stU7Pi+IoBJz21nfgmxaKp3gfSe2DPNt06l8="
     - WEB_ROOT="books.idea.whatwg.org"
